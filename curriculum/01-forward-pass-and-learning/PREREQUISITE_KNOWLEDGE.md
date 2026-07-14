@@ -515,35 +515,65 @@ errors.
 ## 3.5 Vector
 
 **Definition.**
-A vector is an ordered list of numbers. It has one dimension (its
-length).
+A vector is an ordered list of numbers. In machine learning, it is the primary data structure for representing features, activations, and predictions.
 
 **Why it is needed.**
-Vectors are the standard way to represent data in neural networks. The
-input, the hidden-layer activations, the output — all of these are
-vectors.
+Vectors are the standard way to represent data in neural networks. The input (one-hot word representation), the hidden-layer activations, the logits, and the softmax probabilities are all vectors.
 
 **Intuition.**
-Think of a single row in a SQL table, or a one-dimensional C# array:
-
+Think of a single row in a database table or a 1-D array in C#:
 ```csharp
 float[] v = { 0.0f, 1.0f, 0.0f, 0.0f, 0.0f };
 ```
 
-**Example.**
-A vector of length 5: `[0, 1, 0, 0, 0]`.
+---
 
-Shape: `(5,)` — five elements, one dimension.
+### The Dual Meaning of "Dimension"
+The word "dimension" is used in two different ways in ML engineering: mathematical dimension and programming (NumPy) dimension. Confusing the two is a major source of shape-mismatch bugs.
+
+#### 1. Mathematical Vector Dimensionality
+In mathematics, the dimension of a vector is simply the **number of components** (elements) it contains.
+- `[3, 4]` is a 2-dimensional vector (2D space).
+- `[1, 2, 3]` is a 3-dimensional vector (3D space).
+- `[0, 1, 0, 0, 0]` is a **5-dimensional vector** because it has five components.
+
+#### 2. NumPy Array Dimensionality (`ndim`)
+In programming libraries like NumPy, `ndim` means the **number of array axes (grid dimensions)**, not the number of components.
+- A flat 1-D array is a single axis. Its NumPy dimension (`ndim`) is always `1`, regardless of how many elements it holds.
+
+```python
+import numpy as np
+
+# A 5-dimensional mathematical vector represented as a 1-D NumPy array
+v = np.array([0, 1, 0, 0, 0])
+
+print(v.ndim)
+# Outputs: 1  (Because it is a 1-D array of numbers)
+
+print(v.shape)
+# Outputs: (5,)  (A tuple with 5 elements along its single axis)
+```
+
+---
+
+### Shape and Orientation (Row vs. Column)
+A raw 1-D vector has no orientation (it is neither a row nor a column; it is just a flat sequence of numbers). However, when we perform matrix multiplication, the math requires us to treat vectors as either:
+- **Row Vector:** A matrix with 1 row and N columns. Shape: `(1, N)`. `ndim` = `2`.
+- **Column Vector:** A matrix with N rows and 1 column. Shape: `(N, 1)`. `ndim` = `2`.
+
+In NumPy, you can add an axis to convert a flat `(N,)` vector into a 2-D row or column vector:
+```python
+v_row = v[np.newaxis, :]  # Shape: (1, 5), ndim: 2
+v_col = v[:, np.newaxis]  # Shape: (5, 1), ndim: 2
+```
+
+<img src="./images/vector_dimensionality.png" alt="Mathematical Vector Dimension vs NumPy Array Dimension" width="600" />
 
 **Connection to the assignment.**
-The one-hot encoded input is a vector. The hidden-layer output is a
-vector. The logits (raw scores) are a vector. The softmax probabilities
-are a vector.
+The one-hot encoded input is represented as a flat 1-D vector of shape `(vocab_size,)`. When it is multiplied by the weight matrix of shape `(vocab_size, hidden_size)`, NumPy automatically treats it as a row vector for the calculation, returning a flat output vector of shape `(hidden_size,)`.
 
 **Common misunderstanding.**
-"Vectors must be columns." In code, vectors are usually flat 1-D arrays.
-Whether they are treated as row or column vectors depends on how they
-are used in multiplication. The code handles this automatically.
+"A mathematical 5D vector must have shape `(5, 5)` or have `ndim = 5`." No. A 5D vector is a flat list of 5 numbers, which is represented in NumPy as shape `(5,)` and `ndim = 1`. 
 
 ---
 
