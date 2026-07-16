@@ -570,7 +570,19 @@ v_col = v[:, np.newaxis]  # Shape: (5, 1), ndim: 2
 <img src="./images/vector_dimensionality.png" alt="Mathematical Vector Dimension vs NumPy Array Dimension" width="600" />
 
 **Connection to the assignment.**
-The one-hot encoded input is represented as a flat 1-D vector of shape `(vocab_size,)`. When it is multiplied by the weight matrix of shape `(vocab_size, hidden_size)`, NumPy automatically treats it as a row vector for the calculation, returning a flat output vector of shape `(hidden_size,)`.
+The one-hot encoded input is represented as a flat 1-D vector of shape `(vocab_size,)`. In your assignment, you will compute the hidden layer using matrix multiplication:
+```python
+hidden_pre_activation = input_vector @ input_to_hidden_weights + hidden_bias
+```
+Here is the step-by-step logic of how NumPy handles this under the hood:
+1. **The Shape Mismatch Problem:** Mathematically, you cannot multiply a 1-D array of shape `(vocab_size,)` directly by a 2-D matrix of shape `(vocab_size, hidden_size)`. Standard matrix multiplication requires the left operand to have 2 dimensions (rows and columns).
+2. **NumPy's Automatic Promotion:** To resolve this, when NumPy encounters a 1-D array on the **left** of the `@` operator:
+   - It temporarily *promotes* (pads) the vector by prepending a `1` to its shape: `(vocab_size,)` becomes a row vector of shape `(1, vocab_size)`.
+3. **The Matrix Math:** Now that shapes are aligned, the multiplication runs:
+   $$\text{Shape: } (1, \text{vocab\_size}) \times (\text{vocab\_size}, \text{hidden\_size}) \rightarrow (1, \text{hidden\_size})$$
+4. **Automatic Demotion:** Once the multiplication is finished, NumPy automatically *demotes* the result by stripping the prepended `1`, converting the shape from `(1, hidden_size)` back to a clean 1-D vector of shape `(hidden_size,)`.
+
+This convenient behavior means you do not have to write boilerplate code like `input_vector.reshape(1, -1)` before every layer just to satisfy matrix algebra. NumPy treats it as a row vector for the math but returns a clean flat vector for your code.
 
 **Common misunderstanding.**
 "A mathematical 5D vector must have shape `(5, 5)` or have `ndim = 5`." No. A 5D vector is a flat list of 5 numbers, which is represented in NumPy as shape `(5,)` and `ndim = 1`. 
@@ -688,7 +700,7 @@ This is a 3×2 matrix: 3 rows, 2 columns.
 ```
 A = [ 1  2 ]    shape: (2, 3) — 2 rows, 3 columns
     [ 3  4 ]
-    ... wait, that's wrong. Let me be precise:
+    
 
 A = [ 1  2  3 ]    shape: (2, 3) — 2 rows, 3 columns
     [ 4  5  6 ]
