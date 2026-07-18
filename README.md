@@ -45,13 +45,13 @@ Every topic answers:
 
 ## Repository Structure
 
-curriculum/
+weekly curriculum/
 Learning material and weekly roadmap
 
 projects/
 Hands-on implementations
 
-notes/
+Topics/
 Permanent knowledge base
 
 experiments/

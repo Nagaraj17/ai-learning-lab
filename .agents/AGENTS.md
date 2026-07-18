@@ -42,7 +42,7 @@ Ask Undefined Question
 # Assignment Prerequisite Study-Pack Protocol
 
 For every new assignment, the mentor must first create or update one
-consolidated prerequisite study guide inside the assignment's curriculum
+consolidated prerequisite study guide inside the assignment's weekly curriculum
 folder.
 
 Default filename:
@@ -68,3 +68,9 @@ Permanent individual notes may be extracted or expanded later for
 concepts requiring deeper study. Their absence must not prevent the
 learner from beginning the assignment after completing the consolidated
 study guide.
+
+# Concept Note File Naming Convention
+
+When creating separate, permanent concept notes (in the global `Topics/` directory) for deep-dives, you must prepend a numeric prefix to the filename that matches their logical reading/dependency order.
+Example: `01 - ML - Foundations.md`, `02 - LM - Tokens and Vocabulary.md`, etc.
+This ensures notes naturally sort in the correct reading order in the file explorer for all future assignments and topics.

@@ -1,0 +1,153 @@
+Week 2: Embedding
+______________________
+
+Week 1 Goal: How does a neural network learn?
+Week 2 Goal: How does the neural network understand that "Receive" and "Restock" are more similar than "Receive" and "Scenario"?
+
+Welcome to the world of embeddings.
+
+Week 2 Focus – Learning Relationships with Embeddings
+_____________________________________________________
+
+Problem Statement
+___________________
+
+Last week, we built a very simple neural network that learned to predict the next word in a sequence. 
+
+One limitation of that approach is that every word is treated as completely independent.
+A receiving workflow naturally leads to restocking, while Scenario belongs to a completely different business function.
+
+Your Challenge
+_______________
+
+Modify last week's neural network so that instead of using one-hot encoding, it learns an Embedding for each word.
+
+Rather than representing each word as [0 0 1 0 0 0 ...] the network should learn something similar to
+
+Receive   → [0.72, -0.15, 0.44, ...]
+Restock   → [0.68, -0.12, 0.51, ...]
+Forecast  → [-0.31, 0.82, -0.09, ...]
+
+The numbers themselves are not important. The relationships between the vectors are.
+
+
+Vocabulary:
+_______________
+Inventory
+Order
+Cabinet
+Drug
+Invoice
+Shipment
+Receive
+Restock
+Forecast
+Scenario
+
+
+Training Data: Let us use the same transitions:
+________________________________________________
+
+
+Order → Shipment
+
+Shipment → Receive
+
+Receive → Restock
+
+Restock → Inventory
+
+Inventory → Forecast
+
+Forecast → Order
+
+
+Week 2 Objectives
+_______________________
+
+By the end of this exercise, your team should be able to explain:
+
+1. Why one-hot encoding does not capture similarity.
+
+2. What an embedding actually is.
+
+3. Where embeddings are stored inside a neural network.
+
+4. How embeddings are learned during training.
+
+5. Why similar words eventually end up with similar vectors.
+
+
+Deliverables
+________________
+
+1. A working implementation using NumPy.
+2. A visualization or table showing the learned embeddings.
+3. A simple explanation that a non-AI engineer could understand.
+
+
+Stretch Goal
+_________________
+
+Extend the vocabulary by adding additional words and observe whether related concepts begin moving closer together.
+
+Additional Vocabulary:
+________________________
+Acknowledge
+Receive
+Restock
+Invoice
+Cabinet
+Shelf
+Bin
+
+
+Do operational words naturally cluster together?
+
+Do inventory-related words form their own neighborhood?
+
+
+If You Don't Already Know...Learn these concepts before you begin:
+____________________________________________________________________
+
+- Embedding
+- Embedding Matrix
+- One-Hot Encoding
+- Vector
+- Similarity
+- Cosine Similarity
+- Dot Product
+- Vocabulary
+- Token
+- Tokenizer
+
+Questions to Think About: Don't just implement—think.
+______________________________________________________
+
+1. If every embedding starts as random numbers, why do similar words eventually become similar?
+
+2. Does the neural network explicitly know that "Receive" and "Restock" are related?
+
+3. Where is the "knowledge" actually stored?
+
+4. If we add a brand-new word that the model has never seen, what happens?
+
+5. Could the same idea be applied beyond language? For example:
+   - Drugs
+   - Practices
+   - Suppliers
+   - Payers
+   - PO States
+
+If yes, what business problems could embeddings help solve?
+
+Hint:
+_______
+A one-hot vector is like looking up a person's employee ID. An embedding is like learning who that person is.
+The employee ID identifies the person. The embedding captures what the model has learned about that person through experience.
+
+
+Challenge question:
+______________________
+If embeddings tell us what a word is, how does the model decide which previous words matter most when predicting the next one?
+
