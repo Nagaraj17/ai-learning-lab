@@ -81,3 +81,25 @@ This exercise traces the gradients backward through the tiny network from `02_MA
 
 **Formula ($db1$):** $db1 = d\_z1$
 - **Result:** $db1 = [0.1365, -0.5002]$ (Shape: `(2,)`)
+
+---
+
+## Learner Workspace
+
+### Predict the Sign
+Look at our prediction from the forward pass vs the true label:
+- Prediction ($probs$): `[0.5784, 0.4216]`
+- Target (true_label): `1` (which means ideal probs are `[0.0, 1.0]`)
+- The model predicted class 0 with `0.5784` probability. It should be `0.0`. It is too **HIGH**.
+- Therefore, the error derivative $d\_logits$ for class 0 must be **[ Positive / Negative ]** to tell the network to push this probability down?
+
+### Blank Calculation Table
+Try calculating just the output gradients with these new numbers:
+- Prediction ($probs$): `[0.2, 0.5, 0.3]`
+- Target: `2` (Index 2 is the correct class)
+
+| Step | Formula | Your Calculation | Expected Output |
+|------|---------|------------------|-----------------|
+| True One-Hot | `one_hot(target)` | | |
+| d_logits | $probs - true\_one\_hot$ | | |
+

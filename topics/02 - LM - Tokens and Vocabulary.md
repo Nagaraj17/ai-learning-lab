@@ -9,6 +9,8 @@ Computers can only process numbers, so we must map text strings ("Order") to a n
 ## Beginner intuition
 Think of the Vocabulary as a dictionary where every word is assigned a page number (Token ID). 
 
+![Word Representation Pipeline — From String to One-Hot Vector](<../weekly curriculum/01-forward-pass-and-learning/images/word_representation.png>)
+
 ## Week 1 assignment connection
 Our Vocabulary size is 10. The word "Order" is assigned the Token ID `1`, and "Shipment" is assigned `5`. We use a dictionary `state_to_id` to look these up.
 

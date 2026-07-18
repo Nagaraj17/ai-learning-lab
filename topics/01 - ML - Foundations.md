@@ -4,10 +4,14 @@
 Machine learning is teaching a system to recognize patterns in data (Supervised Learning uses labeled data), using a Dataset of Inputs and Targets.
 
 ## Why it exists
-To solve problems that are too complex for hard-coded "if-then" rules. 
+To solve problems that are too complex for hard-coded "if-then" rules.
+
+![Traditional Programming vs Machine Learning — rule-based vs data-driven](<../weekly curriculum/01-forward-pass-and-learning/images/traditional_vs_ml.png>)
+
+*Traditional programming gives the computer rules and data to produce answers. Machine learning gives it data and answers so it can discover the rules itself.*
 
 ## Beginner intuition
-Instead of telling the computer exactly how to solve a maze, you let it run through the maze thousands of times, giving it a reward when it finds the exit. Over time, it learns the path.
+Think of a student learning from a practice exam that comes with an answer key. The student makes a guess for each question, checks it against the answer key, and uses the corrections to improve. Over many rounds, the student learns the patterns. Machine learning works exactly the same way — examples are the questions, labels are the answer key, and the network adjusts its internal numbers after each correction.
 
 ## Week 1 assignment connection
 In `01_Next_Word_Predictor.ipynb`, our Input is a current lifecycle state (e.g., "Order") and our Target is the expected next state ("Shipment"). We are using Supervised Learning to train the network on this specific Dataset.

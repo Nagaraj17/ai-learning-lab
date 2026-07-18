@@ -15,6 +15,8 @@ You have to loop through the book 500 times (500 Epochs) before your fingers mem
 ## Week 1 assignment connection
 We loop `for epoch in range(500):` and inside that, we loop through our `training_data`. The inner loop executes the 4 core steps: `forward_pass`, `compute_loss`, `backward_pass`, and `update_weights`.
 
+![Complete Forward Pass Flow](<../weekly curriculum/01-forward-pass-and-learning/images/forward_pass_flow.png>)
+
 ## Small numerical example
 If our dataset has 6 pairs, and we train for 500 epochs:
 The `update_weights` function executes `6 * 500 = 3,000` times.

@@ -9,6 +9,16 @@ To actually improve the model! Without the update step, calculating the gradient
 ## Beginner intuition
 Imagine you are walking down a mountain blindfolded to find the lowest valley (Loss = 0). The Gradient tells you which way is downhill. The Learning Rate is the size of your footstep. 
 
+```mermaid
+graph TD
+    Start["High Loss (Wrong Prediction)"] -->|Calculate Gradient| Slope["Gradient tells us slope"]
+    Slope -->|Subtract (lr * gradient)| Step["Step downhill against slope"]
+    Step --> End["Lower Loss (Better Prediction)"]
+    
+    style Start fill:#f99,stroke:#333,stroke-width:2px
+    style End fill:#9f9,stroke:#333,stroke-width:2px
+```
+
 ## Week 1 assignment connection
 In the `update_weights` function, we perform `W1 -= lr * dW1`. We use subtraction to ensure we always step *against* the slope (downhill). Our learning rate is `0.1`.
 

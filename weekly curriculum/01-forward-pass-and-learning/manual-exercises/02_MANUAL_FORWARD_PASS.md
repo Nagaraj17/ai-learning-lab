@@ -64,3 +64,22 @@ This exercise traces the forward pass of a tiny neural network: 2 inputs, 2 hidd
 - True label is `1`.
 - $probs[1] = 0.4216$
 - **Result:** $loss = -\log(0.4216) = 0.8637$ (Shape: Scalar)
+
+---
+
+## Learner Workspace
+
+### Predict the Shape
+Before calculating the math, what should the final shape of the Logits be if our batch size is 1, our vocabulary size is 10, and our hidden layer has 8 neurons?
+- **Answer:** `[ _, _ ]`
+
+### Blank Calculation Table
+Try calculating the linear transformations manually with new values:
+- $x = [0, 1]$
+- $W1 = [[0.5, 0.5], [0.2, -0.3]]$
+- $b1 = [0.1, 0.1]$
+
+| Step | Formula | Your Calculation | Expected Output |
+|------|---------|------------------|-----------------|
+| Linear Trans. 1 | $x \cdot W1 + b1$ | | |
+

@@ -61,3 +61,29 @@ Let's run the Forward Pass again with the new weight to prove learning occurred.
 - **New Loss:** $\frac{1}{2}(7.6 - 10.0)^2 = 2.88$ *(The loss dropped significantly from 8.0!)*
 
 We have successfully completed one step of learning.
+
+---
+
+## Learner Workspace
+
+### Predict the Sign
+Before doing any math, look at the initial state:
+- Our prediction was $6.0$
+- Our target is $10.0$
+- We need the prediction to go **UP**.
+- Therefore, we need to **INCREASE** the weight $W$.
+- Because we subtract the gradient during the update ($W - lr \times grad$), the gradient must be **[ Positive / Negative ]** to make the weight increase?
+
+### Blank Calculation Table
+Try calculating a new step yourself using these new starting values:
+- $x = 3.0$
+- $y = 12.0$
+- $W = 2.0$
+- $lr = 0.1$
+
+| Step | Formula | Your Calculation | Expected Output |
+|------|---------|------------------|-----------------|
+| 1. Forward Pass | $x \times W$ | | |
+| 2. Loss | $\frac{1}{2}(pred - y)^2$ | | |
+| 3. Gradient | $(pred - y) \times x$ | | |
+| 4. Update | $W - (lr \times grad)$ | | |

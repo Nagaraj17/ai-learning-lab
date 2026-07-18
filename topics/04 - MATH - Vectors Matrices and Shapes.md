@@ -11,6 +11,8 @@ To organize data so that computer hardware (like GPUs) can perform thousands of 
 - **Vector:** A single column (or row) in Excel.
 - **Matrix:** A full spreadsheet table.
 
+![Vector Dimensionality vs NumPy Arrays](<../weekly curriculum/01-forward-pass-and-learning/images/vector_dimensionality.png>)
+
 ## Week 1 assignment connection
 Our input `x` is a 1D Vector of shape `(10,)`. Our weights `W1` form a 2D Matrix of shape `(10, 8)`.
 
@@ -24,6 +26,8 @@ Matrix:
  [5, 6]]
 ```
 (Shape: `(3, 2)` -> 3 rows, 2 columns)
+
+![Scalar, Vector, and Matrix Shapes](<../weekly curriculum/01-forward-pass-and-learning/images/matrix_shapes.png>)
 
 ## Common misunderstanding
 **Misunderstanding:** NumPy automatically transposes 1D vectors to make matrix multiplication work.

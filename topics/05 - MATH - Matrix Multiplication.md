@@ -9,6 +9,8 @@ If we had to calculate every single connection between neurons one-by-one using 
 ## Beginner intuition
 Imagine you have 10 ingredients (vector `x`) and 8 different recipes (the columns of `W`). Matrix multiplication instantly calculates how much of each ingredient goes into all 8 recipes at the exact same time.
 
+![Matrix Multiplication Visualized](<../weekly curriculum/01-forward-pass-and-learning/images/matrix_multiplication.png>)
+
 ## Week 1 assignment connection
 `np.dot(x, W1)` takes our one-hot vector (shape `(10,)`) and multiplies it against our weight matrix (shape `(10, 8)`), outputting a vector of shape `(8,)` representing the input to the 8 hidden neurons.
 

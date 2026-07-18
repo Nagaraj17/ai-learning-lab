@@ -1,10 +1,57 @@
 # Reflection: Week 1
 
-## What We Built
-In Week 1, we successfully constructed a neural network from scratch using only NumPy. We built a complete training loop, moving from raw words to token IDs, to one-hot vectors, through a hidden layer, and finally to a predicted probability distribution. We then calculated the cross-entropy loss, backpropagated the error, and updated the weights to improve the model.
+## A. What We Built
 
-## The Illusion of Generalization
-Our network successfully achieved 100% accuracy on the PO Lifecycle sequence. However, we must reflect on *why* it succeeded. It succeeded because the dataset is perfectly static—there is only one correct next word for every current word. The network merely memorized the sequence. It did not learn "what an order is"; it just learned that `[1, 0, 0...]` maps to `[0, 1, 0...]`.
+In Week 1, we built a neural network from scratch using only NumPy. The network takes a word from the PO Lifecycle vocabulary, converts it to a one-hot vector, passes it through a hidden layer with `tanh` activation, produces logits, applies Softmax to get a probability distribution, and uses Argmax to make a prediction. We then implemented cross-entropy loss, backpropagation, and gradient-descent weight updates inside a training loop.
 
-## Looking Ahead to Week 2
-One-hot encoding treats every word as completely unrelated. "Picking" and "Packing" have no mathematical similarity. In Week 2, we will introduce **Embeddings**, allowing the model to group similar concepts together in mathematical space, which is the first true step toward generalization.
+---
+
+## B. Evidence Table
+
+> [!IMPORTANT]
+> Fill this table in after running the notebook from a clean kernel (Restart → Run All). Do not fill in values from memory.
+
+| Evidence | Before training | After training | Verified |
+|---|---:|---:|---|
+| Average loss (first epoch) | | | ☐ |
+| Average loss (final epoch) | | | ☐ |
+| Training accuracy | | | ☐ |
+| True-class probability (example: "Order"→"Shipment") | | | ☐ |
+| Parameters changed from initial values | Yes / No | | ☐ |
+| Results reproducible with `np.random.seed(42)` | | | ☐ |
+
+---
+
+## C. The Memorization Boundary
+
+The network can learn to correctly predict the next word in the PO Lifecycle sequence. It can do this because the sequence is a fixed, deterministic loop — there is exactly one correct next word for every current word.
+
+This is **memorization**, not generalization.
+
+The network learned that `[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]` (the one-hot for "Order") should map to `[0, 1, 0, 0, 0, 0, 0, 0, 0, 0]` (the one-hot for "Shipment"). It did not learn what "ordering" or "shipment" means.
+
+The test pairs (Cabinet → Drug, Drug → Invoice) were never in the training data. The notebook's test output shows whether the network correctly handles those pairs after training.
+
+---
+
+## D. Week 2 Preview
+
+In Week 2 we will replace one-hot encoding with **embeddings** — dense, learned vectors that can place similar words near each other in mathematical space. This is a richer representation, but it does not automatically produce generalization. Whether a model generalizes must always be evaluated by testing on meaningful unseen examples, not assumed from the architecture alone.
+
+---
+
+## E. Learner Reflection Space
+
+*Write your own answers below after completing the notebook.*
+
+**What was the hardest concept to calculate manually?**
+
+
+**What misconception did you correct during this week?**
+
+
+**What can you now explain without looking at notes?**
+
+
+**What still requires help or further study?**
+

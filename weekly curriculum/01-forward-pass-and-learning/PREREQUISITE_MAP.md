@@ -83,17 +83,17 @@ This checklist represents the exact dependency order for the Week 1 curriculum. 
 ---
 
 ## Associated Note Files
-Deep-dives for these concepts can be found in `Topics/`:
-- `ML - Foundations.md`
-- `LM - Tokens and Vocabulary.md`
-- `LM - One-Hot Encoding.md`
-- `MATH - Vectors Matrices and Shapes.md`
-- `MATH - Matrix Multiplication.md`
-- `NN - Weights Bias and Initialization.md`
-- `NN - Hidden Layers and tanh.md`
-- `NN - Logits Softmax and Argmax.md`
-- `NN - Cross-Entropy Loss.md`
-- `NN - Gradients and Backpropagation.md`
-- `NN - Learning Rate and Updates.md`
-- `NN - Training Loop.md`
-- `NN - Memorization and Generalization.md`
+Deep-dives for these concepts can be found in `topics/`:
+- `01 - ML - Foundations.md`
+- `02 - LM - Tokens and Vocabulary.md`
+- `03 - LM - One-Hot Encoding.md`
+- `04 - MATH - Vectors Matrices and Shapes.md`
+- `05 - MATH - Matrix Multiplication.md`
+- `06 - NN - Weights Bias and Initialization.md`
+- `07 - NN - Hidden Layers and tanh.md`
+- `08 - NN - Logits Softmax and Argmax.md`
+- `09 - NN - Cross-Entropy Loss.md`
+- `10 - NN - Gradients and Backpropagation.md`
+- `11 - NN - Learning Rate and Updates.md`
+- `12 - NN - Training Loop.md`
+- `13 - NN - Memorization and Generalization.md`

@@ -17,6 +17,16 @@ Vocabulary: `["Cat", "Dog", "Bird"]`
 "Dog" has Token ID `1`.
 One-hot vector: `[0, 1, 0]`
 
+```mermaid
+graph LR
+    x["[0, 1, 0]"] -->|Multiply| W["[[w00, w01],<br>[w10, w11],<br>[w20, w21]]"]
+    W -->|Selects Index 1 row| Out["[w10, w11]"]
+    
+    style x fill:#f9f,stroke:#333,stroke-width:2px
+    style Out fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+
 ## Common misunderstanding
 **Misunderstanding:** One-hot encoding captures the meaning or similarity of words.
 **Correction:** One-hot encoding explicitly assumes every single word is 100% independent and mathematically equidistant from every other word. It does *not* encode semantic similarity.

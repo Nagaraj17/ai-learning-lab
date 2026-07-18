@@ -11,6 +11,8 @@ Weights and Biases are the actual "knowledge" of the network. They are the dials
 - **Bias (`b`)**: Like the master volume dial. It shifts the baseline output up or down regardless of the inputs.
 - **Initialization**: If two racers start in the exact same spot and take the exact same steps, they tie. Giving them different, random starting lines allows them to run different paths (breaking symmetry).
 
+![Artificial Neuron Diagram](<../weekly curriculum/01-forward-pass-and-learning/images/artificial_neuron.png>)
+
 ## Week 1 assignment connection
 Our network has `W1` & `b1` connecting Input to Hidden, and `W2` & `b2` connecting Hidden to Output. We use `np.random.randn()` to initialize `W` randomly, and `np.zeros()` to initialize `b` to zero.
 

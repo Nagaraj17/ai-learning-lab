@@ -71,6 +71,6 @@ study guide.
 
 # Concept Note File Naming Convention
 
-When creating separate, permanent concept notes (in the global `Topics/` directory) for deep-dives, you must prepend a numeric prefix to the filename that matches their logical reading/dependency order.
+When creating separate, permanent concept notes (in the global `topics/` directory) for deep-dives, you must prepend a numeric prefix to the filename that matches their logical reading/dependency order.
 Example: `01 - ML - Foundations.md`, `02 - LM - Tokens and Vocabulary.md`, etc.
 This ensures notes naturally sort in the correct reading order in the file explorer for all future assignments and topics.

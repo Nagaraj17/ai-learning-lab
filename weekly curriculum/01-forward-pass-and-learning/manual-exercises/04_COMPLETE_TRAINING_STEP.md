@@ -54,3 +54,27 @@ The probability assigned to the *correct* class (`1`) went up from $42.16\%$ to 
 The loss dropped from $0.8637$ to $0.8193$.
 
 **Learning occurred successfully.**
+
+---
+
+## Learner Workspace
+
+### Predict the Sign
+Look at the Layer 1 update for `W1`:
+- $W1$: `[[0.5, -0.2], [-0.1, 0.3]]`
+- $dW1$: `[[0.1365, -0.5002], [0.0000, 0.0000]]`
+- The gradient for the top-right weight ($-0.2$) is **negative** ($-0.5002$).
+- Based on the update formula $W - (lr \times grad)$, will the new weight be more positive or more negative than $-0.2$?
+
+### Blank Calculation Table
+Try calculating a simple parameter update step:
+- $W$: `[[0.8, -0.5], [0.2, 0.9]]`
+- $grad$: `[[0.5, 0.1], [-0.4, 0.0]]`
+- $lr$: `0.1`
+
+| Weight Index | Current W | Gradient | Calculation $W - (lr \times grad)$ | New W |
+|--------------|-----------|----------|------------------------------------|-------|
+| Top-Left     | `0.8`     | `0.5`    | | |
+| Top-Right    | `-0.5`    | `0.1`    | | |
+| Bottom-Left  | `0.2`     | `-0.4`   | | |
+| Bottom-Right | `0.9`     | `0.0`    | | |

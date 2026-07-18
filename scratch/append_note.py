@@ -1,6 +1,6 @@
 import os
 
-file_path = r"c:\Users\Nagar\source\repos\ai-learning-lab\curriculum\01-forward-pass-and-learning\PREREQUISITE_KNOWLEDGE.md"
+file_path = r"c:\Users\Nagar\source\repos\ai-learning-lab\weekly curriculum\01-forward-pass-and-learning\PREREQUISITE_KNOWLEDGE.md"
 
 content = """
 ---

@@ -51,26 +51,8 @@ Learning material and weekly roadmap
 projects/
 Hands-on implementations
 
-Topics/
-Permanent knowledge base
-
-experiments/
-Ideas and hypothesis testing
-
-interview/
-Interview preparation
-
-cheat-sheets/
-Revision material
-
-diagrams/
-Architecture and visual notes
-
-datasets/
-Training data
-
-prompts/
-Useful prompts
+topics/
+    Permanent knowledge base
 
 ---
 
