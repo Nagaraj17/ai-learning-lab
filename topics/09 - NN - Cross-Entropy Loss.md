@@ -1,67 +1,50 @@
 # Cross-Entropy Loss
 
-## One-line definition
-Cross-Entropy Loss is a mathematical function that measures how wrong a prediction is by looking exclusively at the probability the model assigned to the *true correct class*.
+> [!NOTE]
+> This topic is based on Chapter 6.2 (Gradient-Based Learning) and 3.13 (Information Theory) of the *Deep Learning* textbook.
 
-## Why it exists
-To mathematically quantify "error." Without a loss function, the network doesn't know if its prediction was amazing or terrible, and therefore doesn't know how to adjust its weights.
+## Formal Definition
+To train a neural network, we need a mathematical function that quantifies "how wrong" its predictions are. This function is called the **Loss Function**. For classification tasks, the standard choice is the **Cross-Entropy Loss**, derived from the principle of maximum likelihood.
 
-## Beginner intuition
-Imagine you are taking a multiple-choice test. 
-If you are 99% confident the answer is C, and the answer is C, you get a penalty of near 0.
-If you are 99% confident the answer is A, but the answer is C, you get a massive penalty! Cross-Entropy heavily punishes models for being *confidently wrong*.
-
-## The Mathematical Formula
 For a single example in multi-class classification, the formula is:
+$Loss = - \sum_{c=1}^{M} y_c \log(p_c)$
 
-$$ Loss = - \sum_{c=1}^{M} y_{o,c} \log(p_{o,c}) $$
+## Component-by-Component Math Breakdown
+- **$M$**: The number of possible classes (e.g., vocabulary size).
+- **$c$**: The current class we are looking at in the sum.
+- **$y_c$**: The **true label** for class $c$. This is a binary value (1 if it's the correct answer, 0 if it's the wrong answer).
+- **$p_c$**: The **predicted probability** the network assigned to class $c$ (from the Softmax output).
+- **$\log(p_c)$**: The natural logarithm of the probability. 
+- **$-$ (Negative Sign)**: Because probabilities are fractions between 0 and 1, their logs are always negative. We add a minus sign to the front to make the final Loss a positive penalty.
+- **$\sum$ (Sum)**: Add this up across all classes.
 
-Where:
-- $M$ is the number of classes (vocabulary size).
-- $y$ is the true label (1 for the correct class, 0 for all others).
-- $p$ is the predicted probability for that class.
+**The Magic Simplification:**
+Because $y_c$ is $0$ for every incorrect class, multiplying anything by $0$ makes it disappear. The entire massive sum collapses into just one single term — the one for the true class:
+$Loss = - \log(p_{\text{true\_class}})$
 
-**The Simplification:**
-Because $y$ is $0$ for every incorrect class, multiplying anything by $0$ makes it disappear. The entire sum collapses into just one term — the one for the true class:
+## Beginner Intuition & Contrasting Analogy
+Imagine you are taking a high-stakes multiple-choice test where you must state your confidence.
+- **Linear Penalty:** If you are wrong, you lose 10 points. If you are really wrong, you lose 20 points.
+- **Logarithmic Penalty (Cross-Entropy):** If you guess the right answer with 99% confidence, you lose 0 points. But if you bet your entire life savings that the answer is A (99% confidence), and the real answer is actually C... the penalty isn't just a slap on the wrist. It's an astronomical fine that bankrupts you. 
 
-$$ Loss = - \log(p_{\text{true\_class}}) $$
+Cross-Entropy heavily punishes models for being *confidently wrong*.
 
-## The Loss Penalty Curve (Table)
-Notice how the penalty explodes exponentially as the model becomes more confident in the wrong answer:
+![Cross-Entropy Loss Curve](<images/cross_entropy_loss_curve.png>)
 
-| True-Class Probability ($p$) | Loss ($-log(p)$) | Interpretation |
-|----------------|----------------|----------------|
-| `0.99`         | `0.01`         | Almost perfect. Very small penalty. |
-| `0.90`         | `0.11`         | Very good. Small penalty. |
-| `0.50`         | `0.69`         | Unsure. Moderate penalty. |
-| `0.10`         | `2.30`         | Very wrong. High penalty. |
-| `0.01`         | `4.61`         | Confidently wrong. Massive penalty! |
-| `0.0001`       | `9.21`         | Completely wrong. Extreme penalty! |
+## Where is this used in AI?
+*   **Training LLMs (Next-Token Prediction):** When training a model like GPT, every single word it generates undergoes a Cross-Entropy Loss check against the actual word in the training document. The model desperately tries to minimize this number over billions of words, which forces it to become incredibly smart and accurate.
+*   **Image Classification:** Used to penalize a network if it confidently predicts an image is a Dog when it is actually a Cat.
 
-## Week 1 assignment connection
-We calculate loss as `loss = -np.log(correct_prob + 1e-9)`. We find the True Token ID, look at the Softmax probability for that specific ID, and calculate the negative log.
+## Small Numerical Example
+Let's see the exploding penalty in action:
+- If `p(true class) = 0.90`, Loss = $-\log(0.90) \approx 0.10$ *(Good job, tiny penalty)*
+- If `p(true class) = 0.50`, Loss = $-\log(0.50) \approx 0.69$ *(Unsure, moderate penalty)*
+- If `p(true class) = 0.01`, Loss = $-\log(0.01) \approx 4.60$ *(Confidently wrong, massive penalty!)*
+- If `p(true class) = 0.0001`, Loss = $-\log(0.0001) \approx 9.21$ *(Completely wrong, catastrophic penalty!)*
 
-## Small numerical example
-- If `p(true class) = 0.90`, Loss = `-log(0.90)` ≈ `0.105`
-- If `p(true class) = 0.50`, Loss = `-log(0.50)` ≈ `0.693`
-- If `p(true class) = 0.01`, Loss = `-log(0.01)` ≈ `4.605`
+*(Source: Ian Goodfellow, Yoshua Bengio, and Aaron Courville - Deep Learning, Chapter 6.2)*
 
-## Common misunderstanding
-**Misunderstanding:** Cross-entropy calculates the difference between the highest probability and the second-highest probability.
-**Correction:** Cross-entropy only cares about the probability assigned to the *true correct class*. It ignores the Argmax prediction entirely during the loss calculation.
-
-## What happens if removed or changed?
-If we don't calculate loss, we cannot perform backpropagation. The training loop dies here.
-
-## Teach-back question
-Why do we add `+ 1e-9` (a microscopically small number) when calculating `-np.log(correct_prob)` in the code?
-
-## My Understanding
-*(Learner space to explain this in their own words later)*.
-
-## Exercises
-1. If the vocabulary is `["Cat", "Dog", "Bird"]`, the true label is "Bird", and the model outputs probabilities `[0.70, 0.20, 0.10]`, what number is passed into the `-log()` function to calculate the loss?
-2. Why is `-log(0)` mathematically dangerous in a program?
+---
 
 ## Flashcards
 
@@ -69,4 +52,4 @@ What specific value does the Cross-Entropy Loss function look at to determine th
 It looks exclusively at the True-Class Probability (the probability the model assigned to the correct label), ignoring what the model's actual prediction was.
 
 Why does Cross-Entropy heavily penalize a model for being confidently wrong? #card
-Because it uses a logarithmic scale. If the true-class probability is near `0.0` (meaning the model was highly confident in the wrong answer), `-log(0)` explodes towards infinity, creating a massive loss gradient.
+Because it uses a logarithmic scale. If the true-class probability is near `0.0` (meaning the model was highly confident in the wrong answer), $-\log(0)$ explodes towards infinity, creating a massive loss gradient.

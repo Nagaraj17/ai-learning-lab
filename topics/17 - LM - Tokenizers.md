@@ -1,46 +1,75 @@
 # Tokenizers
 
-## One-line definition
-A **Tokenizer** is an algorithm that breaks raw human text into chunks (Tokens) and maps those chunks to numerical IDs (Token IDs) that the neural network can process.
+> [!NOTE]
+> This topic covers the vital first-and-last step of language modeling: bridging the gap between human strings and machine integers.
 
-## Why it exists
-Neural networks can only perform mathematical operations on numbers. They cannot multiply the letter "A" by `0.5`. Text must be converted to numbers before entering the network.
+## Formal Definition
+A **Tokenizer** is a deterministic algorithm that segments raw human text into chunks (Tokens) and maps those chunks to numerical IDs (Token IDs) that the neural network can mathematically process.
+Formally, we can define tokenization as a function $T$ that maps a string of characters $S$ to a sequence of integers:
+$T(S) \rightarrow [t_1, t_2, \dots, t_n]$
 
-## Beginner intuition
-Imagine translating a book into a secret numeric code. 
-First, you decide what your chunks are. Are you chunking by individual letters? Whole words? Syllables?
-If you chunk by whole words, you build a dictionary:
-- "The" = 0
-- "Cat" = 1
-- "Runs" = 2
-When you receive the text "The Cat", the tokenizer outputs `[0, 1]`. 
+## Component-by-Component Math Breakdown
+- **$T$**: The Tokenizer function. Unlike the neural network weights, $T$ is fixed and deterministic. It does not change or "learn" during backpropagation.
+- **$S$**: The raw input string (e.g., `"Unbelievable!"`).
+- **$t_i$**: A Token ID (an integer index). 
+- **$[t_1, t_2, \dots]$**: The final output vector of integers. The neural network never sees $S$; it only sees this integer vector.
 
-## How it works in modern AI
-Modern Large Language Models (like GPT-4) do not usually use "Whole Word" tokenization because there are too many words in the world (millions). They also do not use "Character" tokenization because it takes too many characters to convey meaning.
-Instead, they use **Sub-word Tokenization** (like Byte-Pair Encoding or BPE). 
-A word like "Unbelievable" might be split into `["Un", "believ", "able"]`. This allows the model to handle words it has never seen before by combining known sub-word chunks.
+## Beginner Intuition & Contrasting Analogy
+Imagine you are translating a book into a Secret Numeric Code. 
+Before you start translating, you must decide your **Strategy (The Tokenizer Rules):**
+- **Strategy A (Character-level):** Assign a number to every letter. `"A"=1, "B"=2`. 
+  - *Problem:* A sentence takes 100 numbers to encode. The code is too long!
+- **Strategy B (Word-level):** Assign a number to every word. `"Cat"=1, "Dog"=2`. 
+  - *Problem:* There are millions of words. Your codebook is too heavy to carry!
+- **Strategy C (Sub-word level):** Assign numbers to common chunks. `"Un"=1, "believ"=2, "able"=3`. 
+  - *Solution:* Perfect! A small codebook, but it can encode any word in existence by combining chunks.
 
-## Week 2 assignment connection
-In our toy problem, our Tokenizer is incredibly simple. We are using **Whole Word Tokenization**. We have a Python dictionary mapping exact strings (`"Receive"`) to exact integers (`6`). 
+```mermaid
+graph TD
+    subgraph Human Input
+    S["Raw String: 'Unbelievably good'"]
+    end
+    
+    subgraph Tokenizer Algorithm
+    BPE["Byte-Pair Encoding (BPE)<br>Chunks by common sub-words"]
+    end
+    
+    subgraph Tokens
+    T["['Un', 'believ', 'ably', ' good']"]
+    end
+    
+    subgraph Neural Network Input
+    I["Integer IDs: [42, 991, 305, 88]"]
+    end
+    
+    S --> BPE --> T --> I
+    
+    style Human Input fill:#f9f9f9,stroke:#333
+    style Neural Network Input fill:#eef9ff,stroke:#333
+```
+
+## Where is this used in AI?
+*   **GPT-4 (Tiktoken):** OpenAI uses a highly advanced Sub-Word tokenizer called `tiktoken` (specifically the `cl100k_base` encoding). It has exactly 100,277 sub-word chunks in its vocabulary. When you type into ChatGPT, your text is instantly passed through `tiktoken` to become an array of integers before the massive GPU neural network ever sees it.
+*   **The "Context Window" Limit:** When you hear that ChatGPT has a "128,000 Token Limit", they aren't talking about words or characters. They are talking about the exact output length of $T(S)$. Because sub-words are smaller than words, 100 Tokens usually equals about 75 English words.
+
+## Small Numerical Example
+In our toy problem, our Tokenizer is incredibly simple. We use **Whole Word Tokenization**. 
 ```python
 vocab = {"Order": 0, "Shipment": 1, ... "Receive": 6}
 ```
-If we try to pass `"Received"` to our network, it will crash, because our simple tokenizer has no sub-word fallback mechanism.
+If we pass `"Receive"` to our Tokenizer, it outputs `[6]`.
+If we try to pass `"Received"` to our network, it will crash, because our simple tokenizer has no sub-word fallback mechanism to handle the past-tense suffix "ed".
 
-## Common misunderstanding
-**Misunderstanding:** The Tokenizer is part of the Neural Network.
-**Correction:** The Tokenizer is completely separate from the Neural Network. It runs *before* the data goes in, and *after* the data comes out. It has no weights and does not learn during training via backpropagation; it is a fixed set of rules.
+## Common Misunderstanding
+**Misunderstanding:** The Tokenizer is a Neural Network layer that learns during training.
+**Correction:** The Tokenizer is completely separate from the Neural Network. It runs on the CPU *before* the data goes into the GPU, and *after* the data comes out. It has no trainable weights and does not learn during backpropagation; it is a fixed, hard-coded set of lookup rules.
 
-## Teach-back question
-Why do modern language models prefer sub-word tokenization over whole-word tokenization?
-
-## My Understanding
-*(Learner space to explain this in their own words later)*.
+---
 
 ## Flashcards
 
 Is the Tokenizer trained by Backpropagation alongside the neural network? #card
 No. The Tokenizer is a separate, pre-defined algorithm that converts text to numbers before the network sees it. It does not learn during the neural network training loop.
 
-What is the main advantage of Sub-Word tokenization over Whole-Word tokenization? #card
-It keeps the vocabulary size manageable while still allowing the model to process completely unknown words by breaking them down into familiar sub-word chunks (like prefixes and suffixes).
+What is the main mathematical advantage of Sub-Word tokenization (BPE) over Whole-Word tokenization? #card
+It keeps the vocabulary size $|V|$ mathematically small (saving memory) while still allowing the model to process completely unknown words by breaking them down into familiar sub-word chunks (like prefixes and suffixes).

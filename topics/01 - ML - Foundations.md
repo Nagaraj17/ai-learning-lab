@@ -1,40 +1,64 @@
 # Machine Learning Foundations
 
-## One-line definition
-Machine learning is teaching a system to recognize patterns in data (Supervised Learning uses labeled data), using a Dataset of Inputs and Targets.
+> [!NOTE]
+> This topic is based on Chapter 5.1 (Learning Algorithms) of the *Deep Learning* textbook.
 
-## Why it exists
-To solve problems that are too complex for hard-coded "if-then" rules.
+## Formal Definition
+A machine learning algorithm is an algorithm that is able to learn from data. Mitchell (1997) provides the formal definition:
+"A computer program is said to learn from experience $E$ with respect to some class of tasks $T$ and performance measure $P$, if its performance at tasks in $T$, as measured by $P$, improves with experience $E$."
 
-![Traditional Programming vs Machine Learning — rule-based vs data-driven](<../weekly curriculum/01-forward-pass-and-learning/images/traditional_vs_ml.png>)
+In this lab, we focus on **Supervised Learning**, where the experience $E$ involves observing a dataset of features (Inputs) matched with targets (Labels).
 
-*Traditional programming gives the computer rules and data to produce answers. Machine learning gives it data and answers so it can discover the rules itself.*
+## Component-by-Component Math Breakdown
+- **$E$ (Experience):** The Dataset. If you want to train an AI to recognize dogs, $E$ is a massive folder of 10,000 pictures of dogs and cats.
+- **$T$ (Task):** The actual goal. For example, $T$ is the task of looking at a new image and outputting the word "Dog" or "Cat".
+- **$P$ (Performance):** The Loss Function (Error). We measure how well the AI is doing by checking its accuracy. If it guesses "Dog" on a picture of a Cat, $P$ goes down.
 
-## Beginner intuition
-Think of a student learning from a practice exam that comes with an answer key. The student makes a guess for each question, checks it against the answer key, and uses the corrections to improve. Over many rounds, the student learns the patterns. Machine learning works exactly the same way — examples are the questions, labels are the answer key, and the network adjusts its internal numbers after each correction.
+If feeding the model more images ($E$) makes its accuracy ($P$) on classification ($T$) go up, the machine is successfully *learning*.
 
-## Week 1 assignment connection
-In `01_Next_Word_Predictor.ipynb`, our Input is a current lifecycle state (e.g., "Order") and our Target is the expected next state ("Shipment"). We are using Supervised Learning to train the network on this specific Dataset.
+## Beginner Intuition & Contrasting Analogy
+Imagine you want to teach a robot how to bake a chocolate cake.
+- **Traditional Programming:** You sit down and write a highly explicit, rigid recipe. "If temp < 350, turn on oven. Add 2 cups flour. Add 1 cup sugar." You provide the **Rules** and the **Data** (ingredients), and the robot outputs the **Answer** (a cake). If the recipe is slightly wrong, the robot will bake a terrible cake forever.
+- **Machine Learning:** You don't write a recipe. Instead, you give the robot the ingredients (**Data**) and a picture of a perfect chocolate cake (**Answer/Label**). You tell the robot to just start mixing things randomly. It bakes a terrible cake, compares it to the picture (calculates Error), and adjusts its internal strategy. After 10,000 terrible cakes, it finally bakes a perfect one. The robot has output the **Rules** (the perfect recipe) entirely on its own!
 
-## Small numerical example
-Input: `x = [1, 0]`
-Target (Label): `y = [0, 1]`
-The model predicts `[0.6, 0.4]`. The error (loss) tells it how far off it was from the Target `[0, 1]`.
+```mermaid
+graph LR
+    subgraph Traditional Programming
+    D1[Data] --> P1[Program]
+    R1[Rules] --> P1
+    P1 --> A1[Answers]
+    end
 
-## Common misunderstanding
-**Misunderstanding:** The model "understands" the words. 
-**Correction:** The model only understands mathematical relationships between numbers; it has no concept of what an "Order" actually is in the real world.
+    subgraph Machine Learning
+    D2[Data] --> P2[Machine Learning Algorithm]
+    A2[Answers] --> P2
+    P2 --> R2[Rules / Model]
+    end
+    
+    style Traditional Programming fill:#f9f9f9,stroke:#333
+    style Machine Learning fill:#eef9ff,stroke:#333
+```
 
-## What happens if removed or changed?
-If we remove the Targets/Labels, we can no longer do Supervised Learning. The model wouldn't know when it made a mistake, so it could never correct its weights.
+## Where is this used in AI?
+*   **Self-Driving Cars:** Humans cannot write `if` statements for every possible driving scenario (e.g., `if stop_sign_covered_in_snow_and_person_wearing_chicken_suit_crossing_road:`). It's too complex. Instead, Tesla engineers record millions of hours of expert human driving (Data + Answers) and feed it to a neural network to learn the Rules of driving itself.
+*   **Medical Diagnosis:** Feeding an AI 100,000 X-Rays of lungs along with the doctor's diagnosis (Healthy vs Sick) so the AI learns to identify microscopic patterns of cancer that humans might miss.
 
-## Teach-back question
-Why can't we just write an `if` statement for predicting the next word in the PO Lifecycle? (And why is this a toy problem where an `if` statement actually *would* work better?)
+## Small Numerical Example
+Let's look at the data structure for a tiny Supervised Learning task (Predicting if someone will buy a house based on their age):
+- **Input (Age):** $\mathbf{x} = [25, 45, 60]$
+- **Target (Bought House?):** $\mathbf{y} = [0, 1, 1]$
+
+The model makes a prediction $\hat{\mathbf{y}} = [0.1, 0.4, 0.9]$.
+The performance $P$ calculates how far $\hat{\mathbf{y}}$ is from $\mathbf{y}$.
+
+*(Source: Ian Goodfellow, Yoshua Bengio, and Aaron Courville - Deep Learning, Chapter 5.1)*
+
+---
 
 ## Flashcards
 
-What is the difference between Traditional Programming and Machine Learning? #card
-Traditional Programming requires a human to write explicit rules to process data into answers. Machine Learning takes data and answers, and learns the rules itself.
+What is the fundamental difference between Traditional Programming and Machine Learning? #card
+Traditional Programming requires a human to input explicit Rules to process Data into Answers. Machine Learning takes Data and Answers, and outputs the Rules (the model) automatically.
 
-In Supervised Learning, what do we call the "correct answer" we provide to the model during training? #card
-The Target or Label.
+What does Mitchell's formal definition of machine learning (Task $T$, Performance $P$, Experience $E$) mean in plain English? #card
+A machine is "learning" if getting more Experience (training on more data) makes its Performance (accuracy) at a specific Task (like image recognition) improve.

@@ -31,6 +31,10 @@ This is the consolidated study guide for Week 1 (Forward Pass & Learning). It co
 ## Stage 3: Mathematics
 [📖 Deep-Dive Note: 04 - MATH - Vectors Matrices and Shapes.md](../../topics/04%20-%20MATH%20-%20Vectors%20Matrices%20and%20Shapes.md)
 [📖 Deep-Dive Note: 05 - MATH - Matrix Multiplication.md](../../topics/05%20-%20MATH%20-%20Matrix%20Multiplication.md)
+> **Optional Deep-Dives for the Curious:**
+> - [💡 05b - MATH - Tensors and Norms - Optional.md](../../topics/05b%20-%20MATH%20-%20Tensors%20and%20Norms%20-%20Optional.md) *(Why read it? Discover how AI models measure their own massive errors using L1/L2 Norms, and how data is actually shaped for GPU processing.)*
+> - [💡 05c - MATH - Identity Inverse and Special Matrices - Optional.md](../../topics/05c%20-%20MATH%20-%20Identity%20Inverse%20and%20Special%20Matrices%20-%20Optional.md) *(Why read it? See how we can sometimes solve machine learning equations instantly with analytical math instead of slow guessing.)*
+> - [💡 05d - MATH - Eigendecomposition - Optional.md](../../topics/05d%20-%20MATH%20-%20Eigendecomposition%20-%20Optional.md) *(Why read it? Understand the "magic vectors" that act as the skeleton of a matrix, laying the foundation for how AI compresses data.)*
 
 **9. Scalar, vector, and matrix**: 
 - **Scalar**: One single number.
@@ -56,6 +60,8 @@ This is the consolidated study guide for Week 1 (Forward Pass & Learning). It co
 ## Stage 5: Activation & Output
 [📖 Deep-Dive Note: 07 - NN - Hidden Layers and tanh.md](../../topics/07%20-%20NN%20-%20Hidden%20Layers%20and%20tanh.md)
 [📖 Deep-Dive Note: 08 - NN - Logits Softmax and Argmax.md](../../topics/08%20-%20NN%20-%20Logits%20Softmax%20and%20Argmax.md)
+> **Optional Deep-Dives for the Curious:**
+> - [💡 07b - NN - Advanced Activation Functions - Optional.md](../../topics/07b%20-%20NN%20-%20Advanced%20Activation%20Functions%20-%20Optional.md) *(Why read it? Learn why modern models completely abandoned `tanh` in favor of `ReLU` to solve the catastrophic "Vanishing Gradient" problem.)*
 
 **17. Activation function**: Introduced immediately after `Wx + b` to add non-linearity, allowing the model to learn complex patterns instead of just straight lines.
 **18. tanh**: Bends inputs (ranging from negative infinity to positive infinity) strictly into a range between `-1` and `1`.
@@ -94,6 +100,8 @@ This is the consolidated study guide for Week 1 (Forward Pass & Learning). It co
 ## Stage 8: Training Execution
 [📖 Deep-Dive Note: 11 - NN - Learning Rate and Updates.md](../../topics/11%20-%20NN%20-%20Learning%20Rate%20and%20Updates.md)
 [📖 Deep-Dive Note: 12 - NN - Training Loop.md](../../topics/12%20-%20NN%20-%20Training%20Loop.md)
+> **Optional Deep-Dives for the Curious:**
+> - [💡 11b - NN - Advanced Optimizers - Optional.md](../../topics/11b%20-%20NN%20-%20Advanced%20Optimizers%20-%20Optional.md) *(Why read it? Basic SGD is painfully slow. Discover `Adam` (the industry standard optimizer) and how it uses "Momentum" like a bowling ball to speed up learning.)*
 
 **30. Learning rate**: Controls the size of the step we take. `0` means no learning. Too large means overshooting.
 **31. Weight and bias update**: The actual change applied to the parameters (`new_weight = old_weight - (learning_rate * gradient)`). We use subtraction to ensure we step *downhill* towards zero loss.
@@ -105,6 +113,8 @@ This is the consolidated study guide for Week 1 (Forward Pass & Learning). It co
 
 ## Stage 9: Reflection
 [📖 Deep-Dive Note: 13 - NN - Memorization and Generalization.md](../../topics/13%20-%20NN%20-%20Memorization%20and%20Generalization.md)
+> **Optional Deep-Dives for the Curious:**
+> - [💡 13b - NN - Advanced Regularization - Optional.md](../../topics/13b%20-%20NN%20-%20Advanced%20Regularization%20-%20Optional.md) *(Why read it? If GPT-4 didn't use Regularization, it would just memorize Wikipedia word-for-word. Learn how `Dropout` forces models to actually learn instead of cheat.)*
 
 **35. Memorization in the PO lifecycle problem**: Because our toy dataset is an arbitrary loop with no real semantic patterns, the network is fundamentally *memorizing* the answers, which is acceptable for this Week 1 exercise.
 **36. What has not yet been demonstrated about generalization**: Successful training on these examples does not prove the model has "learned a concept" that it could apply to unseen data. (See [PARKING_LOT.md](PARKING_LOT.md) for deferred Generalization and Train/Test Split topics).

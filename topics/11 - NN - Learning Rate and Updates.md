@@ -1,49 +1,56 @@
 # Learning Rate and Updates
 
-## One-line definition
-The **Weight Update** applies the gradients to fix the parameters, and the **Learning Rate** controls exactly how big of a step we take.
+> [!NOTE]
+> This topic is based on Chapter 4.3 (Gradient-Based Optimization) of the *Deep Learning* textbook.
 
-## Why it exists
-To actually improve the model! Without the update step, calculating the gradients is useless.
+## Formal Definition
+Once backpropagation computes the gradient of the loss with respect to the parameters, the **Optimizer** must use this gradient to update the weights. The simplest optimization algorithm is **Stochastic Gradient Descent (SGD)**. 
 
-## Beginner intuition
-Imagine you are walking down a mountain blindfolded to find the lowest valley (Loss = 0). The Gradient tells you which way is downhill. The Learning Rate is the size of your footstep. 
+The update rule scales the gradient by a hyperparameter called the **learning rate** (often denoted by $\epsilon$ or $\eta$), which determines the step size.
 
-```mermaid
-graph TD
-    Start["High Loss (Wrong Prediction)"] -->|Calculate Gradient| Slope["Gradient tells us slope"]
-    Slope -->|Subtract (lr * gradient)| Step["Step downhill against slope"]
-    Step --> End["Lower Loss (Better Prediction)"]
-    
-    style Start fill:#f99,stroke:#333,stroke-width:2px
-    style End fill:#9f9,stroke:#333,stroke-width:2px
-```
+## Component-by-Component Math Breakdown
+The mathematical formula for a Gradient Descent update is:
+$\mathbf{\theta}_{\text{new}} = \mathbf{\theta}_{\text{old}} - \epsilon \mathbf{g}$
 
-## Week 1 assignment connection
-In the `update_weights` function, we perform `W1 -= lr * dW1`. We use subtraction to ensure we always step *against* the slope (downhill). Our learning rate is `0.1`.
+- **$\mathbf{\theta}$ (Theta)**: A mathematical placeholder for any parameter in the network (e.g., a Weight matrix $\mathbf{W}$ or a Bias vector $\mathbf{b}$).
+- **$\mathbf{g}$**: The gradient we just calculated during Backpropagation ($\frac{\partial L}{\partial \theta}$). It points in the direction of the steepest *ascent* (uphill).
+- **$\epsilon$ (Epsilon)**: The **Learning Rate**. This is a small positive number (like $0.01$) that determines how large of a step we take.
+- **$-$ (Subtraction)**: Because the gradient $\mathbf{g}$ always points uphill towards maximum loss, we must *subtract* it to step downhill towards minimum loss.
 
-## Small numerical example
-Formula: `new_weight = old_weight - (learning_rate * gradient)`
-- Old weight: `0.5`
-- Gradient: `2.0` (Positive slope)
-- Learning Rate: `0.1`
-- New weight = `0.5 - (0.1 * 2.0)` = `0.5 - 0.2` = **`0.3`**
+## Beginner Intuition & Contrasting Analogy
+Imagine you are walking down a mountain blindfolded, trying to find the lowest valley (where Loss = 0).
+- **The Gradient** is your foot feeling the slope of the ground. It tells you which way is downhill.
+- **The Learning Rate** is the size of your footstep.
 
-## Common misunderstanding
-**Misunderstanding:** The gradient is the weight update.
-**Correction:** The gradient is just the slope. The actual update requires multiplying the slope by the learning rate.
+If your learning rate is perfectly tuned, you take smooth strides to the bottom. 
+If your learning rate is too small, you take microscopic baby steps. It will take you billions of years to reach the bottom.
+If your learning rate is massive, you take a giant leap. You might overshoot the valley completely, land halfway up the opposite mountain, and bounce violently into outer space!
 
-## What happens if removed or changed?
-- If Learning Rate is `0.0`: `new_weight = old_weight`. The network never learns.
-- If Learning Rate is massive (e.g., `100.0`): The network takes a massive step, jumps across the valley to the other mountain, and the loss explodes to infinity.
+![Learning Rate Comparison](<images/learning_rate_comparison.png>)
 
-## Teach-back question
-Why do we *subtract* the gradient during the update step (`W1 = W1 - lr * dW1`), rather than adding it?
+## Where is this used in AI?
+*   **Learning Rate Schedulers:** In modern AI training (like training LLaMA or GPT-4), we don't use a fixed learning rate. We use a "Scheduler" that starts with a large learning rate to quickly bound down the mountain, and then slowly decays the learning rate to tiny baby steps as we get close to the bottom, allowing the model to perfectly settle into the absolute lowest point of the valley without bouncing out.
+*   **Hyperparameter Tuning:** The learning rate is often considered the single most important hyperparameter to tune. If an AI engineer's model isn't learning, the very first thing they check is the learning rate.
+
+## Small Numerical Example
+Let's see a single weight update in action:
+- **Old weight:** $0.5$
+- **Gradient ($\mathbf{g}$):** $2.0$ (Positive slope, meaning increasing the weight increases the loss)
+- **Learning Rate ($\epsilon$):** $0.1$
+
+Calculate the step size: $\epsilon \times \mathbf{g} = 0.1 \times 2.0 = 0.2$
+Update the weight: $\mathbf{\theta}_{\text{new}} = 0.5 - 0.2 = \mathbf{0.3}$
+
+The weight successfully decreased to step downhill!
+
+*(Source: Ian Goodfellow, Yoshua Bengio, and Aaron Courville - Deep Learning, Chapter 4.3)*
+
+---
 
 ## Flashcards
 
 What happens if you set the Learning Rate to 0.0? #card
-The parameters never update (`old_weight - 0 * gradient = old_weight`). The network does not learn.
+The parameters never update (`old_weight - 0 * gradient = old_weight`). The network does not learn at all.
 
-Why do we use subtraction in the weight update formula (`W -= lr * gradient`)? #card
-Because the gradient points uphill (towards maximum loss). We want to minimize the loss, so we subtract the gradient to step downhill.
+Why do we use subtraction in the weight update formula (`W = W - lr * gradient`)? #card
+Because the gradient mathematically points uphill (towards maximum loss). We want to minimize the loss, so we subtract the gradient to step downhill into the valley.

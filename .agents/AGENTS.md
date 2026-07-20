@@ -10,9 +10,10 @@ For every new concept:
 2. Create or update a complete starter knowledge note.
 3. Fill the factual teaching sections yourself.
 4. Explain the concept from first principles using:
-   - intuition;
-   - a real-world example;
-   - a small numerical or technical example;
+   - **Component-by-Component Math Breakdown:** If there is a formula, explain every single symbol (e.g. what the $\sum$ means, what the exponent does) individually in plain English.
+   - **Contrasting Analogies:** Use vivid, contrasting analogies (e.g. Bird's straight path vs Human's grid path) to build intuition.
+   - **Concrete "Where is this used in AI?" Section:** Always include a dedicated section that connects the concept to a real, concrete AI mechanism (e.g., Loss Functions, Embeddings, Regularization) with numerical examples of how the math affects the AI's behavior.
+   - **Visual Diagrams:** Generate and embed visual diagrams (via scripts or image generation) whenever explaining spatial or comparative mathematical concepts.
    - connection to the current assignment.
 5. Ask the learner to read the note.
 6. Invite clarification questions.
