@@ -74,3 +74,18 @@ study guide.
 When creating separate, permanent concept notes (in the global `topics/` directory) for deep-dives, you must prepend a numeric prefix to the filename that matches their logical reading/dependency order.
 Example: `01 - ML - Foundations.md`, `02 - LM - Tokens and Vocabulary.md`, etc.
 This ensures notes naturally sort in the correct reading order in the file explorer for all future assignments and topics.
+
+
+## Reference Materials Protocol
+
+We maintain a curated map of reference textbooks at `resources/REFERENCE_MAP.md` and the actual references in `resources/references/`. 
+
+When generating or updating notes for a topic, the mentor MUST consult `REFERENCE_MAP.md` to identify the optimal reference book for that specific topic.
+
+Rules for using references:
+1. **Never copy-paste entirely:** Do not just dump paragraphs or chapters from the book into the notes.
+2. **Synthesize and Simplify:** Use the reference to deeply understand the concept yourself, then explain it in your own words following the Beginner-First Teaching Protocol (intuition, real-world examples, simple math).
+3. **Formal Definitions:** You may quote short, formal definitions from the references if they are the industry standard, but you must immediately break them down into plain English.
+4. **Targeted Reading:** Locate the relevant chapter or section in the mapped reference book first. Do not load or summarize the complete book.
+5. **No Source of Truth Override:** Use the books as secondary references to enrich the notes, but always preserve the AI Learning Lab's dependency order and mastery standards.
+6. **Cite the Source:** Mention which reference book inspired the intuition or definition in the note.
