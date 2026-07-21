@@ -26,26 +26,23 @@ Before you start translating, you must decide your **Strategy (The Tokenizer Rul
 
 ```mermaid
 graph TD
-    subgraph Human Input
-    S["Raw String: 'Unbelievably good'"]
+    subgraph SG1 ["Human Input"]
+        S["Raw String: 'Unbelievably good'"]
     end
     
-    subgraph Tokenizer Algorithm
-    BPE["Byte-Pair Encoding (BPE)<br>Chunks by common sub-words"]
+    subgraph SG2 ["Tokenizer Algorithm"]
+        BPE["Byte-Pair Encoding (BPE)<br>Chunks by common sub-words"]
     end
     
-    subgraph Tokens
-    T["['Un', 'believ', 'ably', ' good']"]
+    subgraph SG3 ["Tokens"]
+        T["['Un', 'believ', 'ably', ' good']"]
     end
     
-    subgraph Neural Network Input
-    I["Integer IDs: [42, 991, 305, 88]"]
+    subgraph SG4 ["Neural Network Input"]
+        I["Integer IDs: [42, 991, 305, 88]"]
     end
     
     S --> BPE --> T --> I
-    
-    style Human Input fill:#f9f9f9,stroke:#333
-    style Neural Network Input fill:#eef9ff,stroke:#333
 ```
 
 ## Where is this used in AI?

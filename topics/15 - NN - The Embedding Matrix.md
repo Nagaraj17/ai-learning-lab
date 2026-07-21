@@ -26,17 +26,14 @@ Imagine the Embedding Matrix as a massive Phone Book.
 
 ```mermaid
 graph TD
-    subgraph The Stupid Way: Matrix Multiplication
-    O["One-Hot Vector: [0, 0, 1, 0]"] -->|Multiply @| M["Embedding Matrix E<br>Row 0: [w00, w01]<br>Row 1: [w10, w11]<br>Row 2: [w20, w21]<br>Row 3: [w30, w31]"]
-    M -->|Wastes massive GPU compute| R1["Result: [w20, w21]"]
+    subgraph SG1 ["The Stupid Way: Matrix Multiplication"]
+        O["One-Hot Vector: [0, 0, 1, 0]"] -->|Multiply @| M["Embedding Matrix E<br>Row 0: [w00, w01]<br>Row 1: [w10, w11]<br>Row 2: [w20, w21]<br>Row 3: [w30, w31]"]
+        M -->|Wastes massive GPU compute| R1["Result: [w20, w21]"]
     end
     
-    subgraph The Smart Way: Array Index Lookup
-    T["Token ID: 2"] -->|Direct Array Index E[2]| R2["Result: [w20, w21]"]
+    subgraph SG2 ["The Smart Way: Array Index Lookup"]
+        T["Token ID: 2"] -->|Direct Array Index E[2]| R2["Result: [w20, w21]"]
     end
-    
-    style The Stupid Way: Matrix Multiplication fill:#f9f9f9,stroke:#333
-    style The Smart Way: Array Index Lookup fill:#eef9ff,stroke:#333
 ```
 
 ## Where is this used in AI?

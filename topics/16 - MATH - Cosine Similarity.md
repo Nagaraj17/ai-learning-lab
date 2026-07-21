@@ -26,24 +26,20 @@ In NLP, common words like "The" get trained a lot, so their vector arms grow ver
 
 ```mermaid
 graph TD
-    subgraph Perfect Similarity = 1.0
-    A1["Vector A (Length 3)"] --> C1["Same Direction"]
-    B1["Vector B (Length 5)"] --> C1
+    subgraph SG1 ["Perfect Similarity (1.0)"]
+        A1["Vector A (Length 3)"] --> C1["Same Direction (0° Angle)"]
+        B1["Vector B (Length 5)"] --> C1
     end
     
-    subgraph Zero Similarity = 0.0
-    A2["Vector A"] --> C2["90 Degrees Apart (Orthogonal)"]
-    B2["Vector B"] --> C2
+    subgraph SG2 ["Zero Similarity (0.0)"]
+        A2["Vector A"] --> C2["Perpendicular (90° Angle)"]
+        B2["Vector B"] --> C2
     end
     
-    subgraph Opposite Similarity = -1.0
-    A3["Vector A"] --> C3["180 Degrees Apart (Opposite)"]
-    B3["Vector B"] --> C3
+    subgraph SG3 ["Opposite Similarity (-1.0)"]
+        A3["Vector A"] --> C3["Opposite Direction (180° Angle)"]
+        B3["Vector B"] --> C3
     end
-    
-    style Perfect Similarity fill:#eef9ff,stroke:#333
-    style Zero Similarity fill:#f9f9f9,stroke:#333
-    style Opposite Similarity fill:#ffeef0,stroke:#333
 ```
 
 ## Where is this used in AI?

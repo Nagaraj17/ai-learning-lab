@@ -25,22 +25,19 @@ Dimensionality Reduction is the math of finding the **absolute best camera angle
 
 ```mermaid
 graph TD
-    subgraph Original High-Dimensional Space
-    3D["3D Object (e.g., A sphere hovering over a cube)"]
+    subgraph SG1 ["Original High-Dimensional Space"]
+        D3["3D Object (Sphere above Cube)"]
     end
     
-    subgraph PCA Transformation
-    C["PCA calculates the optimal 'Camera Angle'"]
+    subgraph SG2 ["PCA Transformation"]
+        C["Optimal Projection Angle Matrix P"]
     end
     
-    subgraph Reduced Space
-    2D["2D Shadow (e.g., A circle hovering over a square)"]
+    subgraph SG3 ["Reduced Space"]
+        D2["2D Shadow (Circle above Square)"]
     end
     
-    3D --> C --> 2D
-    
-    style Original High-Dimensional Space fill:#f9f9f9,stroke:#333
-    style Reduced Space fill:#eef9ff,stroke:#333
+    D3 --> C --> D2
 ```
 
 ## Where is this used in AI?

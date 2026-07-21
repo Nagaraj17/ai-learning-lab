@@ -22,18 +22,18 @@ Imagine you want to mathematically describe vehicles.
 By looking at the embedding vectors, the computer can immediately calculate how similar two cars are mathematically.
 
 ```mermaid
-quadrantChart
-    title Word Embedding Semantic Space (Simplified to 2 Dimensions)
-    x-axis "Feminine" --> "Masculine"
-    y-axis "Peasant" --> "Royalty"
-    quadrant-1 "Male Royalty"
-    quadrant-2 "Female Royalty"
-    quadrant-3 "Female Commoner"
-    quadrant-4 "Male Commoner"
-    "King": [0.8, 0.8]
-    "Queen": [0.2, 0.8]
-    "Man": [0.8, 0.2]
-    "Woman": [0.2, 0.2]
+graph TD
+    subgraph SemanticSpace ["Word Embedding Semantic Space (2D)"]
+        King["King: [0.8, 0.8] (Male Royalty)"]
+        Queen["Queen: [0.2, 0.8] (Female Royalty)"]
+        Man["Man: [0.8, 0.2] (Male Commoner)"]
+        Woman["Woman: [0.2, 0.2] (Female Commoner)"]
+        
+        King <-->|Gender Direction| Queen
+        Man <-->|Gender Direction| Woman
+        King <-->|Royalty Direction| Man
+        Queen <-->|Royalty Direction| Woman
+    end
 ```
 *Notice how the mathematical distance between "Man" and "Woman" is perfectly parallel to the distance between "King" and "Queen". This is how AI understands relationships!*
 
