@@ -1,50 +1,128 @@
 # Logits, Softmax, and Argmax
 
 > [!NOTE]
-> This topic is based on Chapter 6.2 (Gradient-Based Learning - Output Units) of the *Deep Learning* textbook.
+> This topic is based on Chapter 6.2 (Gradient-Based Learning - Output Units) of the *Deep Learning* textbook (Goodfellow et al.).
+
+## Why is this Concept Required?
+In **Week 1: Build a Basic Prediction Machine**, after computing hidden activations with $\tanh$, our network must produce a final prediction over target classes (e.g., predicting the next token or classifying an output). Raw hidden activations cannot directly serve as probabilities because they are unconstrained numbers. We need a systematic pipeline:
+1. Compute raw scores (**Logits**).
+2. Convert raw scores into a valid probability distribution (**Softmax**).
+3. Pick the winning class with highest confidence (**Argmax**).
+
+---
 
 ## Formal Definition
-Any neural network used for classification needs to output a probability distribution over the discrete classes. The final linear layer outputs raw, unnormalized scores called **logits**. We use the **softmax** function to convert these logits into a valid probability distribution. Finally, we use **argmax** to find the index of the highest probability.
+Any neural network used for classification outputs a probability distribution over discrete classes. The final linear layer outputs raw, unnormalized scores called **logits** ($\mathbf{z}$). We use the **softmax** function to convert logits into a valid probability distribution where all values are positive and sum to $1.0$. Finally, we use **argmax** to find the index of the class with the highest probability.
 
-Formally, the softmax function for the $i$-th class is defined as:
-$\text{softmax}(\mathbf{z})_i = \frac{\exp(z_i)}{\sum_j \exp(z_j)}$
+Formally, the softmax probability for the $i$-th class is defined as:
+
+$$\text{softmax}(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}$$
+
+---
 
 ## Component-by-Component Math Breakdown
-Let's break down the formula $\text{softmax}(\mathbf{z})_i = \frac{\exp(z_i)}{\sum_j \exp(z_j)}$:
-- **$\mathbf{z}$**: The vector of raw **logits** produced by the final layer of the network. These numbers can be anything (e.g., $100.5$, $-42.1$, $0.0$).
-- **$z_i$**: The specific logit score for class $i$.
-- **$\exp(z_i)$**: The mathematical exponential function ($e^{z_i}$). This serves two crucial purposes: it forces every number to be positive (since probabilities cannot be negative), and it heavily exaggerates differences (a slightly higher logit becomes a vastly higher exponential).
-- **$\sum_j \exp(z_j)$**: This is the denominator. It adds up all the exponentiated values for every single class. 
-- **Division**: By dividing the specific class's exponentiated score by the total sum, we guarantee that all the final outputs will add up to exactly $1.0$ (100%).
 
-## Beginner Intuition & Contrasting Analogy
-Think of this process like a chaotic talent show transitioning into an official winner announcement:
-- **Logits:** The eccentric judge shouting random scores: "I give Apple 50 points! Banana -12 points!" These numbers are meaningless in isolation.
-- **Softmax:** The official mediator stepping in: "Okay, let's normalize this. Apple has a 98% chance of winning, Banana has a 2% chance." Softmax forces the chaotic scores into a clean 100% pie chart.
-- **Argmax:** The announcer at the very end: "The winner is Apple!" Argmax throws away the percentages and just points at the index that won.
+### 1. The Softmax Formula: $P_i = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}$
 
-![Softmax Visualization](<images/softmax_function.png>)
+| Symbol | Name | Plain-English Meaning |
+| :--- | :--- | :--- |
+| $\mathbf{z}$ | **Logits Vector** | The vector of raw, unconstrained output scores from the final layer ($[z_1, z_2, \dots, z_K]$). |
+| $z_i$ | **Class $i$ Logit** | The raw numerical score assigned to class $i$. Can be negative, zero, or positive ($-\infty$ to $+\infty$). |
+| $K$ | **Total Number of Classes** | The total count of target output classes (e.g., $K=3$ for 3 classes). |
+| $e$ | **Euler's Constant** | $\approx 2.71828$, base of the natural logarithm. |
+| $e^{z_i}$ | **Exponential Score of Class $i$** | Converts raw score $z_i$ into a strictly positive value ($e^z > 0$). Exponentiation also exaggerates score differences. |
+| $\sum_{j=1}^{K} e^{z_j}$ | **Sum of Exponentials (Denominator)** | Adds up the exponentiated scores of *all* $K$ classes. Serves as the normalizing constant. |
+| $\text{softmax}(\mathbf{z})_i$ | **Softmax Probability $P_i$** | The normalized probability for class $i$. Guaranteed to be between $0.0$ and $1.0$, with $\sum_{i=1}^K P_i = 1.0$. |
+
+### 2. Argmax: $\hat{y} = \arg\max_{i} (\mathbf{P})$
+
+| Symbol | Name | Plain-English Meaning |
+| :--- | :--- | :--- |
+| $\mathbf{P}$ | **Probability Vector** | The array of normalized probabilities output by Softmax. |
+| $\arg\max_i$ | **Argument of Maximum** | Scans the probability array $\mathbf{P}$ and returns the **index $i$** of the largest value, not the value itself. |
+| $\hat{y}$ | **Predicted Class Index** | The final predicted class label (e.g., class index `0`). |
+
+---
+
+## Beginner Intuition & Contrasting Analogies
+
+### Analogy: The Talent Show (Logits $\to$ Softmax $\to$ Argmax)
+Imagine a panel of judges scoring contestants in a talent show:
+
+1. **Logits (Raw Loud Scores):** 
+   Judge shouts raw unorganized points: "Apple gets +3.0! Banana gets +1.0! Cherry gets +0.1!"
+   - *Problem:* Points can be negative, don't add up to 100%, and can't be directly compared across different contests.
+2. **Softmax (The Official Percentage Pie Chart):**
+   The mediator steps in, exponentiates every score to make them positive, and divides by the total:
+   - "Apple has **84%** probability of winning."
+   - "Banana has **11%** probability of winning."
+   - "Cherry has **5%** probability of winning."
+   - *Result:* Clean, positive numbers that sum up to exactly $100\%$ ($1.0$).
+3. **Argmax (The Final Winner Announcement):**
+   The host points to Apple: "The winner is **Contestant #0** (Apple)!"
+   - Argmax drops the percentages and returns the winning category index.
+
+![Softmax Visualization](images/softmax_function.png)
+
+---
 
 ## Where is this used in AI?
-*   **Next-Token Prediction in LLMs:** When ChatGPT predicts the next word, it doesn't just confidently spit out one word. The final layer produces a vector of **logits** with a size of ~100,000 (one score for every possible word in its vocabulary). It applies **Softmax** to turn those 100,000 scores into probabilities. Then, it rolls a weighted dice based on those probabilities to pick the next word!
-*   **Image Classification:** If you build an AI to classify images of cats and dogs, the output layer will have 2 logits. Softmax guarantees the "Cat Probability" and "Dog Probability" perfectly sum to 1.0.
 
-## Small Numerical Example
-Let's trace a prediction for 3 classes:
-- **Logits:** $\mathbf{z} = [3.0, 1.0, 0.1]$
-- **Exponentials ($e^z$):** $[20.08, 2.71, 1.10]$
-- **Sum of Exponentials:** $20.08 + 2.71 + 1.10 = 23.89$
-- **Softmax Probabilities:** $[20.08/23.89, 2.71/23.89, 1.10/23.89] = [0.84, 0.11, 0.05]$
-- **Argmax:** `0` (Because index 0 has the highest probability, $0.84$)
+1. **Next-Token Prediction in LLMs (ChatGPT / Claude):**
+   When an LLM predicts the next word, its final output layer generates a vector of **logits** across its entire vocabulary ($\sim 100,000$ words). **Softmax** converts these scores into a huge probability distribution. The AI can either use **Argmax** to pick the single most likely word or sample from the distribution.
+2. **Multi-Class Classification:**
+   In vision networks classifying images into categories (Cat, Dog, Bird), Softmax turns raw final-layer scores into class probabilities so the model can report its exact confidence level.
 
-*(Source: Ian Goodfellow, Yoshua Bengio, and Aaron Courville - Deep Learning, Chapter 6.2)*
+---
+
+## Concrete Numerical Worked Example
+
+Suppose our model predicts scores for $K = 3$ classes: **Class 0 (Apple)**, **Class 1 (Banana)**, and **Class 2 (Cherry)**.
+
+1. **Step 1: Raw Logits ($\mathbf{z}$)**
+   $$\mathbf{z} = [3.0, 1.0, 0.1]$$
+
+2. **Step 2: Exponentiate Each Logit ($e^{z_i}$)**
+   - $e^{3.0} \approx 20.086$
+   - $e^{1.0} \approx 2.718$
+   - $e^{0.1} \approx 1.105$
+
+3. **Step 3: Sum Exponentials (Denominator)**
+   $$\text{Sum} = 20.086 + 2.718 + 1.105 = 23.909$$
+
+4. **Step 4: Compute Softmax Probabilities ($P_i = e^{z_i} / \text{Sum}$)**
+   - $P_0 = 20.086 / 23.909 \approx \mathbf{0.840}$ (84.0%)
+   - $P_1 = 2.718 / 23.909 \approx \mathbf{0.114}$ (11.4%)
+   - $P_2 = 1.105 / 23.909 \approx \mathbf{0.046}$ (4.6%)
+   
+   *Check:* $0.840 + 0.114 + 0.046 = 1.000$ (100%).
+
+5. **Step 5: Apply Argmax**
+   $$\hat{y} = \arg\max([0.840, 0.114, 0.046]) = \mathbf{0} \quad \text{(Class 0: Apple)}$$
+
+---
+
+## Connection to Active Assignment
+In **Week 1: Build a Basic Prediction Machine**, after the hidden layer $\mathbf{h} = \tanh(\mathbf{W}_1 \mathbf{x} + \mathbf{b}_1)$, you multiply by output weights to get raw logits $\mathbf{z} = \mathbf{W}_2 \mathbf{h} + \mathbf{b}_2$. You then apply Softmax to get predicted probabilities $\mathbf{P}$, which feed directly into your Loss function during training and Argmax during inference.
+
+*(Reference: Ian Goodfellow, Yoshua Bengio, and Aaron Courville - Deep Learning, Chapter 6.2)*
 
 ---
 
 ## Flashcards
 
 Are Logits restricted to be between 0 and 1? #card
-No. Logits are the raw, unconstrained output scores from the final layer. They can be any number from negative infinity to positive infinity.
+No. Logits are raw, unconstrained output scores from the final layer. They can be any real number from negative infinity to positive infinity.
 
 Why do we use the Exponential function ($e^z$) inside Softmax instead of just dividing the logits by their sum? #card
-Two reasons: First, logarithms and exponentials handle negative logits perfectly by turning them into small positive fractions (probabilities can't be negative). Second, exponentials exaggerate differences, making the "winner" stand out more clearly from the runner-up.
+Two key reasons: First, exponentiating turns any negative or positive score into a strictly positive number ($e^z > 0$), which is required since probabilities cannot be negative. Second, exponentials exaggerate score differences, making the top prediction stand out cleanly.
+
+---
+
+## My Understanding
+
+*This section is for you to fill in your own words after studying this topic.*
+- What are logits in simple terms?
+- Why do we need Softmax after computing logits?
+- What is the difference between Softmax output and Argmax output?
+
