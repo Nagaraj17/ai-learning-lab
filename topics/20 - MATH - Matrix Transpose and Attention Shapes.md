@@ -1,19 +1,19 @@
 # 20 - MATH - Matrix Transpose and Attention Shapes
 
 ## 1. The Problem
-Suppose we have a sequence matrix $\mathbf{X} \in \mathbb{R}^{T \times d}$. 
-We want to compare every token against every other token by taking matrix dot products. 
-If we try to multiply $\mathbf{X} \cdot \mathbf{X}$, matrix multiplication **FAILS** because the inner dimensions do not match: $(T \times d) \cdot (T \times d)$ is mathematically undefined ($d \neq T$).
+Suppose we have two sequence projection matrices, Queries $\mathbf{Q} \in \mathbb{R}^{T \times d_k}$ and Keys $\mathbf{K} \in \mathbb{R}^{T \times d_k}$. 
+We want to compare every query row $\mathbf{q}_i$ with every key row $\mathbf{k}_j$ by taking their dot product: $S_{i,j} = \mathbf{q}_i \cdot \mathbf{k}_j$. 
+If we try to multiply $\mathbf{Q} \cdot \mathbf{K}$ directly, matrix multiplication is usually undefined because inner dimensions don't match ($d_k \neq T$). Even if $T = d_k$ making the multiplication mathematically legal, $\mathbf{Q} \cdot \mathbf{K}$ does not compute the pairwise row-by-row dot products we actually want.
 
 ## 2. Why We Need Something New
-We need a linear algebra operation that flips the rows and columns of a matrix so that inner dimensions align for pairwise token dot products: $(T \times d) \cdot (d \times T) = (T \times T)$.
+To compare every query row with every key row, we need to arrange the keys so that the dot products naturally form a $(T \times T)$ matrix of scores. We need a linear algebra operation that swaps the rows and columns of $\mathbf{K}$, allowing $\mathbf{Q} \mathbf{K}^\top$ to compute exactly what we need.
 
 ## 3. One-Line Definition
 **Matrix Transpose** (denoted $\mathbf{A}^\top$) flips a matrix over its diagonal, swapping its row and column indices such that an $(M \times N)$ matrix becomes an $(N \times M)$ matrix.
 
 ## 4. Beginner Intuition / Mental Model
 Imagine a spreadsheet table with 3 rows (tokens) and 2 columns (features). 
-Transposing the spreadsheet is like rotating the table 90 degrees and flipping it: the 3 rows become 3 columns, and the 2 columns become 2 rows.
+Transposing the spreadsheet is simply swapping its rows and columns (or reflecting it across its main diagonal): the 3 rows become 3 columns, and the 2 columns become 2 rows.
 
 ## 5. What Came Before → What Changes Now
 - **Before:** Standard matrix multiplication $\mathbf{A} \mathbf{B}$ where $A_{cols} == B_{rows}$.
@@ -91,7 +91,7 @@ Transposing a matrix in memory requires reshaping or stride manipulation. In PyT
 In **Week 3 Assignment**, you will calculate `K.T` to compute the raw score matrix `S = Q @ K.T` of shape `(3, 3)`.
 
 ## 14. Where It Appears in Modern AI Systems
-Every Attention mechanism in Transformers relies on $\mathbf{Q} \mathbf{K}^\top$ matrix transpose dot products.
+Standard Transformer scaled dot-product attention uses $\mathbf{Q} \mathbf{K}^\top$ matrix transpose dot products to compute attention scores.
 
 ## 15. Connection to the Next Concept
 Now that we can compute square score matrices $(T \times T)$, why do static embeddings need attention to become dynamic contextual representations? (`21 - TRANSFORMER - Attention and Contextual Representations.md`).

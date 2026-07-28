@@ -13,7 +13,7 @@ However, a word in a sentence often has multiple different relationships simulta
 We need **Multi-Head Attention (MHA)**, which splits the hidden dimension $d_{model}$ across $h$ independent "heads", allowing the model to jointly attend to information from different representation subspaces at different positions.
 
 ## 3. One-Line Definition
-**Multi-Head Attention** computes $h$ parallel attention heads, each projecting $\mathbf{Q}, \mathbf{K}, \mathbf{V}$ into smaller $d_k$-dimensional subspaces ($d_k = d_{model} / h$), concatenates the head outputs, and projects them back through output matrix $\mathbf{W}_O$.
+**Multi-Head Attention** runs multiple learned Q/K/V projections in parallel, performs attention in each projected subspace, concatenates the outputs, and applies an output projection $\mathbf{W}_O$.
 
 ## 4. Beginner Intuition / Mental Model
 Imagine a **Detective Panel investigating a crime scene**:
@@ -29,13 +29,14 @@ Instead of one detective trying to look at everything at once, $h$ specialized d
 
 ## 6. How It Works
 1. Given sequence matrix $\mathbf{X} \in \mathbb{R}^{T \times d_{model}}$ and number of heads $h$.
-2. Compute head dimension $d_k = d_{model} / h$.
-3. For each head $i \in \{1, \dots, h\}$:
+2. For each head $i \in \{1, \dots, h\}$, project and compute attention:
    $$\text{head}_i = \text{Attention}(\mathbf{X} \mathbf{W}_Q^i, \mathbf{X} \mathbf{W}_K^i, \mathbf{X} \mathbf{W}_V^i) \in \mathbb{R}^{T \times d_v}$$
-4. Concatenate all $h$ head outputs along the feature dimension:
+3. Concatenate all $h$ head outputs along the feature dimension:
    $$\text{Concat}(\text{head}_1, \dots, \text{head}_h) \in \mathbb{R}^{T \times (h \cdot d_v)}$$
-5. Multiply by final output projection matrix $\mathbf{W}_O \in \mathbb{R}^{(h \cdot d_v) \times d_{model}}$:
+4. Multiply by final output projection matrix $\mathbf{W}_O \in \mathbb{R}^{(h \cdot d_v) \times d_{model}}$:
    $$\mathbf{MultiHead}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Concat}(\text{head}_1, \dots, \text{head}_h) \mathbf{W}_O \in \mathbb{R}^{T \times d_{model}}$$
+
+> **Implementation Convention:** In the original Transformer, $d_k = d_v = d_{model} / h$ was chosen so the concatenated head width equals $d_{model}$. This is a common implementation design, not a universal mathematical definition for MHA.
 
 ```
 Sequence X (T x d_model)
@@ -46,16 +47,15 @@ Sequence X (T x d_model)
 ```
 
 ## 7. Required Mathematics
-$$\mathbf{MultiHead}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Concat}(\text{head}_1, \dots, \text{head}_h) \mathbf{W}_O$$
+$$\mathbf{MultiHead}(\mathbf{X}) = \text{Concat}(\text{head}_1, \dots, \text{head}_h) \mathbf{W}_O$$
 
-where $\text{head}_i = \text{Attention}(\mathbf{Q} \mathbf{W}_Q^i, \mathbf{K} \mathbf{W}_K^i, \mathbf{V} \mathbf{W}_V^i)$.
+where $\text{head}_i = \text{Attention}(\mathbf{X} \mathbf{W}_Q^i, \mathbf{X} \mathbf{W}_K^i, \mathbf{X} \mathbf{W}_V^i)$.
 
 **Shape Trace:**
 - Input $\mathbf{X}$: $(T \times d_{model})$
-- $h$ heads, $d_k = d_{model} / h$
-- Each $\text{head}_i$: $(T \times d_k)$
-- Concatenated heads: $(T \times h \cdot d_k) = (T \times d_{model})$
-- Output Weight $\mathbf{W}_O$: $(d_{model} \times d_{model})$
+- Each $\text{head}_i$: $(T \times d_v)$
+- Concatenated heads: $(T \times h \cdot d_v)$
+- Output Weight $\mathbf{W}_O$: $(h \cdot d_v \times d_{model})$
 - Final Output: $(T \times d_{model})$
 
 ### Symbol Table
@@ -63,13 +63,13 @@ where $\text{head}_i = \text{Attention}(\mathbf{Q} \mathbf{W}_Q^i, \mathbf{K} \m
 | Symbol | Name | Plain-English Meaning |
 | :--- | :--- | :--- |
 | $h$ | **Number of Heads** | How many parallel attention heads run simultaneously. Each head specializes in a different relationship type (e.g., syntactic, semantic, positional). |
-| $d_k$ | **Per-Head Dimension** | $d_k = d_{model} / h$. Each head works in a reduced-dimension subspace. For $d_{model} = 768$ and $h = 12$: $d_k = 64$. |
-| $\mathbf{W}_Q^i, \mathbf{W}_K^i, \mathbf{W}_V^i$ | **Per-Head Projection Weights** | Each head $i$ has its own Q/K/V projection matrices of shape $(d_{model} \times d_k)$. |
-| $\text{head}_i$ | **Output of Head $i$** | The $(T \times d_k)$ contextual output from a single attention head. |
-| $\text{Concat}(\dots)$ | **Concatenation** | Joins all $h$ head outputs side-by-side along the feature dimension: $h$ matrices of $(T \times d_k)$ become one $(T \times d_{model})$ matrix. |
-| $\mathbf{W}_O$ | **Output Projection Matrix** | A $(d_{model} \times d_{model})$ learnable weight matrix that mixes the concatenated head outputs into the final representation. This allows heads to share and combine their findings. |
+| $d_k, d_v$ | **Per-Head Dimensions** | The query/key and value dimensions for a single head. |
+| $\mathbf{W}_Q^i, \mathbf{W}_K^i, \mathbf{W}_V^i$ | **Per-Head Projection Weights** | Each head $i$ has its own Q/K/V projection matrices. $\mathbf{W}_Q^i, \mathbf{W}_K^i \in \mathbb{R}^{d_{model} \times d_k}$, $\mathbf{W}_V^i \in \mathbb{R}^{d_{model} \times d_v}$. |
+| $\text{head}_i$ | **Output of Head $i$** | The $(T \times d_v)$ contextual output from a single attention head. |
+| $\text{Concat}(\dots)$ | **Concatenation** | Joins all $h$ head outputs side-by-side along the feature dimension: $h$ matrices of $(T \times d_v)$ become one $(T \times h \cdot d_v)$ matrix. |
+| $\mathbf{W}_O$ | **Output Projection Matrix** | A $(h \cdot d_v \times d_{model})$ learnable weight matrix that mixes the concatenated head outputs into the final representation. This allows heads to share and combine their findings. |
 
-> **Why does the output shape stay $(T \times d_{model})$?** Because $h \times d_k = h \times \frac{d_{model}}{h} = d_{model}$. The concat step perfectly reconstructs the full model dimension.
+> **Practical Note:** Implementations often combine all per-head projections into large $\mathbf{W}_Q$, $\mathbf{W}_K$, $\mathbf{W}_V$ matrices and reshape/split the resulting feature dimension into heads. The NumPy code below does exactly this, which is why it requires $d_{model}$ to be divisible by $h$.
 
 ## 8. Complete Worked Example
 Let $T = 2$, $d_{model} = 4$, $h = 2$ heads $\implies d_k = d_v = 4 / 2 = 2$.
@@ -155,21 +155,22 @@ concat = heads_out.transpose(1, 0, 2).reshape(T, self.d_model)
 
 ## 10. Experiments / What-If Questions
 - **Does Multi-Head Attention increase total computational FLOPs compared to Single-Head Attention of dimension $d_{model}$?**
-  No! Because each head operates on reduced dimension $d_k = d_{model} / h$, total FLOPs across $h$ heads equal a single head of full dimension $d_{model}$. However, memory bandwidth demands increase.
+  The original Transformer states that with the design choice $d_k = d_v = d_{model} / h$, the total computational cost is similar to single-head attention with full dimensionality. Equal splitting prevents the attention computation from becoming $h$ full-width attention operations. However, there are still multiple projections, concatenation, output projection, and memory/implementation overheads.
 
 ## 11. Common Misunderstandings
 - **Misunderstanding:** Each attention head processes a different subset of words in the sentence.
 - **Correction:** Every head processes **all $T$ words in the sequence**, but in a different feature subspace of dimension $d_k$.
 
 ## 12. Limitations and Trade-Offs
-- Multi-Head Attention requires $d_{model}$ to be divisible by $h$.
+- **Memory Scaling:** Each head conceptually has a $T \times T$ attention matrix, so storing all attention weights can scale with $h \times T \times T$ (although optimized kernels may avoid explicitly materializing every intermediate).
+- The common reshape-based implementation (like the NumPy code above) requires $d_{model}$ to be divisible by $h$, but this is not a universal mathematical requirement for MHA.
 - Pruning experiments show that some attention heads become redundant during training and can be pruned without degrading model performance.
 
 ## 13. Where It Appears in the Current Assignment
 In **Week 3 Assignment**, Multi-Head Attention is introduced conceptually and implemented as an optional stretch exercise.
 
 ## 14. Where It Appears in Modern AI Systems
-Multi-Head Attention is used in every state-of-the-art Transformer (GPT-4 uses 96 heads, Llama-3 8B uses 32 heads).
+MHA is foundational; later architectures sometimes modify how query/key/value heads are shared for efficiency (e.g., Multi-Query Attention or Grouped-Query Attention).
 
 ## 15. Connection to the Next Concept
 Multi-Head Causal Attention produces contextual representations for sequence matrix $\mathbf{X}$. To build a complete Transformer block, we combine Multi-Head Attention with Layer Normalization, Residual Connections, and FeedForward Networks in **Week 4 (Transformer Block)**.
@@ -188,11 +189,11 @@ If $d_{model} = 768$ and the model uses $h = 12$ heads:
 *Fill in your own notes on how Multi-Head Attention enables parallel representation learning.*
 
 ## 19. Flashcards
-What is the mathematical relationship between model dimension $d_{model}$, number of heads $h$, and head dimension $d_k$? #card
-$d_k = d_{model} / h$.
+Is $d_k = d_{model} / h$ a universal mathematical requirement of Multi-Head Attention? #card
+No. It is a common implementation convention (used in the original Transformer) to ensure the concatenated output width equals $d_{model}$, preventing the total computation from growing too large.
 
-Why does Multi-Head Attention not increase computational FLOPs compared to a single head of full dimension $d_{model}$? #card
-Because each head projects into a smaller dimension $d_k = d_{model} / h$. Summing FLOPs across $h$ heads ($h \times \frac{d_{model}}{h}$) equals the compute cost of a single full-dimensional head.
+Why does Multi-Head Attention with $d_k = d_{model} / h$ have similar computational cost to a single head of full dimension $d_{model}$? #card
+Because each head projects into a smaller dimension $d_k$. Equal splitting prevents the attention computation from becoming $h$ full-width attention operations, keeping the total dot-product cost similar.
 
 ## 20. Sources
 - Vaswani et al. (2017) *"Attention Is All You Need"*, Section 3.2.2.

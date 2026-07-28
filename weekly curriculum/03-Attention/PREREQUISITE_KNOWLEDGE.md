@@ -18,11 +18,11 @@ $$\mathbf{X} = \begin{bmatrix} \mathbf{e}_{t_1} \\ \mathbf{e}_{t_2} \\ \vdots \\
 ---
 
 ## 2. The Limitations of Static Embeddings
-Static embeddings assign one frozen vector per word from the lookup table $\mathbf{E}$.
+Base token embeddings assign one context-independent vector per word from the lookup table $\mathbf{E}$.
 - Word `"bank"` in *"river bank"* $\to [0.45, -0.12]$
 - Word `"bank"` in *"money bank"* $\to [0.45, -0.12]$
 
-Static embeddings cannot adapt to surrounding context. We need **Attention** to take a weighted sum of sequence token representations and produce dynamic **Contextual Representations** $\mathbf{H} \in \mathbb{R}^{T \times d_v}$.
+Base token embeddings cannot adapt to surrounding context. We need **Attention** to take a weighted sum of sequence token representations and produce dynamic **Contextual Representations** $\mathbf{H} \in \mathbb{R}^{T \times d_v}$.
 
 ---
 
@@ -41,7 +41,7 @@ To measure pairwise token interactions, we compute raw dot products between quer
 $$\mathbf{S} = \mathbf{Q} \mathbf{K}^\top \in \mathbb{R}^{T \times T}$$
 
 ### Why scale by $\frac{1}{\sqrt{d_k}}$?
-For large key dimension $d_k$, variance of dot products increases ($\text{Var} = d_k$). Large unscaled score values push Softmax into extreme saturation regions where gradients vanish ($\text{Softmax}'(z) \to 0$). Dividing by $\sqrt{d_k}$ normalizes variance back to $1.0$.
+Assuming the components of $\mathbf{q}$ and $\mathbf{k}$ are independent random variables with mean $0$ and variance $1$, their dot product has variance $d_k$. Large unscaled score values can push Softmax into extreme saturation regions where gradients become very small. Dividing by $\sqrt{d_k}$ controls the scale of the distribution under these assumptions, mitigating the risk of Softmax saturation.
 
 $$\mathbf{S}_{\text{scaled}} = \frac{\mathbf{Q} \mathbf{K}^\top}{\sqrt{d_k}} \in \mathbb{R}^{T \times T}$$
 
@@ -67,7 +67,7 @@ The contextual representation matrix $\mathbf{H}$ is computed as the weighted su
 $$\mathbf{H} = \mathbf{A} \mathbf{V} \in \mathbb{R}^{T \times d_v}$$
 
 **Complete Central Shape Trace:**
-$$(T \times d_{model}) \xrightarrow{\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V} \mathbf{Q}, \mathbf{K}, \mathbf{V}: (T \times d_k), (T \times d_v) \xrightarrow{\mathbf{Q} \mathbf{K}^\top} \mathbf{S}: (T \times T) \xrightarrow{\text{Mask+Softmax}} \mathbf{A}: (T \times T) \xrightarrow{\mathbf{A} \mathbf{V}} \mathbf{H}: (T \times d_v)$$
+$$(T \times d_{model}) \xrightarrow{\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V} \mathbf{Q}, \mathbf{K}: (T \times d_k), \mathbf{V}: (T \times d_v) \xrightarrow{\mathbf{Q} \mathbf{K}^\top} \mathbf{S}: (T \times T) \xrightarrow{\text{Mask+Softmax}} \mathbf{A}: (T \times T) \xrightarrow{\mathbf{A} \mathbf{V}} \mathbf{H}: (T \times d_v)$$
 
 ---
 

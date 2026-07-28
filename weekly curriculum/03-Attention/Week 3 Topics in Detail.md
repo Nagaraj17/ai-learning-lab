@@ -15,7 +15,7 @@ The following deep-dive notes in the global `topics/` directory cover Week 3:
    - Linear projection weight matrices $\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V$.
 
 5. **[23 - TRANSFORMER - Scaled Dot-Product Attention](../../topics/23%20-%20TRANSFORMER%20-%20Scaled%20Dot-Product%20Attention.md)**
-   - Mathematical formula $\text{Softmax}\left(\frac{\mathbf{Q} \mathbf{K}^\top}{\sqrt{d_k}}\right) \mathbf{V}$ and vanishing gradient protection.
+   - Mathematical formula $\text{Softmax}\left(\frac{\mathbf{Q} \mathbf{K}^\top}{\sqrt{d_k}}\right) \mathbf{V}$ and score scaling to control Softmax saturation at larger key dimensions.
 
 6. **[24 - TRANSFORMER - Self-Attention](../../topics/24%20-%20TRANSFORMER%20-%20Self-Attention.md)**
    - Single-head self-attention module implementation.

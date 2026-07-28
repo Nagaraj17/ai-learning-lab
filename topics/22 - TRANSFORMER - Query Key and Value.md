@@ -6,7 +6,7 @@ If we compare raw sequence vectors $\mathbf{X}$ directly against themselves ($\m
 2. Advertising what information it holds.
 3. Supplying its actual content.
 
-Using one vector for all three roles prevents the model from learning asymmetric relationships (e.g. a verb searching for a noun, where the verb's search criteria differ from its content).
+Instead of forcing a single raw vector to handle all these roles, using separate learned projections gives the model greater flexibility to learn different feature spaces for querying, matching, and the information carried in the values.
 
 ## 2. Why We Need Something New
 We need separate, trainable linear projections that transform the single input representation $\mathbf{X}$ into three distinct functional roles: **Query ($Q$)**, **Key ($K$)**, and **Value ($V$)**.
@@ -106,7 +106,7 @@ print("V shape:", V.shape)
 - **What if $\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V$ were identity matrices $\mathbf{I}$?**
   Then $\mathbf{Q} = \mathbf{K} = \mathbf{V} = \mathbf{X}$. The model loses the ability to separate search requests from content profiles.
 - **Can $d_k$ differ from $d_{model}$?**
-  Yes! $d_k$ and $d_v$ are projection hyper-parameters. In multi-head attention, $d_k = d_{model} / h$.
+  Yes! $d_k$ and $d_v$ are projection hyper-parameters. In the original Transformer's multi-head attention, $d_k = d_{model} / h$ is a common equal-head design choice, but this is an implementation convention, not the universal mathematical definition of Q/K/V or Multi-Head Attention.
 - **Why exactly THREE projections? Why not two (Q and K only) or four?**
   - **Why not two?** If we used $\mathbf{Q}$ and $\mathbf{K}$ alone (without $\mathbf{V}$), the attention weights $\mathbf{A}$ would multiply the raw input $\mathbf{X}$ directly. This forces the "relevance scoring" and "content retrieval" to use the same vectors, limiting what the model can learn. $\mathbf{V}$ gives the model a separate, learnable representation for *what content to actually retrieve*.
   - **Why not four?** Mathematically, attention has exactly three functional roles: (1) asking a question (Q), (2) being matched against (K), (3) providing the retrieved content (V). A fourth matrix would be redundant — it would either duplicate one of these roles or be absorbed into $\mathbf{W}_O$ (the output projection in Multi-Head Attention, covered in Topic 26).
@@ -116,7 +116,7 @@ print("V shape:", V.shape)
 - **Correction:** In Self-Attention, $\mathbf{Q}, \mathbf{K}, \mathbf{V}$ are all projected from the **SAME** input sequence matrix $\mathbf{X}$!
 
 ## 12. Limitations and Trade-Offs
-Introducing $\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V$ adds $3 \times (d_{model} \cdot d_k)$ trainable parameters to the model layer, requiring gradient tracking for all three projection matrices during backpropagation.
+Introducing $\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V$ adds trainable parameters to the model. Ignoring biases, $\mathbf{W}_Q$ and $\mathbf{W}_K$ have size $d_{model} \times d_k$, while $\mathbf{W}_V$ has size $d_{model} \times d_v$. Therefore, the total Q/K/V projection parameters are $d_{model}(2d_k + d_v)$. It only becomes $3 d_{model} d_k$ when $d_v = d_k$. This requires gradient tracking for all three projection matrices during backpropagation.
 
 ## 13. Where It Appears in the Current Assignment
 In **Week 3 Assignment**, you will initialize $\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V$ of shape $(2, 2)$ and compute `Q = X @ W_Q`, `K = X @ W_K`, `V = X @ W_V`.

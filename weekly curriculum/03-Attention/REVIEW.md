@@ -14,12 +14,12 @@ Test your conceptual, mathematical, and code mastery of Week 3 before completing
    - What is the shape of projection weights $\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V$?
    - What is the shape of raw score matrix $\mathbf{S} = \mathbf{Q} \mathbf{K}^\top$?
    - What is the shape of contextual output $\mathbf{H} = \mathbf{A} \mathbf{V}$?
-2. Why do we scale raw scores by $\frac{1}{\sqrt{d_k}}$ before passing them to Softmax? What happens to Softmax gradients if we omit this scale factor for $d_k = 128$?
+2. Under the simplifying assumptions used in the Transformer paper, why do dot-product magnitudes tend to grow with $d_k$, and how can this affect Softmax?
 
 ## Part 3: Code & Implementation
 1. Write a 3-line NumPy function that creates a $T \times T$ lower-triangular causal mask matrix $\mathbf{M}$ containing $0.0$ for valid past positions and $-1e9$ for future positions.
 2. In PyTorch, what is the dimension permutation order required when splitting $Q \in \mathbb{R}^{B \times T \times d_{model}}$ into multi-head shape $(B, h, T, d_k)$?
 
 ## Part 4: Debugging & What-If Scenarios
-1. **Scenario:** A student notices that token 1 (`"Order"`) receives $50\%$ attention from token 3 (`"Receive"`), but token 3 receives $0\%$ attention from token 1. Is this a bug in causal masking or expected behavior? Explain why.
+1. **Scenario:** A student inspects an attention matrix $\mathbf{A}$ and notices that `A[2, 0] = 0.50` (token at position 2 attends 50% to earlier token 0), but `A[0, 2] = 0.0` (token at position 0 gives 0% attention to future token 2). Is this a bug in causal masking or expected behavior? Explain why this asymmetry is expected.
 2. **Scenario:** After training a tiny single-head attention model for 2 epochs, the attention weights appear completely random. Why should we not expect an untrained or tiny model to produce human-intuitive attention patterns?

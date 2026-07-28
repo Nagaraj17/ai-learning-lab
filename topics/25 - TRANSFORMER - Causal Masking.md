@@ -3,7 +3,7 @@
 ## 1. The Problem
 In autoregressive language models (like GPT-4), the task is to **predict the next token** $t_{i+1}$ given previous tokens $[t_1, \dots, t_i]$.
 If we use standard un-masked Self-Attention, token $i$ can look forward into position $i+1$ and read the exact answer it is supposed to predict.
-**The limitation:** Un-masked self-attention allows "cheating" during training, causing the model to memorize future tokens rather than learning autoregressive language dynamics.
+**The limitation:** Un-masked self-attention allows "cheating" during training; it allows the training computation to access information that should not be available under the autoregressive factorization.
 
 ## 2. Why We Need Something New
 We need a mathematical filter (**Causal Masking**) that blocks attention scores from position $i$ to any future position $j > i$, ensuring token $i$ can ONLY attend to past and present tokens ($j \le i$).
@@ -16,8 +16,9 @@ Imagine taking an exam where the answers to future questions are printed on the 
 **Causal Masking** is like placing a **cardboard barrier** over all future pages: you can only look at questions you have already answered, preventing you from peeking ahead.
 
 ## 5. What Came Before → What Changes Now
-- **Unmasked Self-Attention (Bidirectional / BERT):** Every token attends to all $T$ tokens (upper and lower triangle active).
-- **Causal Masked Self-Attention (Autoregressive / GPT):** Token $i$ attends ONLY to tokens $1 \dots i$ (upper triangle set to 0% probability).
+- **BERT-style encoder self-attention:** Bidirectional / unmasked with respect to future token positions. Every token attends to all $T$ tokens (upper and lower triangle active).
+- **Transformer decoder self-attention:** Causally masked so positions cannot attend to subsequent output positions.
+- **GPT-style decoder-only Transformer:** Causally masked self-attention. Token $i$ attends ONLY to tokens $1 \dots i$ (upper triangle set to 0% probability).
 
 ## 6. How It Works
 1. Create a lower-triangular boolean mask matrix $\mathbf{M}_{\text{bool}} \in \mathbb{R}^{T \times T}$ where valid past positions ($j \le i$) are `True` and future positions ($j > i$) are `False`.
@@ -103,7 +104,9 @@ print("Causal Attention Weights A:\n", np.round(A, 3))
 
 ## 11. Common Misunderstandings
 - **Misunderstanding:** Causal masking is used in all Transformers, including BERT.
-- **Correction:** Causal masking is used ONLY in **decoder-only autoregressive models** (GPT, Llama, Claude). Encoder models (BERT) use bidirectional (unmasked) attention because they process the full text at once.
+- **Correction:** Causal masking is used wherever autoregressive self-attention must prevent access to future positions (e.g., the original Transformer decoder and decoder-only models like GPT). Encoder models (BERT) use bidirectional (unmasked) attention.
+- **Misunderstanding:** Code implementations literally use $-\infty$.
+- **Correction:** While $-\infty$ is the clean mathematical value, code uses large finite negative values (e.g., `-1e9`, or framework masking APIs) as practical approximations.
 
 ## 12. Limitations and Trade-Offs
 Causal masking restricts token 1 to only see itself, limiting early tokens from gathering future context. However, it is mandatory for autoregressive generation.
@@ -112,7 +115,7 @@ Causal masking restricts token 1 to only see itself, limiting early tokens from 
 In **Week 3 Assignment**, you will implement causal masking using `np.tril()` and verify that the upper triangle of attention weights `A` is strictly $0.0$.
 
 ## 14. Where It Appears in Modern AI Systems
-Causal masking is the defining architectural feature of GPT-4, Llama-3, Mistral, and all autoregressive LLMs.
+Causal masking is a standard component of autoregressive Transformer decoders.
 
 ## 15. Connection to the Next Concept
 How do we allow the model to focus on multiple different context relationships simultaneously? That requires **Multi-Head Attention** (`26 - TRANSFORMER - Multi-Head Attention.md`).

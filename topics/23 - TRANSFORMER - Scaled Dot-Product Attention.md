@@ -1,12 +1,12 @@
 # 23 - TRANSFORMER - Scaled Dot-Product Attention
 
 ## 1. The Problem
-When calculating dot products $\mathbf{S} = \mathbf{Q} \mathbf{K}^\top$ for large vector dimensions $d_k$ (e.g. $d_k = 64$ or $128$), the magnitude of the dot products grows large: $\text{Var}(\mathbf{q} \cdot \mathbf{k}) = d_k$.
+When calculating dot products $\mathbf{S} = \mathbf{Q} \mathbf{K}^\top$ for large vector dimensions $d_k$ (e.g., $d_k = 64$ or $128$), the magnitude of the dot products can grow large. Vaswani et al. explain this with an assumption: if the components of $\mathbf{q}$ and $\mathbf{k}$ are independent random variables with mean $0$ and variance $1$, then their dot product $\mathbf{q} \cdot \mathbf{k} = \sum_{i} q_i k_i$ has variance $d_k$.
 When unscaled large values (e.g. scores of $+50$ vs $+2$) are passed into Softmax, Softmax pushes probability weights to extreme $1.0$ and $0.0$ values. 
-**The limitation:** Softmax gradients in those extreme regions become almost $0.0$ ($\text{Softmax}'(z) \to 0$), causing **vanishing gradients** during backpropagation!
+**The limitation:** Larger dot-product magnitudes can push Softmax into highly peaked/saturated regions where gradients can become very small during backpropagation.
 
 ## 2. Why We Need Something New
-We need a scaling factor that divides raw dot-product scores by $\sqrt{d_k}$ to keep variance equal to $1.0$, preserving healthy non-zero gradients during Softmax backpropagation.
+We need a scaling factor that divides raw dot-product scores by $\sqrt{d_k}$ to control the scale of the score distribution under those assumptions, mitigating the risk of Softmax saturation and preserving healthy gradients.
 
 ## 3. One-Line Definition
 **Scaled Dot-Product Attention** is an attention mechanism that computes pairwise relevance scores using matrix multiplication $\mathbf{Q} \mathbf{K}^\top$, scales the scores by $\frac{1}{\sqrt{d_k}}$, and applies Softmax to calculate normalized attention weights over Value matrix $\mathbf{V}$.
@@ -16,7 +16,7 @@ Imagine a volume knob turned up to 100 on a stereo speaker — the music becomes
 Scaling by $\frac{1}{\sqrt{d_k}}$ is like a **Volume Limiter**: it turns down extreme score spikes back into a clean range so Softmax can calculate smooth, informative probability percentages.
 
 ## 5. What Came Before → What Changes Now
-- **Additive Attention (Bahdanau et al., 2014):** Computed score $e_{i, j} = \mathbf{v}_a^\top \tanh(\mathbf{W}_a \mathbf{q}_i + \mathbf{U}_a \mathbf{k}_j)$ using a feedforward network. Slower $O(T^2 \cdot d)$ operations.
+- **Additive Attention (Bahdanau et al., 2014):** Computed score using a feedforward network. While additive and dot-product attention have similar theoretical complexity, dot-product attention is faster and more space-efficient in practice because it maps efficiently to optimized matrix multiplication.
 - **Scaled Dot-Product Attention (Vaswani et al., 2017):** Computes score matrix $\mathbf{S} = \frac{\mathbf{Q} \mathbf{K}^\top}{\sqrt{d_k}}$ using highly optimized GPU matrix multiplication.
 
 ## 6. How It Works
@@ -124,14 +124,14 @@ def scaled_dot_product_attention(Q, K, V):
 
 ## 10. Experiments / What-If Questions
 - **What happens if we remove the scaling factor $\frac{1}{\sqrt{d_k}}$?**
-  For large $d_k$ (e.g., $d_k = 128$), dot products reach $+80$, Softmax outputs become one-hot $1.0$ and $0.0$, and gradients vanish during backpropagation ($\text{Softmax}' \to 0$).
+  For large $d_k$ (e.g., $d_k = 128$), dot products can grow large, and Softmax outputs can become heavily peaked (e.g., near $1.0$ and $0.0$). This risks pushing the network into saturated regions where gradients become very small during backpropagation.
 
 ## 11. Common Misunderstandings
 - **Misunderstanding:** Scaling by $\sqrt{d_k}$ changes the relative ranking order of the scores.
 - **Correction:** Division by a positive constant $c = \sqrt{d_k}$ is monotonic! The largest raw dot product remains the largest score after scaling. It only scales down variance so Softmax gradients don't vanish.
 
 ## 12. Limitations and Trade-Offs
-Dot-product attention assumes $Q$ and $K$ lie in compatible inner-product vector spaces ($d_k$). The $O(T^2)$ matrix multiplication becomes a memory bottleneck for extremely long sequences ($T > 32,000$).
+Dot-product attention assumes $Q$ and $K$ lie in compatible inner-product vector spaces ($d_k$). The $T \times T$ score and attention matrices grow quadratically with sequence length, so memory and compute become increasingly expensive as $T$ grows.
 
 ## 13. Where It Appears in the Current Assignment
 In **Week 3 Assignment**, you will implement `scaled_dot_product_attention(Q, K, V)` in NumPy and verify its shape transformations.
@@ -140,7 +140,7 @@ In **Week 3 Assignment**, you will implement `scaled_dot_product_attention(Q, K,
 Scaled Dot-Product Attention is the foundational mathematical equation of all modern Transformer models (Vaswani et al., 2017).
 
 ## 15. Connection to the Next Concept
-In a complete Self-Attention layer, how do we prevent tokens from peeking into future positions during autoregressive next-token prediction? That requires **Causal Masking** (`25 - TRANSFORMER - Causal Masking.md`).
+We now know how to compute $\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V})$. What happens when $\mathbf{Q}$, $\mathbf{K}$, and $\mathbf{V}$ are all derived from the same sequence? That gives us **Self-Attention** (`24 - TRANSFORMER - Self-Attention.md`).
 
 ## 16. Teach-Back and Small Application Exercise
 If $d_k = 64$:

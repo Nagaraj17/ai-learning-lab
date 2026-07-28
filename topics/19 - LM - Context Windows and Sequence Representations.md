@@ -7,7 +7,9 @@ However, human language and operational logs do not exist in isolated single-wor
 - **Sentence B:** `"Order canceled today."`
 
 If our model only looks at the single word `"today"`, it has zero idea whether the next token should be `"Receive"` or `"Alert"`. 
-**The limitation:** Processing tokens as isolated 1D vectors destroys sentence history and context.
+**The limitation:** Processing tokens as isolated 1D vectors destroys sequence history and context.
+
+> **Note on Positional Order:** While the sequence matrix has rows corresponding to token positions (e.g., Row 1 is Token 1), vanilla self-attention does not automatically understand the significance of this row order. Giving the model true positional awareness requires Positional Encoding, which is deferred to Week 4.
 
 > **What is a Context Window?**
 > A **context window** is the maximum number of tokens ($T_{max}$) that a model can process simultaneously in a single forward pass. It is a fixed hyperparameter set during model design. For example, GPT-2 has a context window of $T_{max} = 1024$ tokens, while GPT-4 supports up to $T_{max} = 128{,}000$ tokens. Any input longer than $T_{max}$ must be truncated or split.
@@ -65,7 +67,7 @@ $$\mathbf{X} = \begin{bmatrix} 0.5 & -0.2 \\ 0.1 & 0.9 \\ 0.8 & 0.4 \end{bmatrix
 ```python
 import numpy as np
 
-# Vocabulary size |V|=10, embedding dim d_model=2
+# Vocabulary size |V|=7, embedding dim d_model=2
 E = np.array([
     [0.0, 0.0],  # 0: Pad
     [0.5, -0.2], # 1: Order
@@ -83,9 +85,9 @@ print("Sequence Matrix X shape:", X.shape)
 
 ## 10. Experiments / What-If Questions
 - **What if sequence length $T$ exceeds the model's context window $T_{max}$?**
-  The input sequence must be truncated or split into batches of max size $T_{max}$.
+  The input sequence must be truncated or divided into chunks/windows of max size $T_{max}$.
 - **What if sequences in a batch have different lengths?**
-  Shorter sequences are padded with a designated `<PAD>` token ID to match shape $(B, T_{max}, d_{model})$.
+  Variable-length sequences may be padded with a designated `<PAD>` token ID to match a configured length or the longest sequence in a batch (they do not universally need to be padded to $T_{max}$). Note that these padding positions normally require masking later to prevent the model from attending to them.
 
 ## 11. Common Misunderstandings
 - **Misunderstanding:** A sequence matrix combines all words by adding or averaging them together into 1 vector.
@@ -111,7 +113,7 @@ If a prompt has $T = 5$ tokens and the model uses $d_{model} = 768$:
 ## 17. Quick Revision Summary
 - Single-token models fail because context matters.
 - A Sequence Matrix $\mathbf{X} \in \mathbb{R}^{T \times d_{model}}$ stacks token vectors into a 2D matrix.
-- Row $i$ corresponds to token position $i$.
+- Row $i$ corresponds to token position $i$, though the core attention mechanism is order-blind without Week 4's positional encoding.
 
 ## 18. My Understanding
 *Fill in your own summary of how sequence matrices represent multi-token context windows.*

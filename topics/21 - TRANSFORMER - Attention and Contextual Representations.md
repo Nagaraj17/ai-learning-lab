@@ -20,7 +20,7 @@ Attention is like a **smart translator**: when reading a sentence, it looks at t
 
 ## 5. What Came Before → What Changes Now
 - **Before (Bahdanau et al., 2014):** Attention was introduced in seq2seq RNNs to allow a decoder to focus on specific source encoder states instead of compressing an entire sentence into one bottleneck vector.
-- **Now (Vaswani et al., 2017):** **Self-Attention** eliminates RNNs entirely, allowing every token in a sequence to attend directly to every other token in parallel!
+- **Now (Vaswani et al., 2017):** The Transformer architecture replaces sequence-aligned recurrence with **Self-Attention** and other components, allowing every token in a sequence to attend directly to every other token in parallel!
 
 ## 6. How It Works
 1. Start with static sequence matrix $\mathbf{X} \in \mathbb{R}^{T \times d_{model}}$.
@@ -105,9 +105,9 @@ print("Contextual representation for 'bank':", H[1])
 
 ## 10. Experiments / What-If Questions
 - **What if all attention weights in a row are equal ($\frac{1}{T}$)?**
-  Attention degenerates into a uniform average (Bag-of-Words), treating every word as equally relevant.
+  Attention produces a uniform average of the value vectors, treating every word as equally relevant.
 - **What if an attention weight is $1.0$ for self and $0.0$ for others?**
-  The token receives zero context from surrounding words, preserving its un-contextualized representation.
+  There is no cross-token mixing and the output for that position equals its own value vector $\mathbf{v}_i$.
 
 ## 11. Common Misunderstandings
 - **Misunderstanding:** Attention weights can be automatically interpreted as complete explanations of a model's reasoning.
@@ -133,7 +133,7 @@ If $\mathbf{A}$ has shape $(4, 4)$ and $\mathbf{V}$ has shape $(4, 8)$:
 2. What must the sum of elements in each row of $\mathbf{A}$ equal?
 
 ## 17. Quick Revision Summary
-- Static embeddings give frozen vectors regardless of sentence context.
+- Base token embeddings give context-independent vectors regardless of sentence context.
 - Attention computes dynamic contextual representations $\mathbf{H} = \mathbf{A} \mathbf{V}$.
 - Attention weights $\mathbf{A}$ determine how much context is pulled from each word.
 
@@ -141,8 +141,8 @@ If $\mathbf{A}$ has shape $(4, 4)$ and $\mathbf{V}$ has shape $(4, 8)$:
 *Fill in your own notes on how Attention turns static embeddings into contextual representations.*
 
 ## 19. Flashcards
-What is the core difference between a static embedding and a contextual representation? #card
-A static embedding provides the same frozen vector for a token regardless of context. A contextual representation dynamically adjusts a token's vector based on surrounding words in the sequence.
+What is the core difference between a base token embedding and a contextual representation? #card
+A base token embedding provides the same context-independent vector for a token regardless of context. A contextual representation dynamically adjusts a token's vector based on surrounding words in the sequence.
 
 Can attention weights always be treated as definitive explanations of model decision making? #card
 No (Jain & Wallace, 2019). Attention weights show feature mixing weights, but different attention distributions can yield identical predictions. They are not guaranteed explanation proofs.

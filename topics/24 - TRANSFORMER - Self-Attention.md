@@ -99,7 +99,8 @@ class SelfAttentionSingleHead:
 
 ## 10. Experiments / What-If Questions
 - **What happens if two tokens in the sequence are identical copies?**
-  They will produce identical Query and Key vectors, receiving identical attention scores from all other tokens.
+  If two token positions have identical input representations AND no positional information has been added, their projected Q/K/V vectors will be identical, receiving identical attention scores from all other tokens. Once positional information or earlier contextual layers are involved, identical token IDs do not necessarily have identical representations.
+  > **Note:** Positional information is intentionally deferred to Week 4, so this week's toy self-attention is order-blind by design.
 
 ## 11. Common Misunderstandings
 - **Misunderstanding:** Self-attention requires recurrent step-by-step loops over time like an RNN.
@@ -112,7 +113,7 @@ class SelfAttentionSingleHead:
 In **Week 3 Assignment**, you will build a standalone NumPy `SelfAttentionSingleHead` class and test it on 3 operational log tokens.
 
 ## 14. Where It Appears in Modern AI Systems
-Self-Attention is the core building block of all Transformer Encoders (BERT) and Decoders (GPT, Llama, Claude).
+Self-attention is a core component of standard Transformer encoder and decoder architectures.
 
 ## 15. Connection to the Next Concept
 In language modeling (predicting the next token), allowing token $t$ to attend to future tokens $> t$ is **cheating**! How do we block peeking into the future? `25 - TRANSFORMER - Causal Masking.md`.
