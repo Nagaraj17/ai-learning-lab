@@ -36,6 +36,17 @@ $$\mathbf{K} = \begin{bmatrix} k_{1,1} & k_{1,2} \\ k_{2,1} & k_{2,2} \\ k_{3,1}
 $$\mathbf{Q} \in \mathbb{R}^{T \times d_k}, \quad \mathbf{K}^\top \in \mathbb{R}^{d_k \times T}$$
 $$\mathbf{S} = \mathbf{Q} \cdot \mathbf{K}^\top \in \mathbb{R}^{(T \times d_k) \cdot (d_k \times T)} = \mathbb{R}^{T \times T}$$
 
+### Symbol Table
+
+| Symbol | Name | Plain-English Meaning |
+| :--- | :--- | :--- |
+| $\mathbf{A}^\top$ | **Transpose of Matrix A** | A new matrix created by flipping $\mathbf{A}$ over its diagonal: rows become columns and columns become rows. Shape changes from $(M \times N)$ to $(N \times M)$. |
+| $(i, j)$ | **Row-Column Index** | The position of an element at row $i$ and column $j$. After transposing, element at $(i, j)$ moves to $(j, i)$. |
+| $\mathbf{Q}$ | **Query Matrix** | The "what am I looking for?" projection of the sequence. Shape: $(T \times d_k)$. (Introduced fully in Topic 22.) |
+| $\mathbf{K}$ | **Key Matrix** | The "what information do I contain?" projection. Shape: $(T \times d_k)$. Transposed to $\mathbf{K}^\top$ with shape $(d_k \times T)$ to enable dot-product scoring. |
+| $\mathbf{S}$ | **Raw Score Matrix** | The result of $\mathbf{Q} \mathbf{K}^\top$. A square $(T \times T)$ matrix where entry $S_{i,j}$ is the raw dot-product similarity between token $i$'s Query and token $j$'s Key. |
+| $d_k$ | **Key/Query Dimension** | The number of features in each Query and Key vector. This is the "inner dimension" that must match for the matrix multiplication to work. |
+
 ## 8. Complete Worked Example
 Let $\mathbf{K} = \begin{bmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{bmatrix} \in \mathbb{R}^{3 \times 2}$.
 

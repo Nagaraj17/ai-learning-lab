@@ -58,6 +58,19 @@ where $\text{head}_i = \text{Attention}(\mathbf{Q} \mathbf{W}_Q^i, \mathbf{K} \m
 - Output Weight $\mathbf{W}_O$: $(d_{model} \times d_{model})$
 - Final Output: $(T \times d_{model})$
 
+### Symbol Table
+
+| Symbol | Name | Plain-English Meaning |
+| :--- | :--- | :--- |
+| $h$ | **Number of Heads** | How many parallel attention heads run simultaneously. Each head specializes in a different relationship type (e.g., syntactic, semantic, positional). |
+| $d_k$ | **Per-Head Dimension** | $d_k = d_{model} / h$. Each head works in a reduced-dimension subspace. For $d_{model} = 768$ and $h = 12$: $d_k = 64$. |
+| $\mathbf{W}_Q^i, \mathbf{W}_K^i, \mathbf{W}_V^i$ | **Per-Head Projection Weights** | Each head $i$ has its own Q/K/V projection matrices of shape $(d_{model} \times d_k)$. |
+| $\text{head}_i$ | **Output of Head $i$** | The $(T \times d_k)$ contextual output from a single attention head. |
+| $\text{Concat}(\dots)$ | **Concatenation** | Joins all $h$ head outputs side-by-side along the feature dimension: $h$ matrices of $(T \times d_k)$ become one $(T \times d_{model})$ matrix. |
+| $\mathbf{W}_O$ | **Output Projection Matrix** | A $(d_{model} \times d_{model})$ learnable weight matrix that mixes the concatenated head outputs into the final representation. This allows heads to share and combine their findings. |
+
+> **Why does the output shape stay $(T \times d_{model})$?** Because $h \times d_k = h \times \frac{d_{model}}{h} = d_{model}$. The concat step perfectly reconstructs the full model dimension.
+
 ## 8. Complete Worked Example
 Let $T = 2$, $d_{model} = 4$, $h = 2$ heads $\implies d_k = d_v = 4 / 2 = 2$.
 
@@ -115,6 +128,31 @@ class MultiHeadAttentionNumPy:
         return output, A
 ```
 
+### Understanding the Reshape → Transpose Pipeline
+
+The trickiest part of the Multi-Head code is how we split one large Q/K/V matrix into $h$ separate heads **without a for-loop**. Here's what each line does:
+
+```python
+# Step 1: Q has shape (T, d_model) = (T, h * d_k)
+# We reshape it to (T, h, d_k) — this "splits" the features into h groups of d_k
+Q_heads = Q.reshape(T, self.num_heads, self.d_k)
+# Shape: (T, h, d_k) — but we need (h, T, d_k) for batched matmul
+
+# Step 2: Transpose axes so heads become the first dimension
+Q_heads = Q_heads.transpose(1, 0, 2)
+# Shape: (h, T, d_k) — now each head[i] is a (T, d_k) matrix
+# This is like having h separate Q matrices stacked in a batch!
+```
+
+**Why do we need this?** Because `Q_heads @ K_heads.T` computes `h` independent attention score matrices $(T \times T)$ simultaneously as a single batched operation — much faster than running a Python loop $h$ times.
+
+After computing attention outputs for each head `(h, T, d_k)`, we reverse the process:
+```python
+# Transpose back: (h, T, d_k) → (T, h, d_k)
+# Then reshape: (T, h, d_k) → (T, h * d_k) = (T, d_model)
+concat = heads_out.transpose(1, 0, 2).reshape(T, self.d_model)
+```
+
 ## 10. Experiments / What-If Questions
 - **Does Multi-Head Attention increase total computational FLOPs compared to Single-Head Attention of dimension $d_{model}$?**
   No! Because each head operates on reduced dimension $d_k = d_{model} / h$, total FLOPs across $h$ heads equal a single head of full dimension $d_{model}$. However, memory bandwidth demands increase.
@@ -159,5 +197,4 @@ Because each head projects into a smaller dimension $d_k = d_{model} / h$. Summi
 ## 20. Sources
 - Vaswani et al. (2017) *"Attention Is All You Need"*, Section 3.2.2.
 - Alammar, J. & Grootendorst, M. [Hands-On Large Language Models.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Hands-On%20Large%20Language%20Models.md), Chapter 3.
-- Raschka, S. [Build a Large Language Model (From Scratch).md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Build%20a%20Large%20Language%20Model%20(From%20Scratch).md), Chapter 3 (Multi-Head Attention).
 

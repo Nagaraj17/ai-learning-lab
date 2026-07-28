@@ -45,6 +45,18 @@ $$\mathbf{A} = \text{Softmax}\left( \frac{\mathbf{Q} \mathbf{K}^\top}{\sqrt{d_k}
 - $\mathbf{S}_{\text{masked}}$: $(T \times T)$
 - Attention weights $\mathbf{A}$: $(T \times T)$ (Upper triangle entries are exactly $0.0$).
 
+### Symbol Table
+
+| Symbol | Name | Plain-English Meaning |
+| :--- | :--- | :--- |
+| $\mathbf{M}$ | **Causal Mask Matrix** | A $(T \times T)$ matrix of $0$s and $-\infty$s. $0$ in positions where attention is allowed ($j \le i$), and $-\infty$ where it is blocked ($j > i$). |
+| $-\infty$ | **Negative Infinity** | A very large negative number (practically $-10^9$ in code). When exponentiated by Softmax, $e^{-\infty} = 0.0$, guaranteeing zero attention weight. |
+| $M_{i,j}$ | **Mask Entry** | The scalar at row $i$, column $j$ of the mask. $M_{i,j} = 0$ means "token $i$ is allowed to see token $j$". $M_{i,j} = -\infty$ means "token $i$ is blocked from seeing token $j$". |
+| $\mathbf{S}_{\text{masked}}$ | **Masked Score Matrix** | The result of $\frac{\mathbf{Q} \mathbf{K}^\top}{\sqrt{d_k}} + \mathbf{M}$. Future positions now contain $-\infty$. |
+| $j \le i$ | **Past/Present Condition** | Token at position $i$ can attend to any token at position $j$ that is at or before itself. |
+| $j > i$ | **Future Condition** | Token at position $i$ is BLOCKED from attending to any token at position $j$ that is after itself. |
+| `np.tril()` | **Lower-Triangular Function** | NumPy function that creates a matrix with $1$s on and below the diagonal and $0$s above. Used to build the causal mask. |
+
 ## 8. Complete Worked Example
 Let $T = 3$. Raw scaled scores $\mathbf{S}_{\text{scaled}} = \begin{bmatrix} 2.0 & 5.0 & 1.0 \\ 3.0 & 4.0 & 6.0 \\ 1.0 & 2.0 & 3.0 \end{bmatrix} \in \mathbb{R}^{3 \times 3}$.
 
@@ -109,6 +121,8 @@ How do we allow the model to focus on multiple different context relationships s
 1. What value must be added to future position scores before Softmax, and why?
 2. In a sequence of length $T = 4$, how many entries in attention matrix $\mathbf{A}$ will be zero due to causal masking?
 
+> **Hint for Q2:** The zero entries form the **strictly upper triangle** of a $T \times T$ matrix. The number of entries in a strict upper triangle is $\frac{T(T-1)}{2}$. For $T = 4$: $\frac{4 \times 3}{2} = 6$ entries are masked to zero.
+
 ## 17. Quick Revision Summary
 - Causal Masking prevents token $i$ from attending to future tokens $j > i$.
 - Adds $-\infty$ to upper-triangular scores before Softmax ($e^{-\infty} = 0.0$).
@@ -127,5 +141,4 @@ Exactly $0.0$, because position 3 is in the future relative to position 1.
 ## 20. Sources
 - Vaswani et al. (2017) *"Attention Is All You Need"*, Section 3.2.3.
 - Radford et al. (2018) *"Improving Language Understanding by Generative Pre-Training"* (GPT-1).
-- Raschka, S. [Build a Large Language Model (From Scratch).md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Build%20a%20Large%20Language%20Model%20(From%20Scratch).md), Chapter 3 (Causal Masking).
 

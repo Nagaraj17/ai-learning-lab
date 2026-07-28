@@ -9,6 +9,9 @@ However, human language and operational logs do not exist in isolated single-wor
 If our model only looks at the single word `"today"`, it has zero idea whether the next token should be `"Receive"` or `"Alert"`. 
 **The limitation:** Processing tokens as isolated 1D vectors destroys sentence history and context.
 
+> **What is a Context Window?**
+> A **context window** is the maximum number of tokens ($T_{max}$) that a model can process simultaneously in a single forward pass. It is a fixed hyperparameter set during model design. For example, GPT-2 has a context window of $T_{max} = 1024$ tokens, while GPT-4 supports up to $T_{max} = 128{,}000$ tokens. Any input longer than $T_{max}$ must be truncated or split.
+
 ## 2. Why We Need Something New
 We need a mathematical structure that can hold an **entire sequence of $T$ tokens** simultaneously in memory, preserving the order and feature vectors of every token in the context window.
 
@@ -32,6 +35,18 @@ A Sequence Matrix is a **bound book of $T$ pages**, where Page 1 is Token 1, Pag
 For a sequence of length $T$ and embedding dimension $d_{model}$:
 
 $$\mathbf{X} = \begin{bmatrix} \mathbf{e}_{t_1} \\ \mathbf{e}_{t_2} \\ \vdots \\ \mathbf{e}_{t_T} \end{bmatrix} \in \mathbb{R}^{T \times d_{model}}$$
+
+### Symbol Table
+
+| Symbol | Name | Plain-English Meaning |
+| :--- | :--- | :--- |
+| $T$ | **Sequence Length** | The number of tokens in the current input prompt (e.g., $T = 3$ means 3 tokens). Must satisfy $T \le T_{max}$ (the model's context window). |
+| $T_{max}$ | **Context Window Size** | The maximum number of tokens the model architecture can accept in one forward pass (a fixed hyperparameter). |
+| $d_{model}$ | **Model / Embedding Dimension** | The length of each token's embedding vector. Also called `hidden_size` (e.g., $d_{model} = 768$ in GPT-2). |
+| $\mathbf{X}$ | **Sequence Matrix** | A 2D matrix of shape $(T, d_{model})$ where row $i$ is the embedding vector for the $i$-th token in the input. |
+| $\mathbf{e}_{t_i}$ | **Token $i$'s Embedding Vector** | The $d_{model}$-dimensional vector retrieved from the Embedding Matrix $\mathbf{E}$ for Token ID $t_i$. |
+| $\mathbf{E}$ | **Embedding Matrix** | The full lookup table of shape $(|V|, d_{model})$ containing learned vectors for all tokens in the vocabulary. |
+| $|V|$ | **Vocabulary Size** | Total number of unique tokens the model knows (e.g., $|V| = 50{,}257$ for GPT-2). |
 
 **Shape Trace:**
 - Token IDs: $(T,)$

@@ -51,6 +51,21 @@ $$\mathbf{V} = \mathbf{X} \mathbf{W}_V \in \mathbb{R}^{T \times d_v}$$
 - Weight $\mathbf{W}_K$: $(d_{model} \times d_k) \implies \mathbf{K}: (T \times d_k)$
 - Weight $\mathbf{W}_V$: $(d_{model} \times d_v) \implies \mathbf{V}: (T \times d_v)$
 
+### Symbol Table
+
+| Symbol | Name | Plain-English Meaning |
+| :--- | :--- | :--- |
+| $\mathbf{X}$ | **Sequence Matrix** | The input: a $(T \times d_{model})$ matrix where each row is a token's embedding. (From Topic 19.) |
+| $\mathbf{W}_Q$ | **Query Weight Matrix** | A learnable $(d_{model} \times d_k)$ matrix that transforms each token's embedding into a "search request" vector. Updated by backpropagation during training. |
+| $\mathbf{W}_K$ | **Key Weight Matrix** | A learnable $(d_{model} \times d_k)$ matrix that transforms each token's embedding into an "index tag" vector. |
+| $\mathbf{W}_V$ | **Value Weight Matrix** | A learnable $(d_{model} \times d_v)$ matrix that transforms each token's embedding into a "content payload" vector. |
+| $\mathbf{Q}$ | **Query Matrix** | $\mathbf{X} \mathbf{W}_Q$. Each row $\mathbf{q}_i$ represents: "What is token $i$ looking for?" Shape: $(T \times d_k)$. |
+| $\mathbf{K}$ | **Key Matrix** | $\mathbf{X} \mathbf{W}_K$. Each row $\mathbf{k}_i$ represents: "What information does token $i$ have to offer?" Shape: $(T \times d_k)$. |
+| $\mathbf{V}$ | **Value Matrix** | $\mathbf{X} \mathbf{W}_V$. Each row $\mathbf{v}_i$ represents: "What is token $i$'s actual content?" Shape: $(T \times d_v)$. |
+| $d_{model}$ | **Model Dimension** | Width of the input embedding. The "input features" dimension of each projection weight matrix. |
+| $d_k$ | **Key/Query Dimension** | Width of the Q and K projections. Q and K **must** share the same $d_k$ so that their dot product $\mathbf{Q} \mathbf{K}^\top$ is defined. |
+| $d_v$ | **Value Dimension** | Width of the V projection. Can differ from $d_k$, but in practice often $d_v = d_k$. |
+
 ## 8. Complete Worked Example
 Let $T = 2$, $d_{model} = 2$, $d_k = 2$, $d_v = 2$:
 
@@ -92,6 +107,9 @@ print("V shape:", V.shape)
   Then $\mathbf{Q} = \mathbf{K} = \mathbf{V} = \mathbf{X}$. The model loses the ability to separate search requests from content profiles.
 - **Can $d_k$ differ from $d_{model}$?**
   Yes! $d_k$ and $d_v$ are projection hyper-parameters. In multi-head attention, $d_k = d_{model} / h$.
+- **Why exactly THREE projections? Why not two (Q and K only) or four?**
+  - **Why not two?** If we used $\mathbf{Q}$ and $\mathbf{K}$ alone (without $\mathbf{V}$), the attention weights $\mathbf{A}$ would multiply the raw input $\mathbf{X}$ directly. This forces the "relevance scoring" and "content retrieval" to use the same vectors, limiting what the model can learn. $\mathbf{V}$ gives the model a separate, learnable representation for *what content to actually retrieve*.
+  - **Why not four?** Mathematically, attention has exactly three functional roles: (1) asking a question (Q), (2) being matched against (K), (3) providing the retrieved content (V). A fourth matrix would be redundant — it would either duplicate one of these roles or be absorbed into $\mathbf{W}_O$ (the output projection in Multi-Head Attention, covered in Topic 26).
 
 ## 11. Common Misunderstandings
 - **Misunderstanding:** Query, Key, and Value are separate input text sequences.
@@ -132,5 +150,4 @@ No. In Self-Attention, Q, K, and V are all linear projections created from the s
 ## 20. Sources
 - Vaswani et al. (2017) *"Attention Is All You Need"*, Section 3.2.1.
 - Alammar, J. & Grootendorst, M. [Hands-On Large Language Models.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Hands-On%20Large%20Language%20Models.md), Chapter 3.
-- Raschka, S. [Build a Large Language Model (From Scratch).md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Build%20a%20Large%20Language%20Model%20(From%20Scratch).md), Chapter 3.
 

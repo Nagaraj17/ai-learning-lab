@@ -25,6 +25,12 @@ Scaling by $\frac{1}{\sqrt{d_k}}$ is like a **Volume Limiter**: it turns down ex
 3. Apply row-wise Softmax to compute attention weights: $\mathbf{A} = \text{Softmax}(\mathbf{S}_{\text{scaled}}) \in \mathbb{R}^{T \times T}$.
 4. Compute weighted sum of Values: $\mathbf{H} = \mathbf{A} \mathbf{V} \in \mathbb{R}^{T \times d_v}$.
 
+> **Softmax Refresher (from Topic 08):**
+> Softmax converts a row of raw scores $[z_1, z_2, \dots, z_n]$ into a probability distribution:
+> $$P_i = \frac{e^{z_i}}{\sum_{j=1}^{n} e^{z_j}}$$
+> Each output $P_i$ is between $0.0$ and $1.0$, and all outputs in the row sum to exactly $1.0$.
+> In attention, Softmax is applied **independently to each row** of the $(T \times T)$ score matrix.
+
 ```
 Q (T x d_k) ──┐
               ├──► MatMul (Q @ K.T) ──► S (T x T) ──► Scale (/ sqrt(d_k)) ──► Softmax ──► A (T x T) ──┐
@@ -44,6 +50,21 @@ $$\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Softmax}\left( \f
 - $\mathbf{V}: (T \times d_v)$
 - Output $\mathbf{H}: (T \times T) \cdot (T \times d_v) = (T \times d_v)$
 
+### Symbol Table
+
+| Symbol | Name | Plain-English Meaning |
+| :--- | :--- | :--- |
+| $\mathbf{Q}$ | **Query Matrix** | $(T \times d_k)$ — each row is a token's "search request" vector. |
+| $\mathbf{K}$ | **Key Matrix** | $(T \times d_k)$ — each row is a token's "index tag" vector. |
+| $\mathbf{K}^\top$ | **Transposed Key Matrix** | $(d_k \times T)$ — K flipped so inner dimensions align for $\mathbf{Q} \mathbf{K}^\top$. |
+| $\mathbf{V}$ | **Value Matrix** | $(T \times d_v)$ — each row is a token's "content" to be retrieved. |
+| $\mathbf{S}$ | **Raw Score Matrix** | $(T \times T)$ — result of $\mathbf{Q} \mathbf{K}^\top$. Entry $S_{i,j}$ is the raw dot-product similarity of token $i$'s Query and token $j$'s Key. |
+| $d_k$ | **Key/Query Dimension** | Number of features per Q/K vector. Determines how much dot products can grow. |
+| $\sqrt{d_k}$ | **Scaling Factor** | The square root of $d_k$. We divide raw scores by this to keep variance ≈ 1.0. For $d_k = 64$: $\sqrt{64} = 8$. |
+| $\mathbf{S}_{\text{scaled}}$ | **Scaled Score Matrix** | $\frac{\mathbf{S}}{\sqrt{d_k}}$ — scores brought into a moderate range before Softmax. |
+| $\mathbf{A}$ | **Attention Weight Matrix** | $(T \times T)$ — result of row-wise Softmax on scaled scores. Each row sums to $1.0$. |
+| $\mathbf{H}$ | **Contextual Output** | $(T \times d_v)$ — result of $\mathbf{A} \mathbf{V}$. Each token's updated representation. |
+
 ## 8. Complete Worked Example
 Let $T = 2$, $d_k = 2$, $d_v = 2$. Therefore $\sqrt{d_k} = \sqrt{2} \approx 1.414$.
 
@@ -58,8 +79,20 @@ $$\mathbf{S} = \begin{bmatrix} 1 & 4 \\ 3 & 0 \end{bmatrix} \begin{bmatrix} 2 & 
 $$\mathbf{S}_{\text{scaled}} = \frac{1}{1.414} \begin{bmatrix} 6.0 & 12.0 \\ 6.0 & 0.0 \end{bmatrix} \approx \begin{bmatrix} 4.24 & 8.49 \\ 4.24 & 0.00 \end{bmatrix}$$
 
 3. **Row-wise Softmax $\mathbf{A} = \text{Softmax}(\mathbf{S}_{\text{scaled}})$:**
-- Row 0: $\text{Softmax}([4.24, 8.49]) \approx [0.014, 0.986]$
-- Row 1: $\text{Softmax}([4.24, 0.00]) \approx [0.986, 0.014]$
+
+   **Row 0 — full arithmetic** (so you can verify yourself):
+   - Inputs: $[4.24, 8.49]$
+   - Exponentiate each: $e^{4.24} \approx 69.4$, $e^{8.49} \approx 4875.1$
+   - Sum of exponentials: $69.4 + 4875.1 = 4944.5$
+   - Divide each by sum: $\frac{69.4}{4944.5} \approx 0.014$, $\frac{4875.1}{4944.5} \approx 0.986$
+   - Result: $[0.014, 0.986]$ ✓ (sums to $1.0$)
+
+   > **Notice:** The large gap between $4.24$ and $8.49$ causes Softmax to push almost all probability ($98.6\%$) to the second token. This is why scaling matters — without it, the gaps would be even larger and Softmax would output a hard $[0.0, 1.0]$.
+
+   **Row 1:** $\text{Softmax}([4.24, 0.00])$:
+   - $e^{4.24} \approx 69.4$, $e^{0.00} = 1.0$
+   - Sum: $70.4$
+   - Result: $[\frac{69.4}{70.4}, \frac{1.0}{70.4}] \approx [0.986, 0.014]$
 
 $$\mathbf{A} = \begin{bmatrix} 0.014 & 0.986 \\ 0.986 & 0.014 \end{bmatrix} \in \mathbb{R}^{2 \times 2}$$
 
@@ -131,5 +164,4 @@ To prevent dot product magnitudes from growing too large for high dimensions $d_
 ## 20. Sources
 - Vaswani et al. (2017) *"Attention Is All You Need"*, Section 3.2.1.
 - Goodfellow, I., Bengio, Y., & Courville, A. [Deep Learning.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Deep%20Learning.md), Chapter 6 (Softmax Vanishing Gradients).
-- Raschka, S. [Build a Large Language Model (From Scratch).md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Build%20a%20Large%20Language%20Model%20(From%20Scratch).md), Chapter 3.
 

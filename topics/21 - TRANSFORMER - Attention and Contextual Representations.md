@@ -48,6 +48,17 @@ $$\mathbf{H} = \mathbf{A} \mathbf{V} \in \mathbb{R}^{T \times d_v}$$
 - Values $\mathbf{V}$: $(T \times d_v)$
 - Contextual Output $\mathbf{H}$: $(T \times d_v)$
 
+### Symbol Table
+
+| Symbol | Name | Plain-English Meaning |
+| :--- | :--- | :--- |
+| $\mathbf{A}$ | **Attention Weight Matrix** | A $(T \times T)$ matrix where entry $A_{i,j}$ is the probability (0.0 to 1.0) of how much token $i$ should attend to token $j$. Each row sums to $1.0$. |
+| $A_{i,j}$ | **Attention Weight Entry** | A single scalar between $0.0$ and $1.0$ representing: "How much should token $i$ pull information from token $j$?" |
+| $\mathbf{V}$ | **Value Matrix** | A $(T \times d_v)$ matrix containing the "content payload" vectors for each token. This is what gets mixed together by attention. |
+| $d_v$ | **Value Dimension** | The number of features in each Value vector. Often $d_v = d_k$, but they can differ. |
+| $\mathbf{H}$ | **Contextual Output Matrix** | The $(T \times d_v)$ result of $\mathbf{A} \mathbf{V}$. Each row $i$ is a new vector for token $i$ that blends information from all tokens weighted by attention. |
+| $\sum_{j=1}^T A_{i,j} = 1.0$ | **Row Sum Constraint** | Each row of $\mathbf{A}$ is a valid probability distribution — the attention weights for any given token must sum to exactly $1.0$ (guaranteed by Softmax). |
+
 ## 8. Complete Worked Example
 Let sequence length $T = 2$ (`["river", "bank"]`), and $d_v = 2$.
 
@@ -59,9 +70,17 @@ Suppose attention weights $\mathbf{A} = \begin{bmatrix} 0.9 & 0.1 \\ 0.7 & 0.3 \
 
 Compute contextual output $\mathbf{H} = \mathbf{A} \mathbf{V}$:
 
-$$\mathbf{H}_{row 1 (\text{"bank"})} = 0.7 \times [0.1, 0.9] + 0.3 \times [0.4, 0.2] = [0.07, 0.63] + [0.12, 0.06] = [0.19, 0.69]$$
+- **Row 0 (`"river"` output):**
+  $$\mathbf{H}_{row 0} = 0.9 \times [0.1, 0.9] + 0.1 \times [0.4, 0.2] = [0.09, 0.81] + [0.04, 0.02] = [0.13, 0.83]$$
+  `"river"` stays mostly like itself (90% self-attention), with a tiny pull from `"bank"`.
 
-Notice how `"bank"`'s output vector $[0.19, 0.69]$ is now heavily influenced by `"river"`!
+- **Row 1 (`"bank"` output):**
+  $$\mathbf{H}_{row 1} = 0.7 \times [0.1, 0.9] + 0.3 \times [0.4, 0.2] = [0.07, 0.63] + [0.12, 0.06] = [0.19, 0.69]$$
+  `"bank"`'s output vector $[0.19, 0.69]$ is now heavily influenced by `"river"`!
+
+$$\mathbf{H} = \begin{bmatrix} 0.13 & 0.83 \\ 0.19 & 0.69 \end{bmatrix} \in \mathbb{R}^{2 \times 2}$$
+
+> **Key Observation:** Both tokens got updated — not just `"bank"`. Every row of $\mathbf{H}$ is a weighted blend of ALL Value rows. The attention weights determine the blend ratios.
 
 ## 9. Math → Code Mapping
 ```python

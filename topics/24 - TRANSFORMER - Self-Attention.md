@@ -42,6 +42,19 @@ $$\mathbf{H} = \text{Softmax}\left( \frac{(\mathbf{X} \mathbf{W}_Q) (\mathbf{X} 
 - $\mathbf{A}: (T \times T)$
 - $\mathbf{H}: (T \times d_v)$
 
+### Symbol Table
+
+| Symbol | Name | Plain-English Meaning |
+| :--- | :--- | :--- |
+| $\mathbf{X}$ | **Sequence Matrix** | $(T \times d_{model})$ input — from Topic 19. |
+| $\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V$ | **Projection Weight Matrices** | Learnable matrices that transform $\mathbf{X}$ into Q, K, V — from Topic 22. |
+| $\mathbf{Q}, \mathbf{K}, \mathbf{V}$ | **Query, Key, Value Matrices** | Three separate projections of $\mathbf{X}$ with distinct functional roles — from Topic 22. |
+| $\sqrt{d_k}$ | **Scaling Factor** | Prevents dot-product magnitudes from exploding — from Topic 23. |
+| $\mathbf{A}$ | **Attention Weight Matrix** | $(T \times T)$ Softmax-normalized scores. Row $i$ is a probability distribution over all tokens — from Topic 21. |
+| $\mathbf{H}$ | **Contextual Output** | $(T \times d_v)$ result. Every token's vector is now context-aware. |
+
+> **What makes this "Self"?** The key distinction: in Self-Attention, Q, K, and V are ALL derived from the **same** input $\mathbf{X}$. In Cross-Attention (encoder-decoder models), Q comes from one sequence and K, V come from another.
+
 ## 8. Complete Worked Example
 Let $T = 3$ tokens (`["Order", "Shipment", "Receive"]`), $d_{model} = 2$, $d_k = 2$, $d_v = 2$.
 
@@ -57,6 +70,8 @@ Dot product $\mathbf{Q} \mathbf{K}^\top$ creates a $3 \times 3$ matrix of scores
 Softmax normalizes each row into probability weights $\mathbf{A} \in \mathbb{R}^{3 \times 3}$.
 
 Multiplying $\mathbf{A} \mathbf{V}$ produces contextual sequence matrix $\mathbf{H} \in \mathbb{R}^{3 \times 2}$.
+
+> **📝 Complete Numerical Walkthrough:** For a fully traced, step-by-step calculation with actual numbers ($T=3, d=2$, explicit $\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V$ matrices, every dot product, every Softmax row, every weighted sum), see **[PREREQUISITE_KNOWLEDGE.md, Section 7](file:///c:/Users/Nagar/source/repos/ai-learning-lab/weekly%20curriculum/03-Attention/PREREQUISITE_KNOWLEDGE.md)**. That 9-step example is the definitive worked example for Self-Attention.
 
 ## 9. Math → Code Mapping
 ```python
@@ -124,5 +139,4 @@ Because matrix dot products $Q K^\top$ compute set-wise similarities between vec
 ## 20. Sources
 - Vaswani et al. (2017) *"Attention Is All You Need"*, Section 3.2.
 - Alammar, J. & Grootendorst, M. [Hands-On Large Language Models.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Hands-On%20Large%20Language%20Models.md), Chapter 3.
-- Raschka, S. [Build a Large Language Model (From Scratch).md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Build%20a%20Large%20Language%20Model%20(From%20Scratch).md), Chapter 3.
 
