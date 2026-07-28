@@ -12,10 +12,10 @@ The objective is to **master concepts**, understand the reasoning behind them, a
 
 | Field | Value |
 |--------|-------|
-| Current Phase | Phase 3 - Neural Networks |
-| Current Week | Week 1 |
-| Current Topic | Forward Pass |
-| Current Assignment | Build a Basic Prediction Machine |
+| Current Phase | Phase 5 - Transformers |
+| Current Week | Week 3 |
+| Current Topic | Attention & Contextual Representations |
+| Current Assignment | Build a Causal Self-Attention Layer from Scratch in NumPy |
 | Status | 🟡 In Progress |
 | Started On | |
 | Completed On | |
@@ -26,7 +26,9 @@ The objective is to **master concepts**, understand the reasoning behind them, a
 
 | Week | Topic | Assignment | Status | Confidence |
 |------|---------|------------|--------|------------|
-| Week 1 | Forward Pass | Build a Prediction Machine | 🟡 | ⭐⭐☆☆☆ |
+| Week 1 | Forward Pass & Learning | Build a Next-Word Predictor | 🟢 | ⭐⭐⭐⭐⭐ |
+| Week 2 | Embeddings & Relationships | Build an Embedding Layer | 🟢 | ⭐⭐⭐⭐⭐ |
+| Week 3 | Attention & Contextual Representations | Build a Causal Self-Attention Layer | 🟡 | ⭐⭐⭐☆☆ |
 
 Legend
 

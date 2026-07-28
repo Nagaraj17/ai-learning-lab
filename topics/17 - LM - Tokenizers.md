@@ -58,8 +58,9 @@ If we pass `"Receive"` to our Tokenizer, it outputs `[6]`.
 If we try to pass `"Received"` to our network, it will crash, because our simple tokenizer has no sub-word fallback mechanism to handle the past-tense suffix "ed".
 
 ## Common Misunderstanding
-**Misunderstanding:** The Tokenizer is a Neural Network layer that learns during training.
-**Correction:** The Tokenizer is completely separate from the Neural Network. It runs on the CPU *before* the data goes into the GPU, and *after* the data comes out. It has no trainable weights and does not learn during backpropagation; it is a fixed, hard-coded set of lookup rules.
+
+**Misunderstanding:** The Tokenizer is a neural network layer that updates its weights via backpropagation during model training.  
+**Correction:** Tokenizer construction/training (learning subword merge rules like BPE from a raw text corpus) is a statistical **pre-processing step** that happens completely *before* neural network training begins. Once built, the tokenizer is a fixed, non-differentiable mapping function on CPU. It does not learn or receive gradients during neural network training.
 
 ---
 

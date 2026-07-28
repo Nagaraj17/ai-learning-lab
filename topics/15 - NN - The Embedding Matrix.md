@@ -13,8 +13,8 @@ Formally, it is a matrix $\mathbf{E} \in \mathbb{R}^{|V| \times d}$.
 - **$d$ (Columns)**: The dimensionality of the embedding vector. If the hidden size is 256, every row has 256 columns.
 
 **The core mathematical trick:** 
-If $\mathbf{x}$ is a One-Hot vector (where index $i$ is `1` and all others are `0`), then the matrix multiplication $\mathbf{x} \mathbf{E}$ mathematically results in exactly the $i$-th row of $\mathbf{E}$.
-Because of this mathematical law, we completely skip the complex $O(n^2)$ matrix multiplication step, and instead just perform an $O(1)$ array index lookup: `E[i]`.
+If $\mathbf{x} \in \mathbb{R}^{1 \times |V|}$ is a One-Hot vector (where index $i$ is `1` and all others are `0`), then the matrix multiplication $\mathbf{x} \mathbf{E}$ mathematically results in exactly the $i$-th row of $\mathbf{E}$.
+Performing the full matrix-vector multiplication requires $O(|V| \cdot d)$ arithmetic operations (multiplying and adding $|V|$ rows by $d$ columns, where $|V| - 1$ rows are zeros). Instead, direct array indexing `E[i]` is an $O(d)$ memory copy operation that directly extracts the $i$-th row in $d$ operations, completely bypassing $|V| \cdot d$ redundant operations with zeros.
 
 ## Beginner Intuition & Contrasting Analogy
 Imagine the Embedding Matrix as a massive Phone Book. 

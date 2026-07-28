@@ -9,7 +9,10 @@ In **Week 2: Learning Relationships with Embeddings**, our goal is to move beyon
 ---
 
 ## Formal Definition
-An **Embedding** is a dense, continuous, low-dimensional vector representation of a discrete token. Instead of sparse 1s and 0s, an embedding vector represents a token as a list of real-valued numbers.
+An **Embedding** is a dense, continuous, low-dimensional vector representation of a discrete token. Instead of sparse 1s and 0s, an embedding vector represents a token as a list of real-valued numbers optimized to minimize a specific task objective (e.g. next-token prediction loss). 
+
+> [!IMPORTANT]
+> Embeddings are **learned task-specific statistical representations** derived from prediction objectives. They do **not** automatically encode inherent or universal human semantic meaning; their coordinates reflect statistical co-occurrence patterns in the specific training corpus and loss function.
 
 Formally, an embedding for a token is a vector:
 
@@ -95,7 +98,10 @@ Notice how **"Receive"** and **"Restock"** have numbers that are almost identica
 ---
 
 ## Connection to Active Assignment
-In **Week 2: Learning Relationships with Embeddings**, your challenge is to replace One-Hot Encoding with a trainable Embedding Layer. When your model processes operational transitions like `Receive → Restock` and `Restock → Inventory`, gradient descent will automatically nudge the embedding vectors of `Receive` and `Restock` close together in vector space!
+In **Week 2: Learning Relationships with Embeddings**, your challenge is to replace One-Hot Encoding with a trainable Embedding Layer. When your model processes operational transitions like `Receive → Restock` and `Restock → Inventory`, gradient descent adjusts the active embedding rows. 
+
+> [!NOTE]
+> Similar embeddings are **not guaranteed** merely because one token follows another in a simple 1-to-1 sequence. Representation clustering occurs when tokens share overlapping contexts (e.g. multiple tokens predicting the same next word or appearing after the same preceding words).
 
 *(Reference: Ian Goodfellow, Yoshua Bengio, and Aaron Courville - Deep Learning, Chapter 12: Applications)*
 

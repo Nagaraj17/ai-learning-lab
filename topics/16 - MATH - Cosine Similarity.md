@@ -45,8 +45,9 @@ graph TD
 ![Cosine Similarity Formula Breakdown](images/cosine_similarity_breakdown.svg)
 
 ## Where is this used in AI?
-*   **Vector Databases (RAG):** When you upload a massive PDF document to ChatGPT and ask it a question, ChatGPT doesn't read the whole PDF. It converts your question into an embedding vector, and then calculates the **Cosine Similarity** against every single paragraph in the PDF. It grabs the paragraph with the highest Cosine score (e.g. `0.95`) and uses that text to answer your question!
-*   **Checking our Work:** In our assignment, to prove that our neural network actually learned the lifecycle, we extract the embeddings for `"Receive"` and `"Restock"` and calculate their Cosine Similarity. We expect it to be a high positive number (e.g. `0.85`), proving they clustered together in space.
+*   **Vector Databases (RAG):** When you upload a document to ChatGPT and ask a question, ChatGPT converts your question into an embedding vector, and calculates the **Cosine Similarity** against embedded paragraphs to retrieve relevant context.
+*   **Evaluating Vector Geometry:** In embedding training, we calculate Cosine Similarity between vectors to inspect whether gradient descent moved their spatial directions closer together.
+*   **IMPORTANT — Attention vs. Cosine Similarity:** Transformer Attention mechanisms calculate **Raw Scaled Dot Products** ($\frac{\mathbf{Q} \mathbf{K}^\top}{\sqrt{d_k}}$), **NOT** Cosine Similarity. Cosine similarity normalizes vector lengths to $1.0$, whereas Attention deliberately retains vector magnitudes so that higher-magnitude queries and keys can express stronger attention intensity.
 
 ---
 
@@ -68,8 +69,12 @@ $$\text{Cosine Similarity} = \frac{24}{25} = \mathbf{0.96} \quad \text{(96\% Sim
 ---
 
 ## Common Misunderstanding
-**Misunderstanding:** A Cosine Similarity of `0.0` means the words are opposites.  
-**Correction:** A similarity of `0.0` means they are completely unrelated (Orthogonal / 90 degrees). For example, "Apple" and "Carburetor". A similarity of `-1.0` means they are exact opposites (180 degrees). For example, "Hot" and "Cold".
+
+**Misunderstanding 1:** A Cosine Similarity of `0.0` or `-1.0` universally means words are "unrelated" or "antonyms" in human language.  
+**Correction:** Cosine Similarity is strictly a **geometric metric** measuring vector angle $\cos(\theta)$. A score of $0.0$ means geometric orthogonality ($\mathbf{A} \cdot \mathbf{B} = 0$), and $-1.0$ means diametrically opposite vector direction. In natural language models, antonyms (e.g. "hot" and "cold", "large" and "small") appear in nearly identical surrounding contexts and frequently have **high positive cosine similarity**. Geometric orientation does not map 1-to-1 to human linguistic semantics.
+
+**Misunderstanding 2:** Transformer Attention uses Cosine Similarity to calculate word relevance.  
+**Correction:** Transformer Attention uses un-normalized Query-Key dot products scaled by $\frac{1}{\sqrt{d_k}}$. It does **not** divide by vector norms $\|\mathbf{Q}\| \|\mathbf{K}\|$.
 
 ---
 
