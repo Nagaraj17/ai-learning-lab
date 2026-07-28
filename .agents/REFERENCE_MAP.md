@@ -1,47 +1,17 @@
-Create a new permanent learning topic for:
+Reference Resolution Rule
 
-[TOPIC]
-
-Follow AGENTS.md and the Problem-First Concept Teaching Protocol.
-
-Start from the learner's existing knowledge.
-
-First identify:
-
-1. What can the learner already do?
-2. What limitation now becomes visible?
-3. What concrete example makes that limitation obvious?
-4. Why do we need this new concept?
-
-Only after establishing the problem, introduce the concept name and
-definition.
-
-Then teach:
-
-Problem
-→ Need
-→ Intuition
-→ Definition
-→ Mechanism
-→ Required Mathematics
-→ Complete Worked Example
-→ Math-to-Code Mapping
-→ What-If Experiments
-→ Misconceptions
-→ Limitations
-→ Assignment Connection
-→ Modern AI Connection
-→ Next Concept Bridge
-→ Teach-Back
-→ Quick Revision
-→ My Understanding
-→ Flashcards
-→ Sources
-
-Use authoritative references from REFERENCE_MAP.md and original papers
-where appropriate.
-
-Do not assume expected experimental behaviour. Distinguish theory,
-expectation and observed results.
-
-Do not modify older topics unless explicitly required to unblock this topic.
+1. Read resources/REFERENCE_MAP.md to identify preferred sources.
+2. Read resources/LOCAL_REFERENCE_LIBRARY.md to determine which sources
+   are actually available locally.
+3. Prefer an available local reference when it is appropriate for the topic.
+4. If a mapped reference is not locally available:
+   - do NOT pretend to have read it;
+   - do NOT invent chapter numbers, quotes, or claims from it;
+   - if web/search grounding is available, locate an authoritative external
+     source instead;
+   - prefer original papers, official documentation, official author material,
+     or open authoritative textbooks.
+5. Record which sources were actually consulted in the generated topic.
+6. If neither the local reference nor an authoritative external source can be
+   accessed, state that the preferred reference was unavailable and proceed
+   only with claims that can be independently supported.
