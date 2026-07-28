@@ -15,7 +15,7 @@ Here is the mapping of our curriculum topics to their optimal reference book:
     *   `18 - MATH - Dimensionality Reduction and PCA.md`
 
 ### 2. Large Language Model Architecture & Intuition
-**Best Reference:** `LLMs-resource.md` (*Hands-On Large Language Models* by Jay Alammar & Maarten Grootendorst)
+**Best Reference:** `Hands-on- Large Language Models.md` (*Hands-On Large Language Models* by Jay Alammar & Maarten Grootendorst)
 *   **Why:** Jay Alammar is famous for his highly visual and intuitive explanations of complex architectures like the Transformer. This book is the best for understanding the *mechanics* and *intuition* of LLMs without getting bogged down in production engineering.
 *   **Topics to use this for:**
     *   `02 - LM - Tokens and Vocabulary.md`
