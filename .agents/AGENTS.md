@@ -90,3 +90,175 @@ Rules for using references:
 4. **Targeted Reading:** Locate the relevant chapter or section in the mapped reference book first. Do not load or summarize the complete book.
 5. **No Source of Truth Override:** Use the books as secondary references to enrich the notes, but always preserve the AI Learning Lab's dependency order and mastery standards.
 6. **Cite the Source:** Mention which reference book inspired the intuition or definition in the note.
+
+
+# Problem-First Concept Teaching Protocol
+
+Starting with Week 3, every new core concept must be introduced through
+the problem that caused the concept to exist.
+
+Do not begin a concept with a formal definition or formula when the learner
+does not yet understand the problem being solved.
+
+Preferred learning sequence:
+
+Problem
+→ Need
+→ Intuition
+→ Concept Name / Definition
+→ Mechanism
+→ Mathematics
+→ Worked Example
+→ Code
+→ Experiment
+→ Teach-Back
+→ Connection to Previous and Next Concepts
+
+Example:
+
+Instead of beginning with:
+
+"Self-Attention is a mechanism that..."
+
+begin with:
+
+"We already have an embedding for every token.
+
+Consider:
+
+'The payer denied the drug because authorization was missing.'
+
+When processing 'denied', should every other token contribute equally?
+
+If not, the model needs a mechanism for deciding which tokens are relevant
+to the current token and by how much.
+
+That mechanism is attention."
+
+The learner should first feel the need for the concept and then learn its name.
+
+This is not a cold diagnostic question.
+
+The mentor presents the problem and guides the learner toward why a solution
+is necessary before teaching the solution.
+
+# Permanent Topic Learning Format
+
+Starting with Week 3, newly created permanent `topics/` notes should follow
+this learning sequence when applicable:
+
+1. The Problem
+   - What limitation existed before this concept?
+   - Show a concrete example that makes the limitation visible.
+
+2. Why We Need Something New
+   - What capability is missing?
+   - Do not name the solution too early if the problem is not yet clear.
+
+3. One-Line Definition
+   - Introduce the concept after the need is understood.
+
+4. Beginner Intuition / Mental Model
+   - Use a simple analogy when useful.
+   - Explain where the analogy stops being accurate.
+
+5. What Came Before → What Changes Now
+   - Explicitly connect this topic to concepts already learned.
+
+6. How It Works
+   - Explain the mechanism step by step before presenting condensed formulas.
+
+7. Required Mathematics
+   - Teach only mathematics needed for the current concept.
+   - Explain every symbol.
+   - Trace shapes for vector/matrix/tensor operations.
+
+8. Complete Worked Example
+   - Use small numbers.
+   - Do not skip arithmetic that a beginner needs to understand.
+   - Verify the result.
+
+9. Math → Code Mapping
+   - Show which code corresponds to each mathematical operation.
+   - Explain why the code is written that way.
+
+10. Experiments / What-If Questions
+    - Change one variable or assumption.
+    - Predict what should happen.
+    - Observe actual output when implementation exists.
+
+11. Common Misunderstandings
+    - Include misconceptions discovered during actual learning.
+
+12. Limitations and Trade-Offs
+    - State what the concept does NOT solve.
+
+13. Where It Appears in the Current Assignment
+
+14. Where It Appears in Modern AI Systems
+
+15. Connection to the Next Concept
+    - End with the unresolved question that motivates what comes next.
+
+16. Teach-Back and Small Application Exercise
+
+17. Quick Revision Summary
+
+18. My Understanding
+
+19. Flashcards
+
+20. Sources
+
+
+# Legacy Topic Preservation Protocol
+
+The improved topic format applies prospectively starting with Week 3.
+
+Do NOT mass-rewrite or regenerate existing Week 1 and Week 2 topic notes
+merely to conform to the newer format.
+
+Existing learning material represents completed work and should remain stable.
+
+Update a previous topic only when:
+
+1. the learner actively revisits that concept;
+2. a factual error or misleading explanation is discovered;
+3. the old explanation creates a prerequisite gap for the current topic;
+4. a small clarification would materially improve understanding of the
+   concept currently being studied.
+
+When updating legacy material:
+
+- make the smallest useful change;
+- preserve correct existing explanations;
+- do not restructure the entire file unless explicitly requested;
+- do not regenerate visuals, examples, flashcards, or formatting solely
+  for consistency.
+
+New curriculum improvements are forward-looking by default.
+
+
+# Evidence-Driven Learning Rule
+
+When a concept produces observable model behaviour, distinguish clearly
+between:
+
+- what the theory allows;
+- what we expect;
+- what the current experiment actually produced.
+
+Never alter the interpretation of experimental results to fit the lesson.
+
+For example:
+
+Do not say:
+"The attention head focuses on 'authorization' because it is important."
+
+unless the calculated attention weights actually show that.
+
+Instead say:
+"We might expect 'authorization' to become relevant. Let us inspect the
+attention matrix and see what this model actually does."
+
+Unexpected results are learning opportunities, not failures to hide.

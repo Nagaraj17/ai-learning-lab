@@ -1,72 +1,94 @@
----
-name: ai-curriculum-generator
-description: >-
-  Transforms a raw technical problem statement into a highly structured, 
-  first-principles AI learning module. Generates deep-dive topic notes, manual 
-  math exercises, prerequisite dependency maps, and a fully explained Jupyter 
-  Notebook following the strict pedagogical rules of the ai-learning-lab repository.
----
-
-# First-Principles AI Curriculum Generator
-
-## Overview
-This skill orchestrates the creation of a new weekly curriculum module for the `ai-learning-lab` repository. It takes a raw exercise text file as input and systematically generates all required directory structures, deep-dive topic notes, manual math verification exercises, and a Jupyter Notebook. It strictly enforces a first-principles teaching approach where learners must prove math manually before executing code.
-
-## Dependencies
-- None (This is a pure orchestration and reasoning skill utilizing standard file writing capabilities).
-
-## Quick Start
-Trigger this skill by asking the agent:
-> "Use the ai-curriculum-generator skill to create the Week 3 module based on the provided text file."
-
 ## Workflow
 
-### 1. Analyze Prerequisites and Ask for Clarification
-- Read the raw exercise file provided by the user.
-- Identify which existing `topics/` notes are required prerequisites for the new assignment.
-- Identify what new concepts need to be taught.
-- **CRITICAL:** If the required mathematical concepts or prerequisites are ambiguous in the text file, **STOP** and ask the user for clarification before generating any files. Do not guess the math.
+### 1. Understand the Assignment
 
-### 2. Create New Permanent Topics
-- Generate new Deep-Dive notes in the global `topics/` directory.
-- Continue the numerical prefix convention from the existing files (e.g., if the last note was `18`, start at `19`).
-- **Required Sections for every topic note:**
-  - One-line definition
-  - Why it exists
-  - Beginner intuition
-  - The Mathematical Formula (if applicable)
-  - Week X assignment connection
-  - Common misunderstanding
-  - Teach-back question
-  - My Understanding (leave space for learner)
-  - Flashcards (At least two Q&A pairs tagged with `#card`)
+Read the assignment/problem statement.
 
-### 3. Generate the Weekly Curriculum Structure
-- Create the new directory: `weekly curriculum/Week X-{topic-name}/`.
-- Inside this directory, create the following meta-files:
-  - `PREREQUISITE_KNOWLEDGE.md`: A consolidated study guide explicitly linking back to required past topics and defining the new concepts.
-  - `Week X Topics in Detail.md`: An ordered list mapping concepts to the deep-dive notes.
-  - `REVIEW.md`: A 4-part review testing Conceptual, Code, Math, and Debugging/What-If scenarios.
-  - `REFLECTION.md`: An evidence table where the learner must paste outputs from their notebook to prove completion.
+Determine:
 
-### 4. Draw the Prerequisite Map
-- Create `PREREQUISITE_MAP.md` inside the weekly folder.
-- Use a Mermaid `graph TD` diagram.
-- Color code nodes: gray for previous week concepts, blue/colored for current week concepts. Show the dependency arrows clearly.
+- what capability the assignment is trying to teach;
+- what problem from the previous week leads naturally to this assignment;
+- what the learner should be able to explain and implement afterward.
 
-### 5. Create Manual Exercises
-- Create a `manual-exercises/` subdirectory in the weekly folder.
-- Generate Markdown files containing strict mathematical walk-throughs of the week's concepts.
-- Provide hardcoded initialization matrices/vectors.
-- Provide a "Learner Workspace" with blank calculation tables for them to perform the math by hand.
-- **Verification:** Ensure the expected outputs you write in the exercise are mathematically correct.
+Do not generate files yet.
 
-### 6. Build the Jupyter Notebook
-- Create the notebook in `projects/Week X/Work/` (or the equivalent project directory).
-- **CRITICAL:** The notebook MUST contain detailed Markdown cells explaining what is happening at every step. Do not write monolithic code blocks; break them up with explanations.
-- Ensure any new third-party libraries used in the notebook are added to the root `requirements.txt`.
+### 2. Inspect Existing Knowledge
 
-## Common Mistakes
-- **Skipping the Math Check:** Generating manual exercises with incorrect numbers or shapes. Always double-check your matrix multiplication shapes and arithmetic.
-- **Failing to Link Past Concepts:** Treating a week in isolation. The curriculum is a continuous journey; you must explicitly link new concepts back to the foundational math from previous weeks.
-- **Monolithic Notebooks:** Creating a Jupyter notebook with very little markdown text and huge code cells. The notebook is a teaching tool, not just an answer key. Break code down and explain the *why*.
+Inspect:
+
+- relevant previous `topics/`;
+- previous weekly curriculum;
+- learner reflections and experiments when relevant;
+- ROADMAP.md;
+- REFERENCE_MAP.md.
+
+Identify:
+
+- reusable prerequisites;
+- missing prerequisites;
+- misconceptions that would block the new topic.
+
+Do not mass-upgrade previous topics.
+
+### 3. Research the Concept
+
+Consult the references defined by `REFERENCE_MAP.md`.
+
+For foundational algorithms, prefer original papers where appropriate.
+
+Peer/team submissions may be inspected for additional questions,
+experiments and teaching ideas, but are not sources of technical truth.
+
+### 4. Design the Learning Path
+
+Before creating curriculum files, produce a proposal containing:
+
+- previous-topic bridge;
+- central problem;
+- required prerequisites;
+- new concepts;
+- dependency order;
+- proposed permanent topic files;
+- concepts deliberately deferred;
+- assignment goal;
+- proposed consolidated-guide structure.
+
+STOP and request learner approval.
+
+Do not create large learning documents before approval.
+
+### 5. Create the Week Study Pack
+
+After approval, create:
+
+- PREREQUISITE_MAP.md
+- PREREQUISITE_KNOWLEDGE.md
+- Week X Topics in Detail.md
+
+The consolidated guide should connect the concepts into one continuous
+learning story rather than duplicate every permanent topic in full.
+
+### 6. Create New Permanent Topics
+
+Create permanent notes only for NEW core concepts required by the current
+week.
+
+Use the Problem-First Concept Teaching Protocol defined in AGENTS.md.
+
+Do not regenerate previous weeks' topics for formatting consistency.
+
+### 7. Create Manual Exercises
+
+...
+
+### 8. Build the Implementation
+
+...
+
+### 9. Experiment and Review
+
+...
+
+### 10. Reflection and Mastery
+
+...

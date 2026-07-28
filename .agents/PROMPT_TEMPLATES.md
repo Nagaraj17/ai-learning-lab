@@ -1,35 +1,47 @@
-# Common Prompt Templates
+Create a new permanent learning topic for:
 
-The following templates ensure that any AI teaching assistant generates content in strict adherence to the **Beginner-First Teaching Protocol** (defined in `AGENTS.md`).
+[TOPIC]
 
-## 1. Topic Generation Prompt
+Follow AGENTS.md and the Problem-First Concept Teaching Protocol.
 
-Use this prompt to generate a brand new topic or fill in a missing gap in the curriculum.
+Start from the learner's existing knowledge.
 
-```text
-Please generate a new learning note for the topic: [INSERT TOPIC NAME]. 
+First identify:
 
-You must strictly follow the Beginner-First Teaching Protocol defined in our AGENTS.md:
-1. Start by consulting our REFERENCE_MAP.md to find the best textbook source, and extract the formal rigorous definitions.
-2. Break down any mathematical formulas component-by-component in plain English.
-3. Provide a vivid, contrasting analogy to build beginner intuition.
-4. Include a dedicated 'Where is this used in AI?' section with concrete, real-world examples.
-5. Generate and embed a visual diagram illustrating the concept.
-6. Do not copy-paste paragraphs from textbooks; synthesize and explain it yourself.
-```
+1. What can the learner already do?
+2. What limitation now becomes visible?
+3. What concrete example makes that limitation obvious?
+4. Why do we need this new concept?
 
-## 2. Topic Upgrade Prompt
+Only after establishing the problem, introduce the concept name and
+definition.
 
-Use this prompt if an existing topic is too brief, too complex, or lacking visual intuition.
+Then teach:
 
-```text
-Please upgrade the existing file: [INSERT FILE PATH]. 
+Problem
+→ Need
+→ Intuition
+→ Definition
+→ Mechanism
+→ Required Mathematics
+→ Complete Worked Example
+→ Math-to-Code Mapping
+→ What-If Experiments
+→ Misconceptions
+→ Limitations
+→ Assignment Connection
+→ Modern AI Connection
+→ Next Concept Bridge
+→ Teach-Back
+→ Quick Revision
+→ My Understanding
+→ Flashcards
+→ Sources
 
-You must rewrite it to strictly follow the Beginner-First Teaching Protocol defined in our AGENTS.md:
-1. Ensure the Formal Definition aligns with the official textbooks in REFERENCE_MAP.md.
-2. Add a 'Component-by-Component Math Breakdown' for the primary formula.
-3. Add a 'Beginner Intuition' section with a contrasting, vivid analogy.
-4. Add a 'Where is this used in AI?' section.
-5. Generate and embed a highly educational mathematical visual diagram.
-6. Preserve any existing flashcards or assignment connection sections.
-```
+Use authoritative references from REFERENCE_MAP.md and original papers
+where appropriate.
+
+Do not assume expected experimental behaviour. Distinguish theory,
+expectation and observed results.
+
+Do not modify older topics unless explicitly required to unblock this topic.
