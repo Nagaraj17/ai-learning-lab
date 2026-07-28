@@ -157,5 +157,7 @@ Why does Multi-Head Attention not increase computational FLOPs compared to a sin
 Because each head projects into a smaller dimension $d_k = d_{model} / h$. Summing FLOPs across $h$ heads ($h \times \frac{d_{model}}{h}$) equals the compute cost of a single full-dimensional head.
 
 ## 20. Sources
-- Vaswani et al. (2017) *Attention Is All You Need*, Section 3.2.2.
-- Alammar, J. *The Illustrated Transformer*.
+- Vaswani et al. (2017) *"Attention Is All You Need"*, Section 3.2.2.
+- Alammar, J. & Grootendorst, M. [Hands-On Large Language Models.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Hands-On%20Large%20Language%20Models.md), Chapter 3.
+- Raschka, S. [Build a Large Language Model (From Scratch).md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Build%20a%20Large%20Language%20Model%20(From%20Scratch).md), Chapter 3 (Multi-Head Attention).
+

@@ -109,5 +109,6 @@ Does constructing a Sequence Matrix average the token embeddings together? #card
 No. It stacks the $T$ token embeddings vertically as rows, preserving every token's distinct feature vector.
 
 ## 20. Sources
-- Alammar, J. & Grootendorst, M. *Hands-On Large Language Models*, Chapter 2.
-- Goodfellow, I., Bengio, Y., & Courville, A. *Deep Learning*, Chapter 12.
+- Alammar, J. & Grootendorst, M. [Hands-On Large Language Models.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Hands-On%20Large%20Language%20Models.md), Chapter 2.
+- Goodfellow, I., Bengio, Y., & Courville, A. [Deep Learning.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Deep%20Learning.md), Chapter 12.
+

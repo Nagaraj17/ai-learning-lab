@@ -105,5 +105,6 @@ Why is matrix transpose necessary in Attention score computation $\mathbf{Q} \ma
 Because $\mathbf{Q}$ and $\mathbf{K}$ both have shape $(T, d_k)$. Transposing $\mathbf{K}$ to $(d_k, T)$ aligns the inner dimensions for matrix multiplication, producing a square pairwise score matrix of shape $(T, T)$.
 
 ## 20. Sources
-- Goodfellow, I., Bengio, Y., & Courville, A. *Deep Learning*, Chapter 2 (Linear Algebra).
-- Vaswani et al. (2017) *Attention Is All You Need*.
+- Goodfellow, I., Bengio, Y., & Courville, A. [Deep Learning.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Deep%20Learning.md), Chapter 2 (Linear Algebra).
+- Vaswani et al. (2017) *"Attention Is All You Need"*.
+

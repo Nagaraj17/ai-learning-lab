@@ -129,5 +129,7 @@ Why do we scale the dot products by $\frac{1}{\sqrt{d_k}}$? #card
 To prevent dot product magnitudes from growing too large for high dimensions $d_k$, which would push Softmax into extreme regions with near-zero gradients.
 
 ## 20. Sources
-- Vaswani et al. (2017) *Attention Is All You Need*, Section 3.2.1.
-- Goodfellow, I. et al. *Deep Learning*, Chapter 6 (Softmax Vanishing Gradients).
+- Vaswani et al. (2017) *"Attention Is All You Need"*, Section 3.2.1.
+- Goodfellow, I., Bengio, Y., & Courville, A. [Deep Learning.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Deep%20Learning.md), Chapter 6 (Softmax Vanishing Gradients).
+- Raschka, S. [Build a Large Language Model (From Scratch).md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Build%20a%20Large%20Language%20Model%20(From%20Scratch).md), Chapter 3.
+

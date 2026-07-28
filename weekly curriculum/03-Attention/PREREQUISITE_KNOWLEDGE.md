@@ -132,3 +132,14 @@ Every calculation step matches matrix algebra exactly!
 ## 8. Manual Verification Exercises
 Complete the hand calculations in:
 - [Level 3: Single-Head Self-Attention](manual-exercises/01_SINGLE_HEAD_ATTENTION.md)
+
+---
+
+## 9. References & Sources
+- Vaswani et al. (2017) *"Attention Is All You Need"*
+- Bahdanau, Cho, & Bengio (2014) *"Neural Machine Translation by Jointly Learning to Align and Translate"*
+- Jain & Wallace (2019) *"Attention is not Explanation"*
+- Alammar, J. & Grootendorst, M. [Hands-On Large Language Models.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Hands-On%20Large%20Language%20Models.md)
+- Goodfellow, I., Bengio, Y., & Courville, A. [Deep Learning.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Deep%20Learning.md)
+- Raschka, S. [Build a Large Language Model (From Scratch).md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Build%20a%20Large%20Language%20Model%20(From%20Scratch).md)
+

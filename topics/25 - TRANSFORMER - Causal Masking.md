@@ -125,5 +125,7 @@ In a causal masked attention matrix, what is the value of entry $A_{1, 3}$ (Toke
 Exactly $0.0$, because position 3 is in the future relative to position 1.
 
 ## 20. Sources
-- Vaswani et al. (2017) *Attention Is All You Need*, Section 3.2.3.
-- Radfford et al. (2018) *Improving Language Understanding by Generative Pre-Training* (GPT-1).
+- Vaswani et al. (2017) *"Attention Is All You Need"*, Section 3.2.3.
+- Radford et al. (2018) *"Improving Language Understanding by Generative Pre-Training"* (GPT-1).
+- Raschka, S. [Build a Large Language Model (From Scratch).md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Build%20a%20Large%20Language%20Model%20(From%20Scratch).md), Chapter 3 (Causal Masking).
+

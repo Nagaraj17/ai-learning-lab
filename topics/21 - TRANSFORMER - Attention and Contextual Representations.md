@@ -129,6 +129,8 @@ Can attention weights always be treated as definitive explanations of model deci
 No (Jain & Wallace, 2019). Attention weights show feature mixing weights, but different attention distributions can yield identical predictions. They are not guaranteed explanation proofs.
 
 ## 20. Sources
-- Bahdanau, Cho, & Bengio (2014) *Neural Machine Translation by Jointly Learning to Align and Translate*.
-- Vaswani et al. (2017) *Attention Is All You Need*.
-- Jain & Wallace (2019) *Attention is not Explanation*.
+- Bahdanau, Cho, & Bengio (2014) *"Neural Machine Translation by Jointly Learning to Align and Translate"*.
+- Vaswani et al. (2017) *"Attention Is All You Need"*.
+- Jain & Wallace (2019) *"Attention is not Explanation"*.
+- Alammar, J. & Grootendorst, M. [Hands-On Large Language Models.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Hands-On%20Large%20Language%20Models.md), Chapter 3.
+
