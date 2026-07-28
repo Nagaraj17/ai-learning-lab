@@ -288,6 +288,19 @@ If embeddings tell us what a word is, how does the model decide which previous w
 The relative position/ distance between the word's embedding tells us how much they are related/ similar to each other.
 With this we can calculate the similarity between the words and decide which previous words matter most when predicting the next one.
 
+improved ans
+An Embedding gives a word its base identity and static attributes (e.g., Receive = [0.72, -0.15, 0.44]).
+
+Now imagine reading a 15-word sentence:
+
+"The company placed a large order for supplies, but due to weather, the receive step was delayed."
+
+When predicting the next word, the model is staring at 15 previous embedding vectors.
+
+Some words (order, receive, delayed) are critically important.
+Some words (the, a, for, to) are almost irrelevant filler.
+If all words just sit there as static embeddings, how does the model filter out the noise and focus on what matters?
+
 
 Note: We have still not leant token and tokenizer although we know the definition of it but are still not clear on it how it works under the hood.
 Thereare a few more concepts that we want to understand

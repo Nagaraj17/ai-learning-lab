@@ -42,19 +42,33 @@ graph TD
     end
 ```
 
+![Cosine Similarity Formula Breakdown](images/cosine_similarity_breakdown.svg)
+
 ## Where is this used in AI?
 *   **Vector Databases (RAG):** When you upload a massive PDF document to ChatGPT and ask it a question, ChatGPT doesn't read the whole PDF. It converts your question into an embedding vector, and then calculates the **Cosine Similarity** against every single paragraph in the PDF. It grabs the paragraph with the highest Cosine score (e.g. `0.95`) and uses that text to answer your question!
-*   **Checking our Work:** In our assignment, to prove that our neural network actually learned the lifecycle, we will extract the embedding for `"Receive"` and `"Restock"` and calculate their Cosine Similarity. We expect it to be a high positive number (e.g. `0.85`), proving they clustered together in space.
+*   **Checking our Work:** In our assignment, to prove that our neural network actually learned the lifecycle, we extract the embeddings for `"Receive"` and `"Restock"` and calculate their Cosine Similarity. We expect it to be a high positive number (e.g. `0.85`), proving they clustered together in space.
 
-## Small Numerical Example
-Vector $\mathbf{A}$: `[3, 4]` (Magnitude = 5)
-Vector $\mathbf{B}$: `[6, 8]` (Magnitude = 10)
-- Dot Product: $(3 \times 6) + (4 \times 8) = 18 + 32 = 50$
-- Product of Magnitudes: $5 \times 10 = 50$
-- Cosine Similarity: $50 / 50 = \mathbf{1.0}$ (They point in the exact same direction!).
+---
+
+## Step-by-Step Numerical Worked Example
+
+Suppose Vector $\mathbf{A} = [3, 4]$ and Vector $\mathbf{B} = [4, 3]$:
+
+### 1. Step 1: Numerator (Dot Product $\mathbf{A} \cdot \mathbf{B}$)
+$$\mathbf{A} \cdot \mathbf{B} = (3 \times 4) + (4 \times 3) = 12 + 12 = \mathbf{24}$$
+
+### 2. Step 2: Denominator (Product of Magnitudes $\|\mathbf{A}\| \cdot \|\mathbf{B}\|$)
+- $\|\mathbf{A}\| = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = \mathbf{5}$
+- $\|\mathbf{B}\| = \sqrt{4^2 + 3^2} = \sqrt{16 + 9} = \sqrt{25} = \mathbf{5}$
+- Denominator $= 5 \times 5 = \mathbf{25}$
+
+### 3. Step 3: Compute Cosine Similarity
+$$\text{Cosine Similarity} = \frac{24}{25} = \mathbf{0.96} \quad \text{(96\% Similar in direction!)}$$
+
+---
 
 ## Common Misunderstanding
-**Misunderstanding:** A Cosine Similarity of `0.0` means the words are opposites.
+**Misunderstanding:** A Cosine Similarity of `0.0` means the words are opposites.  
 **Correction:** A similarity of `0.0` means they are completely unrelated (Orthogonal / 90 degrees). For example, "Apple" and "Carburetor". A similarity of `-1.0` means they are exact opposites (180 degrees). For example, "Hot" and "Cold".
 
 ---

@@ -1,0 +1,30 @@
+WHAT
+1. What is embedding? 
+Embedding is essentially a lookup table that stores a list of numbers for each token. 
+2. What is NOT embedding? 
+Embeddings are task specific. In current model, they're trained in the context of predicting the next state, so Received and Restocked may appear closer in the embedding graph but they're not sematically closer words. But in an LLM where it's trained using numerous examples, the network would have a better relationship between these words
+3. Where embeddings are stored inside a neural network. 
+They're stored as matrix with every row representing a state or token and every column representing one dimension of that token
+4. If we add a brand-new word that the model has never seen, what happens?
+Next word predictor would throw an error because the lookup wouldn't have that word. But if we implement subword tokenization then I suppose it will give an output that's based on a similar combination of subwords that it has seen during training
+
+HOW
+1. How an embedding learns? 
+Embeddings are random numbers during starting the training of the network. During training, these numbers are gradually adjusted to better predict the next state
+2. Does the neural network explicitly know that "Receive" and "Restock" are related?
+It knows only based on the context of the training data. In our next word predictor, it only knows Restock comes after Received. But in an LLM where it's trained using numerous examples, the network would have a better relationship between these words
+
+WHY
+1. Why one-hot encoding does not capture similarity.
+Because one-hot encoding only tells us which is the state, it doesn't capture any information about what is the state
+2. If every embedding starts as random numbers, why do similar words eventually become similar?
+Words that are used in similar contexts end having similar vectors. In the training phase, the embeddings of similar words are adjusted closer so that the prediction becomes accurate
+
+Next word predictor vs LLM
+1. Vocabulary(tokens) size - 6 vs more than 50k for an SLM
+2. embedding dimension - 8 vs can go upto thousands
+3. Training data - 5 pairs vs hundreds of billions of training tokens
+4. States are full words in next word predictor. But in LLM's tokens would be substrings rather than full words
+
+Takeaways
+1. Try changing the random number seeding and compare final embedding values. The values don't match but still produce results with 100% accuracy. So it all depends on where we start i.e. np.random.seed(n). Uphill analogy makes sense, there could be N number of correct values for the weights or biases, they're are not magic numbers. For example 1x10 = 10, 2x5=10, 4x2.5=10...

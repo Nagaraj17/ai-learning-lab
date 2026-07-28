@@ -57,8 +57,12 @@ hidden_state = W_embed[x_token_id]
 Both codes produce the exact same mathematical output vector!
 
 ## Common Misunderstanding
-**Misunderstanding:** An Embedding Layer is a complex, deep learning algorithm.
-**Correction:** An Embedding Layer is nothing more than a standard weight matrix (just like any other linear layer). The only difference is *how* we extract the data from it (Lookup vs Multiplication). It is still updated normally via Backpropagation during training.
+
+**Misunderstanding 1:** An Embedding Layer is a complex, deep learning algorithm.  
+**Correction:** An Embedding Layer is nothing more than a standard weight matrix (just like any other linear layer). The only difference is *how* we extract the data from it (Lookup vs Multiplication).
+
+**Misunderstanding 2 (Sparse Gradient Updates):** Every training step updates all 100,000 rows in the embedding table.  
+**Correction:** During backpropagation, **only the active rows** corresponding to words that actually appeared in the input batch receive non-zero gradients. All other rows in the embedding matrix remain completely untouched for that training step. This is known as a **Sparse Gradient Update**.
 
 ---
 

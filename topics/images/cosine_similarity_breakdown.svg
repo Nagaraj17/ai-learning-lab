@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 950" width="100%" height="100%" style="background-color: #0f172a; font-family: 'Segoe UI', Arial, sans-serif;">
+  <!-- Title Header -->
+  <rect x="0" y="0" width="1000" height="90" fill="#1e293b"/>
+  <text x="500" y="42" font-size="26" font-weight="bold" fill="#f8fafc" text-anchor="middle">Cosine Similarity: Mathematical Formula Breakdown</text>
+  <text x="500" y="72" font-size="15" fill="#94a3b8" text-anchor="middle">Numerator (Dot Product) vs. Denominator (Product of Vector Lengths)</text>
+
+  <!-- Main Formula Box -->
+  <g transform="translate(50, 110)">
+    <rect x="0" y="0" width="900" height="110" rx="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2.5"/>
+    <text x="450" y="40" font-size="20" font-weight="bold" fill="#38bdf8" text-anchor="middle">THE COSINE SIMILARITY FORMULA</text>
+    <text x="450" y="82" font-size="32" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      Cosine Similarity = 
+      <tspan fill="#facc15"> A · B </tspan> 
+      / 
+      <tspan fill="#4ade80"> ||A|| ||B|| </tspan>
+      = cos(θ)
+    </text>
+  </g>
+
+  <!-- ==================== LEFT PANEL: NUMERATOR ==================== -->
+  <g transform="translate(50, 245)">
+    <rect x="0" y="0" width="435" height="340" rx="14" fill="#1e293b" stroke="#facc15" stroke-width="2"/>
+    <text x="217" y="38" font-size="18" font-weight="bold" fill="#facc15" text-anchor="middle">NUMERATOR: Dot Product (A · B)</text>
+    <text x="217" y="65" font-size="13" fill="#cbd5e1" text-anchor="middle">Measures direction alignment &amp; overlapping magnitude</text>
+
+    <!-- Formula -->
+    <rect x="25" y="85" width="385" height="55" rx="8" fill="#0f172a" stroke="#854d0e" stroke-width="1.5"/>
+    <text x="217" y="120" font-size="18" font-weight="bold" fill="#fef08a" text-anchor="middle">A · B = (A₁ × B₁) + (A₂ × B₂) + (A₃ × B₃)</text>
+
+    <text x="25" y="170" font-size="14" font-weight="bold" fill="#f8fafc">How it works:</text>
+    <text x="25" y="198" font-size="13" fill="#cbd5e1">• Multiply each matching slot from Vector A and Vector B.</text>
+    <text x="25" y="222" font-size="13" fill="#cbd5e1">• Add all the products together into a single scalar number.</text>
+    
+    <rect x="25" y="250" width="385" height="65" rx="8" fill="#451a03" stroke="#f97316" stroke-width="1"/>
+    <text x="40" y="275" font-size="13" font-weight="bold" fill="#ffedd5">If vectors point in the SAME direction ➔ Large Positive</text>
+    <text x="40" y="298" font-size="13" font-weight="bold" fill="#ffedd5">If vectors are PERPENDICULAR (90°) ➔ Exactly 0</text>
+  </g>
+
+  <!-- ==================== RIGHT PANEL: DENOMINATOR ==================== -->
+  <g transform="translate(515, 245)">
+    <rect x="0" y="0" width="435" height="340" rx="14" fill="#1e293b" stroke="#4ade80" stroke-width="2"/>
+    <text x="217" y="38" font-size="18" font-weight="bold" fill="#4ade80" text-anchor="middle">DENOMINATOR: Product of Vector Lengths</text>
+    <text x="217" y="65" font-size="13" fill="#cbd5e1" text-anchor="middle">||A|| × ||B|| (Euclidean Norms / Magnitudes)</text>
+
+    <!-- Formula -->
+    <rect x="25" y="85" width="385" height="55" rx="8" fill="#0f172a" stroke="#14532d" stroke-width="1.5"/>
+    <text x="217" y="120" font-size="16" font-weight="bold" fill="#86efac" text-anchor="middle">||A|| = √(A₁² + A₂² + A₃²)  ×  ||B|| = √(B₁² + B₂² + B₃²)</text>
+
+    <text x="25" y="170" font-size="14" font-weight="bold" fill="#f8fafc">Why we divide by vector lengths:</text>
+    <text x="25" y="198" font-size="13" fill="#cbd5e1">• Cancels out vector length so pure DIRECTION is measured.</text>
+    <text x="25" y="222" font-size="13" fill="#cbd5e1">• Normalizes the output score strictly between -1.0 and +1.0.</text>
+
+    <rect x="25" y="250" width="385" height="65" rx="8" fill="#064e3b" stroke="#34d399" stroke-width="1"/>
+    <text x="40" y="275" font-size="13" font-weight="bold" fill="#d1fae5">Score = +1.0 ➔ 100% Identical Direction (0° Angle)</text>
+    <text x="40" y="298" font-size="13" font-weight="bold" fill="#d1fae5">Score = -1.0 ➔ Opposite Direction (180° Angle)</text>
+  </g>
+
+  <!-- ==================== WORKED NUMERICAL EXAMPLE ==================== -->
+  <g transform="translate(50, 610)">
+    <rect x="0" y="0" width="900" height="300" rx="14" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+    <text x="30" y="38" font-size="20" font-weight="bold" fill="#38bdf8">Worked Numerical Example</text>
+    <text x="30" y="65" font-size="14" fill="#cbd5e1">Let Vector A = [3, 4] and Vector B = [4, 3]</text>
+
+    <!-- Calculation Steps Grid -->
+    <g transform="translate(30, 90)">
+      <!-- Step 1 Box -->
+      <rect x="0" y="0" width="260" height="170" rx="10" fill="#0f172a" stroke="#facc15" stroke-width="1.5"/>
+      <text x="130" y="30" font-size="15" font-weight="bold" fill="#facc15" text-anchor="middle">Step 1: Numerator (Dot Product)</text>
+      <text x="20" y="65" font-size="14" fill="#f8fafc">A · B = (3 × 4) + (4 × 3)</text>
+      <text x="20" y="95" font-size="14" fill="#f8fafc">A · B = 12 + 12</text>
+      <text x="130" y="140" font-size="18" font-weight="bold" fill="#fef08a" text-anchor="middle">Numerator = 24</text>
+
+      <!-- Plus Sign -->
+      <text x="280" y="95" font-size="28" font-weight="bold" fill="#94a3b8">/</text>
+
+      <!-- Step 2 Box -->
+      <rect x="300" y="0" width="260" height="170" rx="10" fill="#0f172a" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="430" y="30" font-size="15" font-weight="bold" fill="#4ade80" text-anchor="middle">Step 2: Denominator (Lengths)</text>
+      <text x="320" y="60" font-size="13" fill="#f8fafc">||A|| = √(3² + 4²) = √25 = 5</text>
+      <text x="320" y="90" font-size="13" fill="#f8fafc">||B|| = √(4² + 3²) = √25 = 5</text>
+      <text x="320" y="120" font-size="13" fill="#cbd5e1">Denominator = 5 × 5</text>
+      <text x="430" y="150" font-size="18" font-weight="bold" fill="#86efac" text-anchor="middle">Denominator = 25</text>
+
+      <!-- Equals Sign -->
+      <text x="580" y="95" font-size="28" font-weight="bold" fill="#94a3b8">=</text>
+
+      <!-- Step 3 Box -->
+      <rect x="600" y="0" width="240" height="170" rx="10" fill="#064e3b" stroke="#34d399" stroke-width="2"/>
+      <text x="720" y="30" font-size="15" font-weight="bold" fill="#a7f3d0" text-anchor="middle">Step 3: Cosine Similarity</text>
+      <text x="720" y="75" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">24 / 25</text>
+      <text x="720" y="130" font-size="26" font-weight="bold" fill="#34d399" text-anchor="middle">0.96  (96% Similar!)</text>
+    </g>
+  </g>
+</svg>

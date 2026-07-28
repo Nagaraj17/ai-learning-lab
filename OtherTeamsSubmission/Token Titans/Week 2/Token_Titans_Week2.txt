@@ -1,0 +1,178 @@
+# From One-Hot Encoding to Embeddings
+
+In Week 1, we built a small neural network that learned to predict the next word.
+
+For example:
+Forecast → Order
+
+To give a word to the neural network, we first created a vocabulary and assigned each word an ID:
+Inventory → 0
+Order     → 1
+Cabinet   → 2
+Drug      → 3
+Invoice   → 4
+Shipment  → 5
+Receive   → 6
+Restock   → 7
+Forecast  → 8
+Scenario  → 9
+
+For example:
+Receive → 6
+
+The ID was then converted into a one-hot vector:
+Receive → [0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+
+However, one-hot encoding only provides an identity.
+
+It tells the network:
+> "This is the word Receive."
+
+It does not provide any information about how `Receive` relates to `Restock`, `Inventory`, or `Scenario`.
+Every word is simply represented by a different position in the vector.
+
+
+In Week 2, we introduce an embedding matrix.
+Suppose our vocabulary contains 10 words and we choose an embedding size of 4.
+The embedding matrix will have:
+10 rows × 4 columns
+
+Conceptually:
+Inventory → [ ... ]
+Order     → [ ... ]
+Cabinet   → [ ... ]
+Drug      → [ ... ]
+Invoice   → [ ... ]
+Shipment  → [ ... ]
+Receive   → [ ... ]
+Restock   → [ ... ]
+Forecast  → [ ... ]
+Scenario  → [ ... ]
+
+There is one row for every word in the vocabulary.
+Each row contains a vector of numbers.
+At the beginning of training, these numbers are usually random:
+Receive → [0.17, -0.82, 0.64, -0.31]
+Restock → [-0.44, 0.23, 0.91, 0.05]
+
+These numbers do not initially have any meaningful interpretation.
+They are simply starting values.
+
+A note about the vocabulary: Cabinet, Drug, Invoice, and Scenario never actually appear in our training pairs, so their embedding rows never get updated — they just keep their random starting numbers. Being in the vocabulary isn't the same as being learned.
+
+## How Does a Word Get Its Embedding?
+
+The word `Receive` has ID `6`.
+The ID identifies row `6` in the embedding matrix.
+
+So:
+Receive
+   ↓
+ID = 6
+   ↓
+Select row 6
+   ↓
+[0.17, -0.82, 0.64, -0.31]
+
+This vector is the embedding for `Receive`.
+
+---
+
+## How Does the Embedding Learn?
+The rest of the neural network works just like it did in Week 1.
+
+For example:
+Receive → Restock
+
+The network performs:
+Receive
+   ↓
+Look up Receive's embedding
+   ↓
+Hidden Layer
+   ↓
+Predict the next word
+   ↓
+Calculate the error
+   ↓
+Backpropagation
+   ↓
+Gradient Descent
+   ↓
+Update the weights
+
+
+The embedding matrix is also part of the trainable weights.
+
+Therefore, when the network makes a prediction error, the embedding values can also be updated.
+
+For example:
+Before training:
+Receive → [0.17, -0.82, 0.64, -0.31]
+
+After training:
+Receive → [0.18, -0.80, 0.67, -0.29]
+
+This is just one small update — the change per step is intentionally tiny. On its own it looks like the embedding barely moves, but over many thousands of updates these small shifts accumulate into a meaningful representation.
+
+After many training updates, the network has learned a numerical representation for each word.
+
+
+### Week 1
+Word
+  ↓
+Word ID
+  ↓
+One-Hot Encoding
+  ↓
+Hidden Layer
+  ↓
+Prediction
+
+### Week 2
+Word
+  ↓
+Word ID
+  ↓
+Embedding Lookup
+  ↓
+Learned Vector
+  ↓
+Hidden Layer
+  ↓
+Prediction
+
+The prediction task is still the same:
+Forecast → Order
+
+The difference is that instead of sending a large one-hot identity vector directly into the network, we first look up a smaller vector that the network can learn.
+
+
+## The Important Idea
+One-hot encoding tells the network:
+
+> Which word is this?
+An embedding is a vector that the network learns for that word:
+
+> What numerical representation helps me make better predictions about this word?
+
+The embedding is not manually given to the network.
+It starts with random numbers and is gradually adjusted through training.
+If different words appear in similar contexts and participate in similar prediction patterns, their embeddings may eventually become numerically similar.
+
+This happens because words that show up in similar situations get similar prediction errors, so training keeps nudging their embedding rows in the same direction until they end up close together.
+To check if two embeddings are similar, we use something called cosine similarity — a score from −1 to +1, where higher means the two vectors point in more similar directions.
+
+However, the network is not explicitly told:
+Receive is similar to Restock.
+It only sees the training examples.
+Similarity can emerge from the patterns the network observes.
+Therefore, the key transition from Week 1 to Week 2 is:
+We move from representing a word using a fixed identity (one-hot encoding) to representing it using a trainable vector (an embedding).
+
+
+## What Our Model Actually Showed
+
+In our 6-word cycle, each word only ever has one next-word, so no two words share a context.
+Because of that, the embeddings didn't actually end up meaningfully similar — the dataset is just too small and rigid for that to happen. 
+We only saw real similarity once we extended the vocabulary so several words shared the same contexts (the stretch goal), where words in the same business role landed close together and unrelated words stayed apart. The takeaway: embeddings only capture meaning when the training data gives words shared contexts to learn from.

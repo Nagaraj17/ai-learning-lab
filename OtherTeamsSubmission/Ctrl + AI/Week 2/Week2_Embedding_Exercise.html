@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week 2 - Embedding Similarity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2a2f36;
+            background: linear-gradient(135deg, #0f766e 0%, #0ea5e9 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f766e 0%, #0ea5e9 100%);
+            color: #ffffff;
+            padding: 38px 24px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.25em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.05em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 34px;
+        }
+
+        section {
+            margin-bottom: 34px;
+            border-left: 4px solid #0f766e;
+            padding-left: 18px;
+        }
+
+        h2 {
+            color: #0f766e;
+            margin-bottom: 14px;
+            font-size: 1.9em;
+        }
+
+        h3 {
+            color: #0284c7;
+            margin-top: 14px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        .box {
+            background: #f3fbff;
+            border-left: 4px solid #0ea5e9;
+            border-radius: 6px;
+            padding: 12px 14px;
+            margin: 12px 0;
+        }
+
+        .good {
+            background: #ecfdf5;
+            border-left-color: #16a34a;
+        }
+
+        .warn {
+            background: #fff7ed;
+            border-left-color: #f59e0b;
+        }
+
+        .code {
+            background: #1f2937;
+            color: #f9fafb;
+            border-radius: 8px;
+            padding: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.92em;
+            white-space: pre;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: #0f766e;
+            color: #fff;
+            margin: 4px;
+            font-size: 0.92em;
+            font-weight: 600;
+        }
+
+        .arrow {
+            color: #0f766e;
+            font-weight: 700;
+            margin: 0 6px;
+        }
+
+        .simple-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 10px 0;
+        }
+
+        .card {
+            border: 1px solid #dbe7ee;
+            border-radius: 8px;
+            padding: 12px;
+            background: #fafcfe;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+        }
+
+        table th {
+            background: #0f766e;
+            color: #ffffff;
+            padding: 12px;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: top;
+        }
+
+        table tr:hover {
+            background: #f8fafc;
+        }
+
+        ul, ol {
+            margin-left: 22px;
+            margin-bottom: 10px;
+        }
+
+        li {
+            margin-bottom: 7px;
+        }
+
+        .divider {
+            margin: 28px 0;
+            border: 0;
+            border-top: 2px dashed #cdd9e5;
+        }
+
+        .checklist li {
+            list-style: none;
+            margin-left: -18px;
+        }
+
+        .check {
+            font-weight: 700;
+            color: #0f766e;
+        }
+
+        footer {
+            background: #f8fafc;
+            border-top: 1px solid #e5e7eb;
+            padding: 18px;
+            text-align: center;
+            color: #5b6470;
+            font-size: 0.96em;
+        }
+
+        @media (max-width: 860px) {
+            .content {
+                padding: 22px;
+            }
+            .simple-grid {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 1.78em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Week 2 : Embedding Similarity</h1>
+            <p>Part A: Our Understanding | Part B: Exercise Q&A</p>
+        </header>
+
+        <div class="content">
+            <section>
+                <h2>Part A - Our Understanding</h2>
+                <p>
+                    In Week 1, we learned next-state prediction. In Week 2, we understood a deeper idea:
+                    the model should learn which words/states are related, not only what comes next.
+                </p>
+                <div class="box good">
+                    Our key understanding: prediction and relationship learning are connected,
+                    and embeddings are the bridge between them.
+                </div>
+            </section>
+
+            <section>
+                <h2>1) Workflow context we used</h2>
+                <div style="text-align:center; margin: 10px 0;">
+                    <span class="pill">Order</span>
+                    <span class="arrow">-&gt;</span>
+                    <span class="pill">Shipment</span>
+                    <span class="arrow">-&gt;</span>
+                    <span class="pill">Receive</span>
+                    <span class="arrow">-&gt;</span>
+                    <span class="pill">Restock</span>
+                    <span class="arrow">-&gt;</span>
+                    <span class="pill">Inventory</span>
+                    <span class="arrow">-&gt;</span>
+                    <span class="pill">Forecast</span>
+                    <span class="arrow">-&gt;</span>
+                    <span class="pill">Order</span>
+                </div>
+                <p>
+                    We used this cycle as a practical mental map for understanding how context influences vector updates.
+                </p>
+            </section>
+
+            <section>
+                <h2>2) What made the concept click for us</h2>
+                <div class="simple-grid">
+                    <div class="card">
+                        <h3>One-hot is identity only</h3>
+                        <p>It tells who a state is, but not how it behaves.</p>
+                        <div class="code">Receive  = [0,0,0,0,0,0,1,0,0,0]
+Restock = [0,0,0,0,0,0,0,1,0,0]</div>
+                    </div>
+                    <div class="card">
+                        <h3>Embedding is learned profile</h3>
+                        <p>It captures behavior and relationship structure.</p>
+                        <div class="code">Receive  = [ 0.72, -0.15, 0.44, ... ]
+Restock = [ 0.68, -0.12, 0.51, ... ]</div>
+                    </div>
+                </div>
+                <div class="box">
+                    Exact values are not the goal. Relative direction and closeness are the goal.
+                </div>
+            </section>
+
+            <section>
+                <h2>3) How we understood similarity learning</h2>
+                <p>
+                    At the beginning, embeddings are random. During training, each error pushes vectors slightly.
+                    If two states appear in similar contexts, they get similar updates again and again.
+                </p>
+                <div class="code">Predict -> Compare with truth -> Compute loss -> Backprop -> Update vectors -> Repeat</div>
+                <div class="box good">
+                    Our takeaway: similar contexts create similar corrections; similar corrections move vectors toward similar directions.
+                </div>
+            </section>
+
+            <section>
+                <h2>4) How we read cosine similarity</h2>
+                <p>Cosine compares vector direction (not raw magnitude).</p>
+                <div class="code">cos(theta) = dot(a, b) / (||a|| * ||b|| + 1e-9)</div>
+                <ul>
+                    <li>Closer to +1: strongly aligned direction</li>
+                    <li>Around 0: weak or neutral relationship</li>
+                    <li>Below 0: opposite direction</li>
+                </ul>
+                <div class="box warn">
+                    Important team insight: cosine is a geometric signal. It may not always equal business correctness directly.
+                </div>
+            </section>
+
+            <section>
+                <h2>5) Our understanding of unseen words</h2>
+                <ul>
+                    <li>Out of vocabulary: model cannot represent that word.</li>
+                    <li>In vocabulary but not trained: embedding remains near random.</li>
+                    <li>After enough examples: embedding becomes meaningful.</li>
+                </ul>
+            </section>
+
+            <hr class="divider" />
+
+            <section>
+                <h2>Part B - Exercise Q&A</h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Question</th>
+                                <th>Answer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>If embeddings start random, why do similar words eventually become similar?</td>
+                                <td>
+                                    Similar words often appear in similar contexts, so they receive similar gradient updates.
+                                    Repeating this over many epochs moves their vectors toward similar directions.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Does the model explicitly know that Receive and Restock are related?</td>
+                                <td>
+                                    No explicit rule is hard-coded. The model infers this relation indirectly while minimizing prediction loss.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Where is the knowledge stored?</td>
+                                <td>
+                                    In learned parameters: embedding matrix E, output weights W_out, and output bias b_out.
+                                    Embeddings store token representation; output layer maps representation to predictions.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>If we add a brand-new word never seen in training, what happens?</td>
+                                <td>
+                                    If it is out-of-vocabulary, the model cannot represent it. If added but never trained,
+                                    the embedding stays near random and predictions are unreliable until trained examples are provided.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Could this idea be applied beyond language?</td>
+                                <td>
+                                    Yes. We can embed entities like drugs, suppliers, payers, practices, and PO states.
+                                    Useful for clustering, anomaly detection, recommendation, and workflow intelligence.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Challenge: If embeddings tell what a word is, how does model choose which previous words matter most?</td>
+                                <td>
+                                    In larger models, attention mechanisms dynamically weight previous tokens by relevance.
+                                    This Week 2 exercise uses a simpler context, but the same embedding foundation applies.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+    </div>
+</body>
+</html>
