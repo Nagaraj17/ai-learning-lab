@@ -1,4 +1,4 @@
-# 20 - MATH - Matrix Transpose and Attention Shapes
+# 22 - MATH - Matrix Transpose and Attention Shapes
 
 ## 1. The Problem
 Now that we have projected our sequence into Queries $\mathbf{Q} \in \mathbb{R}^{T \times d_k}$ and Keys $\mathbf{K} \in \mathbb{R}^{T \times d_k}$, we know we need to take the dot product of *every* query row $\mathbf{q}_i$ with *every* key row $\mathbf{k}_j$ to find their relevance score: $S_{i,j} = \mathbf{q}_i \cdot \mathbf{k}_j$. 
@@ -129,4 +129,3 @@ Because $\mathbf{Q}$ and $\mathbf{K}$ both have shape $(T, d_k)$. Transposing $\
 ## 20. Sources
 - Goodfellow, I., Bengio, Y., & Courville, A. [Deep Learning.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Deep%20Learning.md), Chapter 2 (Linear Algebra).
 - Vaswani et al. (2017) *"Attention Is All You Need"*.
-

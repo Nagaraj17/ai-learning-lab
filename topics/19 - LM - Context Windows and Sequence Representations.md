@@ -110,7 +110,7 @@ In **Week 3 Assignment**, your input to the Self-Attention layer will be a seque
 Every Transformer (GPT-4, Llama-3, Claude) converts prompt tokens into a sequence matrix $\mathbf{X}$ as the very first step before passing data into attention blocks.
 
 ## 15. Connection to the Next Concept
-Now that we have a sequence matrix $\mathbf{X} \in \mathbb{R}^{T \times d_{model}}$, we have the static, base meanings of our tokens. But what happens if a word like "bank" has multiple meanings depending on the sentence? We need these rows to interact with each other. This leads us to the limitations of static embeddings and the conceptual need for Attention (`21 - TRANSFORMER - Attention and Contextual Representations.md`).
+Now that we have a sequence matrix $\mathbf{X} \in \mathbb{R}^{T \times d_{model}}$, we have the static, base meanings of our tokens. But what happens if a word like "bank" has multiple meanings depending on the sentence? We need these rows to interact with each other. This leads us to the limitations of static embeddings and the conceptual need for Attention (`20 - TRANSFORMER - Attention and Contextual Representations.md`).
 
 ## 16. Teach-Back and Small Application Exercise
 If a prompt has $T = 5$ tokens and the model uses $d_{model} = 768$:

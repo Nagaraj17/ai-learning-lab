@@ -1,4 +1,4 @@
-# 21 - TRANSFORMER - Attention and Contextual Representations
+# 20 - TRANSFORMER - Attention and Contextual Representations
 
 ## 1. The Problem
 Embeddings are learned from the company a token kept *during training*. For example, the token `bank` learned its base embedding by looking at thousands of training examples like:
@@ -84,7 +84,7 @@ Every modern Transformer block uses attention to convert static input embeddings
 
 ## 15. Connection to the Next Concept
 Now we understand that Attention is about figuring out "Which other tokens matter to me, and how much information should I take from them?" 
-But how does the model *mathematically calculate* which tokens are relevant to each other? To do this, it gives tokens three separate roles: **Query, Key, and Value** (`22 - TRANSFORMER - Query Key and Value.md`).
+But how does the model *mathematically calculate* which tokens are relevant to each other? To do this, it gives tokens three separate roles: **Query, Key, and Value** (`21 - TRANSFORMER - Query Key and Value.md`).
 
 ## 16. Teach-Back and Small Application Exercise
 If you have the sentence `"The bank approved my loan"`, which word do you think `"bank"` should pay the most attention to, and why?
@@ -109,4 +109,3 @@ No (Jain & Wallace, 2019). Attention weights show feature mixing weights, but di
 - Vaswani et al. (2017) *"Attention Is All You Need"*.
 - Jain & Wallace (2019) *"Attention is not Explanation"*.
 - Alammar, J. & Grootendorst, M. [Hands-On Large Language Models.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Hands-On%20Large%20Language%20Models.md), Chapter 3.
-

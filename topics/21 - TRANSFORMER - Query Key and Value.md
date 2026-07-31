@@ -1,4 +1,4 @@
-# 22 - TRANSFORMER - Query Key and Value
+# 21 - TRANSFORMER - Query Key and Value
 
 ## 1. The Problem
 If we compare raw sequence vectors $\mathbf{X}$ directly against themselves ($\mathbf{X} \mathbf{X}^\top$), a token has to play three conflicting roles simultaneously using the exact same numbers:
@@ -143,7 +143,7 @@ In **Week 3 Assignment**, you will initialize $\mathbf{W}_Q, \mathbf{W}_K, \math
 $\mathbf{Q}, \mathbf{K}, \mathbf{V}$ projections form the core input transformations in every Transformer architecture (Vaswani et al., 2017).
 
 ## 15. Connection to the Next Concept
-Now that we have the $\mathbf{Q}$ and $\mathbf{K}$ matrices for the whole sequence, we know we need to take the dot product of *every* Query with *every* Key to get all token-to-token scores. How do we do that efficiently with matrix multiplication? We need to transpose the Key matrix. (`20 - MATH - Matrix Transpose and Attention Shapes.md`).
+Now that we have the $\mathbf{Q}$ and $\mathbf{K}$ matrices for the whole sequence, we know we need to take the dot product of *every* Query with *every* Key to get all token-to-token scores. How do we do that efficiently with matrix multiplication? We need to transpose the Key matrix. (`22 - MATH - Matrix Transpose and Attention Shapes.md`).
 
 ## 16. Teach-Back and Small Application Exercise
 If $\mathbf{X}$ has shape $(10, 512)$, $\mathbf{W}_Q$ has shape $(512, 64)$, and $\mathbf{W}_V$ has shape $(512, 64)$:
@@ -168,4 +168,3 @@ No. In Self-Attention, Q, K, and V are all linear projections created from the s
 ## 20. Sources
 - Vaswani et al. (2017) *"Attention Is All You Need"*, Section 3.2.1.
 - Alammar, J. & Grootendorst, M. [Hands-On Large Language Models.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Hands-On%20Large%20Language%20Models.md), Chapter 3.
-
