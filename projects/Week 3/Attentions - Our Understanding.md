@@ -221,7 +221,75 @@ Step 1: calculate the relevance score between the current word (query) and all t
 
 we know what is K('The') = X(emb('The)) * WK similary for others 
 
+
+step 2. converts that relevance in percentage 
 Now these raw scores from above "dot products" will give us the relative importance of the other words in the context of the current word and can be real numbers so to get a better understanding and convert it into probabilities we use SOFTMAX which gives us the values between 0 to 1 and adds up to 1. 
 
+step 3: use that to attention weights to get the weighted sum of embeddings of all the words in the context.
 
-Step 2: Calculate attention weights
+Now we have the weights (Softmax Output). We then multiply these weights with the **V** (Value) matrix of each token to get the contextual information. Finally, we sum up these weighted V vectors to obtain the final contextualized embedding for "bank".
+
+So,
+Contextualised "bank" = (0.02 * V('The')) + (0.70 * V('bank')) + (0.20 * V('river')) + (0.08 * V('flooded'))
+
+Where we know that V('The') = X(emb('The)) * WV similary for others.
+
+This provides a context representation of each word in the given sentence.
+
+
+This is how attention works.
+
+## However there is one problem 
+
+
+They saw that when the sentence size increases the computation power required to calculate the attention weights increases quadratically. So they thought is there any way to reduce the computation power required to calculate the attention weights.
+
+therefore they introduced dk dimension.
+
+So, Once the raw logits are calculated we divide it by dk to scale it down. 
+
+So, the final formula is 
+contextual representaion H = Softmax( QK^T / sqrt(dk)) V 
+
+
+Text
+
+↓
+
+Tokenizer
+
+↓
+
+Token IDs
+
+↓
+
+Embedding Lookup
+
+↓
+
+Sequence Matrix X
+
+↓
+
+Create Q,K,V
+
+↓
+
+Calculate Attention Scores
+
+↓
+
+Softmax
+
+↓
+
+Attention Weights
+
+↓
+
+Weighted Sum of Values
+
+↓
+
+Contextual Representation
