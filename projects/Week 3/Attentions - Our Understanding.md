@@ -61,9 +61,9 @@ Now Let's come to attentions.
 
 The Embedding tells us the general representation of the word, But not the meaning in a particular sentence.
 
-It learned based on the company it kept but doesn't give meaning of the word that it is currently in.
+Although it has learned based on the company it kept but doesn't give meaning of the word that it is used currently in the given sentence.
 
-Let's continue with the example of the Bank
+Let's continue with the same example of the Bank
 River  bank
 Bank account
 Bank loan
@@ -85,20 +85,17 @@ Bank loan -> context related to money, loan, etc.
 Bank of the river -> context related to water, shore, etc.
 
 **This is where we need to attentions.**
-Although an embedding captures a token’s general learned meaning from training, it is still a context-independent base representation at lookup time. It does not yet reflect the surrounding tokens of the current sentence. **Attention adds that current context**.
+Although an embedding captures a token’s general learned meaning from training, it is still a context-independent base representation at lookup time. It does not yet reflect the surrounding tokens of the current sentence. 
+Here is where and why we need Attention. **Attention adds that current context**.
 
-> **PROBLEM** While Embeddings tells us te general representation of the word based on the company it kept during the training.
+> **PROBLEM** While Embeddings tells us te general representation of the word based on the company it kept during the training.It Doesn't provide the semantic meaning of the word in the given context window.
+It doesn't know if we are referring to financial related bank or a river bank.
 > **SOLUTION** Attention tells us the meaning of the words based on current sentence/context it is currently being used in.
-
-Nagaraj is a developer
-Nagaraj is a father
-Nagaraj is AI enthusiast
-
-
-based on the -> Nagaraj is either a father, Ai enthusiast or developer 
 
 Attention looks at the company the token is keeping right now. what cotext it is been used
 
+## How does Attention mechanism work or know the current context of the word?
+For the given sentence "The **bank** river overflowed".
 
 
 
