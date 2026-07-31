@@ -97,8 +97,131 @@ Attention looks at the company the token is keeping right now. what cotext it is
 ## How does Attention mechanism work or know the current context of the word?
 For the given sentence "The **bank** river overflowed".
 
+lets take exaple of the word bank.
+
+Now the word bank basically has general representation correct.
+ To get the contextual meaning of the word bank in this sentence it has to look at the other words in the sentence. 
+
+ This is done by multiplying the word bank embedding with the embeddings of the other words in the sentence.
+
+ Ex: The river bank flooded
+
+**Note:** The below is only conceptually mathematically it is different. Please note that.
+**Note:** Please do not use this to understand the working of the attention mechanism.
+================================================================================
+
+Bank(embedding) * The(embedding) = 0.02
+Bank(embedding) * river(embedding) = 0.70
+Bank(embedding) * bank(embedding) = 0.2
+Bank(embedding) * flooded(embedding)= 0.08
+
+Then the dot product between them will give the attention weights we also call this as the relevance score.
+
+ These attention weights only tells which word to focus on or in other words it tells the relative importance of the other words in the context of the current word.
+
+ It only tells which word to pay attention on however it doesn't provide the contextual meaning of the word it only provides the weights to focus on . 
+
+To get the new meaning of the bank we would have to collect the information from those words and combine it.
+
+i.e, New "Bank"meaning = [ 0.70 * (embedding of the word 'river') + 0.20 * (embedding of the word 'bank') + 0.08 * (embedding of the word 'flooded') + 0.02 * (embedding of the word 'the')]
+
+This new Bank meaning is the contextual representation.
+
+### To Sum it up.
+1. calculate the relevance score between the current word and all the other words in the context.
+2. converts that relevance in percentage 
+3. use that to attention weights to get the weighted sum of embeddings of all the words in the context.
+4. This weighted sum becomes the new contextual meaning of the word.
+
+### Some things to think is that what if the attention scores are equal for all the words?
+Then it simply means that there is no one important word to focus on and all the words are equally important.
+
+
+### Mathematically how does it does it do it the actual working inside the Attention mechanism?
+Previously we understood how attention works conceptually but we didn't understand how does it actually calculate those scores and how it combines them to give the contextual meaning. 
+
+To understand this we need to understand  **3** new thigs or terminologies Q, K, V
+
+What is this Q, K V?
+Q, K and V answers three questions namely.
+
+Q -> Query (what am I looking for?)
+K -> Key (what category information do I contain?)
+V -> Value (what information I can provide?)
+
+Now, What are these composed of and how are we calculating them?
+
+Q = X WQ ; K = X WK ; V = X WV
+where X is the input sequence vectors (it can be either Emdbedded vectors or output matrix of previous layer), WQ, WK, WV are the weight matrices that are learned during training.
+
+Let's take the sentence "The **bank** river overflowed".
+
+Embedding Matrix E
+
+Token 1: The
+Token 2: bank
+Token 3: river
+Token 4: overflowed
+
+
+X = [
+  emb('The'),
+  emb('bank'),
+  emb('river'),
+  emb('overflowed')
+]
+
+Now, when calculating contextual representation for "bank", for simplicity lets take one token embedding for our understandin although the computation happens are the sequence matrix . it doesn't take each token and do the operation this is only for our understanding we have taken one token.
+
+
+X = embedding of "bank"; Please note tha the weights are initialized randomly  initially.
+
+Also. We know that the shape of the sequence matrix is (seq_len, dimension)
+i.e, in our case it is (4, 128) for all 4 tokens. [One row per token, 128 columns for 128 dimensions] (Roughtly we can think that dimensions can be the no of neuron in the first layer; Roughly)
+
+And the shape of WQ, WK, WV is (emb_dim, head_dim) i.e., (128, 64).
+128 dimensions we get from the previous sequence matrix shape while the 64 is the dimension of the output vector we want it can be anything we provide.
+
+
+So, if X is the embedding of "Bank", size (1, 128) (Note herefor simplicity showing one vector at a time but actually the entire sequence vector matrx is multiplied with WQ, WK, WV)
+Q(Bank) = X WQ [WQ is learned during training; unique matrix for Query, but shared across tokens]
+K(Bank) = X WK [WK is learned during training; unique matrix for Key, but shared across tokens]
+V(Bank) = X WV [WV is learned during training; unique matrix for Value, but shared across tokens]
 
 
 
+Likewise Q = X WQ ; K = X WK ; V = X WV
+Each WQ, WK and WQ is randomly initialized and learned during the training. They are unique to the Attention layer not to the tokens.
 
 
+For The: X = emb('The'); Q(The) = X WQ ; K(The) = X WK ; V(The) = X WV
+For bank: X = emb('bank'); Q(bank) = X WQ ; K(bank) = X WK ; V(bank) = X WV
+For river: X = emb('river'); Q(river) = X WQ ; K(river) = X WK ; V(river) = X WV
+For overflowed: X = emb('overflowed'); Q(overflowed) = X WQ ; K(overflowed) = X WK ; V(overflowed) = X WV
+
+**Note**: Although each Token has it own Q, K, V But They will always share the weights WQ, WK, WV. across the tokens would be the same.
+
+Now we know Q,K,V.
+
+Lets understand how does the calculating of attention weights actually work.
+
+So lets say we want to calculate the contextual embedding for "bank" in the sentence "The **bank** river overflowed".
+
+To calculate the contextual embedding for **bank**, we first calculate the attention weights for **bank** with all the other words in the sentence including itself.
+
+
+Step 1: calculate the relevance score between the current word (query) and all the other words (Keys)
+    So we calculate the attention weights for "bank" with "The", "bank", "river", "overflowed".
+    So, lets say for Queryfor Bank Q(bank) = X(E('bank')) * WQ
+                                              = Multiple the Query Matrix with the dot product of all the Key Matrices
+    Attention scores are calculated for bank =   Q(bank) . K('The') 
+                                                  Q(bank) . K('bank') 
+                                                  Q(bank) . K('river') 
+                                                  Q(bank) . K('overflowed')
+
+we know what is K('The') = X(emb('The)) * WK similary for others 
+
+Now these raw scores from above "dot products" will give us the relative importance of the other words in the context of the current word and can be real numbers so to get a better understanding and convert it into probabilities we use SOFTMAX which gives us the values between 0 to 1 and adds up to 1. 
+
+
+Step 2: Calculate attention weights
