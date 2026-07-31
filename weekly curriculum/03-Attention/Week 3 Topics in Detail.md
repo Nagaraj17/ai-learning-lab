@@ -3,22 +3,22 @@
 The following deep-dive notes in the global `topics/` directory cover Week 3:
 
 1. **[19 - LM - Context Windows and Sequence Representations](../../topics/19%20-%20LM%20-%20Context%20Windows%20and%20Sequence%20Representations.md)**
-   - Moving from single tokens to sequence matrix $\mathbf{X} \in \mathbb{R}^{T \times d_{model}}$.
+   - Distinguishing the learned Embedding Matrix $\mathbf{E}$ from the computed sequence matrix $\mathbf{X} \in \mathbb{R}^{T \times d_{model}}$.
 
-2. **[20 - MATH - Matrix Transpose and Attention Shapes](../../topics/20%20-%20MATH%20-%20Matrix%20Transpose%20and%20Attention%20Shapes.md)**
-   - Matrix transpose mechanics $\mathbf{K}^\top$ for inner dimension matching in pairwise dot products ($T \times T$).
+2. **[21 - TRANSFORMER - Attention and Contextual Representations](../../topics/21%20-%20TRANSFORMER%20-%20Attention%20and%20Contextual%20Representations.md)**
+   - The limitations of static embeddings and introducing Attention conceptually.
 
-3. **[21 - TRANSFORMER - Attention and Contextual Representations](../../topics/21%20-%20TRANSFORMER%20-%20Attention%20and%20Contextual%20Representations.md)**
-   - Limitations of static embeddings; dynamic contextual representations $\mathbf{H} = \mathbf{A} \mathbf{V}$.
+3. **[22 - TRANSFORMER - Query Key and Value](../../topics/22%20-%20TRANSFORMER%20-%20Query%20Key%20and%20Value.md)**
+   - Why we need Query, Key, and Value projections, and pairwise token dot products.
 
-4. **[22 - TRANSFORMER - Query Key and Value](../../topics/22%20-%20TRANSFORMER%20-%20Query%20Key%20and%20Value.md)**
-   - Linear projection weight matrices $\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V$.
+4. **[20 - MATH - Matrix Transpose and Attention Shapes](../../topics/20%20-%20MATH%20-%20Matrix%20Transpose%20and%20Attention%20Shapes.md)**
+   - Matrix transpose mechanics $\mathbf{K}^\top$, converting raw scores to weights via Softmax, and computing the Contextual Output $\mathbf{H} = \mathbf{A} \mathbf{V}$.
 
 5. **[23 - TRANSFORMER - Scaled Dot-Product Attention](../../topics/23%20-%20TRANSFORMER%20-%20Scaled%20Dot-Product%20Attention.md)**
-   - Mathematical formula $\text{Softmax}\left(\frac{\mathbf{Q} \mathbf{K}^\top}{\sqrt{d_k}}\right) \mathbf{V}$ and score scaling to control Softmax saturation at larger key dimensions.
+   - Score scaling by $\sqrt{d_k}$ to prevent Softmax saturation.
 
 6. **[24 - TRANSFORMER - Self-Attention](../../topics/24%20-%20TRANSFORMER%20-%20Self-Attention.md)**
-   - Single-head self-attention module implementation.
+   - The complete Single-head self-attention flow and its connection to backpropagation training.
 
 7. **[25 - TRANSFORMER - Causal Masking](../../topics/25%20-%20TRANSFORMER%20-%20Causal%20Masking.md)**
    - Autoregressive lower-triangular mask setting future score positions to $-\infty$.

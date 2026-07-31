@@ -22,9 +22,22 @@ Think of a **Database / Search Engine System**:
 
 Matching Query against Key finds which articles to read; multiplying by Value retrieves the content!
 
-## 5. What Came Before → What Changes Now
-- **Before:** Single representation vector $\mathbf{x}_i$ per token.
-- **Now:** Three projected vectors per token: $\mathbf{q}_i = \mathbf{x}_i \mathbf{W}_Q$, $\mathbf{k}_i = \mathbf{x}_i \mathbf{W}_K$, $\mathbf{v}_i = \mathbf{x}_i \mathbf{W}_V$.
+## 5. What is Learned vs What is Computed
+It is absolutely critical to understand what is stored permanently in the neural network vs what is generated temporarily for the current sentence:
+
+**Learned & Stored (Parameters)**
+- $\mathbf{E}$ (Embedding Matrix)
+- $\mathbf{W}_Q$ (Query Projection Matrix)
+- $\mathbf{W}_K$ (Key Projection Matrix)
+- $\mathbf{W}_V$ (Value Projection Matrix)
+*These are updated slowly via backpropagation during training.*
+
+**Computed Temporarily (Activations)**
+- $\mathbf{X}$ (Sequence Matrix)
+- $\mathbf{Q}$ (Query Matrix)
+- $\mathbf{K}$ (Key Matrix)
+- $\mathbf{V}$ (Value Matrix)
+*These are destroyed as soon as the forward pass is over.*
 
 ## 6. How It Works
 1. Take sequence matrix $\mathbf{X} \in \mathbb{R}^{T \times d_{model}}$.
@@ -39,7 +52,12 @@ Sequence X  ─────┼──► Key Projection W_K    ──► K = X W_
 ```
 
 ## 7. Required Mathematics
-For sequence matrix $\mathbf{X} \in \mathbb{R}^{T \times d_{model}}$:
+Before we look at the matrices, consider how we compare two single words: "bank" (token $i$) and "river" (token $j$). 
+To see how relevant "river" is to "bank", we take the **dot product** of "bank's" Query vector and "river's" Key vector:
+$$ \text{score}_{i,j} = \mathbf{q}_i \cdot \mathbf{k}_j $$
+A high dot product means they are highly relevant. A low or negative dot product means they are unrelated.
+
+To do this efficiently for the whole sequence at once, we project the entire Sequence matrix $\mathbf{X} \in \mathbb{R}^{T \times d_{model}}$:
 
 $$\mathbf{Q} = \mathbf{X} \mathbf{W}_Q \in \mathbb{R}^{T \times d_k}$$
 $$\mathbf{K} = \mathbf{X} \mathbf{W}_K \in \mathbb{R}^{T \times d_k}$$
@@ -125,7 +143,7 @@ In **Week 3 Assignment**, you will initialize $\mathbf{W}_Q, \mathbf{W}_K, \math
 $\mathbf{Q}, \mathbf{K}, \mathbf{V}$ projections form the core input transformations in every Transformer architecture (Vaswani et al., 2017).
 
 ## 15. Connection to the Next Concept
-Now that we have $\mathbf{Q}$ and $\mathbf{K}$, how do we compute raw score matrix $\mathbf{S} = \mathbf{Q} \mathbf{K}^\top$ and why must we scale it by $\frac{1}{\sqrt{d_k}}$? (`23 - TRANSFORMER - Scaled Dot-Product Attention.md`).
+Now that we have the $\mathbf{Q}$ and $\mathbf{K}$ matrices for the whole sequence, we know we need to take the dot product of *every* Query with *every* Key to get all token-to-token scores. How do we do that efficiently with matrix multiplication? We need to transpose the Key matrix. (`20 - MATH - Matrix Transpose and Attention Shapes.md`).
 
 ## 16. Teach-Back and Small Application Exercise
 If $\mathbf{X}$ has shape $(10, 512)$, $\mathbf{W}_Q$ has shape $(512, 64)$, and $\mathbf{W}_V$ has shape $(512, 64)$:

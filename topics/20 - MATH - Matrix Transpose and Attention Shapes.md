@@ -1,12 +1,12 @@
 # 20 - MATH - Matrix Transpose and Attention Shapes
 
 ## 1. The Problem
-Suppose we have two sequence projection matrices, Queries $\mathbf{Q} \in \mathbb{R}^{T \times d_k}$ and Keys $\mathbf{K} \in \mathbb{R}^{T \times d_k}$. 
-We want to compare every query row $\mathbf{q}_i$ with every key row $\mathbf{k}_j$ by taking their dot product: $S_{i,j} = \mathbf{q}_i \cdot \mathbf{k}_j$. 
+Now that we have projected our sequence into Queries $\mathbf{Q} \in \mathbb{R}^{T \times d_k}$ and Keys $\mathbf{K} \in \mathbb{R}^{T \times d_k}$, we know we need to take the dot product of *every* query row $\mathbf{q}_i$ with *every* key row $\mathbf{k}_j$ to find their relevance score: $S_{i,j} = \mathbf{q}_i \cdot \mathbf{k}_j$. 
+
 If we try to multiply $\mathbf{Q} \cdot \mathbf{K}$ directly, matrix multiplication is usually undefined because inner dimensions don't match ($d_k \neq T$). Even if $T = d_k$ making the multiplication mathematically legal, $\mathbf{Q} \cdot \mathbf{K}$ does not compute the pairwise row-by-row dot products we actually want.
 
 ## 2. Why We Need Something New
-To compare every query row with every key row, we need to arrange the keys so that the dot products naturally form a $(T \times T)$ matrix of scores. We need a linear algebra operation that swaps the rows and columns of $\mathbf{K}$, allowing $\mathbf{Q} \mathbf{K}^\top$ to compute exactly what we need.
+To compare every query row with every key row efficiently in a single operation, we need to arrange the keys so that the dot products naturally form a $(T \times T)$ matrix of scores. We need a linear algebra operation that swaps the rows and columns of $\mathbf{K}$, allowing $\mathbf{Q} \mathbf{K}^\top$ to compute exactly what we need.
 
 ## 3. One-Line Definition
 **Matrix Transpose** (denoted $\mathbf{A}^\top$) flips a matrix over its diagonal, swapping its row and column indices such that an $(M \times N)$ matrix becomes an $(N \times M)$ matrix.
@@ -36,16 +36,27 @@ $$\mathbf{K} = \begin{bmatrix} k_{1,1} & k_{1,2} \\ k_{2,1} & k_{2,2} \\ k_{3,1}
 $$\mathbf{Q} \in \mathbb{R}^{T \times d_k}, \quad \mathbf{K}^\top \in \mathbb{R}^{d_k \times T}$$
 $$\mathbf{S} = \mathbf{Q} \cdot \mathbf{K}^\top \in \mathbb{R}^{(T \times d_k) \cdot (d_k \times T)} = \mathbb{R}^{T \times T}$$
 
+### 7.1 Softmax and Attention Weights ($\mathbf{A}$)
+The raw scores in $\mathbf{S}$ can be any real number. To convert them into percentages (probabilities) that represent *how much* attention to pay, we apply the Softmax function independently to each row of $\mathbf{S}$.
+$$\mathbf{A} = \text{Softmax}(\mathbf{S}) \in \mathbb{R}^{T \times T}$$
+Now, each row of $\mathbf{A}$ sums to $1.0$. $A_{i,j}$ represents the exact percentage of attention token $i$ pays to token $j$.
+
+### 7.2 Contextual Output ($\mathbf{H}$)
+Now that we have the exact mixing weights in $\mathbf{A}$, we multiply them by the Values $\mathbf{V} \in \mathbb{R}^{T \times d_v}$ to create the final Contextual Output $\mathbf{H}$:
+$$\mathbf{H} = \mathbf{A} \mathbf{V} \in \mathbb{R}^{T \times d_v}$$
+Every row of $\mathbf{H}$ is a new representation for that token, built by blending the Value vectors of all tokens according to the Attention weights.
+
 ### Symbol Table
 
 | Symbol | Name | Plain-English Meaning |
 | :--- | :--- | :--- |
 | $\mathbf{A}^\top$ | **Transpose of Matrix A** | A new matrix created by flipping $\mathbf{A}$ over its diagonal: rows become columns and columns become rows. Shape changes from $(M \times N)$ to $(N \times M)$. |
-| $(i, j)$ | **Row-Column Index** | The position of an element at row $i$ and column $j$. After transposing, element at $(i, j)$ moves to $(j, i)$. |
-| $\mathbf{Q}$ | **Query Matrix** | The "what am I looking for?" projection of the sequence. Shape: $(T \times d_k)$. (Introduced fully in Topic 22.) |
-| $\mathbf{K}$ | **Key Matrix** | The "what information do I contain?" projection. Shape: $(T \times d_k)$. Transposed to $\mathbf{K}^\top$ with shape $(d_k \times T)$ to enable dot-product scoring. |
-| $\mathbf{S}$ | **Raw Score Matrix** | The result of $\mathbf{Q} \mathbf{K}^\top$. A square $(T \times T)$ matrix where entry $S_{i,j}$ is the raw dot-product similarity between token $i$'s Query and token $j$'s Key. |
-| $d_k$ | **Key/Query Dimension** | The number of features in each Query and Key vector. This is the "inner dimension" that must match for the matrix multiplication to work. |
+| $\mathbf{Q}$ | **Query Matrix** | The "what am I looking for?" projection. Shape: $(T \times d_k)$. |
+| $\mathbf{K}$ | **Key Matrix** | The "what information do I contain?" projection. Transposed to $\mathbf{K}^\top$ to enable dot-product scoring. |
+| $\mathbf{S}$ | **Raw Score Matrix** | $\mathbf{Q} \mathbf{K}^\top$. A square $(T \times T)$ matrix. |
+| $\mathbf{A}$ | **Attention Weights** | $\text{Softmax}(\mathbf{S})$. A square $(T \times T)$ matrix where rows sum to $1.0$. |
+| $\mathbf{V}$ | **Value Matrix** | The "content payload" projection. Shape: $(T \times d_v)$. |
+| $\mathbf{H}$ | **Contextual Output** | $\mathbf{A} \mathbf{V}$. The final updated vectors for each token in the sequence. Shape: $(T \times d_v)$. |
 
 ## 8. Complete Worked Example
 Let $\mathbf{K} = \begin{bmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{bmatrix} \in \mathbb{R}^{3 \times 2}$.
@@ -94,7 +105,7 @@ In **Week 3 Assignment**, you will calculate `K.T` to compute the raw score matr
 Standard Transformer scaled dot-product attention uses $\mathbf{Q} \mathbf{K}^\top$ matrix transpose dot products to compute attention scores.
 
 ## 15. Connection to the Next Concept
-Now that we can compute square score matrices $(T \times T)$, why do static embeddings need attention to become dynamic contextual representations? (`21 - TRANSFORMER - Attention and Contextual Representations.md`).
+We skipped a small but critical detail. Before passing the raw scores $\mathbf{S}$ to Softmax, we must scale them down. Why is this necessary? (`23 - TRANSFORMER - Scaled Dot-Product Attention.md`).
 
 ## 16. Teach-Back and Small Application Exercise
 If $\mathbf{K}$ has shape $(128, 64)$:

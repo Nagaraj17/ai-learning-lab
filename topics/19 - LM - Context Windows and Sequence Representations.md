@@ -21,17 +21,24 @@ We need a mathematical structure that can hold an **entire sequence of $T$ token
 A **Sequence Matrix** $\mathbf{X} \in \mathbb{R}^{T \times d_{model}}$ is a 2D matrix formed by stacking the $d_{model}$-dimensional embedding vectors of $T$ sequential tokens along the rows.
 
 ## 4. Beginner Intuition / Mental Model
-Imagine a single token embedding as a **single page profile** of a person. 
-A Sequence Matrix is a **bound book of $T$ pages**, where Page 1 is Token 1, Page 2 is Token 2, and Page $T$ is Token $T$. The book holds the entire story of the context window.
+Imagine the **Embedding Matrix $\mathbf{E}$** as a massive **Library** containing every book (word) in the world. It is a permanent, physical building.
+A **Sequence Matrix $\mathbf{X}$** is just the **specific stack of $T$ books** you checked out today to read on your desk. 
+
+- **$\mathbf{E}$** = Learned, permanent embeddings for the whole vocabulary.
+- **$\mathbf{X}$** = The specific computed embeddings for the current input sequence.
 
 ## 5. What Came Before → What Changes Now
 - **Before (Week 2):** Single token vector $\mathbf{v} \in \mathbb{R}^{d_{model}}$ (Shape: $1 \times d_{model}$).
 - **Now (Week 3):** Context Window Sequence Matrix $\mathbf{X} \in \mathbb{R}^{T \times d_{model}}$ (Shape: $T \times d_{model}$).
 
 ## 6. How It Works
-1. A raw text prompt is split into $T$ tokens: $[t_1, t_2, \dots, t_T]$.
-2. Each Token ID $t_i$ looks up its row in the Embedding Matrix $\mathbf{E} \in \mathbb{R}^{|V| \times d_{model}}$.
-3. The $T$ retrieved embedding vectors are stacked vertically to construct $\mathbf{X}$.
+The exact sequence of events before Attention begins:
+1. **Text:** A raw text prompt is provided (e.g., `"The river bank"`).
+2. **Tokens:** The text is split into $T$ pieces.
+3. **Token IDs:** Each piece is mapped to an integer index $[t_1, t_2, \dots, t_T]$.
+4. **Embedding Matrix ($\mathbf{E}$):** The model contains a trainable parameter matrix $\mathbf{E} \in \mathbb{R}^{|V| \times d_{model}}$ that holds base representations for the entire vocabulary. This matrix is learned via backpropagation.
+5. **Lookup:** Each Token ID $t_i$ retrieves its corresponding row from $\mathbf{E}$. This is NOT a Dense layer multiplication; it is a direct row retrieval.
+6. **Sequence Matrix ($\mathbf{X}$):** The $T$ retrieved embedding vectors are stacked vertically to construct the temporary input block $\mathbf{X}$.
 
 ## 7. Required Mathematics
 For a sequence of length $T$ and embedding dimension $d_{model}$:
@@ -103,7 +110,7 @@ In **Week 3 Assignment**, your input to the Self-Attention layer will be a seque
 Every Transformer (GPT-4, Llama-3, Claude) converts prompt tokens into a sequence matrix $\mathbf{X}$ as the very first step before passing data into attention blocks.
 
 ## 15. Connection to the Next Concept
-Now that we have a sequence matrix $\mathbf{X} \in \mathbb{R}^{T \times d_{model}}$, how do we multiply matrices to compare every token against every other token? That requires **Matrix Transpose** (`20 - MATH - Matrix Transpose and Attention Shapes.md`).
+Now that we have a sequence matrix $\mathbf{X} \in \mathbb{R}^{T \times d_{model}}$, we have the static, base meanings of our tokens. But what happens if a word like "bank" has multiple meanings depending on the sentence? We need these rows to interact with each other. This leads us to the limitations of static embeddings and the conceptual need for Attention (`21 - TRANSFORMER - Attention and Contextual Representations.md`).
 
 ## 16. Teach-Back and Small Application Exercise
 If a prompt has $T = 5$ tokens and the model uses $d_{model} = 768$:

@@ -1,7 +1,8 @@
 # 23 - TRANSFORMER - Scaled Dot-Product Attention
 
 ## 1. The Problem
-When calculating dot products $\mathbf{S} = \mathbf{Q} \mathbf{K}^\top$ for large vector dimensions $d_k$ (e.g., $d_k = 64$ or $128$), the magnitude of the dot products can grow large. Vaswani et al. explain this with an assumption: if the components of $\mathbf{q}$ and $\mathbf{k}$ are independent random variables with mean $0$ and variance $1$, then their dot product $\mathbf{q} \cdot \mathbf{k} = \sum_{i} q_i k_i$ has variance $d_k$.
+In the previous section, we computed raw attention scores using $\mathbf{S} = \mathbf{Q} \mathbf{K}^\top$. 
+When calculating these dot products for large vector dimensions $d_k$ (e.g., $d_k = 64$ or $128$), the magnitude of the dot products can grow large. Vaswani et al. explain this with an assumption: if the components of $\mathbf{q}$ and $\mathbf{k}$ are independent random variables with mean $0$ and variance $1$, then their dot product $\mathbf{q} \cdot \mathbf{k} = \sum_{i} q_i k_i$ has variance $d_k$.
 When unscaled large values (e.g. scores of $+50$ vs $+2$) are passed into Softmax, Softmax pushes probability weights to extreme $1.0$ and $0.0$ values. 
 **The limitation:** Larger dot-product magnitudes can push Softmax into highly peaked/saturated regions where gradients can become very small during backpropagation.
 

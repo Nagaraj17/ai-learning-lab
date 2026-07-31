@@ -1,15 +1,19 @@
 # 21 - TRANSFORMER - Attention and Contextual Representations
 
 ## 1. The Problem
-Consider the word **`bank`** in two different sentences:
-- **Sentence 1:** *"I sat by the river bank."*
-- **Sentence 2:** *"I deposited money at the bank."*
+Embeddings are learned from the company a token kept *during training*. For example, the token `bank` learned its base embedding by looking at thousands of training examples like:
+- *"The river bank flooded."*
+- *"I deposited money at the bank."*
+- *"The bank approved my loan."*
 
-In Week 2, our model used a static Embedding Matrix $\mathbf{E}$. Word `bank` has one fixed row in $\mathbf{E}$. Therefore, in both sentences, `bank` receives the **EXACT SAME** vector $\mathbf{v}_{\text{bank}} = [0.45, -0.12]$.
-**The limitation:** Static embeddings cannot alter their vector values based on the surrounding sentence context.
+The single embedding vector for `bank` is an average, generalized representation of all those meanings. 
+
+**The limitation:** At lookup time, static embeddings are completely context-blind to the *current* sentence. 
+- In `"The river bank flooded"`, `bank` gets vector $[0.45, -0.12]$.
+- In `"The bank approved my loan"`, `bank` gets the exact same vector $[0.45, -0.12]$.
 
 ## 2. Why We Need Something New
-We need a dynamic mechanism that allows token vectors to interact with neighboring tokens in the sequence, pulling relevant context from surrounding words to update their representations at runtime.
+The embedding lookup itself does not inspect the surrounding tokens of the current sentence. We need the token representations in the sequence to interact with each other. We need a way for "bank" to look at "river" and say, "Ah, in this specific sentence, I should act like a water bank."
 
 ## 3. One-Line Definition
 **Attention** is a mechanism that computes dynamic, context-dependent representations ($\mathbf{H}$) by taking a weighted sum of sequence token representations based on pairwise interaction scores.
@@ -22,86 +26,40 @@ Attention is like a **smart translator**: when reading a sentence, it looks at t
 - **Before (Bahdanau et al., 2014):** Attention was introduced in seq2seq RNNs to allow a decoder to focus on specific source encoder states instead of compressing an entire sentence into one bottleneck vector.
 - **Now (Vaswani et al., 2017):** The Transformer architecture replaces sequence-aligned recurrence with **Self-Attention** and other components, allowing every token in a sequence to attend directly to every other token in parallel!
 
-## 6. How It Works
-1. Start with static sequence matrix $\mathbf{X} \in \mathbb{R}^{T \times d_{model}}$.
-2. Measure pairwise relevance between every token pair $(i, j)$ in the sequence.
-3. Convert relevance scores into normalized attention probabilities (weights that sum to $1.0$).
-4. Mix the token representations according to those attention weights to produce contextual outputs $\mathbf{H} \in \mathbb{R}^{T \times d_v}$.
+## 6. How It Works (Conceptually)
+For the sentence `"The river bank flooded"`, to understand `"bank"`, the model needs to determine how relevant every other word is:
+- `river` $\to$ highly relevant (0.70)
+- `bank` $\to$ relevant (0.20)
+- `flooded` $\to$ relevant (0.08)
+- `The` $\to$ less relevant (0.02)
 
-```
-Static Embeddings X (T x d)  ──► [ Attention Mechanism ] ──► Contextual Representations H (T x d)
-  "bank" = [0.45, -0.12]                                      "bank" (Sentence 1) = [0.05, 0.92] (Nature)
-  "bank" = [0.45, -0.12]                                      "bank" (Sentence 2) = [0.95, -0.80] (Finance)
+Attention conceptually does four things:
+1. Calculates relevance between tokens.
+2. Converts that relevance into percentage weights (like the 0.70 above).
+3. Uses those weights to mix information from other tokens.
+4. Produces a new **contextual representation**.
+
+```text
+New "bank" representation = 
+  0.70 × (river information)
++ 0.20 × (bank information)
++ 0.08 × (flooded information)
++ 0.02 × (The information)
 ```
 
 ## 7. Required Mathematics
-Let $\mathbf{A} \in \mathbb{R}^{T \times T}$ be the attention weight matrix where row $i$ gives the probability distribution over all tokens for token $i$ ($\sum_{j=1}^T A_{i, j} = 1.0$).
+*Note: The detailed mathematics for exactly how these vectors are multiplied together to create contextual outputs ($\mathbf{H} = \mathbf{A}\mathbf{V}$) will be covered shortly. For now, focus entirely on the concept that Attention is a weighted mixing of information.*
 
-Let $\mathbf{V} \in \mathbb{R}^{T \times d_v}$ be the representation matrix of the sequence.
+## 8. Complete Conceptual Example
+Let sequence length $T = 2$ (`["river", "bank"]`).
+Suppose attention determines these mixing weights:
+- `"river"` pays 90% attention to itself and 10% to `"bank"`.
+- `"bank"` pays 70% attention to `"river"` and 30% to itself.
 
-The Contextual Output Matrix $\mathbf{H}$ is computed as:
+`"river"` stays mostly like itself (90% self-attention), with a tiny pull from `"bank"`.
+`"bank"` is heavily influenced by `"river"` (70%), so its meaning completely shifts toward water.
 
-$$\mathbf{H} = \mathbf{A} \mathbf{V} \in \mathbb{R}^{T \times d_v}$$
-
-**Shape Trace:**
-- Attention Weights $\mathbf{A}$: $(T \times T)$
-- Values $\mathbf{V}$: $(T \times d_v)$
-- Contextual Output $\mathbf{H}$: $(T \times d_v)$
-
-### Symbol Table
-
-| Symbol | Name | Plain-English Meaning |
-| :--- | :--- | :--- |
-| $\mathbf{A}$ | **Attention Weight Matrix** | A $(T \times T)$ matrix where entry $A_{i,j}$ is the probability (0.0 to 1.0) of how much token $i$ should attend to token $j$. Each row sums to $1.0$. |
-| $A_{i,j}$ | **Attention Weight Entry** | A single scalar between $0.0$ and $1.0$ representing: "How much should token $i$ pull information from token $j$?" |
-| $\mathbf{V}$ | **Value Matrix** | A $(T \times d_v)$ matrix containing the "content payload" vectors for each token. This is what gets mixed together by attention. |
-| $d_v$ | **Value Dimension** | The number of features in each Value vector. Often $d_v = d_k$, but they can differ. |
-| $\mathbf{H}$ | **Contextual Output Matrix** | The $(T \times d_v)$ result of $\mathbf{A} \mathbf{V}$. Each row $i$ is a new vector for token $i$ that blends information from all tokens weighted by attention. |
-| $\sum_{j=1}^T A_{i,j} = 1.0$ | **Row Sum Constraint** | Each row of $\mathbf{A}$ is a valid probability distribution — the attention weights for any given token must sum to exactly $1.0$ (guaranteed by Softmax). |
-
-## 8. Complete Worked Example
-Let sequence length $T = 2$ (`["river", "bank"]`), and $d_v = 2$.
-
-Let Values $\mathbf{V} = \begin{bmatrix} 0.1 & 0.9 \\ 0.4 & 0.2 \end{bmatrix}$ where Row 0 is `"river"` and Row 1 is `"bank"`.
-
-Suppose attention weights $\mathbf{A} = \begin{bmatrix} 0.9 & 0.1 \\ 0.7 & 0.3 \end{bmatrix}$:
-- Token 0 (`"river"`) pays 90% attention to itself and 10% to `"bank"`.
-- Token 1 (`"bank"`) pays 70% attention to `"river"` and 30% to itself.
-
-Compute contextual output $\mathbf{H} = \mathbf{A} \mathbf{V}$:
-
-- **Row 0 (`"river"` output):**
-  $$\mathbf{H}_{row 0} = 0.9 \times [0.1, 0.9] + 0.1 \times [0.4, 0.2] = [0.09, 0.81] + [0.04, 0.02] = [0.13, 0.83]$$
-  `"river"` stays mostly like itself (90% self-attention), with a tiny pull from `"bank"`.
-
-- **Row 1 (`"bank"` output):**
-  $$\mathbf{H}_{row 1} = 0.7 \times [0.1, 0.9] + 0.3 \times [0.4, 0.2] = [0.07, 0.63] + [0.12, 0.06] = [0.19, 0.69]$$
-  `"bank"`'s output vector $[0.19, 0.69]$ is now heavily influenced by `"river"`!
-
-$$\mathbf{H} = \begin{bmatrix} 0.13 & 0.83 \\ 0.19 & 0.69 \end{bmatrix} \in \mathbb{R}^{2 \times 2}$$
-
-> **Key Observation:** Both tokens got updated — not just `"bank"`. Every row of $\mathbf{H}$ is a weighted blend of ALL Value rows. The attention weights determine the blend ratios.
-
-## 9. Math → Code Mapping
-```python
-import numpy as np
-
-# A: Attention weights (2, 2)
-A = np.array([
-    [0.9, 0.1],
-    [0.7, 0.3]
-])
-
-# V: Value representations (2, 2)
-V = np.array([
-    [0.1, 0.9], # river
-    [0.4, 0.2]  # bank
-])
-
-# Contextual output H = A @ V
-H = A @ V # Shape (2, 2)
-print("Contextual representation for 'bank':", H[1])
-```
+> **Key Observation:** Both tokens get updated! Every output is a weighted blend of ALL tokens in the sequence.
 
 ## 10. Experiments / What-If Questions
 - **What if all attention weights in a row are equal ($\frac{1}{T}$)?**
@@ -125,12 +83,11 @@ In **Week 3 Assignment**, you will verify how attention matrix $\mathbf{A} \in \
 Every modern Transformer block uses attention to convert static input embeddings into deep contextual representations across multiple layers.
 
 ## 15. Connection to the Next Concept
-How does the model decide *which* tokens should attend to which? It creates separate roles using **Query, Key, and Value** projections (`22 - TRANSFORMER - Query Key and Value.md`).
+Now we understand that Attention is about figuring out "Which other tokens matter to me, and how much information should I take from them?" 
+But how does the model *mathematically calculate* which tokens are relevant to each other? To do this, it gives tokens three separate roles: **Query, Key, and Value** (`22 - TRANSFORMER - Query Key and Value.md`).
 
 ## 16. Teach-Back and Small Application Exercise
-If $\mathbf{A}$ has shape $(4, 4)$ and $\mathbf{V}$ has shape $(4, 8)$:
-1. What is the shape of contextual output $\mathbf{H} = \mathbf{A} \mathbf{V}$?
-2. What must the sum of elements in each row of $\mathbf{A}$ equal?
+If you have the sentence `"The bank approved my loan"`, which word do you think `"bank"` should pay the most attention to, and why?
 
 ## 17. Quick Revision Summary
 - Base token embeddings give context-independent vectors regardless of sentence context.

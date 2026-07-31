@@ -97,7 +97,17 @@ class SelfAttentionSingleHead:
         return H, A
 ```
 
-## 10. Experiments / What-If Questions
+## 10. Connection to the Training Loop
+So far we have looked at the **Forward Pass**. But how does the model *learn* to pay attention to the right things? 
+Remember Week 1: 
+1. **Forward Pass:** The sequence matrix $\mathbf{X}$ is multiplied by the current weights $\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V$ to get $\mathbf{H}$, which is used to predict the next word.
+2. **Loss Calculation:** The predicted word is compared to the actual next word using Cross-Entropy Loss.
+3. **Backpropagation:** The error gradient flows backward through the Softmax, through the dot products, and all the way back to the weight matrices $\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V$.
+4. **Weight Update:** The optimizer slightly adjusts the numbers in $\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V$ so that next time, they generate Queries and Keys that produce better attention weights for the correct prediction.
+
+The model is literally learning *how to search its own context*.
+
+## 11. Experiments / What-If Questions
 - **What happens if two tokens in the sequence are identical copies?**
   If two token positions have identical input representations AND no positional information has been added, their projected Q/K/V vectors will be identical, receiving identical attention scores from all other tokens. Once positional information or earlier contextual layers are involved, identical token IDs do not necessarily have identical representations.
   > **Note:** Positional information is intentionally deferred to Week 4, so this week's toy self-attention is order-blind by design.
