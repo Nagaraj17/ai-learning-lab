@@ -1,0 +1,156 @@
+You have now learned:
+
+Week 1 → How a Neural Network learns
+Week 2 → How words become embeddings
+Week 3 → How Attention creates context
+
+On Week4 - we are going to explore: why one head isn't enough?
+
+Week 04 – Looking at the Same Problem from Different Perspectives
+
+1. Problem Statement
+
+In Week 3, our neural network learned to pay attention to previous words before making a prediction.
+
+But a question remains: Can a single attention mechanism learn every relationship that matters?
+
+Consider the following PO lifecycle.
+Order
+Shipment
+Receive
+Restock
+Inventory
+Forecast
+Invoice
+Scenario
+
+If the current word is Forecast, what should the model pay attention to?
+
+It could be: Inventory or Previous Orders or Invoice or Shipment delays
+
+Which is correct? Perhaps all of them.
+
+2. Your Challenge
+
+Modify your Week 3 Attention model so that it contains "multiple independent attention heads".
+
+Each attention head should be free to learn its own perspective.
+
+Your implementation should demonstrate that different heads can focus on different parts of the same sequence.
+
+
+3. Continue using the same vocabulary.
+
+
+4. Training Sequences
+
+Instead of simple transitions, use longer sequences. Examples below:
+Order → Shipment → Receive → Restock → Inventory
+Shipment → Receive → Restock → Inventory → Forecast
+Receive → Restock → Inventory → Forecast → Order
+Inventory → Forecast → Scenario → Order → Shipment
+
+Feel free to extend these.
+
+
+5. Your Objectives
+
+By the end of this exercise, your team should be able to explain:
+
+1. Why one attention head may not be sufficient?
+
+2. Why different heads learn different relationships?
+
+3. Whether every head actually learns something unique?
+
+4. How the outputs of multiple heads are combined?
+
+5. Why this architecture scales better than trying to build one "super head."?
+
+6. Deliverables
+a. A NumPy implementation of 2–4 attention heads
+b. Visualize what each head is paying attention to
+c. Compare the attention patterns
+d. Explain what each head appears to have learned
+
+7. Stretch Goal
+
+Instead of simply printing numbers, Create a visualization to show each head's attention.
+
+Can you explain why each head chose different information?
+
+
+8. If You Don't Already Know...
+
+Learn these concepts before you begin:
+
+Multi-Head Attention
+Self-Attention
+Head Dimension
+Concatenation
+Linear Projection
+Residual Connection (high level)
+Layer Normalization (high level)
+
+9. Questions to Think About
+
+a. If every head learns exactly the same thing, have we gained anything?
+
+b. Why not simply increase the size of one attention head?
+
+c. Does adding more heads always improve the model?
+
+d. If one head disappears, does the model still work?
+
+e. Can one head specialize in operations while another specializes in finance?
+
+10. Business Challenge
+
+Suppose we have
+
+Practice
+
+Drug
+
+Distributor
+
+Inventory
+
+Contract
+
+Invoice
+
+Rebate
+
+Forecast
+
+
+Could different heads naturally specialize?
+
+Examples:
+
+a. Inventory Head
+b. Financial Head
+c. Contract Head
+d. Operational Head
+
+Should we force this? Or should we let training discover it? Explain your reasoning.
+
+
+::One Hint
+Embeddings tell us what things are. Attention tells us what matters. Multi-Head Attention allows several "experts" to look at the same information simultaneously, each discovering different patterns.
+
+11: Challenge Question: Let us build a "Multi-Head Attention ForecastIQ"
+
+ForecastIQ predicts that Drug A should be ordered. Each head focuses on a separate item like below,
+
+Head1 (Inventory Expert) : Inventory
+Head2 (Supply Chain Expert): Recent Shipments
+Head3 (Financial Expert): Seasonal Forecast 
+Head4 (Demand Planner): Contract Pricing.
+
+How should the model combine these four opinions into one final decision?
+
+We are not going to cover MOE (Mixture of Experts) in our 10-weeks, but this will give you a perspective of that.
+
+Enjoy!!

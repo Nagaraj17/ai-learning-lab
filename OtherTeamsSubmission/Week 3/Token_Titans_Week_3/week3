@@ -1,0 +1,212 @@
+# From Embeddings to Attention
+
+In Week 2, we gave every word a learned vector called an embedding.
+Similar words could end up with similar vectors.
+
+But our predictor still had one limitation: it only ever looked at ONE word.
+
+For example:
+Receive → Restock
+
+The model saw a single word and predicted the next one.
+It had no way to use anything that came earlier in the sequence.
+
+In Week 3, we add attention.
+Attention lets the model look at a whole SEQUENCE of previous words and
+decide which of them matter most for predicting the next word.
+
+
+## The Idea in One Line
+
+One-hot (Week 1) asked: which word is this?
+Embedding (Week 2) asked: what does this word mean?
+Attention (Week 3) asks: given several words, which ones should I focus on right now?
+
+
+## What We Feed the Model Now
+
+Week 2 input:  a single word
+Week 3 input:  a sequence of words
+
+For example, we have seen:
+["Receive", "Order", "Shipment"]
+
+We stack each word's Week-2 embedding into one matrix X, one row per word.
+Nothing about the embeddings changes. We just look at several at once.
+
+
+## Query, Key, and Value
+
+Each word now plays three roles. Think of a search:
+
+Query  → what am I looking for?
+Key    → what does each word advertise about itself?
+Value  → what does each word actually contribute if chosen?
+
+We create these three versions of each word by multiplying its embedding
+by three matrices: Wq, Wk, and Wv.
+
+Query = embedding × Wq
+Key   = embedding × Wk
+Value = embedding × Wv
+
+In this exercise Wq, Wk, and Wv start as random numbers.
+This is exactly like Week 2, where embeddings also started random.
+
+
+## The Attention Step
+
+The last word in the sequence is the one doing the predicting.
+Its query is compared against every word's key.
+
+Step 1  Score: query · key for each word.
+        The dot product is a similarity measure — the same operation we used
+        for cosine similarity in Week 2. A higher score means "more relevant."
+
+Step 2  Scale: divide each score by the square root of the embedding size.
+        This just keeps the numbers from getting too large before the next step.
+
+Step 3  Weights: apply softmax to the scores.
+        Softmax (from Week 1) turns the scores into positive numbers that add
+        up to 1. These are the attention weights: how much to listen to each word.
+
+Step 4  Context: multiply each word's value by its weight and add them up.
+        The result is one vector, the context vector — a blend of the sequence,
+        weighted by what the model decided to focus on.
+
+
+## What the Context Vector Is For
+
+In Week 2 the hidden layer received a single word's embedding.
+In Week 3 it receives the context vector instead. That is the only change to
+the predictor. Everything after it (hidden layer, output, softmax) is unchanged.
+
+Week 2:  word → embedding → hidden layer → prediction
+Week 3:  sequence → attention → context vector → hidden layer → prediction
+
+
+## What Our Model Actually Showed
+
+We ran the attention step on our real trained Week-2 embeddings, with random
+(untrained) Wq, Wk, Wv. The last word's attention weights came out:
+
+  Receive   0.6%
+  Order    97.7%
+  Shipment  1.6%
+
+Two honest points about this result:
+
+First, the attention is NOT spread evenly — it put almost all of its weight on
+one word. That shows the mechanism works: a query, keys, scores, and a softmax
+really do produce a focused set of weights.
+
+Second, WHICH word it focused on (Order) is essentially an accident here, because
+Wq, Wk, and Wv were never trained. The model has the ABILITY to focus, but it has
+not yet LEARNED what to focus on. This is the same lesson as Week 2: the machinery
+is in place, but the weights only become meaningful after training.
+
+So for Week 3 the important thing is understanding the mechanism, not the specific
+word that won. Training the attention matrices is a later step.
+
+
+## The Important Idea
+
+Attention gives the model something it did not have before: the ability to reach
+back into a sequence and weigh earlier words. Instead of relying only on the most
+recent word, it can decide that an earlier word matters more, or blend several
+words together.
+
+The model is not told which words are important. It only sees the training
+examples. Just like embeddings, useful attention would emerge from training, not
+from a rule we write.
+
+
+## What We Are NOT Doing Yet (Scope)
+
+To stay grounded, this week is deliberately limited to:
+- One attention step
+- One attention head
+- Forward direction only (no training of Wq, Wk, Wv)
+
+The following are later weeks and were intentionally left out:
+- Multiple attention heads (Week 4)
+- Positional encoding, residuals, layer norm (Week 5)
+- A full Transformer block (Week 6)
+
+
+## Three Questions to Think Deeply About
+
+These were posed to us to make sure we understand the WHY, not just the HOW.
+They turn out to be the same lesson at three different layers.
+
+Week 1: Why can't we solve for the weights directly?
+
+  With one or two students and two weights, the score equations are linear and
+  we have as many equations as unknowns, so plain algebra solves them exactly:
+      5*W1 + 4*W2 = 80
+      3*W1 + 5*W2 = 70
+  Two things break this as we scale up. First, the network is nonlinear — once a
+  tanh sits in the middle, the relationship between a weight and the loss is no
+  longer a straight line, and there is no rearrange-the-equation trick for it.
+  Second, the weights are tangled: with millions of weights where W1 affects W2
+  affects W3, no single weight has a fixed right answer — its best value depends
+  on all the others. So there is nothing to "solve." Instead we learn:
+  guess -> predict -> measure error -> adjust every weight a little -> repeat.
+  We trade "solve once, exactly" for "improve many times, approximately."
+
+Week 2: If embeddings start as random numbers, why don't they stay random?
+
+  Because embeddings ARE weights, and the training loop pulls on all weights.
+  Every step, backprop reaches the embedding rows and nudges them to lower the
+  loss. The key point: words that appear in similar contexts produce similar
+  prediction errors, so gradient descent pushes their rows in similar directions,
+  again and again, until they drift together. They do not stay random because the
+  loss keeps moving them somewhere specific. Random is only the starting point.
+  (And they only move meaningfully when the data gives a reason — in our rigid
+  6-word cycle they barely clustered; in the stretch goal, with shared contexts,
+  they did.)
+
+Week 3: If every word already has an embedding, why do we need attention?
+
+  Because an embedding is fixed, but meaning is not. The same word carries a
+  different meaning depending on what came before it:
+      Shipment -> Receive -> ?              (Receive = take in goods -> Restock)
+      Return Authorization -> Receive -> ?  (Receive = take back a return -> Credit)
+  "Receive" has the SAME embedding in both, so the embedding alone can only say
+  what Receive means on average — it cannot say what Receive means HERE. Attention
+  is the mechanism that answers the loaded question: which previous words should I
+  look at before deciding what Receive means right now? It blends the same Receive
+  embedding with different neighbors, producing a different context each time.
+  Embedding = what a word means on average. Attention = what it means right now.
+
+The through-line:
+
+  Week 1 gives us the method — tangled nonlinear systems can't be solved, only
+  learned (guess, measure, adjust, repeat). Week 2 applies that method to a new
+  set of weights: embeddings are just more parameters, so the same loop learns
+  them. Week 3 hits the limit of a fixed representation — one vector per word
+  can't capture context — so we add attention, whose own weights (Wq, Wk, Wv)
+  get learned by the exact same loop. The machine gets bigger every week, but the
+  engine never changes: guess, measure, adjust, repeat.
+
+
+## Key Terms
+
+Sequence: several words fed in together, in order.
+Query: what the current word is looking for.
+Key: what each word advertises about itself.
+Value: what each word contributes if it is attended to.
+Attention score: query · key, a similarity between two words.
+Scaling: dividing scores by sqrt(embedding size) to keep them stable.
+Attention weight: a softmaxed score; how much to listen to a word (weights sum to 1).
+Context vector: the weighted blend of value vectors; the sequence summarized.
+Self-attention: letting every word take a turn as the query.
+
+
+## Questions We Discussed
+
+- Why can attention reach back to an earlier word when Week 1-2 could not?
+- Why are the attention weights focused even though nothing was trained?
+- What decides which word gets the most attention once training is added?
+- How is an attention score related to the cosine similarity from Week 2?
+- What would break if we removed the softmax step?
