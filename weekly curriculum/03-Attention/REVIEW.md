@@ -18,7 +18,7 @@ Test your conceptual, mathematical, and code mastery of Week 3 before completing
 
 ## Part 3: Code & Implementation
 1. Write a 3-line NumPy function that creates a $T \times T$ lower-triangular causal mask matrix $\mathbf{M}$ containing $0.0$ for valid past positions and $-1e9$ for future positions.
-2. In PyTorch, what is the dimension permutation order required when splitting $Q \in \mathbb{R}^{B \times T \times d_{model}}$ into multi-head shape $(B, h, T, d_k)$?
+2. In single-head attention, why do we transpose $\mathbf{K} \in \mathbb{R}^{T \times d_k}$ into $\mathbf{K}^\top \in \mathbb{R}^{d_k \times T}$ before computing $\mathbf{Q}\mathbf{K}^\top$, and what is the output shape?
 
 ## Part 4: Debugging & What-If Scenarios
 1. **Scenario:** A student inspects an attention matrix $\mathbf{A}$ and notices that `A[2, 0] = 0.50` (token at position 2 attends 50% to earlier token 0), but `A[0, 2] = 0.0` (token at position 0 gives 0% attention to future token 2). Is this a bug in causal masking or expected behavior? Explain why this asymmetry is expected.

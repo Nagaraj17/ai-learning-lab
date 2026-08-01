@@ -23,11 +23,13 @@ flowchart TD
         T23["Scaled Dot-Product Attention<br>[23]"]
         T24["Single-Head Self-Attention<br>[24]"]
         T25["Causal Masking (-inf Upper Triangle)<br>[25]"]
-        T26["Multi-Head Attention (MHA)<br>[26]"]
     end
 
-    subgraph W4 ["Deferred to Week 4"]
+    subgraph W4 ["Deferred Beyond Week 3"]
         style W4 fill:#334155,stroke:#94a3b8,color:#cbd5e1
+        MHA["Multi-Head Attention (Week 4)<br>[26]"]
+        Concat["Concatenation and W_O (Week 4)<br>[27]"]
+        Heads["Head Specialization and Redundancy (Week 4)<br>[28]"]
         PosEnc["Positional Encoding (Sinusoidal / Learned)"]
         FFN["FeedForward Network (FFN)"]
         Norm["Layer Normalization (LayerNorm)"]
@@ -47,10 +49,12 @@ flowchart TD
     P08 --> T23
     T23 --> T24
     T24 --> T25
-    T25 --> T26
+    T25 --> MHA
+    MHA --> Concat
+    Concat --> Heads
 
     T24 -. Limitation: Order Blind .-> PosEnc
-    T26 --> Block
+    Heads --> Block
     PosEnc --> Block
     FFN --> Block
     Norm --> Block

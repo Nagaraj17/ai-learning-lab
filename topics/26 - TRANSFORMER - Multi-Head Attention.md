@@ -16,12 +16,15 @@ We need **Multi-Head Attention (MHA)**, which splits the hidden dimension $d_{mo
 **Multi-Head Attention** runs multiple learned Q/K/V projections in parallel, performs attention in each projected subspace, concatenates the outputs, and applies an output projection $\mathbf{W}_O$.
 
 ## 4. Beginner Intuition / Mental Model
-Imagine a **Detective Panel investigating a crime scene**:
-- Head 1 focuses exclusively on **fingerprints** (Syntactic role).
-- Head 2 focuses exclusively on **financial records** (Semantic role).
-- Head 3 focuses exclusively on **timeline order** (Positional role).
+Imagine a **Detective Panel investigating the same case file**:
+- every detective reads the full case file
+- each detective uses a different learned lens
+- the panel may notice different patterns
 
-Instead of one detective trying to look at everything at once, $h$ specialized detectives investigate in parallel, and their reports are combined into a final verdict!
+Instead of one detective trying to compress every clue into one report, $h$
+parallel heads can build multiple contextual views of the same sequence. These
+views are later combined. The roles are **not** manually assigned, and training
+does not guarantee neat human-labeled specialization.
 
 ## 5. What Came Before → What Changes Now
 - **Single-Head Attention:** 1 set of projection matrices $(\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V)$ of size $(d_{model} \times d_{model})$.
@@ -62,7 +65,7 @@ where $\text{head}_i = \text{Attention}(\mathbf{X} \mathbf{W}_Q^i, \mathbf{X} \m
 
 | Symbol | Name | Plain-English Meaning |
 | :--- | :--- | :--- |
-| $h$ | **Number of Heads** | How many parallel attention heads run simultaneously. Each head specializes in a different relationship type (e.g., syntactic, semantic, positional). |
+| $h$ | **Number of Heads** | How many parallel attention heads run simultaneously. Different heads may learn different useful patterns, but those roles are not manually assigned or guaranteed. |
 | $d_k, d_v$ | **Per-Head Dimensions** | The query/key and value dimensions for a single head. |
 | $\mathbf{W}_Q^i, \mathbf{W}_K^i, \mathbf{W}_V^i$ | **Per-Head Projection Weights** | Each head $i$ has its own Q/K/V projection matrices. $\mathbf{W}_Q^i, \mathbf{W}_K^i \in \mathbb{R}^{d_{model} \times d_k}$, $\mathbf{W}_V^i \in \mathbb{R}^{d_{model} \times d_v}$. |
 | $\text{head}_i$ | **Output of Head $i$** | The $(T \times d_v)$ contextual output from a single attention head. |
@@ -167,13 +170,17 @@ concat = heads_out.transpose(1, 0, 2).reshape(T, self.d_model)
 - Pruning experiments show that some attention heads become redundant during training and can be pruned without degrading model performance.
 
 ## 13. Where It Appears in the Current Assignment
-In **Week 3 Assignment**, Multi-Head Attention is introduced conceptually and implemented as an optional stretch exercise.
+In **Week 4 Assignment**, Multi-Head Attention is the main topic. Week 3
+should be treated as the single-head prerequisite.
 
 ## 14. Where It Appears in Modern AI Systems
 MHA is foundational; later architectures sometimes modify how query/key/value heads are shared for efficiency (e.g., Multi-Query Attention or Grouped-Query Attention).
 
 ## 15. Connection to the Next Concept
-Multi-Head Causal Attention produces contextual representations for sequence matrix $\mathbf{X}$. To build a complete Transformer block, we combine Multi-Head Attention with Layer Normalization, Residual Connections, and FeedForward Networks in **Week 4 (Transformer Block)**.
+Multi-Head Attention produces richer contextual representations for sequence
+matrix $\mathbf{X}$. After this week, the next architectural question is how to
+place that sublayer inside a larger Transformer block together with residual
+connections, Layer Normalization, and feed-forward layers.
 
 ## 16. Teach-Back and Small Application Exercise
 If $d_{model} = 768$ and the model uses $h = 12$ heads:
@@ -198,4 +205,3 @@ Because each head projects into a smaller dimension $d_k$. Equal splitting preve
 ## 20. Sources
 - Vaswani et al. (2017) *"Attention Is All You Need"*, Section 3.2.2.
 - Alammar, J. & Grootendorst, M. [Hands-On Large Language Models.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Hands-On%20Large%20Language%20Models.md), Chapter 3.
-
