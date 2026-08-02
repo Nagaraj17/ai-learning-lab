@@ -1,207 +1,615 @@
 # 26 - TRANSFORMER - Multi-Head Attention
 
 ## 1. The Problem
-A single attention head produces **one single set of attention weights** $\mathbf{A} \in \mathbb{R}^{T \times T}$.
-However, a word in a sentence often has multiple different relationships simultaneously:
-- Syntactic relationship (e.g., verb attending to its subject).
-- Semantic relationship (e.g., pronoun attending to its noun antecedent).
-- Positional relationship (e.g., attending to immediately preceding token).
 
-**The limitation:** Single-Head Attention averages all these different relationships into one single attention distribution, diluting specific semantic signals.
+Week 3 used one attention head. For every query token, that head produced one
+attention distribution over the sequence.
+
+Consider the token Forecast in a purchase-order sequence. Relevant context may
+include Inventory, Shipment, Invoice, and earlier Orders. These relationships
+can represent different kinds of evidence.
+
+A single head is not incapable of learning complex behavior. Its specific
+limitation is narrower: for each query, it has only one set of attention
+weights. Different relationships must share that one routing pattern before
+the values are combined.
 
 ## 2. Why We Need Something New
-We need **Multi-Head Attention (MHA)**, which splits the hidden dimension $d_{model}$ across $h$ independent "heads", allowing the model to jointly attend to information from different representation subspaces at different positions.
+
+We want the model to form several attention distributions for the same query
+token. Each distribution should be produced from its own learned Query, Key,
+and Value projections.
+
+This gives the model several parallel representation subspaces in which to
+compare the same sequence. One head might eventually become sensitive to
+short-range operational patterns while another becomes sensitive to financial
+patterns. Those roles are learned possibilities, not roles assigned by us and
+not guarantees of training.
 
 ## 3. One-Line Definition
-**Multi-Head Attention** runs multiple learned Q/K/V projections in parallel, performs attention in each projected subspace, concatenates the outputs, and applies an output projection $\mathbf{W}_O$.
 
-## 4. Beginner Intuition / Mental Model
-Imagine a **Detective Panel investigating the same case file**:
-- every detective reads the full case file
-- each detective uses a different learned lens
-- the panel may notice different patterns
+**Multi-Head Attention (MHA)** applies several independently parameterized
+scaled dot-product attention heads to the same sequence in parallel, producing
+one contextual output and one attention matrix per head.
 
-Instead of one detective trying to compress every clue into one report, $h$
-parallel heads can build multiple contextual views of the same sequence. These
-views are later combined. The roles are **not** manually assigned, and training
-does not guarantee neat human-labeled specialization.
+The head outputs must later be combined. Concatenation and output projection
+are taught separately in Topic 27.
 
-## 5. What Came Before → What Changes Now
-- **Single-Head Attention:** 1 set of projection matrices $(\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V)$ of size $(d_{model} \times d_{model})$.
-- **Multi-Head Attention:** $h$ parallel sets of projection matrices $(\mathbf{W}_Q^i, \mathbf{W}_K^i, \mathbf{W}_V^i)$ of size $(d_{model} \times d_k)$, concatenated and projected by $\mathbf{W}_O \in \mathbb{R}^{d_{model} \times d_{model}}$.
+## 4. Beginner Intuition
 
-## 6. How It Works
-1. Given sequence matrix $\mathbf{X} \in \mathbb{R}^{T \times d_{model}}$ and number of heads $h$.
-2. For each head $i \in \{1, \dots, h\}$, project and compute attention:
-   $$\text{head}_i = \text{Attention}(\mathbf{X} \mathbf{W}_Q^i, \mathbf{X} \mathbf{W}_K^i, \mathbf{X} \mathbf{W}_V^i) \in \mathbb{R}^{T \times d_v}$$
-3. Concatenate all $h$ head outputs along the feature dimension:
-   $$\text{Concat}(\text{head}_1, \dots, \text{head}_h) \in \mathbb{R}^{T \times (h \cdot d_v)}$$
-4. Multiply by final output projection matrix $\mathbf{W}_O \in \mathbb{R}^{(h \cdot d_v) \times d_{model}}$:
-   $$\mathbf{MultiHead}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Concat}(\text{head}_1, \dots, \text{head}_h) \mathbf{W}_O \in \mathbb{R}^{T \times d_{model}}$$
+Imagine several analysts reading the same business timeline:
 
-> **Implementation Convention:** In the original Transformer, $d_k = d_v = d_{model} / h$ was chosen so the concatenated head width equals $d_{model}$. This is a common implementation design, not a universal mathematical definition for MHA.
+- every analyst receives the full timeline;
+- each analyst uses a different learned lens;
+- each analyst produces a separate view of what matters.
 
-```
-Sequence X (T x d_model)
-   │
-   ├──► Head 1 (W_Q1, W_K1, W_V1) ──► head_1 (T x d_k) ──┐
-   ├──► Head 2 (W_Q2, W_K2, W_V2) ──► head_2 (T x d_k) ──┼──► Concat ──► (T x d_model) ──► @ W_O ──► Output (T x d_model)
-   └──► Head h (W_Qh, W_Kh, W_Vh) ──► head_h (T x d_k) ──┘
-```
+The analogy helps explain parallel perspectives. It stops being exact because
+attention heads are matrices optimized by gradient descent, not people with
+predefined job titles or human reasoning.
 
-## 7. Required Mathematics
-$$\mathbf{MultiHead}(\mathbf{X}) = \text{Concat}(\text{head}_1, \dots, \text{head}_h) \mathbf{W}_O$$
+![Single-head versus Multi-Head Attention](images/week04/single-head-vs-multi-head.png)
 
-where $\text{head}_i = \text{Attention}(\mathbf{X} \mathbf{W}_Q^i, \mathbf{X} \mathbf{W}_K^i, \mathbf{X} \mathbf{W}_V^i)$.
+**How to read the image:** The left side shows one head producing one
+relationship pattern. On the right, every colored head receives the same
+complete sequence but can produce a different pattern. The colors indicate
+independent heads; they do not assign predefined business roles.
 
-**Shape Trace:**
-- Input $\mathbf{X}$: $(T \times d_{model})$
-- Each $\text{head}_i$: $(T \times d_v)$
-- Concatenated heads: $(T \times h \cdot d_v)$
-- Output Weight $\mathbf{W}_O$: $(h \cdot d_v \times d_{model})$
-- Final Output: $(T \times d_{model})$
+## 5. What Came Before -> What Changes Now
 
-### Symbol Table
+### Single-head self-attention
 
-| Symbol | Name | Plain-English Meaning |
+One set of learned projections creates:
+
+$$
+\mathbf{Q} = \mathbf{X}\mathbf{W}_Q,\qquad
+\mathbf{K} = \mathbf{X}\mathbf{W}_K,\qquad
+\mathbf{V} = \mathbf{X}\mathbf{W}_V
+$$
+
+This produces one attention matrix and one contextual output.
+
+### Multi-head self-attention
+
+Head $i$ has its own learned parameters:
+
+$$
+\mathbf{W}_Q^{(i)},\quad
+\mathbf{W}_K^{(i)},\quad
+\mathbf{W}_V^{(i)}
+$$
+
+It therefore produces its own:
+
+$$
+\mathbf{Q}^{(i)},\quad
+\mathbf{K}^{(i)},\quad
+\mathbf{V}^{(i)},\quad
+\mathbf{A}^{(i)},\quad
+\mathbf{H}^{(i)}
+$$
+
+All heads read every token. The input is not divided into different groups of
+words. The feature dimension is divided into smaller per-head subspaces.
+
+## 6. How One Head Works Inside MHA
+
+Let:
+
+- $T$ be the sequence length;
+- $d_{\text{model}}$ be the input feature width;
+- $h$ be the number of heads;
+- $d_k$ be the Query and Key width of one head;
+- $d_v$ be the Value and output width of one head.
+
+For head $i$:
+
+### Step 1: Project the shared input
+
+$$
+\mathbf{Q}^{(i)} = \mathbf{X}\mathbf{W}_Q^{(i)}
+$$
+
+$$
+\mathbf{K}^{(i)} = \mathbf{X}\mathbf{W}_K^{(i)}
+$$
+
+$$
+\mathbf{V}^{(i)} = \mathbf{X}\mathbf{W}_V^{(i)}
+$$
+
+### Step 2: Calculate that head's scores
+
+$$
+\mathbf{S}^{(i)}
+=
+\frac{\mathbf{Q}^{(i)}{\mathbf{K}^{(i)}}^\top}{\sqrt{d_k}}
+$$
+
+If attention is causal, the same causal-mask rule from Week 3 is applied to
+every head's score matrix before Softmax.
+
+### Step 3: Calculate that head's attention weights
+
+$$
+\mathbf{A}^{(i)} = \operatorname{Softmax}(\mathbf{S}^{(i)})
+$$
+
+Softmax is applied independently to every row. Each row of each head's
+attention matrix sums to $1$.
+
+### Step 4: Calculate that head's contextual output
+
+$$
+\mathbf{H}^{(i)} = \mathbf{A}^{(i)}\mathbf{V}^{(i)}
+$$
+
+This process repeats independently for all $h$ heads.
+
+![Multi-Head Attention shape flow](images/week04/multi-head-shape-flow.png)
+
+**Shape checkpoint:** Every branch begins with the full
+$(T \times d_{\text{model}})$ sequence. Each head creates its own
+$(T \times T)$ attention matrix and $(T \times d_v)$ contextual output.
+The outputs remain separate until Topic 27.
+
+## 7. Shape Trace
+
+For one head:
+
+| Quantity | Shape | Meaning |
 | :--- | :--- | :--- |
-| $h$ | **Number of Heads** | How many parallel attention heads run simultaneously. Different heads may learn different useful patterns, but those roles are not manually assigned or guaranteed. |
-| $d_k, d_v$ | **Per-Head Dimensions** | The query/key and value dimensions for a single head. |
-| $\mathbf{W}_Q^i, \mathbf{W}_K^i, \mathbf{W}_V^i$ | **Per-Head Projection Weights** | Each head $i$ has its own Q/K/V projection matrices. $\mathbf{W}_Q^i, \mathbf{W}_K^i \in \mathbb{R}^{d_{model} \times d_k}$, $\mathbf{W}_V^i \in \mathbb{R}^{d_{model} \times d_v}$. |
-| $\text{head}_i$ | **Output of Head $i$** | The $(T \times d_v)$ contextual output from a single attention head. |
-| $\text{Concat}(\dots)$ | **Concatenation** | Joins all $h$ head outputs side-by-side along the feature dimension: $h$ matrices of $(T \times d_v)$ become one $(T \times h \cdot d_v)$ matrix. |
-| $\mathbf{W}_O$ | **Output Projection Matrix** | A $(h \cdot d_v \times d_{model})$ learnable weight matrix that mixes the concatenated head outputs into the final representation. This allows heads to share and combine their findings. |
+| $\mathbf{X}$ | $(T \times d_{\text{model}})$ | Shared sequence representation |
+| $\mathbf{W}_Q^{(i)}$ | $(d_{\text{model}} \times d_k)$ | Query projection for head $i$ |
+| $\mathbf{W}_K^{(i)}$ | $(d_{\text{model}} \times d_k)$ | Key projection for head $i$ |
+| $\mathbf{W}_V^{(i)}$ | $(d_{\text{model}} \times d_v)$ | Value projection for head $i$ |
+| $\mathbf{Q}^{(i)}$ | $(T \times d_k)$ | Queries for head $i$ |
+| $\mathbf{K}^{(i)}$ | $(T \times d_k)$ | Keys for head $i$ |
+| $\mathbf{V}^{(i)}$ | $(T \times d_v)$ | Values for head $i$ |
+| $\mathbf{A}^{(i)}$ | $(T \times T)$ | Attention weights for head $i$ |
+| $\mathbf{H}^{(i)}$ | $(T \times d_v)$ | Contextual output from head $i$ |
 
-> **Practical Note:** Implementations often combine all per-head projections into large $\mathbf{W}_Q$, $\mathbf{W}_K$, $\mathbf{W}_V$ matrices and reshape/split the resulting feature dimension into heads. The NumPy code below does exactly this, which is why it requires $d_{model}$ to be divisible by $h$.
+Keeping all heads explicit gives:
 
-## 8. Complete Worked Example
-Let $T = 2$, $d_{model} = 4$, $h = 2$ heads $\implies d_k = d_v = 4 / 2 = 2$.
+| Quantity | Shape |
+| :--- | :--- |
+| All attention matrices | $(h \times T \times T)$ |
+| All head outputs | $(h \times T \times d_v)$ |
 
-Input $\mathbf{X} \in \mathbb{R}^{2 \times 4}$.
+The original Transformer commonly chooses:
 
-- **Head 1:** Projects $\mathbf{X}$ to $\mathbf{Q}_1, \mathbf{K}_1, \mathbf{V}_1 \in \mathbb{R}^{2 \times 2}$. Computes $\text{head}_1 \in \mathbb{R}^{2 \times 2}$.
-- **Head 2:** Projects $\mathbf{X}$ to $\mathbf{Q}_2, \mathbf{K}_2, \mathbf{V}_2 \in \mathbb{R}^{2 \times 2}$. Computes $\text{head}_2 \in \mathbb{R}^{2 \times 2}$.
+$$
+d_k = d_v = \frac{d_{\text{model}}}{h}
+$$
 
-Concatenate along columns:
+For example, if $d_{\text{model}} = 8$ and $h = 2$, each head commonly uses
+$d_k = d_v = 4$.
 
-$$\text{Concat}(\text{head}_1, \text{head}_2) = \begin{bmatrix} [\text{head}_1 \text{ row 0}] & [\text{head}_2 \text{ row 0}] \\ [\text{head}_1 \text{ row 1}] & [\text{head}_2 \text{ row 1}] \end{bmatrix} \in \mathbb{R}^{2 \times 4}$$
+This equal split is a design convention used to keep total width and
+computation manageable. It is not the mathematical definition of MHA.
 
-Multiply by $\mathbf{W}_O \in \mathbb{R}^{4 \times 4}$ to get final Output of shape $(2, 4)$.
+## 8. Complete Two-Head Worked Example
 
-## 9. Math → Code Mapping
-```python
+This example uses deliberately chosen projection matrices so the two heads are
+easy to inspect. They are illustrative parameters, not the result of training.
+
+Let:
+
+$$
+T = 2,\qquad d_{\text{model}} = 4,\qquad h = 2,\qquad d_k = d_v = 2
+$$
+
+and:
+
+$$
+\mathbf{X}
+=
+\begin{bmatrix}
+1 & 0 & 1 & 0 \\
+0 & 1 & 0 & 1
+\end{bmatrix}
+$$
+
+### Head 1 projections
+
+Head 1 selects the first two input features for Queries, Keys, and Values:
+
+$$
+\mathbf{W}_Q^{(1)}
+=
+\mathbf{W}_K^{(1)}
+=
+\mathbf{W}_V^{(1)}
+=
+\begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+0 & 0 \\
+0 & 0
+\end{bmatrix}
+$$
+
+Therefore:
+
+$$
+\mathbf{Q}^{(1)}
+=
+\mathbf{K}^{(1)}
+=
+\mathbf{V}^{(1)}
+=
+\begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix}
+$$
+
+The scaled score matrix is:
+
+$$
+\mathbf{S}^{(1)}
+=
+\frac{
+\begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix}
+}{\sqrt{2}}
+\approx
+\begin{bmatrix}
+0.707 & 0 \\
+0 & 0.707
+\end{bmatrix}
+$$
+
+Applying row-wise Softmax:
+
+$$
+\mathbf{A}^{(1)}
+\approx
+\begin{bmatrix}
+0.670 & 0.330 \\
+0.330 & 0.670
+\end{bmatrix}
+$$
+
+Because $\mathbf{V}^{(1)}$ is the identity matrix:
+
+$$
+\mathbf{H}^{(1)}
+=
+\mathbf{A}^{(1)}\mathbf{V}^{(1)}
+\approx
+\begin{bmatrix}
+0.670 & 0.330 \\
+0.330 & 0.670
+\end{bmatrix}
+$$
+
+Head 1 places more weight on the token at the same position.
+
+### Head 2 projections
+
+Head 2 uses the same Query selection, swaps the Key features, and reads Values
+from the final two input features:
+
+$$
+\mathbf{W}_Q^{(2)}
+=
+\begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+0 & 0 \\
+0 & 0
+\end{bmatrix},
+\qquad
+\mathbf{W}_K^{(2)}
+=
+\begin{bmatrix}
+0 & 1 \\
+1 & 0 \\
+0 & 0 \\
+0 & 0
+\end{bmatrix}
+$$
+
+$$
+\mathbf{W}_V^{(2)}
+=
+\begin{bmatrix}
+0 & 0 \\
+0 & 0 \\
+1 & 0 \\
+0 & 1
+\end{bmatrix}
+$$
+
+This gives:
+
+$$
+\mathbf{Q}^{(2)}
+=
+\begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix},
+\qquad
+\mathbf{K}^{(2)}
+=
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix},
+\qquad
+\mathbf{V}^{(2)}
+=
+\begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix}
+$$
+
+The scaled scores are:
+
+$$
+\mathbf{S}^{(2)}
+=
+\frac{
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}
+}{\sqrt{2}}
+\approx
+\begin{bmatrix}
+0 & 0.707 \\
+0.707 & 0
+\end{bmatrix}
+$$
+
+Applying row-wise Softmax:
+
+$$
+\mathbf{A}^{(2)}
+\approx
+\begin{bmatrix}
+0.330 & 0.670 \\
+0.670 & 0.330
+\end{bmatrix}
+$$
+
+and:
+
+$$
+\mathbf{H}^{(2)}
+=
+\mathbf{A}^{(2)}\mathbf{V}^{(2)}
+\approx
+\begin{bmatrix}
+0.330 & 0.670 \\
+0.670 & 0.330
+\end{bmatrix}
+$$
+
+Head 2 places more weight on the other token.
+
+### What the example proves
+
+The two heads received the same $\mathbf{X}$ but produced different attention
+matrices because their projection parameters differed.
+
+The example does not prove that trained heads will always specialize neatly.
+That claim requires inspecting actual learned attention matrices and testing
+the trained model, which is the subject of Topic 28.
+
+## 9. Mathematics -> Code
+
+The following NumPy version keeps the head loop visible. That is slower than a
+vectorized implementation, but it maps directly to the mathematics above.
+
+~~~python
 import numpy as np
 
-class MultiHeadAttentionNumPy:
-    def __init__(self, d_model, num_heads):
-        self.d_model = d_model
-        self.num_heads = num_heads
-        self.d_k = d_model // num_heads
-        
-        self.W_Q = np.random.randn(d_model, d_model) * 0.1
-        self.W_K = np.random.randn(d_model, d_model) * 0.1
-        self.W_V = np.random.randn(d_model, d_model) * 0.1
-        self.W_O = np.random.randn(d_model, d_model) * 0.1
 
-    def forward(self, X, mask=None):
-        T, d = X.shape
-        # Linear projections
-        Q = X @ self.W_Q # (T, d_model)
-        K = X @ self.W_K # (T, d_model)
-        V = X @ self.W_V # (T, d_model)
+def softmax(x):
+    shifted = x - np.max(x, axis=-1, keepdims=True)
+    exp_x = np.exp(shifted)
+    return exp_x / np.sum(exp_x, axis=-1, keepdims=True)
 
-        # Split heads: (T, h, d_k) -> transpose to (h, T, d_k)
-        Q_heads = Q.reshape(T, self.num_heads, self.d_k).transpose(1, 0, 2)
-        K_heads = K.reshape(T, self.num_heads, self.d_k).transpose(1, 0, 2)
-        V_heads = V.reshape(T, self.num_heads, self.d_k).transpose(1, 0, 2)
 
-        # Scaled dot-product attention per head
-        scores = (Q_heads @ K_heads.transpose(0, 2, 1)) / np.sqrt(self.d_k) # (h, T, T)
+def attention_heads(X, W_Q, W_K, W_V, mask=None):
+    """
+    X:   (T, d_model)
+    W_Q: (h, d_model, d_k)
+    W_K: (h, d_model, d_k)
+    W_V: (h, d_model, d_v)
+    """
+    num_heads = W_Q.shape[0]
+    head_outputs = []
+    attention_weights = []
+
+    for head_index in range(num_heads):
+        Q = X @ W_Q[head_index]              # (T, d_k)
+        K = X @ W_K[head_index]              # (T, d_k)
+        V = X @ W_V[head_index]              # (T, d_v)
+
+        d_k = Q.shape[-1]
+        scores = (Q @ K.T) / np.sqrt(d_k)    # (T, T)
+
         if mask is not None:
-            scores = np.where(mask == 1, scores, -1e9)
+            scores = np.where(mask, scores, -np.inf)
 
-        exp_s = np.exp(scores - np.max(scores, axis=-1, keepdims=True))
-        A = exp_s / np.sum(exp_s, axis=-1, keepdims=True) # (h, T, T)
+        weights = softmax(scores)             # (T, T)
+        head_output = weights @ V             # (T, d_v)
 
-        heads_out = A @ V_heads # (h, T, d_k)
-        # Concatenate heads: (T, h * d_k) = (T, d_model)
-        concat = heads_out.transpose(1, 0, 2).reshape(T, self.d_model)
+        attention_weights.append(weights)
+        head_outputs.append(head_output)
 
-        output = concat @ self.W_O # (T, d_model)
-        return output, A
-```
+    return (
+        np.stack(head_outputs),               # (h, T, d_v)
+        np.stack(attention_weights),           # (h, T, T)
+    )
+~~~
 
-### Understanding the Reshape → Transpose Pipeline
+This function deliberately returns the heads separately. Topic 27 will answer
+the next question: how do we turn those separate outputs into one model
+representation?
 
-The trickiest part of the Multi-Head code is how we split one large Q/K/V matrix into $h$ separate heads **without a for-loop**. Here's what each line does:
+## 10. Experiments and What-If Questions
 
-```python
-# Step 1: Q has shape (T, d_model) = (T, h * d_k)
-# We reshape it to (T, h, d_k) — this "splits" the features into h groups of d_k
-Q_heads = Q.reshape(T, self.num_heads, self.d_k)
-# Shape: (T, h, d_k) — but we need (h, T, d_k) for batched matmul
-
-# Step 2: Transpose axes so heads become the first dimension
-Q_heads = Q_heads.transpose(1, 0, 2)
-# Shape: (h, T, d_k) — now each head[i] is a (T, d_k) matrix
-# This is like having h separate Q matrices stacked in a batch!
-```
-
-**Why do we need this?** Because `Q_heads @ K_heads.T` computes `h` independent attention score matrices $(T \times T)$ simultaneously as a single batched operation — much faster than running a Python loop $h$ times.
-
-After computing attention outputs for each head `(h, T, d_k)`, we reverse the process:
-```python
-# Transpose back: (h, T, d_k) → (T, h, d_k)
-# Then reshape: (T, h, d_k) → (T, h * d_k) = (T, d_model)
-concat = heads_out.transpose(1, 0, 2).reshape(T, self.d_model)
-```
-
-## 10. Experiments / What-If Questions
-- **Does Multi-Head Attention increase total computational FLOPs compared to Single-Head Attention of dimension $d_{model}$?**
-  The original Transformer states that with the design choice $d_k = d_v = d_{model} / h$, the total computational cost is similar to single-head attention with full dimensionality. Equal splitting prevents the attention computation from becoming $h$ full-width attention operations. However, there are still multiple projections, concatenation, output projection, and memory/implementation overheads.
+1. Set both heads to identical projection matrices. Predict whether their
+   attention weights will differ, then verify the result.
+2. Change only $\mathbf{W}_K^{(2)}$. Which intermediate values change?
+3. Apply the Week 3 causal mask to both heads. Which entries must become zero
+   after Softmax?
+4. Increase $h$ while keeping $d_{\text{model}}$ fixed. What happens to the
+   common per-head dimension $d_{\text{model}}/h$?
+5. Randomly remove one trained head and measure the model's loss again. A
+   change in loss is stronger evidence of usefulness than a visually
+   interesting heatmap alone.
 
 ## 11. Common Misunderstandings
-- **Misunderstanding:** Each attention head processes a different subset of words in the sentence.
-- **Correction:** Every head processes **all $T$ words in the sequence**, but in a different feature subspace of dimension $d_k$.
+
+**Misunderstanding: Each head receives different words.**
+
+Every head receives the same sequence. The heads differ because they have
+different learned projections.
+
+**Misunderstanding: We assign one head to Inventory and another to Finance.**
+
+Standard MHA does not assign business roles to heads. Training may produce
+different patterns, overlapping patterns, or redundant heads.
+
+**Misunderstanding: More heads means each head keeps the full model width.**
+
+In the common design, the fixed model width is split across heads. If
+$d_{\text{model}} = 8$ and $h = 4$, the common head dimension is $2$, not $8$.
+
+**Misunderstanding: A larger single head is equivalent to several heads.**
+
+A larger single head still produces one Softmax attention distribution per
+query. Multiple heads produce multiple independently normalized distributions.
+
+**Misunderstanding: Different heatmaps prove useful specialization.**
+
+Different attention patterns show different routing, but usefulness requires
+evidence from model behavior, loss, or controlled ablation.
 
 ## 12. Limitations and Trade-Offs
-- **Memory Scaling:** Each head conceptually has a $T \times T$ attention matrix, so storing all attention weights can scale with $h \times T \times T$ (although optimized kernels may avoid explicitly materializing every intermediate).
-- The common reshape-based implementation (like the NumPy code above) requires $d_{model}$ to be divisible by $h$, but this is not a universal mathematical requirement for MHA.
-- Pruning experiments show that some attention heads become redundant during training and can be pruned without degrading model performance.
 
-## 13. Where It Appears in the Current Assignment
-In **Week 4 Assignment**, Multi-Head Attention is the main topic. Week 3
-should be treated as the single-head prerequisite.
+- More heads do not guarantee better learning.
+- With fixed $d_{\text{model}}$, increasing $h$ makes each common head subspace
+  narrower.
+- Some trained heads can be redundant.
+- Explicitly storing every attention matrix requires memory proportional to
+  $hT^2$.
+- Attention still has quadratic sequence-length cost because each head compares
+  token positions pairwise.
+- Head labels are interpretations made after training, not built-in semantics.
+
+With $d_k = d_v = d_{\text{model}}/h$, the original Transformer keeps the
+combined attention work in roughly the same order as one full-width head. MHA
+adds several routing distributions without running $h$ full-width heads.
+Projection, memory, and implementation overhead still exist.
+
+## 13. Where It Appears in the Week 4 Assignment
+
+Week 4 asks for two to four independent attention heads over the same business
+sequence. This topic provides the first implementation unit:
+
+- create separate learned Q/K/V projections per head;
+- calculate one attention matrix per head;
+- preserve the head dimension while inspecting outputs;
+- avoid claiming specialization before examining trained evidence.
+
+The Week 4 visualization should display $\mathbf{A}^{(i)}$ separately for every
+head.
 
 ## 14. Where It Appears in Modern AI Systems
-MHA is foundational; later architectures sometimes modify how query/key/value heads are shared for efficiency (e.g., Multi-Query Attention or Grouped-Query Attention).
+
+Multi-Head Attention is a core Transformer mechanism. Later architectures may
+change how Key and Value heads are shared for efficiency, but grouped-query
+attention, multi-query attention, KV caching, and optimized attention kernels
+are deferred. They are not needed to understand this week's assignment.
 
 ## 15. Connection to the Next Concept
-Multi-Head Attention produces richer contextual representations for sequence
-matrix $\mathbf{X}$. After this week, the next architectural question is how to
-place that sublayer inside a larger Transformer block together with residual
-connections, Layer Normalization, and feed-forward layers.
 
-## 16. Teach-Back and Small Application Exercise
-If $d_{model} = 768$ and the model uses $h = 12$ heads:
-1. What is the head dimension $d_k$ for each head?
-2. What is the shape of attention scores for each head in a sequence of length $T = 16$?
+We now have:
 
-## 17. Quick Revision Summary
-- Multi-Head Attention splits $d_{model}$ across $h$ parallel heads of size $d_k = d_{model} / h$.
-- Allows the model to attend to multiple representation subspaces simultaneously.
-- Output is concatenated and projected by $\mathbf{W}_O$.
+$$
+\mathbf{H}^{(1)},\mathbf{H}^{(2)},\ldots,\mathbf{H}^{(h)}
+$$
+
+The model still needs one output representation for each token. Topic 27,
+**Concatenation and Output Projection**, explains how the head outputs are
+joined and mixed.
+
+## 16. Teach-Back and Small Application
+
+Suppose:
+
+$$
+d_{\text{model}} = 12,\qquad h = 3,\qquad T = 5
+$$
+
+Using the common equal-split convention:
+
+1. What is $d_k$ for one head?
+2. What is the shape of one head's attention matrix?
+3. What is the shape of all attention matrices when the head axis is explicit?
+4. Why can three heads produce different attention patterns from the same
+   input?
+5. Why should you say a head may specialize rather than saying it will
+   specialize?
+
+## 17. Quick Revision
+
+- One head produces one attention distribution per query token.
+- MHA gives each head independent Q/K/V projection parameters.
+- Every head reads the full sequence in a different projected feature space.
+- One head outputs $(T \times d_v)$ and one attention matrix $(T \times T)$.
+- All heads together output $(h \times T \times d_v)$ before combination.
+- Multiple heads can learn different patterns, but uniqueness is not
+  guaranteed.
+- Topic 27 combines the separate outputs.
 
 ## 18. My Understanding
-*Fill in your own notes on how Multi-Head Attention enables parallel representation learning.*
+
+Write your own explanation:
+
+1. The precise limitation of one attention head is...
+2. Two heads can differ even with the same input because...
+3. A heatmap lets me observe...
+4. A heatmap alone cannot prove...
+5. The unresolved question before Topic 27 is...
 
 ## 19. Flashcards
-Is $d_k = d_{model} / h$ a universal mathematical requirement of Multi-Head Attention? #card
-No. It is a common implementation convention (used in the original Transformer) to ensure the concatenated output width equals $d_{model}$, preventing the total computation from growing too large.
 
-Why does Multi-Head Attention with $d_k = d_{model} / h$ have similar computational cost to a single head of full dimension $d_{model}$? #card
-Because each head projects into a smaller dimension $d_k$. Equal splitting prevents the attention computation from becoming $h$ full-width attention operations, keeping the total dot-product cost similar.
+What changes from single-head attention to multi-head attention? #card
+
+MHA uses multiple independently learned Q/K/V projection sets, producing
+multiple attention distributions and contextual outputs for the same sequence.
+
+Does each attention head receive only part of the token sequence? #card
+
+No. Every head receives the full sequence. Each head works in a different
+learned feature subspace.
+
+If $d_{\text{model}} = 768$ and $h = 12$, what is the common per-head
+dimension? #card
+
+$768/12 = 64$.
+
+Does adding heads guarantee unique specialization? #card
+
+No. Heads may learn different, overlapping, or redundant patterns. Actual
+behavior must be inspected and tested after training.
+
+Why is one wider head not identical to several heads? #card
+
+One head still produces one Softmax attention distribution per query. Several
+heads produce several independently normalized distributions.
 
 ## 20. Sources
-- Vaswani et al. (2017) *"Attention Is All You Need"*, Section 3.2.2.
-- Alammar, J. & Grootendorst, M. [Hands-On Large Language Models.md](file:///c:/Users/Nagar/source/repos/ai-learning-lab/resources/references/Hands-On%20Large%20Language%20Models.md), Chapter 3.
+
+- Vaswani et al. (2017), [Attention Is All You Need](https://arxiv.org/abs/1706.03762), Section 3.2.2.
+- Alammar and Grootendorst, [Hands-on Large Language Models](../resources/references/Hands-on-%20Large%20Language%20Models.md), Chapter 3.
