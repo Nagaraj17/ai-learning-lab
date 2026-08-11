@@ -88,16 +88,12 @@ So the same sequence is projected into different representation subspaces.
 That gives the model several chances to form different relevance patterns from
 the same token sequence.
 
-```mermaid
-flowchart LR
-    X["Same input sequence X"] --> H1["Head 1 with its own W_Q^1, W_K^1, W_V^1"]
-    X --> H2["Head 2 with its own W_Q^2, W_K^2, W_V^2"]
-    X --> H3["Head h with its own W_Q^h, W_K^h, W_V^h"]
-    H1 --> C["Concatenate"]
-    H2 --> C
-    H3 --> C
-    C --> WO["Output projection W_O"]
-```
+![Single-head versus Multi-Head Attention](../../topics/images/week04/single-head-vs-multi-head.png)
+
+**How to read the image:** One head produces one relationship pattern. Multiple
+heads receive the same complete sequence and may produce different patterns
+because their learned projection matrices differ. The colors do not assign
+predefined business roles.
 
 ## 4. Beginner Intuition
 
@@ -171,6 +167,17 @@ Multi-Head Attention does **not** mathematically require
 
 It is simply the classic Transformer design choice used in
 *Attention Is All You Need*.
+
+### Why not use one wider "super head"?
+
+A wider single head still produces one row-wise Softmax distribution for each
+query token. Multiple heads produce multiple independently normalized
+distributions.
+
+With the common split $d_k=d_v=d_{\text{model}}/h$, those extra routing
+patterns do not require $h$ full-width attention operations. The per-head
+dimensions become smaller, keeping total attention computation comparable to
+one full-width head while preserving several learned perspectives.
 
 ## 8. The Full Multi-Head Formula
 
@@ -322,21 +329,19 @@ If we stop after concatenation:
 - return to the model width expected by the rest of the network
 - decide how strongly each head’s features should influence the final result
 
+More precisely, $\mathbf{W}_O$ mixes individual concatenated features. It does
+not assign one scalar importance weight to each head and does not select a
+winning head.
+
 ## 12. The Complete Forward Pass
 
-```mermaid
-flowchart TD
-    X["Input sequence X"] --> QKV1["Head 1 projections"]
-    X --> QKV2["Head 2 projections"]
-    QKV1 --> A1["Head 1 scaled dot-product attention"]
-    QKV2 --> A2["Head 2 scaled dot-product attention"]
-    A1 --> H1["head_1 output"]
-    A2 --> H2["head_2 output"]
-    H1 --> C["Concatenate"]
-    H2 --> C
-    C --> WO["Apply W_O"]
-    WO --> Y["Final multi-head output"]
-```
+![Multi-Head Attention shape flow](../../topics/images/week04/multi-head-shape-flow.png)
+
+![Concatenation and output projection](../../topics/images/week04/output-projection-mixing.png)
+
+The first image keeps the per-head projections and outputs visible. The second
+continues the same flow through feature-axis concatenation and the learned
+output projection.
 
 If the assignment uses causal masking, the mask is reused **inside every head**
 before softmax.
@@ -349,7 +354,75 @@ This week requires disciplined language.
 |---|---|
 | Theory permits | Different heads can learn different useful patterns from the same sequence. |
 | We may expect | Some heads may become more local, some broader, some possibly redundant. |
-| Experiment actually proves | Only what the measured attention maps, losses, and ablation tests show for the trained toy model we ran. |
+| Experiment can establish | Only what measured attention maps, losses, and ablation tests show for the specific trained model and evaluation data. |
+
+### Four measurements used in Week 4
+
+**1. Pairwise attention distance**
+
+$$
+D_{i,j}
+=
+\frac{1}{T^2}
+\sum_{q=1}^{T}
+\sum_{k=1}^{T}
+\left|
+A^{(i)}_{q,k}-A^{(j)}_{q,k}
+\right|
+$$
+
+A small value means two heads routed attention similarly on the evaluated
+example. It does not prove that one head is unnecessary.
+
+**2. Normalized attention entropy**
+
+$$
+\widetilde{E}^{(i)}_q
+=
+\frac{
+-
+\sum_k A^{(i)}_{q,k}\log(A^{(i)}_{q,k}+\epsilon)
+}{
+\log(T)
+}
+$$
+
+This measures whether one attention row is concentrated or diffuse. It does
+not measure prediction confidence.
+
+For causal attention, replace $T$ in the normalizer with the number of valid
+keys in that query row. A row with only one valid key has entropy $0$.
+
+**3. Attention mass to a predefined token group**
+
+$$
+M^{(i)}(q,G)
+=
+\sum_{k \in G}
+A^{(i)}_{q,k}
+$$
+
+For example, define an inventory-related group before inspecting the heatmaps,
+then measure how much attention a Forecast query sends to that group.
+
+**4. Head ablation delta**
+
+$$
+\Delta L_i
+=
+L_{-i}-L_{\text{base}}
+$$
+
+$L_{\text{base}}$ is evaluation loss with every head active. $L_{-i}$ is loss
+after setting head $i$'s contextual output to zero while keeping the trained
+weights fixed. A large positive change is evidence that the evaluated model
+depended on that head.
+
+These measurements answer different questions. Pattern difference,
+concentration, business-group routing, and model dependence are not
+interchangeable.
+
+![Attention-head evidence workflow](../../topics/images/week04/head-evidence-workflow.png)
 
 Do **not** say:
 
@@ -392,6 +465,33 @@ This week also needs several negative statements:
 
 ## 16. What Comes Next
 
+The assignment requests a high-level preview of two operations that surround
+attention inside a Transformer block.
+
+### Residual connection
+
+Let the MHA input be $\mathbf{X}$ and its projected output be $\mathbf{Y}$.
+A residual connection adds the original input back:
+
+$$
+\mathbf{R}=\mathbf{X}+\mathbf{Y}
+$$
+
+This preserves a direct path for the original token representation and gives
+gradients a shorter route through the network. The addition requires matching
+shapes, which is one reason $\mathbf{W}_O$ returns the MHA output to
+$(T \times d_{\text{model}})$.
+
+### Layer Normalization
+
+Layer Normalization rescales the features within each token representation so
+their scale remains controlled as the network becomes deeper. It operates on
+the model-feature dimension rather than combining token positions.
+
+Transformer variants differ in whether normalization appears before or after
+the attention sublayer. This week only requires the purpose and shape-level
+connection; the normalization formula and architectural variants are deferred.
+
 Once we understand:
 
 - why one head can be limiting
@@ -426,3 +526,7 @@ That later question is previewed this week but taught in full later.
   [Are Sixteen Heads Really Better than One?](https://papers.neurips.cc/paper_files/paper/2019/hash/2c601ad9d2ff9bc8b282670cdd54f69f-Abstract.html)
 - Elena Voita et al.,
   [Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting, the Rest Can Be Pruned](https://aclanthology.org/P19-1580/)
+- Sarthak Jain and Byron Wallace,
+  [Attention is not Explanation](https://aclanthology.org/N19-1357/)
+- Sarah Wiegreffe and Yuval Pinter,
+  [Attention is not not Explanation](https://aclanthology.org/D19-1002/)

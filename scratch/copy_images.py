@@ -1,11 +1,25 @@
+import os
 import shutil
 
-src1 = r"C:\Users\Nagar\.gemini\antigravity-ide\brain\4eebfaca-d2b1-4283-bbb1-347fb35441c5\contextual_embedding_diagram_1785529978453.png"
-dst1 = r"c:\Users\Nagar\source\repos\ai-learning-lab\projects\Week 3\contextual_embedding_diagram.png"
+brain_dir = r"C:\Users\Nagar\.gemini\antigravity-ide\brain\d8fbe819-14a7-477b-ac2f-108a287c9de3"
+target_dir = r"c:\Users\Nagar\source\repos\ai-learning-lab\topics\images"
 
-src2 = r"C:\Users\Nagar\.gemini\antigravity-ide\brain\4eebfaca-d2b1-4283-bbb1-347fb35441c5\attention_mechanism_diagram_1785529964711.png"
-dst2 = r"c:\Users\Nagar\source\repos\ai-learning-lab\projects\Week 3\attention_mechanism_diagram.png"
+os.makedirs(target_dir, exist_ok=True)
 
-shutil.copyfile(src1, dst1)
-shutil.copyfile(src2, dst2)
-print("SUCCESS")
+# Copy positional encoding infographic
+img1_src = os.path.join(brain_dir, "positional_encoding_3_properties_infographic_1786041232811.png")
+img1_dst = os.path.join(target_dir, "positional_encoding_3_properties_infographic.png")
+
+if os.path.exists(img1_src):
+    shutil.copy2(img1_src, img1_dst)
+    print(f"Copied {img1_src} -> {img1_dst}")
+
+# Copy causal masking cheating infographic
+img2_src = os.path.join(brain_dir, "causal_masking_cheating_infographic_1786042058784.png")
+img2_dst = os.path.join(target_dir, "causal_masking_cheating_infographic.png")
+
+if os.path.exists(img2_src):
+    shutil.copy2(img2_src, img2_dst)
+    print(f"Copied {img2_src} -> {img2_dst}")
+
+print("Image copy process complete!")

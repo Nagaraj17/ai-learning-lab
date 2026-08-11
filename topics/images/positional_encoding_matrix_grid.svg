@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 540" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0f172a; }
+      .card { fill: #1e293b; stroke: #334155; stroke-width: 2; rx: 12px; }
+      .title { font-family: system-ui, -apple-system, sans-serif; font-size: 22px; font-weight: bold; fill: #f8fafc; }
+      .subtitle { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; fill: #94a3b8; }
+      .header-col { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; font-weight: bold; fill: #38bdf8; }
+      .header-fast { font-family: system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: bold; fill: #f87171; }
+      .header-slow { font-family: system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: bold; fill: #60a5fa; }
+      .cell-text { font-family: 'Consolas', 'Courier New', monospace; font-size: 14px; fill: #e2e8f0; }
+      .pos-text { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; font-weight: bold; fill: #fbbf24; }
+      .arrow { stroke: #64748b; stroke-width: 2; marker-end: url(#arrowhead); }
+      .box-highlight { fill: #0f172a; stroke: #38bdf8; stroke-width: 1.5; rx: 6px; }
+      .box-vector { fill: #172554; stroke: #2563eb; stroke-width: 2; rx: 6px; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#64748b" />
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" class="bg" />
+
+  <text x="460" y="35" text-anchor="middle" class="title">How Position Vectors Are Created: Step-by-Step Grid</text>
+  <text x="460" y="60" text-anchor="middle" class="subtitle">Filling a (4 positions × 4 dimensions) Positional Encoding Matrix P</text>
+
+  <!-- Step 1: Columns defined by frequency -->
+  <rect x="40" y="90" width="840" height="420" class="card" />
+
+  <!-- Grid Table Header -->
+  <line x1="60" y1="150" x2="860" y2="150" stroke="#475569" stroke-width="2" />
+  
+  <text x="110" y="125" text-anchor="middle" class="header-col">Position (pos)</text>
+  
+  <text x="250" y="115" text-anchor="middle" class="header-fast">Col 0 (Fast Sin)</text>
+  <text x="250" y="135" text-anchor="middle" class="cell-text" font-size="11" fill="#fca5a5">sin(pos)</text>
+  
+  <text x="390" y="115" text-anchor="middle" class="header-fast">Col 1 (Fast Cos)</text>
+  <text x="390" y="135" text-anchor="middle" class="cell-text" font-size="11" fill="#fca5a5">cos(pos)</text>
+  
+  <text x="530" y="115" text-anchor="middle" class="header-slow">Col 2 (Slow Sin)</text>
+  <text x="530" y="135" text-anchor="middle" class="cell-text" font-size="11" fill="#93c5fd">sin(pos / 100)</text>
+  
+  <text x="670" y="115" text-anchor="middle" class="header-slow">Col 3 (Slow Cos)</text>
+  <text x="670" y="135" text-anchor="middle" class="cell-text" font-size="11" fill="#93c5fd">cos(pos / 100)</text>
+
+  <text x="790" y="125" text-anchor="middle" class="header-col" fill="#4ade80">Resulting Vector P</text>
+
+  <!-- Row 0: Pos 0 -->
+  <line x1="60" y1="220" x2="860" y2="220" stroke="#334155" />
+  <text x="110" y="185" text-anchor="middle" class="pos-text">Pos 0</text>
+  <text x="250" y="185" text-anchor="middle" class="cell-text">sin(0) = 0.00</text>
+  <text x="390" y="185" text-anchor="middle" class="cell-text">cos(0) = 1.00</text>
+  <text x="530" y="185" text-anchor="middle" class="cell-text">sin(0.00) = 0.00</text>
+  <text x="670" y="185" text-anchor="middle" class="cell-text">cos(0.00) = 1.00</text>
+  <rect x="735" y="162" width="125" height="35" class="box-vector" />
+  <text x="797" y="184" text-anchor="middle" class="cell-text" font-weight="bold" fill="#4ade80">[0.00, 1.00, 0.00, 1.00]</text>
+
+  <!-- Row 1: Pos 1 -->
+  <line x1="60" y1="290" x2="860" y2="290" stroke="#334155" />
+  <text x="110" y="255" text-anchor="middle" class="pos-text">Pos 1</text>
+  <text x="250" y="255" text-anchor="middle" class="cell-text">sin(1) = 0.84</text>
+  <text x="390" y="255" text-anchor="middle" class="cell-text">cos(1) = 0.54</text>
+  <text x="530" y="255" text-anchor="middle" class="cell-text">sin(0.01) = 0.01</text>
+  <text x="670" y="255" text-anchor="middle" class="cell-text">cos(0.01) = 1.00</text>
+  <rect x="735" y="232" width="125" height="35" class="box-vector" />
+  <text x="797" y="254" text-anchor="middle" class="cell-text" font-weight="bold" fill="#4ade80">[0.84, 0.54, 0.01, 1.00]</text>
+
+  <!-- Row 2: Pos 2 -->
+  <line x1="60" y1="360" x2="860" y2="360" stroke="#334155" />
+  <text x="110" y="325" text-anchor="middle" class="pos-text">Pos 2</text>
+  <text x="250" y="325" text-anchor="middle" class="cell-text">sin(2) = 0.91</text>
+  <text x="390" y="325" text-anchor="middle" class="cell-text">cos(2) = -0.42</text>
+  <text x="530" y="325" text-anchor="middle" class="cell-text">sin(0.02) = 0.02</text>
+  <text x="670" y="325" text-anchor="middle" class="cell-text">cos(0.02) = 1.00</text>
+  <rect x="735" y="302" width="125" height="35" class="box-vector" />
+  <text x="797" y="324" text-anchor="middle" class="cell-text" font-weight="bold" fill="#4ade80">[0.91, -0.42, 0.02, 1.00]</text>
+
+  <!-- Row 3: Pos 3 -->
+  <line x1="60" y1="430" x2="860" y2="430" stroke="#334155" />
+  <text x="110" y="395" text-anchor="middle" class="pos-text">Pos 3</text>
+  <text x="250" y="395" text-anchor="middle" class="cell-text">sin(3) = 0.14</text>
+  <text x="390" y="395" text-anchor="middle" class="cell-text">cos(3) = -0.99</text>
+  <text x="530" y="395" text-anchor="middle" class="cell-text">sin(0.03) = 0.03</text>
+  <text x="670" y="395" text-anchor="middle" class="cell-text">cos(0.03) = 1.00</text>
+  <rect x="735" y="372" width="125" height="35" class="box-vector" />
+  <text x="797" y="394" text-anchor="middle" class="cell-text" font-weight="bold" fill="#4ade80">[0.14, -0.99, 0.03, 1.00]</text>
+
+  <!-- Bottom Explanatory Callout -->
+  <text x="460" y="465" text-anchor="middle" class="cell-text" fill="#38bdf8" font-size="13">Every row vector is 100% unique! No two positions get the same numbers.</text>
+  <text x="460" y="490" text-anchor="middle" class="subtitle" font-size="12">Columns 0 &amp; 1 wiggle fast across every step. Columns 2 &amp; 3 change slowly across long steps.</text>
+</svg>

@@ -1,86 +1,165 @@
-# Week 4 Source Plan
+# Week 4 Source Record
 
-This plan records which sources were checked during Phase 1 and which sources
-must be consulted before Phase 2 and Phase 3 content is finalized.
+This file records the sources actually consulted for the Week 4 curriculum,
+the role each source played, and the boundaries placed on the resulting
+claims.
 
 ## Source Selection Rule
 
 Use the smallest set of strong sources that covers:
 
-- beginner intuition
-- canonical mechanism
-- mathematical clarification
-- implementation clarification
-- evidence about specialization and redundancy
+- beginner intuition;
+- the canonical Multi-Head Attention mechanism;
+- mathematical and training clarification;
+- evidence about specialization and redundancy;
+- limits of interpreting attention weights.
 
-## Sources Already Verified as Locally Available
+Peer submissions and generated notes are not treated as technical authority.
 
-1. `resources/references/Hands-on- Large Language Models.md`
-   - Role:
-     - beginner intuition
-     - visual architecture framing
-     - Week 3 to Week 4 bridge language
-   - Reason selected:
-     - this is the mapped local reference for the Transformer curriculum
+## Local Sources Consulted
 
-2. `resources/references/Deep Learning.md`
-   - Role:
-     - mathematical clarification
-     - learning / backpropagation language when discussing how heads are
-       trained through loss and updates
-   - Reason selected:
-     - this is the mapped local mathematics reference
+### Hands-on Large Language Models
 
-## Sources Explicitly Not Safe to Cite for This Topic
+[Local reference](../../resources/references/Hands-on-%20Large%20Language%20Models.md)
 
-1. `resources/references/Build a Large Language Model (From Scratch).md`
-   - Status:
-     - file exists, but the local reference inventory says it contains the
-       wrong Raschka book content
-   - Rule:
-     - do not cite it for Multi-Head Attention
+Used for:
 
-## External Sources Required Before Teaching Content Is Finalized
+- beginner intuition;
+- visual Transformer architecture framing;
+- the Week 3 to Week 4 bridge;
+- clarification that heads run in parallel with distinct learned projections.
 
-These are not treated as consulted yet. They must be read before the permanent
-topic notes and experiments cite them.
+### Deep Learning
 
-1. Vaswani et al., *Attention Is All You Need*
-   - Role:
-     - canonical definition of Multi-Head Attention
-     - equal-width head convention `d_k = d_model / h`
-     - cost comparison framing
+[Local reference](../../resources/references/Deep%20Learning.md)
 
-2. Michel, Levy, and Neubig, *Are Sixteen Heads Really Better than One?*
-   - Role:
-     - evidence about head redundancy and pruning
+Used for:
 
-3. Voita et al., *Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting, the Rest Can Be Pruned*
-   - Role:
-     - evidence about specialization emerging unevenly across heads
+- objective, loss, gradient, and optimization terminology;
+- the high-level explanation of how per-head parameters and the output
+  projection learn through backpropagation.
 
-4. Authoritative implementation clarification source for from-scratch
-   Multi-Head Attention
-   - Preferred option:
-     - official author or original educational material from Sebastian Raschka
-   - Fallback:
-     - do not cite Raschka unless the actual correct source is located and
-       consulted
+This source was not used as the canonical definition of Multi-Head Attention.
 
-## Claim Boundaries for Week 4
+## Primary External Sources Consulted
 
-Until the external sources above are consulted, the Week 4 curriculum may
-safely assert only the following:
+### Canonical mechanism
 
-- every head processes the full input sequence
-- heads use different learned projections
-- the common equal-width design is a convention, not the universal definition
-- specialization may emerge during training
-- redundancy can occur
-- a random forward pass demonstrates mechanics, not learned behaviour
+Vaswani et al. (2017),
+[Attention Is All You Need](https://arxiv.org/abs/1706.03762), especially
+Section 3.2.2.
 
-The curriculum must not claim:
+Used for:
 
-- that any specific head learned a business role without measured evidence
-- that more heads always help
-- that attention weights fully explain model decisions
+- the canonical Multi-Head Attention definition;
+- independent projected Query, Key, and Value inputs per head;
+- concatenation and output projection;
+- the original equal-width convention
+  $d_k=d_v=d_{\text{model}}/h$;
+- the comparison with one full-width attention head.
+
+### Head redundancy and pruning
+
+Michel, Levy, and Neubig (2019),
+[Are Sixteen Heads Really Better than One?](https://proceedings.neurips.cc/paper/2019/hash/2c601ad9d2ff9bc8b282670cdd54f69f-Abstract.html).
+
+Used for:
+
+- evidence that some trained heads can be removed with limited performance
+  impact in particular evaluated models;
+- the distinction between architectural capacity and observed head necessity;
+- motivation for controlled head ablation.
+
+The paper's findings are not generalized to every Transformer, task, layer, or
+Week 4 training run.
+
+### Head specialization
+
+Voita et al. (2019),
+[Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting, the Rest Can Be Pruned](https://aclanthology.org/P19-1580/).
+
+Used for:
+
+- evidence that some important heads can develop consistent,
+  linguistically-interpretable patterns in specific machine-translation
+  models;
+- evidence that specialization and redundancy can coexist;
+- the rule that role claims require measured behavior rather than
+  architecture-based expectations.
+
+The paper's linguistic head roles are not converted into assumed ForecastIQ
+business roles.
+
+### Attention interpretation
+
+Jain and Wallace (2019),
+[Attention is not Explanation](https://aclanthology.org/N19-1357/).
+
+Wiegreffe and Pinter (2019),
+[Attention is not not Explanation](https://aclanthology.org/D19-1002/).
+
+Used together to establish a cautious boundary:
+
+- attention weights are observable internal routing values;
+- one heatmap is not automatically a complete causal explanation;
+- interpretation depends on the question, model, baselines, and supporting
+  tests;
+- visualization should be combined with numerical comparison and
+  intervention.
+
+## Source Explicitly Excluded
+
+The local file
+resources/references/Build a Large Language Model (From Scratch).md
+is not cited for Week 4.
+
+The repository's reference inventory says that file contains the wrong
+Raschka book content. No claim or implementation was derived from it.
+
+## Implementation Evidence Rule
+
+The NumPy formulas and examples are synthesized from the canonical mechanism
+and the repository's established attention implementation conventions.
+
+Every fixed numerical example must be recomputed before publication. A random
+forward pass may demonstrate mechanics and shapes, but it cannot demonstrate
+learned specialization.
+
+Implementation output becomes evidence only after:
+
+1. the model is trained;
+2. the evaluation input and random seed are recorded;
+3. actual attention matrices and losses are saved;
+4. predictions are separated from observations;
+5. ablation is evaluated against a baseline.
+
+## Final Claim Boundaries
+
+The Week 4 curriculum may state:
+
+- every standard head receives the full input sequence;
+- heads use different learned projections;
+- one head produces one attention distribution per query;
+- multiple heads permit multiple independently normalized distributions;
+- the equal-width design is a common convention, not a universal definition;
+- specialization may emerge during training;
+- redundancy may also emerge;
+- output projection mixes concatenated head features;
+- attention analysis requires evidence from the trained model.
+
+The curriculum must not state without measured evidence:
+
+- that a specific head learned Inventory, Finance, Contracts, or Operations;
+- that different-looking random heatmaps demonstrate specialization;
+- that similar heatmaps prove functional redundancy;
+- that more heads always improve the model;
+- that a removable head is universally useless;
+- that attention weights fully explain a prediction.
+
+## Status
+
+The research required for the Week 4 teaching material and permanent Topics
+26-28 has been consulted and incorporated.
+
+Research is no longer the blocking item. The remaining evidence must come from
+the Week 4 implementation and its recorded experiments.

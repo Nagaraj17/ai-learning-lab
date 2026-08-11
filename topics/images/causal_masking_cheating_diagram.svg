@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 480" width="100%" height="100%">
+  <rect width="850" height="480" fill="#0f172a" rx="12"/>
+  
+  <!-- Title -->
+  <text x="425" y="35" fill="#f8fafc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">
+    Causal Masking in Transformer LLMs: Unmasked vs. Masked Attention
+  </text>
+  
+  <!-- LEFT PANEL: Unmasked Attention (Cheating) -->
+  <g transform="translate(30, 55)">
+    <rect width="380" height="405" fill="#1e293b" rx="8" stroke="#334155" stroke-width="1.5"/>
+    <text x="190" y="30" fill="#f87171" font-family="sans-serif" font-size="15" font-weight="bold" text-anchor="middle">
+      ❌ Unmasked Self-Attention (CHEATING!)
+    </text>
+    <text x="190" y="50" fill="#94a3b8" font-family="sans-serif" font-size="12" text-anchor="middle">
+      Row 'a' can peek ahead into Column 'mat'
+    </text>
+    
+    <!-- Matrix Headers (Key K) -->
+    <g fill="#cbd5e1" font-family="monospace" font-size="11" text-anchor="middle">
+      <text x="90" y="75">A</text>
+      <text x="140" y="75">Cat</text>
+      <text x="190" y="75">sat</text>
+      <text x="240" y="75">on</text>
+      <text x="290" y="75">a</text>
+      <text x="340" y="75" fill="#f59e0b" font-weight="bold">mat</text>
+    </g>
+    
+    <!-- Row Labels (Query Q) -->
+    <g fill="#cbd5e1" font-family="monospace" font-size="11" text-anchor="end">
+      <text x="60" y="105">A</text>
+      <text x="60" y="145">Cat</text>
+      <text x="60" y="185">sat</text>
+      <text x="60" y="225">on</text>
+      <text x="60" y="265" fill="#f59e0b" font-weight="bold">a</text>
+      <text x="60" y="305">mat</text>
+    </g>
+    
+    <!-- Grid Cells -->
+    <g stroke="#334155" stroke-width="1" fill="#0f172a" font-family="monospace" font-size="10" text-anchor="middle">
+      <!-- Rows 0-3 -->
+      <rect x="70" y="90" width="40" height="25" fill="#1e293b"/><text x="90" y="106" fill="#94a3b8">0.20</text>
+      <rect x="120" y="90" width="40" height="25" fill="#1e293b"/><text x="140" y="106" fill="#94a3b8">0.20</text>
+      <rect x="170" y="90" width="40" height="25" fill="#1e293b"/><text x="190" y="106" fill="#94a3b8">0.20</text>
+      <rect x="220" y="90" width="40" height="25" fill="#1e293b"/><text x="240" y="106" fill="#94a3b8">0.20</text>
+      <rect x="270" y="90" width="40" height="25" fill="#1e293b"/><text x="290" y="106" fill="#94a3b8">0.20</text>
+      <rect x="320" y="90" width="40" height="25" fill="#1e293b"/><text x="340" y="106" fill="#94a3b8">0.20</text>
+      
+      <!-- Row 4 ("a") -->
+      <rect x="70" y="250" width="40" height="25" fill="#1e293b"/><text x="90" y="266" fill="#94a3b8">0.10</text>
+      <rect x="120" y="250" width="40" height="25" fill="#1e293b"/><text x="140" y="266" fill="#94a3b8">0.10</text>
+      <rect x="170" y="250" width="40" height="25" fill="#1e293b"/><text x="190" y="266" fill="#94a3b8">0.10</text>
+      <rect x="220" y="250" width="40" height="25" fill="#1e293b"/><text x="240" y="266" fill="#94a3b8">0.10</text>
+      <rect x="270" y="250" width="40" height="25" fill="#1e293b"/><text x="290" y="266" fill="#94a3b8">0.10</text>
+
+      <!-- CHEATING CELL (Row 4 "a", Col 5 "mat") -->
+      <rect x="320" y="250" width="40" height="25" fill="#7f1d1d" stroke="#ef4444" stroke-width="2"/>
+      <text x="340" y="266" fill="#fca5a5" font-weight="bold">0.50</text>
+    </g>
+    
+    <!-- Cheating Arrow -->
+    <path d="M 70 262 L 315 262" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="4,4" marker-end="url(#arrow-red)"/>
+    
+    <!-- Warning Box -->
+    <rect x="70" y="340" width="290" height="45" fill="#450a0a" rx="6" stroke="#991b1b" stroke-width="1.5"/>
+    <text x="215" y="360" fill="#fca5a5" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">
+      ⚠️ CHEATING: Reading Future Answer!
+    </text>
+    <text x="215" y="376" fill="#f87171" font-family="sans-serif" font-size="11" text-anchor="middle">
+      Row 'a' copies 'mat' directly from Column 5
+    </text>
+  </g>
+  
+  <!-- RIGHT PANEL: Causally Masked Attention (No Cheating) -->
+  <g transform="translate(440, 55)">
+    <rect width="380" height="405" fill="#1e293b" rx="8" stroke="#334155" stroke-width="1.5"/>
+    <text x="190" y="30" fill="#34d399" font-family="sans-serif" font-size="15" font-weight="bold" text-anchor="middle">
+      ✅ Causally Masked Attention (SAFE)
+    </text>
+    <text x="190" y="50" fill="#94a3b8" font-family="sans-serif" font-size="12" text-anchor="middle">
+      Upper Triangle set to -inf (0% Attention)
+    </text>
+    
+    <!-- Matrix Headers (Key K) -->
+    <g fill="#cbd5e1" font-family="monospace" font-size="11" text-anchor="middle">
+      <text x="90" y="75">A</text>
+      <text x="140" y="75">Cat</text>
+      <text x="190" y="75">sat</text>
+      <text x="240" y="75">on</text>
+      <text x="290" y="75">a</text>
+      <text x="340" y="75" fill="#94a3b8">mat</text>
+    </g>
+    
+    <!-- Row Labels (Query Q) -->
+    <g fill="#cbd5e1" font-family="monospace" font-size="11" text-anchor="end">
+      <text x="60" y="105">A</text>
+      <text x="60" y="145">Cat</text>
+      <text x="60" y="185">sat</text>
+      <text x="60" y="225">on</text>
+      <text x="60" y="265" fill="#34d399" font-weight="bold">a</text>
+      <text x="60" y="305">mat</text>
+    </g>
+    
+    <!-- Masked Grid Cells -->
+    <g stroke="#334155" stroke-width="1" font-family="monospace" font-size="10" text-anchor="middle">
+      <!-- Row 4 ("a") Valid Past (Cols 0-4) -->
+      <rect x="70" y="250" width="40" height="25" fill="#064e3b"/><text x="90" y="266" fill="#a7f3d0">0.20</text>
+      <rect x="120" y="250" width="40" height="25" fill="#064e3b"/><text x="140" y="266" fill="#a7f3d0">0.20</text>
+      <rect x="170" y="250" width="40" height="25" fill="#064e3b"/><text x="190" y="266" fill="#a7f3d0">0.20</text>
+      <rect x="220" y="250" width="40" height="25" fill="#064e3b"/><text x="240" y="266" fill="#a7f3d0">0.20</text>
+      <rect x="270" y="250" width="40" height="25" fill="#064e3b"/><text x="290" y="266" fill="#a7f3d0">0.20</text>
+
+      <!-- MASKED CELL (Row 4 "a", Col 5 "mat") -->
+      <rect x="320" y="250" width="40" height="25" fill="#0f172a" stroke="#475569"/>
+      <text x="340" y="266" fill="#ef4444" font-weight="bold">0.00</text>
+      <text x="340" y="245" fill="#f87171" font-size="9">-inf</text>
+    </g>
+    
+    <!-- Success Box -->
+    <rect x="70" y="340" width="290" height="45" fill="#064e3b" rx="6" stroke="#047857" stroke-width="1.5"/>
+    <text x="215" y="360" fill="#a7f3d0" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">
+      🛡️ BLOCKED: Future Peeking Prevented!
+    </text>
+    <text x="215" y="376" fill="#6ee7b7" font-family="sans-serif" font-size="11" text-anchor="middle">
+      Softmax(score + (-inf)) = 0.00 (0% attention)
+    </text>
+  </g>
+</svg>

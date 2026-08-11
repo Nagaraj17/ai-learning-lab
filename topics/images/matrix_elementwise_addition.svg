@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 380" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0f172a; }
+      .card { fill: #1e293b; stroke: #334155; stroke-width: 2; rx: 12px; }
+      .title { font-family: system-ui, -apple-system, sans-serif; font-size: 20px; font-weight: bold; fill: #f8fafc; }
+      .subtitle { font-family: system-ui, -apple-system, sans-serif; font-size: 13px; fill: #94a3b8; }
+      .box-tok { fill: #0f172a; stroke: #38bdf8; stroke-width: 2; rx: 8px; }
+      .box-pos { fill: #0f172a; stroke: #fbbf24; stroke-width: 2; rx: 8px; }
+      .box-res { fill: #172554; stroke: #2563eb; stroke-width: 2; rx: 8px; }
+      .text-code { font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; fill: #e2e8f0; }
+      .text-head { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; font-weight: bold; }
+      .operator { font-family: system-ui, -apple-system, sans-serif; font-size: 26px; font-weight: bold; fill: #38bdf8; }
+    </style>
+  </defs>
+
+  <rect width="100%" height="100%" class="bg" />
+
+  <text x="460" y="35" text-anchor="middle" class="title">Matching Columns (d_model) for Element-Wise Addition</text>
+  <text x="460" y="60" text-anchor="middle" class="subtitle">Every column in X_token aligns perfectly with the same column in Positional Encoding P</text>
+
+  <!-- Container -->
+  <rect x="30" y="85" width="860" height="260" class="card" />
+
+  <!-- Token Vector -->
+  <rect x="50" y="130" width="230" height="150" class="box-tok" />
+  <text x="165" y="160" text-anchor="middle" class="text-head" fill="#38bdf8">Word Embedding X</text>
+  <text x="165" y="180" text-anchor="middle" class="subtitle">"Rebate" at Pos 0</text>
+  <text x="165" y="210" text-anchor="middle" class="text-code">[ Col 0: 0.82,</text>
+  <text x="165" y="230" text-anchor="middle" class="text-code">  Col 1: -0.45,</text>
+  <text x="165" y="250" text-anchor="middle" class="text-code">  Col 2: 0.12,</text>
+  <text x="165" y="270" text-anchor="middle" class="text-code">  Col 3: 0.67 ]</text>
+
+  <!-- Plus Sign -->
+  <text x="310" y="215" text-anchor="middle" class="operator">+</text>
+
+  <!-- Position Vector -->
+  <rect x="345" y="130" width="230" height="150" class="box-pos" />
+  <text x="460" y="160" text-anchor="middle" class="text-head" fill="#fbbf24">Position Vector P</text>
+  <text x="460" y="180" text-anchor="middle" class="subtitle">Positional Stamp at Pos 0</text>
+  <text x="460" y="210" text-anchor="middle" class="text-code">[ Col 0: 0.00,</text>
+  <text x="460" y="230" text-anchor="middle" class="text-code">  Col 1: 1.00,</text>
+  <text x="460" y="250" text-anchor="middle" class="text-code">  Col 2: 0.00,</text>
+  <text x="460" y="270" text-anchor="middle" class="text-code">  Col 3: 1.00 ]</text>
+
+  <!-- Equals Sign -->
+  <text x="605" y="215" text-anchor="middle" class="operator">=</text>
+
+  <!-- Result Vector -->
+  <rect x="640" y="130" width="230" height="150" class="box-res" />
+  <text x="755" y="160" text-anchor="middle" class="text-head" fill="#4ade80">Combined Input X_input</text>
+  <text x="755" y="180" text-anchor="middle" class="subtitle">Position-Aware Vector</text>
+  <text x="755" y="210" text-anchor="middle" class="text-code" fill="#4ade80">[ Col 0: 0.82,</text>
+  <text x="755" y="230" text-anchor="middle" class="text-code" fill="#4ade80">  Col 1: 0.55,</text>
+  <text x="755" y="250" text-anchor="middle" class="text-code" fill="#4ade80">  Col 2: 0.12,</text>
+  <text x="755" y="270" text-anchor="middle" class="text-code" fill="#4ade80">  Col 3: 1.67 ]</text>
+
+  <text x="460" y="320" text-anchor="middle" class="subtitle">Shape of X: (T, d_model)  |  Shape of P: (T, d_model)  |  Col 0 adds to Col 0, Col 1 to Col 1, etc.</text>
+</svg>
