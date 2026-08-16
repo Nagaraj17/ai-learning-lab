@@ -40,16 +40,68 @@ A Position-dependent vector is a vector containing position encodings in a dimen
 Usually the Position-dependent vector is calculated in many ways one of which is learned in similar ways as the embeddings.
 
 Second which is most popular is using the Sinusoidal waves because of the following reasons.
-We can always have bounded values no matter how long the sequence is will solve the explosion problem
-Extrapolation of sequence lengths without training
-It allows attention mechanism learn relative distance relationships 
 
+Consider we have 4 tokens and dimension of each token is also 4
+
+Now,  totally there are 4 positions and 4 dimensions for each position
+
+       col1	col2	  col3	     col4
+Pos 0 sin(0)   cos(0)   sin(0/100)   cos (0/100)
+
+Pos 1 sin(1)	cos(1)	sin(1/100)   cos(1/100)
+
+Pos 2  sin(2) ....
+
+Pos 3  sin(3) ....
+
+With Sinusoidal waves we can always ensure the following.
+
+- We can always have bounded values no matter how long the sequence is will solve the explosion problem
+- Extrapolation of sequence lengths without training
+- It allows attention mechanism learn relative distance relationships 
 
 Now lets take the QKV values now we know that Q = X * WQ where X is sequence matrix containing the Embeddings of the sequence.
 
-Now Instead of the embeddings X(P) = (X(Embedding) + Position-dependent Vector  Where X(P) is Contextual representation along with Positional context
+Now Instead of the embeddings X(P) = (X(Embedding) + Position-dependent Vector)  Where X(P) is Contextual representation along with Positional context
 
 Now the model would know the difference when Rebate comes before Contract.
+
+This way we solved the Positional Information problem, Now the model will know the difference 
+
+But there is another problem which is the training problem.
+
+For Text Genration, we need to use a mask to prevent the attention mechanism from looking at future tokens, because in text generation we are generating tokens one by one and we can't look at the future tokens.
+
+This is done by just adding a mask of -inf  to the token representations.
+
+is there is a sentence or sequence of log events is shorter than the max sequence length we add padding tokens to the sequence. 
+
+Attention mechanism
+Embeddings-> sequence matrix ->( concatenate PositionEncoding using a Sinusoidal approach)-> We get the Position aware Embeddings -> Calculate QK => Attention Matrix -> Softmax => V => Contextual rich and positional aware embeddings-> Feed to next layer
+
+When positional -encoding aling with Attention solves positional awareness and enriches the contextual meaning why do we need multi head attention ?
+Lets us understand with an example consider forecast is the current token.
+
+[Order, Shipment, Inventory, Invoice, Contract, Forecast]
+
+The Forecasts asks which token should influence the meaning in this sequence
+It will atten to all the previous tokens
+1.Inventory -> current stock position2.Order previous procurement activity
+3.Shipment -> supply avaliable date
+4.Invoice -> payment terms and historical spending
+5. Contract -> price and pruchasing terms.
+
+the resultant is a richer context-aware representation of the token forecast.
+
+What is the problem we are trying to solve here?
+A Single attention combines all the above relationships into a one weighted mixture. If inventory is the strongest signal for predicting the required order quantity the single head may assign more attention to inventory. 
+However, this does not mean the other relationships are unimportant. This is a limitation of a single attention head.
+
+Therefore to overcome this limitation and to capture different relationships we use multi-head attention.
+
+Multi head attention allows several heads to examine the same sequences using different learned Q, K, V projections.
+
+Where One head may focus on Inventory, other on  shipments and another on financial information and another on contract terms.
 
 
 
