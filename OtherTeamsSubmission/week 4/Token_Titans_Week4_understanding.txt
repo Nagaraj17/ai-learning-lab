@@ -1,0 +1,220 @@
+WEEK 4 - FROM ONE ATTENTION HEAD TO MULTIPLE PERSPECTIVES
+
+OVERVIEW
+Week 1 asked: How does a neural network learn?
+Week 2 asked: How can a model learn useful word representations?
+Week 3 asked: Which tokens in a sequence matter for the current prediction?
+Week 4 asks: Can the model examine the same sequence from several perspectives at once?
+
+The answer is Multi-Head Attention.
+
+1. LIMITATION OF A SINGLE ATTENTION HEAD
+In Week 3, one self-attention head used one set of query, key, and value
+projections. Given an input matrix X, it computed:
+    Q = X @ Wq
+    K = X @ Wk
+    V = X @ Wv
+It then calculated scaled dot-product attention:
+    scores  = (Q @ K.T) / sqrt(head_dimension)
+    weights = softmax(scores)
+    context = weights @ V
+This allows every token to combine information from other tokens. However, a
+single head produces only one attention pattern in one projected space.
+
+Consider this purchase-order sequence:
+
+    Order -> Shipment -> Receive -> Restock -> Inventory -> Forecast
+
+When processing Forecast, several relationships may matter:
+    Inventory  - current stock affects the forecast.
+    Order      - previous demand affects future demand.
+    Shipment   - delays affect available stock.
+    Invoice    - financial activity may provide another signal.
+One head can represent some of this information, but multiple heads give the
+model several independent ways to transform and compare the same sequence.
+
+2. MULTI-HEAD ATTENTION
+Multi-Head Attention runs several self-attention heads in parallel. Every head
+receives the same input X, but each head has its own projection matrices:
+
+Conceptual four-head example:
+
+    Head 1: Q1 = X @ Wq1, K1 = X @ Wk1, V1 = X @ Wv1
+    Head 2: Q2 = X @ Wq2, K2 = X @ Wk2, V2 = X @ Wv2
+    Head 3: Q3 = X @ Wq3, K3 = X @ Wk3, V3 = X @ Wv3
+    Head 4: Q4 = X @ Wq4, K4 = X @ Wk4, V4 = X @ Wv4
+
+Our Week 4 implementation uses three heads, which satisfies the requirement to
+implement two to four heads:
+
+Head 1: Order / Invoice / Cancel head
+Head 2: Shipment / Receive / Return head
+Head 3: Restock / Inventory / Forecast head
+
+Each head computes its own attention output:
+    head_i = softmax((Qi @ Ki.T) / sqrt(head_dimension)) @ Vi
+Because the projection matrices differ, the heads can learn different
+attention patterns.
+
+
+3. HEAD DIMENSION
+The model dimension is normally divided evenly across the heads:
+    head_dimension = model_dimension / number_of_heads
+Conceptual dimension example (not our implementation configuration):
+    model_dimension = 256
+    number_of_heads  = 4
+    head_dimension   = 64
+Each head processes 64 dimensions. Four 64-dimensional head outputs can then
+be concatenated to recover 256 dimensions. This provides multiple attention
+mechanisms without multiplying the overall representation size.
+
+In our implementation, the number of active heads is explicitly set to three.
+
+
+4. COMBINING THE HEADS
+The head outputs are joined side by side:
+    combined = concatenate(head_1, head_2, ..., head_n)
+A learned output projection then mixes their information:
+    output = combined @ Wo
+
+The heads do not vote. Each head produces numeric features, and Wo learns how
+those features should contribute to the final representation.
+
+The complete process is:
+    Sequence
+       -> Embeddings
+       -> Parallel Self-Attention Heads
+       -> Concatenation
+       -> Output Projection
+       -> Combined Representation
+       -> Prediction
+
+
+5. SELF-ATTENTION VS MULTI-HEAD ATTENTION
+Self-Attention:
+    One attention mechanism that lets tokens in the same sequence exchange
+    information.
+
+Multi-Head Attention:
+    Several self-attention mechanisms operating in parallel, each with its own
+    learned projections.
+
+Self-attention is the mechanism. Multi-Head Attention is a parallel arrangement
+of several such mechanisms.
+
+6. DO HEADS ALWAYS LEARN DIFFERENT THINGS?
+No. Multiple heads provide the capacity for different perspectives, but they do
+not guarantee specialization. Two or more heads may learn similar or redundant
+attention patterns.
+We should compare the trained attention matrices instead of assuming that every
+head is unique. Useful comparisons include:
+    - Visual inspection with heatmaps.
+    - Cosine similarity between flattened attention matrices.
+    - Average absolute difference between head weights.
+    - Prediction performance after masking one head at a time.
+
+If removing one head has little effect, that head may be redundant. However,
+attention weights alone do not fully explain model behavior; the value and
+output projections also influence the final result.
+
+7. TRAINED ATTENTION VS RANDOM ATTENTION
+Random Q, K, and V matrices can produce different-looking attention patterns,
+but those patterns do not represent learned knowledge.
+The correct interpretation is:
+    Architecture gives the model the ability to learn multiple perspectives.
+    Training determines whether useful perspectives actually emerge.
+If heads are manually assigned to categories such as inventory or finance, the
+result demonstrates Multi-Head Attention but does not prove that the model
+discovered those roles. A learned role must emerge from a training objective and
+gradient-based updates to Wq, Wk, Wv, and Wo.
+
+After training, describe a head cautiously:
+    "This head appears to focus on inventory-related tokens."
+Do not claim:
+    "This head is the inventory expert."
+
+8. WHY NOT USE ONE LARGE HEAD?
+One large head and several smaller heads may use the same total representation
+size, but they are not equivalent.
+One large head has one Q/K/V projection system and one attention pattern.
+Multiple heads have independent projection systems and can compare information
+in several representation subspaces at the same time.
+The benefit is not simply more dimensions. It is multiple independent ways of
+transforming and relating the input.
+Adding more heads does not always improve performance. If the model dimension
+stays fixed, increasing the number of heads reduces each head's dimension. Too
+many heads may create very small subspaces, redundant patterns, extra overhead,
+or harder optimization.
+
+9. TRAINING DATA
+Week 4 uses longer sequences so that several relationships can appear in the
+same context. Example sequences include:
+    Order -> Shipment -> Receive -> Restock -> Inventory
+    Shipment -> Receive -> Restock -> Inventory -> Forecast
+    Receive -> Restock -> Inventory -> Forecast -> Order
+    Inventory -> Forecast -> Scenario -> Order -> Shipment
+
+Longer and more varied training data gives the heads more opportunities to
+learn useful differences. A tiny deterministic dataset may encourage
+memorization or redundant heads rather than meaningful specialization.
+
+FORECASTIQ BUSINESS EXAMPLE
+
+Suppose ForecastIQ predicts whether Drug A should be ordered. Relevant inputs
+might include:
+    Practice, Drug, Distributor, Inventory, Contract, Invoice, Rebate, Forecast
+Different heads might learn to combine different kinds of evidence, such as:
+    Inventory and forecast information.
+    Distributor and shipment information.
+    Contract, invoice, and rebate information.
+    Practice-level demand patterns.
+
+We should normally let training discover useful combinations rather than force
+fixed business roles on the heads. Manually assigned roles can be useful for a
+teaching demonstration, but standard Multi-Head Attention learns projections
+from data.
+
+The final decision is produced by concatenating the numeric head outputs,
+applying the learned output projection, and passing the result to the prediction
+layer. This is not a majority vote and is not a Mixture-of-Experts system.
+
+
+WHAT WE LEARNED ABOUT REDUNDANT HEADS
+
+Our first implementation created three heads, but their attention distributions
+were close to uniform and looked almost identical. Pairwise cosine similarities
+between the flattened attention patterns were approximately 0.979 to 0.995.
+Because cosine similarity values near 1 indicate nearly the same pattern, these
+heads were effectively redundant.
+
+The redundancy occurred because the six-dimensional embedding and pseudo-inverse
+could only approximate the ten vocabulary-level category targets. The resulting
+query-key scores were small and similar, so softmax flattened the weights toward
+approximately 20 percent per token.
+
+This demonstrated an important distinction:
+
+    Multiple heads provide the capacity for multiple perspectives.
+    Multiple heads do not guarantee that different perspectives will emerge.
+
+We therefore changed the demonstration to use a shared constant-query target
+and scaled the query and key projections before softmax. In the latest notebook
+run, the off-diagonal cosine similarities decreased to:
+
+    Order head vs Shipment head:     0.698
+    Order head vs Inventory head:    0.456
+    Shipment head vs Inventory head: 0.436
+
+These lower values show that the final attention patterns are more distinct.
+The clearest difference appears in the sequence ending with Forecast, where the
+three heads place their highest weights on Shipment, Receive, and Restock.
+
+However, these roles were designed through manually selected category targets
+and logit scaling. They were not learned end-to-end by updating Wq, Wk, Wv, and
+Wo through backpropagation. We can say that the heads demonstrate different
+perspectives, but we cannot claim that training independently discovered these
+roles.
+
+Some sequences still produce relatively even attention weights. Therefore,
+head differences can depend on the input context, and heads can remain partly
+redundant even when their overall similarity is lower.

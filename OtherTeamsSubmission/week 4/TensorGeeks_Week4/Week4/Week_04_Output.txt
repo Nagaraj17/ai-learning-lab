@@ -1,0 +1,121 @@
+======================================================================
+Week 4: Multi-Head Self-Attention Training
+======================================================================
+Heads: 4 | D_MODEL: 8 | HEAD_DIM: 4
+Epoch    0   Loss = 9.0924   Acc = 50.00%
+Epoch  600   Loss = 0.0041   Acc = 100.00%
+Epoch 1200   Loss = 0.0014   Acc = 100.00%
+Epoch 1800   Loss = 0.0008   Acc = 100.00%
+Epoch 2400   Loss = 0.0005   Acc = 100.00%
+Epoch 3000   Loss = 0.0004   Acc = 100.00%
+Epoch 3600   Loss = 0.0003   Acc = 100.00%
+Epoch 4200   Loss = 0.0003   Acc = 100.00%
+Epoch 4800   Loss = 0.0002   Acc = 100.00%
+Epoch 5400   Loss = 0.0002   Acc = 100.00%
+Epoch 5999   Loss = 0.0002   Acc = 100.00%
+
+======================================================================
+Predictions and Per-Head Attention (Last Token Query)
+======================================================================
+Input: ['PracticeA', 'DrugA', 'PayerA', 'Monday'] -> Predicted: Approved    Expected: Approved
+  Head 1:
+    PracticeA  0.250 |#####...............|
+    DrugA      0.251 |#####...............|
+    PayerA     0.250 |#####...............|
+    Monday     0.249 |#####...............|
+  Head 2:
+    PracticeA  0.240 |#####...............|
+    DrugA      0.253 |#####...............|
+    PayerA     0.264 |#####...............|
+    Monday     0.244 |#####...............|
+  Head 3:
+    PracticeA  0.256 |#####...............|
+    DrugA      0.250 |#####...............|
+    PayerA     0.247 |#####...............|
+    Monday     0.247 |#####...............|
+  Head 4:
+    PracticeA  0.254 |#####...............|
+    DrugA      0.258 |#####...............|
+    PayerA     0.267 |#####...............|
+    Monday     0.221 |####................|
+Input: ['PracticeA', 'DrugB', 'PayerB', 'Monday'] -> Predicted: Denied      Expected: Denied
+  Head 1:
+    PracticeA  0.250 |#####...............|
+    DrugB      0.251 |#####...............|
+    PayerB     0.251 |#####...............|
+    Monday     0.249 |#####...............|
+  Head 2:
+    PracticeA  0.250 |#####...............|
+    DrugB      0.251 |#####...............|
+    PayerB     0.244 |#####...............|
+    Monday     0.255 |#####...............|
+  Head 3:
+    PracticeA  0.252 |#####...............|
+    DrugB      0.251 |#####...............|
+    PayerB     0.255 |#####...............|
+    Monday     0.243 |#####...............|
+  Head 4:
+    PracticeA  0.260 |#####...............|
+    DrugB      0.258 |#####...............|
+    PayerB     0.256 |#####...............|
+    Monday     0.226 |#####...............|
+Input: ['PracticeB', 'DrugA', 'PayerA', 'Friday'] -> Predicted: Denied      Expected: Denied
+  Head 1:
+    PracticeB  0.236 |#####...............|
+    DrugA      0.236 |#####...............|
+    PayerA     0.231 |#####...............|
+    Friday     0.298 |######..............|
+  Head 2:
+    PracticeB  0.218 |####................|
+    DrugA      0.217 |####................|
+    PayerA     0.208 |####................|
+    Friday     0.358 |#######.............|
+  Head 3:
+    PracticeB  0.249 |#####...............|
+    DrugA      0.248 |#####...............|
+    PayerA     0.239 |#####...............|
+    Friday     0.264 |#####...............|
+  Head 4:
+    PracticeB  0.244 |#####...............|
+    DrugA      0.245 |#####...............|
+    PayerA     0.231 |#####...............|
+    Friday     0.279 |######..............|
+Input: ['PracticeB', 'DrugB', 'PayerA', 'Monday'] -> Predicted: Approved    Expected: Approved
+  Head 1:
+    PracticeB  0.251 |#####...............|
+    DrugB      0.251 |#####...............|
+    PayerA     0.250 |#####...............|
+    Monday     0.249 |#####...............|
+  Head 2:
+    PracticeB  0.254 |#####...............|
+    DrugB      0.240 |#####...............|
+    PayerA     0.263 |#####...............|
+    Monday     0.243 |#####...............|
+  Head 3:
+    PracticeB  0.250 |#####...............|
+    DrugB      0.255 |#####...............|
+    PayerA     0.247 |#####...............|
+    Monday     0.247 |#####...............|
+  Head 4:
+    PracticeB  0.260 |#####...............|
+    DrugB      0.252 |#####...............|
+    PayerA     0.267 |#####...............|
+    Monday     0.221 |####................|
+
+Training set accuracy: 100.00%
+
+======================================================================
+Head Comparison (Are heads learning unique patterns?)
+======================================================================
+Head 1 average attention entropy: 1.3848
+Head 2 average attention entropy: 1.3787
+Head 3 average attention entropy: 1.3861
+Head 4 average attention entropy: 1.3840
+
+Pairwise cosine similarity between head signatures:
+  Head 1 vs Head 2: 0.9973
+  Head 1 vs Head 3: 0.9992
+  Head 1 vs Head 4: 0.9982
+  Head 2 vs Head 3: 0.9935
+  Head 2 vs Head 4: 0.9947
+  Head 3 vs Head 4: 0.9985

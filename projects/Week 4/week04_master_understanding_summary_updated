@@ -130,8 +130,22 @@ We found that it is just adding a new router network to the multihead attention 
 
 ---
 
-## 🔬 Part 5: Production Architecture Perspectives
+## 🔬 Part 5: Production Architecture Perspectives (Residuals & LayerNorm)
 
-### 1. TBD
-- **Residual Connections**: Need to explore
-- **Layer Normalization (LayerNorm)**:Need to explore.
+### 1. Residual Connections ($X + \text{MHA}(X)$) — The Gradient Highway
+- **The Problem Solved**: Eliminates vanishing gradients and prevents feature distortion in deep networks.
+- **Math Bypass**: $\frac{d}{dX}[X + f(X)] = \mathbf{1.0} + \frac{df(X)}{dX}$. The $+1.0$ term creates an uninterrupted gradient highway, allowing error signals to flow backward directly to initial layers.
+- **Analogy**: Submitting **[Original Textbook ($X$) + Student Notes ($\text{MHA}(X)$)]** so original input facts are never lost.
+
+### 2. Layer Normalization ($\text{LayerNorm}(X)$) — The Audio Volume Leveler
+- **The Problem Solved**: Rescales feature activation vectors so numbers don't blow up ($+50 \rightarrow +500 \rightarrow \text{NaN}$).
+- **Formula**: $\hat{X}_i = \frac{X_i - \mu}{\sqrt{\sigma^2 + \epsilon}}$ (rescales features to mean 0 and variance 1 per token).
+- **Analogy**: An **automatic audio leveler** that keeps room volume at a crisp, comfortable 70 dB so no single feature screams or overpowers the rest.
+
+### 3. Content Failure (Overfitting) vs Scale Failure (Numeric Explosion)
+- **Backup Heads (Content Protection)**: If 1 head overfits to data noise, other heads provide correct backup representations.
+- **LayerNorm (Scale Protection)**: Even if all 4 heads have great backup representations, concatenating them can produce large numeric sums ($+51.0$). LayerNorm rescales the vector back down so deep layers don't crash.
+
+### 4. Single-Layer vs Multi-Layer Threshold Rule
+- **1-Layer Models** *(Our Assignment)*: Residuals and LayerNorm are **not strictly required** because gradients flow directly over 1 layer.
+- **Deep Models (6+ to 96 Layers)** *(GPT-4, LLaMA)*: Residuals and LayerNorm are **mandatory** to maintain stability.

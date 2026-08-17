@@ -1,0 +1,63 @@
+How Multi-Head Self-Attention Works
+-------------------------------------------------------------------------------
+
+1. Core Architecture
+
+- 4 independent attention heads running in parallel
+- Each head has its own Query (Q), Key (K), and Value (V) projection matrices
+- Head outputs are concatenated and projected back to model dimension
+- Residual connection from the last token embedding
+
+2. Forward Pass for Each Head
+For each head:
+
+Q = Token_Embeddings @ W_q[head]    # Shape: [seq_len, head_dim]
+K = Token_Embeddings @ W_k[head]
+V = Token_Embeddings @ W_v[head]
+
+Then compute attention scores:
+
+scores = (Q @ K.T) / sqrt(head_dim)         # Scaled dot-product
+attention_weights = softmax(scores)         # Normalize to probabilities
+context = attention_weights @ V             # Weighted average of values
+
+Result: Each head learns different patterns. 
+Head 1 might focus on token relationships
+Head 2 on sequential order
+Head 3 on semantic similarity, etc.
+
+3. Combining Heads
+
+concat = [head1_output || head2_output || head3_output || head4_output]
+z = concat @ W_o                            # Project back to D_MODEL
+
+4. Residual + Layer Norm
+
+h_pre = last_token_embedding + z           # Residual connection
+h = layer_norm(h_pre)                      # Non-trainable normalization
+
+5. Classification
+
+logits = h @ W_out + b_out
+probabilities = softmax(logits)            # Predict next word
+
+Key Advantages
+-------------------------------------------------------------------------------
+
+- Diversity: Each head specializes in different attention patterns
+- Robustness: Parallel representations make learning more stable
+- Expressiveness: Multiple perspectives capture richer context
+- Interpretability: You can visualize what each head attends to
+
+
+Summary
+-------------------------------------------------------------------------------
+Multi-head self-attention is powerful because:
+
+- Multiple Perspectives: Different heads capture different patterns simultaneously
+- Robustness: If one head overfits, others provide backup signals
+- Efficiency: Parallel computation is faster than sequential
+- Interpretability: Can visualize what each head learns
+- Stability: Residual connections and layer norm improve training
+- Flexibility: Each head can specialize in attention pattern
+- The key insight: Instead of forcing one attention mechanism to solve all problems, let multiple specialized mechanisms compete and combine their outputs.
