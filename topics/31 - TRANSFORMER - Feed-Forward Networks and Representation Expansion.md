@@ -1,13 +1,13 @@
 # 31 - TRANSFORMER - Feed-Forward Networks and Representation Expansion
 
 ## 1. The Problem
-Multi-Head Attention (MHA) allows tokens to gather context from other tokens across a sequence. However, MHA consists entirely of **linear combinations** (weighted matrix averages $A @ V$).
+Multi-Head Attention (MHA) allows tokens to gather context from other tokens across a sequence. However, MHA consists entirely of **linear combinations** (weighted matrix averages $A V$).
 
 If a Transformer consisted *only* of MHA layers, it would be incapable of learning complex non-linear relationships. Attention decides **where to look** and **what context to gather**, but it lacks the capacity to process, transform, and store factual knowledge about those gathered features.
 
 ---
 
-## 2. Why We Need Something New: Position-Wise Feed-Forward Network
+## 2. Why We Need Something New
 We need a component that:
 1. Applies **non-linear activation functions** (like ReLU or GELU) to transform feature representations.
 2. Operates on **each token position independently and identically** (position-wise processing).
@@ -23,120 +23,160 @@ The **Position-Wise Feed-Forward Network (FFN)** is a two-layer fully connected 
 ---
 
 ## 4. Beginner Intuition / Mental Model
-- **Attention Sub-layer**: The **Researcher** who goes out to the library and gathers relevant reference books ($X \rightarrow A @ V$).
+- **Attention Sub-layer**: The **Researcher** who goes out to the library and gathers relevant reference books ($X \rightarrow A V$).
 - **Feed-Forward Sub-layer (FFN)**: The **Analyst** who takes the gathered books, sits down at their desk, thinks deeply, applies non-linear reasoning, and writes down the synthesized conclusion!
 
 ---
 
-## 5. Why Expand to $4 \times d_{\text{model}}$ before Shrinking?
+## 5. What Came Before $\rightarrow$ What Changes Now
 
-In standard Transformers:
-- Input dimension: $d_{\text{model}} = 16$ (or $512$ / $4096$).
-- Hidden FFN dimension: $d_{\text{ff}} = 4 \times d_{\text{model}} = 64$ (or $2048$ / $16384$).
-
-### Why expand by $4\times$?
-Recent research (Geva et al., 2021) showed that the first FFN linear matrix ($W_1$) acts as an **associative Key-Value memory bank**:
-1. **Expansion ($W_1 \in \mathbb{R}^{d_{\text{model}} \times 4 d_{\text{model}}}$)**: Projects the token vector into a vast 64-dimensional space where thousands of pattern detectors (keys) fire non-linearly via ReLU.
-2. **Shrinking ($W_2 \in \mathbb{R}^{4 d_{\text{model}} \times d_{\text{model}}}$)**: Combines the active pattern detectors back into a refined 16-dimensional representation vector!
+| Aspect | Multi-Head Attention Sub-layer | Feed-Forward Network Sub-layer |
+| :--- | :--- | :--- |
+| **Primary Goal** | **Context Gathering** (where to look across sequence). | **Feature Processing** (what to do with gathered context). |
+| **Cross-Token Mixing** | **Yes**: Mixes information across sequence length $T$. | **No**: Operates on each token position independently. |
+| **Linearity** | Linear combinations ($A V W_O$). | **Non-Linear**: Uses ReLU / GELU activation functions. |
+| **Hidden Dimension** | Standard $d_{\text{model}}$. | **Expanded**: $d_{\text{ff}} = 4 \times d_{\text{model}}$ memory bank. |
 
 ---
 
-## 6. The Mathematical Formulas
+## 6. How It Works
+For each token vector $x \in \mathbb{R}^{d_{\text{model}}}$:
 
-For each token position vector $x \in \mathbb{R}^{d_{\text{model}}}$:
+1. **Linear Expansion**: Project vector from $d_{\text{model}}$ to $d_{\text{ff}} = 4 \times d_{\text{model}}$:
+   $$h_1 = x W_1 + b_1$$
+2. **Non-Linear Activation**: Apply ReLU (or GELU/SwiGLU):
+   $$a_1 = \max(0, h_1)$$
+3. **Linear Compression**: Project vector back from $d_{\text{ff}}$ to $d_{\text{model}}$:
+   $$y = a_1 W_2 + b_2$$
 
+---
+
+## 7. Required Mathematics
+
+### Formulas:
 $$\text{FFN}(x) = \text{ReLU}\left(x W_1 + b_1\right) W_2 + b_2$$
 
 ### Symbol-by-Symbol Breakdown:
-- $x$: Token feature vector of shape $(1, d_{\text{model}})$.
-- $W_1$: First weight matrix of shape $(d_{\text{model}}, 4 \cdot d_{\text{model}})$.
-- $b_1$: First bias vector of shape $(4 \cdot d_{\text{model}},)$.
-- $\text{ReLU}(z) = \max(0, z)$: Rectified Linear Unit activation function (zeroes out negative activations, introducing non-linearity).
-- $W_2$: Second weight matrix of shape $(4 \cdot d_{\text{model}}, d_{\text{model}})$.
-- $b_2$: Second bias vector of shape $(d_{\text{model}},)$.
+- $x$: Input feature vector for one token position with shape $(d_{\text{model}},)$.
+- $W_1$: First weight matrix with shape $(d_{\text{model}}, d_{\text{ff}})$.
+- $b_1$: First bias vector with shape $(d_{\text{ff}},)$.
+- $\text{ReLU}$: Rectified Linear Unit activation function ($\max(0, z)$).
+- $W_2$: Second weight matrix with shape $(d_{\text{ff}}, d_{\text{model}})$.
+- $b_2$: Second bias vector with shape $(d_{\text{model}},)$.
+
+### Tensor Shape Trace:
+- Input $X$: $(B, T, d_{\text{model}})$
+- After $W_1 + b_1$: $(B, T, d_{\text{ff}})$
+- After $\text{ReLU}$: $(B, T, d_{\text{ff}})$
+- After $W_2 + b_2$: $(B, T, d_{\text{model}})$
 
 ---
 
-## 7. Complete Worked Example (Small Numbers)
+## 8. Complete Worked Example
 
-Let $d_{\text{model}} = 2$ and $d_{\text{ff}} = 4$.
-Input token vector $x = [1.0, \; 2.0]$.
+Let input vector be $x = [1.0, 2.0]$ ($d_{\text{model}}=2, d_{\text{ff}}=4$):
 
-Suppose:
-$$W_1 = \begin{bmatrix} 1 & -1 & 2 & 0 \\ 0 & 1 & -1 & 2 \end{bmatrix}, \quad b_1 = [0, 0, 0, 0]$$
-$$W_2 = \begin{bmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \\ 0 & 1 \end{bmatrix}, \quad b_2 = [0, 0]$$
+1. **Projection $W_1$ ($2 \rightarrow 4$)**:
+   Let $W_1 = \begin{bmatrix} 1 & 0 & -1 & 2 \\ 0 & 1 & -1 & 1 \end{bmatrix}, b_1 = [0, 0, 0, 0]$.
+   $$h_1 = x W_1 = [1.0(1)+2.0(0), \; 1.0(0)+2.0(1), \; 1.0(-1)+2.0(-1), \; 1.0(2)+2.0(1)] = [1.0, \; 2.0, \; -3.0, \; 4.0]$$
 
-1. **First Linear Projection ($x W_1$)**:
-   $$z = [1.0, 2.0] \begin{bmatrix} 1 & -1 & 2 & 0 \\ 0 & 1 & -1 & 2 \end{bmatrix} = [1.0, \; 1.0, \; 0.0, \; 4.0]$$
+2. **ReLU Activation**:
+   $$a_1 = \text{ReLU}([1.0, 2.0, -3.0, 4.0]) = [1.0, \; 2.0, \; 0.0, \; 4.0]$$
 
-2. **Non-Linear Activation ($\text{ReLU}(z)$)**:
-   $$\text{h} = \text{ReLU}([1.0, 1.0, 0.0, 4.0]) = [1.0, \; 1.0, \; 0.0, \; 4.0]$$
+3. **Projection $W_2$ ($4 \rightarrow 2$)**:
+   Let $W_2 = \begin{bmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \\ 0 & 1 \end{bmatrix}, b_2 = [0, 0]$.
+   $$y = a_1 W_2 = [1.0(1)+2.0(0)+0(1)+4(0), \; 1.0(0)+2.0(1)+0(1)+4(1)] = [1.0, \; 6.0]$$
 
-3. **Second Linear Projection ($h W_2$)**:
-   $$\text{FFN}(x) = [1.0, 1.0, 0.0, 4.0] \begin{bmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \\ 0 & 1 \end{bmatrix} = [1.0, \; 5.0]$$
-
-Result: The input $[1.0, 2.0]$ was non-linearly transformed into $[1.0, 5.0]$!
+The input vector $[1.0, 2.0]$ was non-linearly transformed into $[1.0, 6.0]$!
 
 ---
 
-## 8. Python / NumPy Implementation
+## 9. Math $\rightarrow$ Code Mapping
 
 ```python
-import numpy as np
+class FeedForwardNumPy:
+    def __init__(self, d_model, d_ff, rng):
+        limit1 = np.sqrt(6.0 / (d_model + d_ff))
+        self.W1 = rng.uniform(-limit1, limit1, (d_model, d_ff)).astype(np.float32)
+        self.b1 = np.zeros(d_ff, dtype=np.float32)
+        limit2 = np.sqrt(6.0 / (d_ff + d_model))
+        self.W2 = rng.uniform(-limit2, limit2, (d_ff, d_model)).astype(np.float32)
+        self.b2 = np.zeros(d_model, dtype=np.float32)
 
-def relu(x):
-    return np.maximum(0, x)
-
-def feed_forward_network(x, W1, b1, W2, b2):
-    """
-    Computes Position-Wise Feed-Forward Network.
-    x shape: (Batch, Seq_Len, d_model)
-    W1 shape: (d_model, 4 * d_model)
-    W2 shape: (4 * d_model, d_model)
-    """
-    # 1. Expand dimension to 4 * d_model & apply ReLU
-    h = relu(x @ W1 + b1) # (Batch, Seq_Len, 4 * d_model)
-    
-    # 2. Project back to d_model
-    out = h @ W2 + b2      # (Batch, Seq_Len, d_model)
-    
-    cache = (x, h, W1, b1, W2, b2)
-    return out, cache
-
-# Test Setup
-d_model = 16
-d_ff = 64 # 4 * 16
-
-W1 = np.random.randn(d_model, d_ff) * 0.1
-b1 = np.zeros(d_ff)
-W2 = np.random.randn(d_ff, d_model) * 0.1
-b2 = np.zeros(d_model)
-
-x_test = np.random.randn(2, 4, d_model)
-ffn_out, _ = feed_forward_network(x_test, W1, b1, W2, b2)
-print("FFN Output Shape:", ffn_out.shape) # Result: (2, 4, 16)
+    def forward(self, x):
+        h1 = np.matmul(x, self.W1) + self.b1
+        a1 = np.maximum(0, h1)  # ReLU
+        out = np.matmul(a1, self.W2) + self.b2
+        self.cache = (x, h1, a1)
+        return out
 ```
 
 ---
 
-## 9. My Understanding
+## 10. Experiments / What-If Questions
+- **Why expand to $4 \times d_{\text{model}}$ instead of staying at $1 \times d_{\text{model}}$?** Research (Geva et al., 2021) showed $W_1$ acts as a key-value memory bank. Expanding to $4 \times$ creates 4x more pattern detectors to store facts.
+- **What if we remove FFN?** In our Week 5 benchmark, Model D-no-FFN dropped performance compared to Model D-1, confirming that non-linear feature expansion is necessary to process complex step combinations.
+
+---
+
+## 11. Common Misunderstandings
+- ❌ *Misconception*: "FFN combines tokens across the sequence length $T$."
+  - ✅ **Correction**: No! FFN operates on each token position independently. There is zero interaction between position $i$ and position $j$ inside the FFN.
+
+---
+
+## 12. Limitations and Trade-Offs
+- **Parameter Count**: FFN layers account for **~66% of total trainable parameters** in a Transformer block!
+
+---
+
+## 13. Where It Appears in the Current Assignment
+Used in every Transformer block in **Week 5**: $d_{\text{model}}=24 \rightarrow d_{\text{ff}}=96 \rightarrow d_{\text{model}}=24$.
+
+---
+
+## 14. Where It Appears in Modern AI Systems
+- **GPT-3 / GPT-4**: Standard FFN with GELU activation.
+- **LLaMA-3 / Mistral**: Uses **SwiGLU** (Swish Gated Linear Unit) FFN layers.
+- **Mixtral 8x7B (MoE)**: Replaces standard FFN with 8 expert FFN layers per token.
+
+---
+
+## 15. Connection to the Next Concept
+With Attention (Context) and FFN (Memory) combined into one block, we can now **Stack Multiple Blocks** to build deep LLM representations!
+
+---
+
+## 16. Teach-Back and Small Application Exercise
+**Exercise**: Why does Multi-Head Attention need an FFN sub-layer right after it?
+
+---
+
+## 17. Quick Revision Summary
+- FFN is a 2-layer position-wise network ($\text{ReLU}(X W_1 + b_1) W_2 + b_2$).
+- Expands dimension by $4 \times d_{\text{model}}$ to act as an associative memory bank.
+- Applies non-linear activation to process gathered context.
+
+---
+
+## 18. My Understanding
 
 ```markdown
-While Multi-Head Attention gathers context across tokens, the Position-Wise Feed-Forward Network (FFN) processes each token independently. It expands the feature dimension by 4x into a hidden space where non-linear activations (ReLU/GELU) act as a key-value memory bank before projecting back to d_model.
+The Feed-Forward Network (FFN) expands each token's vector by 4x, applies a non-linear activation like ReLU to extract feature patterns, and projects it back to d_model. While attention gathers context from other tokens, FFN decides what to do with that context and stores factual memory.
 ```
 
 ---
 
-## 10. Flashcards
+## 19. Flashcards
 
-**Front**: What is the primary role of the Feed-Forward Network (FFN) in a Transformer block?  
-**Back**: The FFN introduces non-linear feature transformations and memory retrieval for each token position independently, complementing MHA's linear token-mixing operation.
+**Front**: What percentage of parameters in a Transformer block belong to the FFN?  
+**Back**: Approximately ~66% (two-thirds) of total parameters.
 
-**Front**: Why does the FFN expand the dimension to $4 \times d_{\text{model}}$ before projecting back to $d_{\text{model}}$?  
-**Back**: Expanding the hidden dimension creates a high-dimensional sparse activation space where pattern-matching keys can fire non-linearly (functioning as a memory bank).
+**Front**: Does the FFN combine information across different token positions?  
+**Back**: No. FFN is position-wise; it operates on each token position vector independently and identically.
 
 ---
 
-## 11. Sources
+## 20. Sources
 - Vaswani, A., et al. (2017). *Attention Is All You Need*. NeurIPS.
 - Geva, M., et al. (2021). *Transformer Feed-Forward Layers Are Key-Value Memories*. EMNLP.

@@ -1,21 +1,21 @@
 # 29 - TRANSFORMER - Layer Normalization
 
 ## 1. The Problem
-In deep neural networks with multiple stacked layers (like 6, 12, or 96 Transformer blocks), feature activations pass through repeated matrix multiplications ($X W_Q, X W_K, X W_V, X W_O, X W_1$). 
+In deep neural networks with multiple stacked layers (like 6, 12, 24, or 96 Transformer blocks), feature activations pass through repeated matrix multiplications ($X W_Q, X W_K, X W_V, X W_O, X W_1$). 
 
-As signals move deeper into the network, the numeric magnitude of vectors can fluctuate wildly:
-- **Exploding Activations**: Vector numbers grow exponentially ($+0.5 \rightarrow +12.0 \rightarrow +350.0 \rightarrow \text{NaN}$).
+As signals move deeper into the network, the numeric magnitude of feature vectors can fluctuate wildly:
+- **Exploding Activations**: Vector values grow exponentially ($+0.5 \rightarrow +12.0 \rightarrow +350.0 \rightarrow \text{NaN}$).
 - **Vanishing Gradients**: Small weight updates become ineffective because activation scales drift out of proportion.
 - **Sensitivity to Learning Rate**: Without scale normalization, training requires delicate learning rate tuning; otherwise, gradient updates cause numeric instability.
 
-In image processing (CNNs), **Batch Normalization (BatchNorm)** solved this by normalizing features across the batch dimension. However, **BatchNorm fails in Natural Language Processing (NLP)** because sequence lengths vary dynamically, and normalizing across a batch ties independent sentence samples together inappropriately.
+In image processing (CNNs), **Batch Normalization (BatchNorm)** solved this by normalizing features across the batch dimension ($B$). However, **BatchNorm fails in Natural Language Processing (NLP)** because sequence lengths vary dynamically, and normalizing across a batch ties independent sentence samples together inappropriately.
 
 ---
 
-## 2. Why We Need Something New: Layer Normalization
+## 2. Why We Need Something New
 We need a normalization technique that:
-1. Operates on **each individual sequence token independently** (zero dependence on batch size).
-2. Works identically regardless of sequence length or batch size.
+1. Operates on **each individual sequence token independently** (zero dependence on batch size $B$).
+2. Works identically regardless of sequence length $T$ or batch size $B$.
 3. Keeps feature activations centered around **mean = 0** and **variance = 1** at every layer.
 
 That mechanism is **Layer Normalization (LayerNorm)**, introduced by Ba, Kiros, and Hinton (2016).
@@ -37,117 +37,177 @@ Imagine an **Automatic Studio Audio Leveler**:
 
 ## 5. What Came Before $\rightarrow$ What Changes Now
 
-| Component | Batch Normalization (BatchNorm) | Layer Normalization (LayerNorm) |
-| :--- | :--- | :--- |
-| **Axis of Normalization** | Normalizes across the **Batch Dimension** ($B$). | Normalizes across the **Feature Dimension** ($d_{\text{model}}$). |
-| **NLP Suitability** | Fails due to variable sequence lengths and batch dependence. | **Ideal for NLP**: Each token is normalized independently. |
-| **Dependency** | Dependent on batch size (fails when batch size = 1). | 100% Independent of batch size (works for $B=1$). |
+| Aspect | Batch Normalization (BatchNorm) | Layer Normalization (LayerNorm) | Root Mean Square Norm (RMSNorm) |
+| :--- | :--- | :--- | :--- |
+| **Axis of Normalization** | Across Batch Dimension ($B$). | Across Feature Dimension ($d_{\text{model}}$). | Across Feature Dimension ($d_{\text{model}}$) without mean. |
+| **NLP Suitability** | Fails due to variable sequence length $T$. | **Ideal for NLP**: Token-independent. | **Modern Favorite**: Faster GPU memory throughput. |
+| **Batch Dependency** | High (fails when $B=1$). | **Zero** (works identically for $B=1$). | **Zero** (works identically for $B=1$). |
+| **Parameters** | Running mean $\mu_B$, var $\sigma^2_B$. | Mean $\mu$, variance $\sigma^2$, $\gamma, \beta$. | RMS scale, gain $\gamma$. |
 
 ---
 
-## 6. How It Works: Step-by-Step
-
-For a single token embedding vector $x \in \mathbb{R}^{d_{\text{model}}}$:
+## 6. How It Works
+For a single token vector $x \in \mathbb{R}^{d_{\text{model}}}$:
 
 1. **Calculate Token Mean ($\mu$)**:
-   Compute the average value across all $d_{\text{model}}$ feature dimensions:
    $$\mu = \frac{1}{d_{\text{model}}} \sum_{i=1}^{d_{\text{model}}} x_i$$
-
 2. **Calculate Token Variance ($\sigma^2$)**:
-   Compute the average squared deviation from the mean:
    $$\sigma^2 = \frac{1}{d_{\text{model}}} \sum_{i=1}^{d_{\text{model}}} (x_i - \mu)^2$$
-
-3. **Standardize Features ($\hat{x}$)**:
-   Subtract mean and divide by standard deviation (with a small constant $\epsilon = 10^{-5}$ to prevent division by zero):
+3. **Standardize Vector ($\hat{x}$)**:
    $$\hat{x}_i = \frac{x_i - \mu}{\sqrt{\sigma^2 + \epsilon}}$$
-
-4. **Learnable Scale & Shift ($\gamma$ and $\beta$)**:
-   Multiply by a learnable gain parameter $\gamma \in \mathbb{R}^{d_{\text{model}}}$ and add a learnable bias parameter $\beta \in \mathbb{R}^{d_{\text{model}}}$:
-   $$y_i = \gamma_i \cdot \hat{x}_i + \beta_i$$
-
----
-
-## 7. Pre-LN vs Post-LN Architecture
-
-In Transformer blocks, LayerNorm can be placed in two positions:
-
-1. **Post-LN (Original 2017 Transformer Paper)**:
-   $$x_{l+1} = \text{LayerNorm}\Big(x_l + \text{SubLayer}(x_l)\Big)$$
-   - *Drawback*: Requires careful learning rate warm-up schedules to prevent early gradient instability.
-
-2. **Pre-LN (Modern Standard: GPT-2, GPT-3, LLaMA)**:
-   $$x_{l+1} = x_l + \text{SubLayer}\Big(\text{LayerNorm}(x_l)\Big)$$
-   - *Advantage*: Gradients flow directly through the main residual spine without passing through LayerNorm parameter constraints, making deep model training significantly more stable!
+   *(where $\epsilon = 10^{-5}$ prevents division by zero)*
+4. **Apply Learned Gain ($\gamma$) and Shift ($\beta$)**:
+   $$y_i = \gamma_i \hat{x}_i + \beta_i$$
 
 ---
 
-## 8. Complete Worked Example (Small Numbers)
+## 7. Required Mathematics
 
-Consider a single token vector with $d_{\text{model}} = 4$:
-$$x = [2.0, \; 4.0, \; 6.0, \; 8.0]$$
+### Formulas:
+$$\text{LN}(x) = \gamma \odot \left( \frac{x - \mu(x)}{\sqrt{\sigma^2(x) + \epsilon}} \right) + \beta$$
 
-Suppose $\gamma = [1.0, 1.0, 1.0, 1.0]$ and $\beta = [0.0, 0.0, 0.0, 0.0]$, $\epsilon = 0.0$.
+### Symbol-by-Symbol Breakdown:
+- $x$: Input feature vector for one token position with shape $(d_{\text{model}},)$.
+- $\mu(x)$: Scalar mean of the elements in vector $x$.
+- $\sigma^2(x)$: Scalar variance of the elements in vector $x$.
+- $\epsilon$: Small constant ($10^{-5}$) added for numerical stability.
+- $\hat{x}$: Zero-mean, unit-variance standardized vector.
+- $\gamma$: Learnable gain (scale) vector with shape $(d_{\text{model}},)$, initialized to ones ($1.0$).
+- $\beta$: Learnable shift (bias) vector with shape $(d_{\text{model}},)$, initialized to zeros ($0.0$).
+- $\odot$: Element-wise (Hadamard) multiplication.
 
-1. **Mean ($\mu$)**:
-   $$\mu = \frac{2 + 4 + 6 + 8}{4} = \frac{20}{4} = 5.0$$
+### Tensor Shape Trace:
+- Input $X$: $(B, T, d_{\text{model}})$
+- $\mu(X)$: $(B, T, 1)$
+- $\sigma^2(X)$: $(B, T, 1)$
+- Standardized $\hat{X}$: $(B, T, d_{\text{model}})$
+- Output $Y$: $(B, T, d_{\text{model}})$
 
-2. **Variance ($\sigma^2$)**:
+---
+
+## 8. Complete Worked Example
+
+Let a single token vector be $x = [2.0, 4.0, 6.0, 8.0]$ ($d_{\text{model}} = 4$, $\epsilon = 10^{-5}$):
+
+1. **Calculate Mean ($\mu$)**:
+   $$\mu = \frac{2.0 + 4.0 + 6.0 + 8.0}{4} = \frac{20.0}{4} = 5.0$$
+
+2. **Calculate Variance ($\sigma^2$)**:
    $$\sigma^2 = \frac{(2-5)^2 + (4-5)^2 + (6-5)^2 + (8-5)^2}{4} = \frac{9 + 1 + 1 + 9}{4} = \frac{20}{4} = 5.0$$
-   $$\sigma = \sqrt{5.0} \approx 2.236$$
+   $$\text{std} = \sqrt{5.0 + 1e-5} \approx 2.236068$$
 
-3. **Normalized Vector ($\hat{x}$)**:
-   - $\hat{x}_1 = (2 - 5) / 2.236 = -3 / 2.236 \approx -1.3416$
-   - $\hat{x}_2 = (4 - 5) / 2.236 = -1 / 2.236 \approx -0.4472$
-   - $\hat{x}_3 = (6 - 5) / 2.236 = +1 / 2.236 \approx +0.4472$
-   - $\hat{x}_4 = (8 - 5) / 2.236 = +3 / 2.236 \approx +1.3416$
+3. **Standardize ($\hat{x}$)**:
+   $$\hat{x}_1 = \frac{2.0 - 5.0}{2.236068} = \frac{-3.0}{2.236068} = -1.34164$$
+   $$\hat{x}_2 = \frac{4.0 - 5.0}{2.236068} = \frac{-1.0}{2.236068} = -0.44721$$
+   $$\hat{x}_3 = \frac{6.0 - 5.0}{2.236068} = \frac{+1.0}{2.236068} = +0.44721$$
+   $$\hat{x}_4 = \frac{8.0 - 5.0}{2.236068} = \frac{+3.0}{2.236068} = +1.34164$$
 
-$$\hat{x} = [-1.3416, \; -0.4472, \; +0.4472, \; +1.3416]$$
+4. **Verify Properties of $\hat{x}$**:
+   - Mean of $\hat{x}$: $\frac{-1.34164 - 0.44721 + 0.44721 + 1.34164}{4} = 0.0$
+   - Variance of $\hat{x}$: $\frac{(-1.34164)^2 + (-0.44721)^2 + (0.44721)^2 + (1.34164)^2}{4} = 1.0$
 
-*Verification*: Mean of $\hat{x}$ is $0.0$, Variance of $\hat{x}$ is $1.0$!
+5. **Apply $\gamma = [1, 1, 1, 1]$ and $\beta = [0, 0, 0, 0]$**:
+   $$y = [-1.34164, \; -0.44721, \; +0.44721, \; +1.34164]$$
 
 ---
 
-## 9. Python / NumPy Implementation
+## 9. Math $\rightarrow$ Code Mapping
 
 ```python
 import numpy as np
 
-def layer_norm(x, gamma=None, beta=None, eps=1e-5):
-    """
-    Computes Layer Normalization on input tensor x of shape (Batch, Seq_Len, d_model).
-    """
-    d_model = x.shape[-1]
-    if gamma is None:
-        gamma = np.ones(d_model)
-    if beta is None:
-        beta = np.zeros(d_model)
-        
-    mean = np.mean(x, axis=-1, keepdims=True)
-    var = np.var(x, axis=-1, keepdims=True)
-    
-    x_hat = (x - mean) / np.sqrt(var + eps)
-    out = gamma * x_hat + beta
-    
-    cache = (x, x_hat, mean, var, gamma, beta, eps)
-    return out, cache
+class LayerNormNumPy:
+    def __init__(self, d_model, eps=1e-5):
+        self.d_model = d_model
+        self.eps = eps
+        self.gamma = np.ones(d_model, dtype=np.float32)
+        self.beta = np.zeros(d_model, dtype=np.float32)
+        self.dgamma = np.zeros_like(self.gamma)
+        self.dbeta = np.zeros_like(self.beta)
+        self.cache = None
 
-# Quick Test
-x_test = np.array([[[2.0, 4.0, 6.0, 8.0]]])
-out_test, _ = layer_norm(x_test)
-print("Normalized Vector:", out_test)
-print("Mean:", np.mean(out_test, axis=-1))
-print("Variance:", np.var(out_test, axis=-1))
+    def forward(self, x):
+        mean = np.mean(x, axis=-1, keepdims=True)
+        var = np.var(x, axis=-1, keepdims=True)
+        std = np.sqrt(var + self.eps)
+        x_norm = (x - mean) / std
+        out = self.gamma * x_norm + self.beta
+        self.cache = (x, x_norm, mean, std)
+        return out
+
+    def backward(self, dout):
+        x, x_norm, mean, std = self.cache
+        self.dgamma = np.sum(dout * x_norm, axis=(0, 1))
+        self.dbeta = np.sum(dout, axis=(0, 1))
+        dx_norm = dout * self.gamma
+        N = self.d_model
+        dx = (1.0 / (N * std)) * (
+            N * dx_norm 
+            - np.sum(dx_norm, axis=-1, keepdims=True) 
+            - x_norm * np.sum(dx_norm * x_norm, axis=-1, keepdims=True)
+        )
+        return dx
 ```
 
 ---
 
-## 10. Where It Appears in Modern AI Systems
-- **GPT-2 / GPT-3 / GPT-4**: Uses Pre-LN before Attention and FFN sub-layers.
-- **LLaMA / LLaMA-2 / LLaMA-3**: Uses **RMSNorm** (Root Mean Square Normalization), a simplified variant of LayerNorm that omits mean subtraction to save GPU memory bandwidth.
+## 10. Experiments / What-If Questions
+- **What if $\epsilon = 0$?** If a token has zero variance across features (e.g., $x = [3, 3, 3, 3]$), variance is $0.0$, causing division by zero ($\text{NaN}$). $\epsilon = 10^{-5}$ guarantees numeric safety.
+- **What if $\gamma = 0$?** The network zeroes out all feature representations, destroying all information flow.
+- **Pre-LN vs Post-LN**:
+  - **Post-LN (Original 2017 Transformer)**: $\text{LN}(X + \text{MHA}(X))$. Required careful learning rate warmup to avoid early divergence.
+  - **Pre-LN (Modern Standard)**: $X + \text{MHA}(\text{LN}(X))$. The residual connection remains an un-normalized, un-blocked highway for gradients, enabling stable training of 100+ block models.
 
 ---
 
-## 11. My Understanding
+## 11. Common Misunderstandings
+- ❌ *Misconception*: "LayerNorm normalizes across the sequence length $T$."
+  - ✅ **Correction**: No! LayerNorm normalizes across the feature dimension $d_{\text{model}}$ of each token independently. Each token in a sequence gets its own separate mean $\mu$ and variance $\sigma^2$.
+- ❌ *Misconception*: "LayerNorm removes the model's ability to represent large feature values."
+  - ✅ **Correction**: No! The learnable parameters $\gamma$ (gain) and $\beta$ (bias) allow the model to restore any feature scale or shift if doing so improves task performance.
+
+---
+
+## 12. Limitations and Trade-Offs
+- **Memory Bandwidth Bottleneck**: On modern GPUs, computing mean and variance across feature vectors requires reading memory twice per sub-layer, making LayerNorm memory-bandwidth heavy.
+- **RMSNorm Alternative**: LLaMA and Mistral replace LayerNorm with **RMSNorm** ($\text{RMSNorm}(x) = \frac{x}{\text{RMS}(x)} \gamma$), which skips mean subtraction and saves ~10-50% memory bandwidth without loss in model quality.
+
+---
+
+## 13. Where It Appears in the Current Assignment
+In the **Week 5 Step-Therapy Benchmark**, LayerNorm is used in Pre-LN configuration:
+- Model D-no-LN (removing LayerNorm) resulted in higher test loss ($1.4749 \pm 0.2289$) compared to Model D ($1.3040 \pm 0.1630$), proving that LayerNorm is essential for gradient stabilization.
+
+---
+
+## 14. Where It Appears in Modern AI Systems
+- **GPT-2 / GPT-3 / GPT-4**: Uses Pre-LN LayerNorm before MHA and FFN layers.
+- **LLaMA 1/2/3 & Mistral**: Uses RMSNorm (Root Mean Square LayerNorm).
+- **Vision Transformers (ViT)**: Uses LayerNorm for image patch token vectors.
+
+---
+
+## 15. Connection to the Next Concept
+LayerNorm stabilizes activation scales so feature vectors can be safely passed through **Residual Connections (Skip Highways)** without numeric explosions!
+
+---
+
+## 16. Teach-Back and Small Application Exercise
+**Exercise**: Given token vector $x = [1.0, 3.0, 5.0, 7.0]$ ($d_{\text{model}}=4$):
+1. Calculate the mean $\mu$.
+2. Calculate the variance $\sigma^2$.
+3. Compute the standardized vector $\hat{x}$.
+
+---
+
+## 17. Quick Revision Summary
+- LayerNorm normalizes feature activations across $d_{\text{model}}$ to mean 0 and variance 1 for each token independently.
+- It eliminates exploding/vanishing activations in deep Transformer blocks.
+- Pre-LN formulation keeps residual skip connections clear for direct gradient propagation.
+
+---
+
+## 18. My Understanding
 
 ```markdown
 Layer Normalization takes each token's feature vector across d_model, calculates its mean and standard deviation, and rescales the numbers to have mean 0 and variance 1. This prevents activations from blowing up (+50 -> +500 -> NaN) in deep Transformer blocks.
@@ -155,16 +215,17 @@ Layer Normalization takes each token's feature vector across d_model, calculates
 
 ---
 
-## 12. Flashcards
+## 19. Flashcards
 
-**Front**: What is the key difference between Batch Normalization and Layer Normalization?  
-**Back**: Batch Normalization normalizes across the batch dimension ($B$) and depends on batch size, whereas Layer Normalization normalizes across the feature dimension ($d_{\text{model}}$) of each token independently.
+**Front**: What axis does Layer Normalization normalize across?  
+**Back**: The feature dimension ($d_{\text{model}}$) of each individual token vector independently.
 
 **Front**: Why is Pre-LN preferred over Post-LN in modern Transformers?  
 **Back**: Pre-LN places LayerNorm before the sub-layer, allowing the residual skip connection to remain an uninterrupted highway for gradients, improving deep network training stability.
 
 ---
 
-## 13. Sources
+## 20. Sources
 - Ba, J. L., Kiros, J. R., & Hinton, G. E. (2016). *Layer Normalization*. arXiv:1607.06450.
 - Vaswani, A., et al. (2017). *Attention Is All You Need*. NeurIPS.
+- Zhang, B., & Sennrich, R. (2019). *Root Mean Square Layer Normalization*. NeurIPS.

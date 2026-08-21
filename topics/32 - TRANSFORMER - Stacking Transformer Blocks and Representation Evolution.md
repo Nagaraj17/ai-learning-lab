@@ -11,7 +11,7 @@ A 1-layer Transformer lacks the depth needed for representations to evolve hiera
 
 ---
 
-## 2. Why We Need Something New: Stacking Transformer Blocks
+## 2. Why We Need Something New
 We need an architecture that stacks multiple identical Transformer blocks sequentially ($N = 2, 6, 12, 96$).
 
 Each block takes the output vector of the previous block as its input ($X_{l} = \text{Block}_l(X_{l-1})$), allowing token vectors to refine their meanings progressively through layer depth.
@@ -23,120 +23,142 @@ Each block takes the output vector of the previous block as its input ($X_{l} = 
 
 ---
 
-## 4. Complete Architecture Blueprint of a 2-Block Transformer
-
-```text
-               Input Token IDs (Batch x Seq_Len)
-                              │
-               [ Token Embedding + Sinusoidal PE ]
-                              │
-                    Tensor X_0 (B x T x d_model)
-                              │
-   ======================= BLOCK 1 =======================
-   │                                                     │
-   │  X_0 ───┬───────────────────────────────┐           │
-   │         │                               │           │
-   │         ▼                               │ (Residual)│
-   │   [ Multi-Head Attention ]              │           │
-   │         │                               │           │
-   │         ▼                               │           │
-   │       MHA(X_0)                          │           │
-   │         │                               │           │
-   │         └───────────────► (+) ◄─────────┘           │
-   │                            │                        │
-   │                    [ LayerNorm 1 ]                  │
-   │                            │                        │
-   │                            ▼                        │
-   │                  SubLayer_1 (B x T x d_model)       │
-   │                            │                        │
-   │  SubLayer_1 ──┬─────────────────────────────┐       │
-   │               │                             │       │
-   │               ▼                             │(Res)  │
-   │         [ Position-Wise FFN (4xd_model) ]   │       │
-   │               │                             │       │
-   │               ▼                             │       │
-   │             FFN(SubLayer_1)                 │       │
-   │               │                             │       │
-   │               └─────────► (+) ◄─────────────┘       │
-   │                            │                        │
-   │                    [ LayerNorm 2 ]                  │
-   │                            │                        │
-   =============================│=========================
-                                ▼
-                    Tensor X_1 (B x T x d_model)
-                                │
-   ======================= BLOCK 2 =======================
-   │      (Identical Sub-layer Architecture as Block 1)   │
-   =============================│=========================
-                                ▼
-                    Tensor X_2 (B x T x d_model)
-                                │
-                [ Vocabulary Projection W_vocab ]
-                                │
-                Next-Token Logits (B x T x Vocab_Size)
-```
+## 4. Beginner Intuition / Mental Model
+Imagine an **Executive Decision Pipeline**:
+- **Block 1 (Junior Analyst)**: Reads raw data and extracts basic local facts.
+- **Block 2 (Senior Manager)**: Takes the junior analyst's facts, checks multi-step workflow context, and resolves ambiguities.
+- **Block 3 (Executive VP)**: Makes the final high-level strategic next-action decision!
 
 ---
 
-## 5. Python / NumPy Implementation of Stacked Blocks
+## 5. What Came Before $\rightarrow$ What Changes Now
+
+| Aspect | 1-Block Transformer | Multi-Block Stacked Transformer ($N=2, 12, 96$) |
+| :--- | :--- | :--- |
+| **Depth** | Single layer ($N=1$). | Hierarchical depth ($N=2$ to $N=96$). |
+| **Representation Capacity** | Limited to 1-hop context gathering. | **Hierarchical Evolution**: Multi-hop reasoning. |
+| **Gradient Stability** | Easy. | Requires **Pre-LN + Residual Highways** to prevent vanishing gradients. |
+
+---
+
+## 6. How It Works
+For input token sequence $X_0 \in \mathbb{R}^{B \times T \times d_{\text{model}}}$:
+
+1. **Embedding & Positional Encoding**: $X_0 = \text{Embedding}(\text{IDs}) + \text{PE}$.
+2. **Block 1**: $X_1 = \text{Block}_1(X_0)$.
+3. **Block 2**: $X_2 = \text{Block}_2(X_1)$.
+4. **Vocabulary Projection**: $\text{Logits} = X_N W_{\text{vocab}} + b_{\text{vocab}}$.
+
+---
+
+## 7. Required Mathematics
+
+### Formulas:
+For block $l \in [1, N]$:
+$$X'_{l-1} = X_{l-1} + \text{MHA}(\text{LN}_1(X_{l-1}))$$
+$$X_l = X'_{l-1} + \text{FFN}(\text{LN}_2(X'_{l-1}))$$
+
+### Symbol-by-Symbol Breakdown:
+- $X_0$: Initial token embedding tensor with shape $(B, T, d_{\text{model}})$.
+- $X_{l-1}$: Input tensor to block $l$ with shape $(B, T, d_{\text{model}})$.
+- $\text{LN}_1, \text{LN}_2$: Layer Normalization operations.
+- $\text{MHA}$: Multi-Head Causal Attention operation.
+- $\text{FFN}$: Position-Wise Feed-Forward Network operation.
+- $X_l$: Final output tensor of block $l$ with shape $(B, T, d_{\text{model}})$.
+
+---
+
+## 8. Complete Worked Example
+
+Let sequence be $X_0$ with shape $(B=1, T=3, d_{\text{model}}=4)$:
+1. **Pass $X_0$ through Block 1**:
+   - MHA gathers local 1-step token context $\rightarrow X'_0$.
+   - FFN applies non-linear memory retrieval $\rightarrow X_1$.
+2. **Pass $X_1$ through Block 2**:
+   - MHA attends over Block 1's refined representations, capturing 2-step multi-token relationships $\rightarrow X'_1$.
+   - FFN synthesizes final state representations $\rightarrow X_2$.
+3. **Project to Logits**:
+   - $\text{Logits} = X_2 W_{\text{head}} + b_{\text{head}}$ shape $(1, 3, |V|)$.
+
+---
+
+## 9. Math $\rightarrow$ Code Mapping
 
 ```python
-import numpy as np
+# Pass through Stacked Blocks
+x = emb + pos_enc
+for block in self.blocks:
+    x = block.forward(x)
 
-def transformer_block(x, mha_weights, ffn_weights, norm_weights):
-    """
-    Computes a single Transformer Block (Pre-LN variant).
-    """
-    # Sub-layer 1: Pre-LN Multi-Head Attention + Residual
-    norm_1, _ = layer_norm(x, norm_weights['g1'], norm_weights['b1'])
-    attn_out, _, _ = forward_multi_head(norm_1, **mha_weights)
-    x1 = x + attn_out
-    
-    # Sub-layer 2: Pre-LN Feed-Forward Network + Residual
-    norm_2, _ = layer_norm(x1, norm_weights['g2'], norm_weights['b2'])
-    ffn_out, _ = feed_forward_network(norm_2, **ffn_weights)
-    x2 = x1 + ffn_out
-    
-    return x2
-
-def stacked_transformer_model(inputs, embed_table, PE, blocks_weights, W_vocab):
-    """
-    Passes inputs through Embeddings -> PE -> N Stacked Blocks -> Vocab Logits.
-    """
-    # 1. Embeddings + PE
-    X = embed_table[inputs] + PE
-    
-    # 2. Sequential Block Pass
-    for block_w in blocks_weights:
-        X = transformer_block(X, block_w['mha'], block_w['ffn'], block_w['norm'])
-        
-    # 3. Final Classification Head
-    logits = X @ W_vocab
-    return logits
+# Project to next-token probabilities
+logits = np.matmul(x, self.W_head) + self.b_head
 ```
 
 ---
 
-## 6. What Each Component Buys Us (Summary Matrix)
-
-| Component | Function | What It Buys Us |
-| :--- | :--- | :--- |
-| **Multi-Head Attention** | Context Gathering | Decides **where to look** across multiple subspaces. |
-| **Feed-Forward Network** | Feature Processing | Decides **what to do** with gathered context (memory bank). |
-| **Residual Connections** | Skip Highways | Eliminates vanishing gradients and preserves input memory. |
-| **Layer Normalization** | Activation Leveler | Stabilizes numerical scale (mean 0, variance 1). |
-| **Block Depth ($N=2$)** | Representation Evolution | Transforms low-level syntax into high-level global context. |
+## 10. Experiments / What-If Questions
+- **Does more depth always improve accuracy?** In our Week 5 benchmark on 1,000 cases, Model D-1 ($N=1$) achieved $60.15\%$ accuracy vs Model D ($N=2$) at $57.70\%$. This proves that on small datasets, excessive depth can cause slight over-parameterization.
 
 ---
 
-## 7. My Understanding
+## 11. Common Misunderstandings
+- ❌ *Misconception*: "Higher blocks process different tokens than lower blocks."
+  - ✅ **Correction**: No! All blocks process the exact same sequence of tokens; what evolves across blocks is the **richness of the feature representation vector** for each token.
+
+---
+
+## 12. Limitations and Trade-Offs
+- **Inference Latency**: Sequential block execution increases compute time linearly with depth ($O(N)$).
+
+---
+
+## 13. Where It Appears in the Current Assignment
+Evaluated as Model D ($N=2$) vs Model D-1 ($N=1$) in the **Week 5 Generalization Study**.
+
+---
+
+## 14. Where It Appears in Modern AI Systems
+- **GPT-2 Small**: 12 blocks ($d_{\text{model}}=768$).
+- **GPT-3 175B**: 96 blocks ($d_{\text{model}}=12288$).
+- **LLaMA-3 70B**: 80 blocks ($d_{\text{model}}=8192$).
+
+---
+
+## 15. Connection to the Next Concept
+Now that you have built a complete 2-block Transformer language model, you are ready for **Week 6 (Tiny GPT & Autoregressive Text Generation)**!
+
+---
+
+## 16. Teach-Back and Small Application Exercise
+**Exercise**: Describe how feature representations change from Layer 1 to Layer 12 in a Transformer LLM.
+
+---
+
+## 17. Quick Revision Summary
+- Stacking Transformer blocks enables hierarchical feature representation evolution.
+- Lower layers capture local syntax; deeper layers capture global semantics.
+- Pre-LN + Skip Highways allow scaling to 96+ layers safely.
+
+---
+
+## 18. My Understanding
 
 ```markdown
-Stacking Transformer blocks sequentially enables representation evolution. Block 1 processes local token relationships, while Block 2 synthesizes deep contextual paths to disambiguate complex workflow predictions.
+Stacking Transformer blocks allows token vectors to evolve hierarchically. Layer 1 captures simple local relationships, while deeper layers synthesize global multi-step context to make accurate predictions.
 ```
 
 ---
 
-## 8. Sources
+## 19. Flashcards
+
+**Front**: What evolves as signals pass through stacked Transformer blocks?  
+**Back**: The feature representation vectors of the tokens, evolving from low-level local syntax to high-level global context.
+
+**Front**: How does compute scaling relate to the number of Transformer blocks $N$?  
+**Back**: Compute scale increases linearly $O(N)$ with the number of blocks.
+
+---
+
+## 20. Sources
 - Vaswani, A., et al. (2017). *Attention Is All You Need*. NeurIPS.
-- Radford, A., et al. (2019). *Language Models Are Unsupervised Multitask Learners* (GPT-2).
+- Radford, A., et al. (2019). *Language Models are Unsupervised Multitask Learners* (GPT-2). OpenAI.
