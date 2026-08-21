@@ -13,11 +13,11 @@ The objective is to **master concepts**, understand the reasoning behind them, a
 | Field | Value |
 |--------|-------|
 | Current Phase | Phase 5 - Transformers |
-| Current Week | Week 3 |
-| Current Topic | Attention & Contextual Representations |
-| Current Assignment | Build a Causal Self-Attention Layer from Scratch in NumPy |
+| Current Week | Week 5 |
+| Current Topic | Tiny Transformer Generalization Study |
+| Current Assignment | 7-Model Multi-Seed Generalization Benchmark in Pure NumPy |
 | Status | 🟡 In Progress |
-| Started On | |
+| Started On | 2026-08-21 |
 | Completed On | |
 
 ---
@@ -28,7 +28,9 @@ The objective is to **master concepts**, understand the reasoning behind them, a
 |------|---------|------------|--------|------------|
 | Week 1 | Forward Pass & Learning | Build a Next-Word Predictor | 🟢 | ⭐⭐⭐⭐⭐ |
 | Week 2 | Embeddings & Relationships | Build an Embedding Layer | 🟢 | ⭐⭐⭐⭐⭐ |
-| Week 3 | Attention & Contextual Representations | Build a Causal Self-Attention Layer | 🟡 | ⭐⭐⭐☆☆ |
+| Week 3 | Attention & Contextual Representations | Build a Causal Self-Attention Layer | 🟢 | ⭐⭐⭐⭐⭐ |
+| Week 4 | Multi-Head Attention | Build Multi-Head Attention & Head Ablation | 🟢 | ⭐⭐⭐⭐⭐ |
+| Week 5 | Tiny Transformer Block | 7-Model Generalization Benchmark in Pure NumPy | 🟡 | ⭐⭐⭐⭐☆ |
 
 Legend
 
