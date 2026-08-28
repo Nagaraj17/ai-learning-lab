@@ -105,5 +105,47 @@ We evaluate 7 model architectures on synthetic healthcare step-therapy prior-aut
 | **Model D-1** | 1 Pre-LN Transformer Block | Depth contrast ($N=1$ vs $N=2$) |
 | **Model D-no-FFN**| 2 Blocks without FFN sub-layers | Impact of non-linear feature processing |
 | **Model D-no-LN** | 2 Blocks without LayerNorm | Impact of feature normalization on optimization |
+| **Model D-no-res** | 2 Blocks without residual connections | Impact of skip-highways on gradient flow |
 
 All models are trained under identical fixed contracts across **5 random seeds** (`[7, 19, 42, 73, 101]`) with early stopping on validation loss.
+
+---
+
+## 📈 Key Evaluation & Training Metrics
+
+### 1. Macro F1-Score
+In predicting sequences with rare workflow events (like `APPEAL_OVERTURNED`), standard accuracy can be misleading if the model just predicts the most common event (e.g., `PA_APPROVED`). 
+- **Macro F1** computes the F1-score independently for each token class and averages them, treating all classes equally regardless of their frequency in the dataset. This ensures models are penalized if they ignore rare transition events.
+
+### 2. Gradient Clipping
+Deep Transformers can experience momentary gradient spikes (e.g., when an attention score aligns perfectly).
+- **Gradient Clipping** caps the maximum magnitude of the gradient vector (e.g., $|g| \le 1.0$) during backpropagation. This prevents a single massive parameter update from blowing up the weights and causing $\text{NaN}$ loss.
+
+### 3. FFN Overfitting
+While expanding the FFN width ($d_{ff} = 4 d_{model}$) provides more "memory slots" for feature patterns, increasing this width too much (e.g., $8 d_{model}$ or $16 d_{model}$) on a small synthetic dataset will lead to **overfitting**. The model memorizes training samples instead of generalizing, which is why we run a specific ablation to map $d_{ff}$ size against the generalization gap (difference between train and test loss).
+
+---
+
+## 🔬 Experimental Design Principles
+
+### Why One Fixed Dataset Split for Architecture Comparison?
+If every architecture trained on a *different* random split, differences in test accuracy could be caused by which *cases* ended up in the test set, not by the architecture itself. By using one fixed split (seed=42) for all models, we isolate the architectural variable.
+
+### Why Separate Initialization Seeds?
+Random weight initialization can accidentally make one architecture easier to optimize than another on one run. By using 5 independent seeds, we observe the *distribution* of outcomes, not just one lucky (or unlucky) run.
+
+### The Critical Inferability Rule
+Every dataset example follows this rule: **the next event must be inferable from the visible history alone**. If approval depends on `PREV_THERAPY_FAILED`, that event token appears *before* the approval event in the sequence. Violating this rule creates a label-leakage problem where the model cannot possibly predict correctly because the deciding evidence is hidden in the future.
+
+### Holdout Families: Val-only vs Test-only
+- **Val-only holdout families** (`step_therapy_exception`, `docs_missing_resubmit_approval`): used during hyperparameter selection and model evaluation on the validation set.
+- **Test-only holdout families** (`appeal_overturned`, `contraindication_exception`): never exposed until final test evaluation. These measure genuine generalization to event patterns the model has not seen during training.
+- This design ensures that model selection cannot accidentally optimize on the test set's specific scenario patterns.
+
+### What "Evidence-Based Conclusion" Means
+A conclusion in this experiment means:
+1. We measured a metric (not estimated it).
+2. We compared it across multiple seeds (not just one run).
+3. We report *what the data shows*, including cases where the hypothesis is **not** supported.
+4. We do not claim that a result from 1,200 fictional cases generalizes to all real PA workflows.
+

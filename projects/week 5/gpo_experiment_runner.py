@@ -19,8 +19,8 @@ import os
 import sys
 sys.path.insert(0, os.path.dirname(__file__))
 
-from step_therapy_generator import (
-    generate_step_therapy_cases, create_next_token_batches,
+from supply_chain_generator import (
+    generate_supply_chain_cases, create_next_token_batches,
     validate_dataset, VOCAB_SIZE, ID2TOKEN, SCENARIO_FAMILIES,
     VAL_ONLY_FAMILIES, TEST_ONLY_FAMILIES
 )
@@ -132,12 +132,12 @@ def evaluate_per_scenario(model, case_list, max_seq_len=20):
     """
     Evaluate per-scenario accuracy on individual cases.
 
-    Returns dict: {scenario_family: {"correct": int, "total": int, "acc": float}}
+    Returns dict: {flow_type: {"correct": int, "total": int, "acc": float}}
     """
     scenario_results = {}
 
     for case in case_list:
-        fam = case["scenario_family"]
+        fam = case["flow_type"]
         if fam not in scenario_results:
             scenario_results[fam] = {"correct": 0, "total": 0}
 
@@ -455,7 +455,7 @@ def run_ffn_width_experiment(
 
 if __name__ == "__main__":
     # Quick smoke test
-    all_cases, splits = generate_step_therapy_cases(num_cases=400, seed=42)
+    all_cases, splits = generate_supply_chain_cases(num_cases=400, seed=42)
     validate_dataset(all_cases, splits)
     results, summary = run_architecture_benchmark(
         splits, all_cases,
