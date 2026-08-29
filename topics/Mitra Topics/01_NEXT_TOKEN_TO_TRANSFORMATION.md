@@ -52,16 +52,16 @@ The model learns that text after `<OUTPUT>` should be a transformed continuation
 ```mermaid
 flowchart TD
     subgraph Context
-        BOS[\<BOS\>] --> IN[\<INPUT\>]
+        BOS["<BOS>"] --> IN["<INPUT>"]
         IN --> P1[PATIENT]
         P1 --> J[John]
-        J --> OUT[\<OUTPUT\>]
+        J --> OUT["<OUTPUT>"]
     end
     
     subgraph Generation Loop
         OUT -->|Predicts| Next1(PATIENT)
-        Next1 -->|Appended to context, predicts| Next2(\[NAME\])
-        Next2 -->|Appended to context, predicts| Next3(\<EOS\>)
+        Next1 -->|Appended to context, predicts| Next2("[NAME]")
+        Next2 -->|Appended to context, predicts| Next3("<EOS>")
     end
 
     style Context fill:#e1f5fe,stroke:#0288d1
@@ -111,8 +111,21 @@ loss = (token_losses * loss_mask).sum() / loss_mask.sum()
 
 ## 13. Limitations and Trade-Offs
 
-Autoregressive generation is computationally expensive compared to simple token classification because the model must be run repeatedly (once for every generated token), whereas classification runs once for the whole sequence. 
+Autoregressive generation is computationally expensive compared to simple token classification because of the difference between **Training (Parallel)** and **Inference (Sequential Loop)**.
 
+**1. Simple Token Classification (Runs Once)**
+Imagine a model that just highlights names in a document (e.g., `PATIENT John DIAGNOSIS NSCLC`). You feed all 4 words into the model **one single time**. The model looks at all the words, does its math once, and spits out an answer for every single word at the exact same time: `[SAFE] [NAME] [SAFE] [SAFE]`.
+*Cost: 1 run through the neural network.*
+
+**2. Autoregressive Generation (Runs in a Loop)**
+When a Generative AI is deployed live, **it doesn't know the answers ahead of time**. It has to build the output token by token. To generate `PATIENT [NAME] DIAGNOSIS NSCLC <EOS>`, it must run repeatedly:
+
+* **Loop 1:** Feed `<BOS> <INPUT> PATIENT John DIAGNOSIS NSCLC <OUTPUT>`. Model predicts: `PATIENT`
+* **Loop 2:** Append prediction. Feed `<BOS> <INPUT> PATIENT John DIAGNOSIS NSCLC <OUTPUT> PATIENT`. Model predicts: `[NAME]`
+* **Loop 3:** Append prediction. Feed `<BOS> <INPUT> PATIENT John DIAGNOSIS NSCLC <OUTPUT> PATIENT [NAME]`. Model predicts: `DIAGNOSIS`
+*(...this continues until `<EOS>`)*
+
+*Cost: To generate an output that is 20 words long, the entire neural network must be run 20 separate times.*
 ## 14. Where It Appears in the Current Assignment
 
 This is the core paradigm for the **Tiny Mitra** project. You will format your synthetic dataset exactly like this so your Tiny-GPT learns to transform strings.

@@ -76,7 +76,26 @@ class WordTokenizer:
 
 ## 12. Limitations and Trade-Offs
 
-Using a simple word tokenizer with an `<UNK>` token destroys information. Modern LLMs (like GPT-4) use subword tokenization (like Byte-Pair Encoding or BPE). In BPE, if `Martinez` is unseen, it might be split into `Mart` + `in` + `ez`, which are common subwords. This eliminates the need for `<UNK>` tokens entirely! We use word tokenization here for simplicity.
+Using a simple word tokenizer with an `<UNK>` token destroys information. Modern LLMs (like GPT-4) avoid this completely by using **subword tokenization**, such as Byte-Pair Encoding (BPE).
+
+**The Scrabble Analogy:**
+Think of BPE like playing Scrabble. Instead of memorizing 100,000 whole words, you learn common prefixes, roots, and suffixes. If you encounter the unseen word `Martinez`, you don't throw it out. You break it down into common chunks you *have* seen: `Mart` + `in` + `ez`. 
+
+Here is how BPE processes an unknown word without losing data:
+
+```mermaid
+flowchart TD
+    Input["Unseen Word: Martinez"] --> Check{"Is word in vocabulary?"}
+    Check -->|No| Subwords["Break into chunks: Mart, in, ez"]
+    Subwords --> CheckChunks{"Are chunks in vocabulary?"}
+    CheckChunks -->|Yes| Encode["Encode chunks: 142, 59, 901"]
+    Encode --> Final["Model processes sequence of 3 subwords"]
+
+    style Input fill:#ffe0b2,stroke:#f57c00
+    style Encode fill:#c8e6c9,stroke:#388e3c
+```
+
+This elegant mechanism eliminates the need for `<UNK>` tokens entirely! We only use whole-word tokenization in this assignment for simplicity.
 
 ## 13. Where It Appears in the Current Assignment
 
@@ -112,3 +131,5 @@ Tokenization converts text strings into integer IDs using a fixed vocabulary dic
 
 ## 20. Sources
 - AI Learning Lab - Tiny-GPT Core Concepts
+- *Build a Large Language Model (From Scratch)* by Sebastian Raschka (Subword tokenization concepts)
+- *Hands-On Large Language Models* by Jay Alammar & Maarten Grootendorst (Tokenization intuition)

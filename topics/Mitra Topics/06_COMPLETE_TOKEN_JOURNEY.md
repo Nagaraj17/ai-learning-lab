@@ -40,40 +40,48 @@ Here is the exact journey of a token sequence through a Tiny-GPT.
 4. **Vocabulary Projection:** `(Batch, Time, D_Model)` $\rightarrow$ `(Batch, Time, Vocab_Size)`.
 5. **Generation:** We slice the matrix to only look at the *last* time step, yielding `(Batch, Vocab_Size)`. Softmax gives us the probability of the next token.
 
-## 7. Visual Diagram
+## 7. Master Architecture Diagram
 
 ```mermaid
 flowchart TD
-    A[Input String: PATIENT Olivia] --> B[Tokenizer: 24, 89]
-    B --> C[Token Embeddings: B, T, D]
-    B -.-> P[Positional Embeddings]
-    P -.-> C
+    %% Input Layer
+    Input["Prompt: PATIENT Olivia"] --> Tokens["Tokenizer: [24, 89]"]
     
-    subgraph Decoder Block 1
-        C --> LN1[LayerNorm]
-        LN1 --> QKV[Q, K, V Projections]
-        QKV --> MHA[Masked Multi-Head Attention]
-        MHA --> ADD1((+))
-        C --> ADD1
-        
-        ADD1 --> LN2[LayerNorm]
-        LN2 --> FFN[Feed Forward Network]
-        FFN --> ADD2((+))
-        ADD1 --> ADD2
+    %% Embedding Layer
+    subgraph Embedding Layer
+        Tokens --> TE["Token Embeddings (B, T, D)"]
+        Tokens --> PE["Positional Embeddings (T, D)"]
+        TE --> AddE((+))
+        PE --> AddE
     end
     
-    ADD2 --> DB2[Decoder Block 2...]
+    %% Transformer Blocks
+    subgraph Transformer Body
+        AddE --> DB1["Decoder Block 1"]
+        DB1 --> DB2["Decoder Block 2"]
+        DB2 --> DB3["Decoder Block ... N"]
+    end
     
-    DB2 --> OUT[Output Projection]
-    OUT --> LOGITS[Logits: B, T, Vocab]
-    LOGITS --> SLICE[Slice Last Position: B, Vocab]
-    SLICE --> SOFTMAX[Softmax Probabilities]
-    SOFTMAX --> NEXT[Next Token ID: 102]
-    NEXT --> APPEND[Append to Input and Repeat]
-
-    style A fill:#fff9c4,stroke:#fbc02d
-    style NEXT fill:#c8e6c9,stroke:#388e3c
-    style APPEND fill:#ffccbc,stroke:#d84315
+    %% Output Layer
+    subgraph Projection & Prediction
+        DB3 --> LNFinal["Final LayerNorm"]
+        LNFinal --> VocabProj["Vocabulary Projection (B, T, Vocab)"]
+        VocabProj --> Slice["Slice Last Logit (B, Vocab)"]
+        Slice --> Temp["Apply Temperature"]
+        Temp --> Softmax["Softmax Probabilities"]
+        Softmax --> Pick["Sample Next Token"]
+    end
+    
+    Pick -->|"[102]"| OutputText["Generated Text: PATIENT Olivia [NAME]"]
+    
+    %% The Autoregressive Loop
+    OutputText -->|Append and Loop!| Input
+    
+    style Input fill:#ffe0b2,stroke:#f57c00
+    style OutputText fill:#c8e6c9,stroke:#388e3c
+    style Embedding Layer fill:#e1f5fe,stroke:#0288d1
+    style Transformer Body fill:#f3e5f5,stroke:#7b1fa2
+    style Projection & Prediction fill:#fff3e0,stroke:#e65100
 ```
 
 ## 8. Required Mathematics (Tensor Shapes)
@@ -162,3 +170,4 @@ At every generation step, one sequence becomes `(B,T,D)` contextual representati
 
 ## 21. Sources
 - AI Learning Lab - Tiny-GPT Core Concepts
+- *Build a Large Language Model (From Scratch)* by Sebastian Raschka (End-to-end architecture flowcharts)

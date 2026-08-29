@@ -53,17 +53,20 @@ Logits for the next token:
 `[NAME]: 1.0`
 `MRN: 0.0`
 
-**Low Temperature (T = 0.1):**
+**Low Temperature (T = 0.1) - The "Ice Spike":**
 Adjusted: `[30, 10, 0]`
-Probabilities: `PATIENT` gets ~99.9%. Output is highly deterministic (Greedy).
+Probabilities: `PATIENT` gets ~99.9%. 
+*Analogy:* The cold temperature freezes the distribution into a single, sharp icy spike. The model is highly deterministic and robotic (Greedy).
 
-**Moderate Temperature (T = 1.0):**
+**Moderate Temperature (T = 1.0) - The "Rolling Hills":**
 Adjusted: `[3.0, 1.0, 0.0]`
-Probabilities: `PATIENT` (84%), `[NAME]` (11%), `MRN` (4%). Top token dominates but others have a chance.
+Probabilities: `PATIENT` (84%), `[NAME]` (11%), `MRN` (4%). 
+*Analogy:* The landscape is bumpy but distinct. The top token usually wins, but others have a fighting chance.
 
-**High Temperature (T = 5.0):**
+**High Temperature (T = 5.0) - The "Melted Desert":**
 Adjusted: `[0.6, 0.2, 0.0]`
-Probabilities: `PATIENT` (41%), `[NAME]` (27%), `MRN` (22%). Distribution is flatter, making the model highly random/creative.
+Probabilities: `PATIENT` (41%), `[NAME]` (27%), `MRN` (22%). 
+*Analogy:* The extreme heat melts the probability landscape until it is completely flat. Everything is equally likely, making the model highly random, creative, or completely nonsensical.
 
 ## 9. Math → Code Mapping
 
@@ -130,3 +133,4 @@ Autoregressive generation repeatedly converts the final-position logits into one
 
 ## 20. Sources
 - AI Learning Lab - Tiny-GPT Core Concepts
+- *Build a Large Language Model (From Scratch)* by Sebastian Raschka (Temperature scaling mechanics)
