@@ -1,272 +1,114 @@
-# Topic 2 — Tokenization, Vocabulary, and Unseen Entities
+# 02 - Tokenization and Unseen Entities
 
-## Learning goal
+## 1. The Problem
 
-You should be able to trace raw text into token IDs, explain every special token, and state exactly what is lost when an unseen name becomes `<UNK>`.
+Machine learning models only understand numbers, not text. If our training data has the string `PATIENT John Smith`, we need a way to turn it into an array of integers like `[45, 102, 19]`. 
+But what happens when the model is tested on `PATIENT Olivia Martinez`? If the names `Olivia` and `Martinez` were never seen during training, the tokenizer won't have an integer ID for them. The model will crash or fail because it doesn't know how to represent them!
 
-## 1. The model does not read strings
+## 2. Why We Need Something New
 
-```text
-Raw text → token strings → vocabulary lookup → token IDs
-```
+We need a standardized vocabulary and a safe fallback mechanism so the model can process entirely new, unseen words without crashing, while still understanding that these unknown words represent entities like names or dates.
 
-```text
-PATIENT John Smith DIAGNOSIS NSCLC
-```
+## 3. One-Line Definition
 
-may split into:
+**Tokenization** is the process of splitting text into manageable pieces (tokens) and mapping them to a fixed dictionary of integer IDs, using a special `<UNK>` (Unknown) token as a fallback for any piece of text not in the dictionary.
 
-```text
-["PATIENT", "John", "Smith", "DIAGNOSIS", "NSCLC"]
-```
+## 4. Beginner Intuition / Mental Model
 
-and encode as:
+Imagine a restaurant menu that only has 80 dishes, each numbered 1 through 80. If a customer orders "Steak", you write down `45`. If they order "Salad", you write down `12`. 
+What happens if someone asks for "Sushi", which isn't on the menu? Instead of throwing them out, you write down a special code `99` which means "Off-Menu Special". The chef (the model) treats every `99` as a generic unknown dish. It doesn't know if it's sushi or tacos, but it knows it's an off-menu item.
 
-```text
-[37, 22, 41, 12, 31]
-```
+## 5. What Came Before → What Changes Now
 
-The integers have no natural ordering or similarity. ID 22 is not inherently closer to ID 23 than ID 100. The learned embedding table gives each ID a trainable vector.
+* **Before:** Throwing an error when encountering an unseen string in test data.
+* **Now:** Gracefully falling back to the `<UNK>` token, ensuring the sequence length is preserved and the model can still process the sentence.
 
-## 2. How our tokenizer splits text
+## 6. How It Works
 
-```python
-TOKEN_PATTERN = re.compile(r"\[[A-Z_]+\]|<[A-Z_]+>|[A-Za-z_]+|\d+|[^\w\s]")
-```
+We build a dictionary (vocabulary) exclusively from the training dataset. 
+During tokenization (encoding):
+1. The text is split into words using a regular expression.
+2. We look up each word in the dictionary.
+3. If it exists, we return its integer ID.
+4. If it doesn't exist, we return the ID for `<UNK>`.
 
-| Pattern part | Captures | Example |
-|---|---|---|
-| `\[[A-Z_]+\]` | Placeholder | `[NAME]` |
-| `<[A-Z_]+>` | Control token | `<OUTPUT>` |
-| `[A-Za-z_]+` | Word-like token | `DIAGNOSIS`, `DrugA` |
-| `\d+` | Consecutive digits | `456789` |
-| `[^\w\s]` | Individual punctuation | `,`, `.`, `-` |
+When decoding back to text, `<UNK>` IDs are printed as `[UNK]`, so the original unknown word is permanently lost to the model.
 
-Thus:
+## 7. Required Mathematics 
 
-```text
-DR Patel, PHONE 9876543210.
-```
+There isn't much math in tokenization! It's a hash map (dictionary) lookup:
+$ID = Vocab\_Dict[token] \text{ if } token \in Vocab\_Dict \text{ else } UNK\_ID$
 
-becomes approximately:
+## 8. Complete Worked Example
 
-```text
-["DR", "Patel", ",", "PHONE", "9876543210", "."]
-```
+Suppose our fitted vocabulary is:
+`{"<BOS>": 0, "<UNK>": 1, "PATIENT": 2, "John": 3, "DIAGNOSIS": 4, "NSCLC": 5}`
 
-`[NAME]` remains one token rather than becoming `[`, `NAME`, `]`.
+**Training sentence:** `PATIENT John DIAGNOSIS NSCLC`
+**Token IDs:** `[2, 3, 4, 5]`
 
-## 3. Vocabulary construction
+**Test sentence:** `PATIENT Olivia DIAGNOSIS ASTHMA`
+* `PATIENT` -> `2`
+* `Olivia` (not in vocab) -> `<UNK>` -> `1`
+* `DIAGNOSIS` -> `4`
+* `ASTHMA` (not in vocab) -> `<UNK>` -> `1`
+**Token IDs:** `[2, 1, 4, 1]`
 
-The tokenizer is fitted only on training sequences:
+## 9. Math → Code Mapping
 
 ```python
-WordTokenizer().fit([example.sequence for example in splits["train"]])
+class WordTokenizer:
+    def encode(self, text: str) -> list[int]:
+        tokens = self.split(text)
+        # Look up the ID, defaulting to self.unk_id if the token is missing
+        return [self.vocab.get(token, self.unk_id) for token in tokens]
 ```
 
-It counts tokens, filters by minimum frequency, sorts them, and places these first:
+## 10. Experiments / What-If Questions
 
-```text
-<PAD>, <UNK>, <BOS>, <EOS>, <INPUT>, <OUTPUT>
-```
+**What if two completely different unseen names appear next to each other?**
+*Prediction:* E.g. `Olivia Martinez`. They both become `<UNK>`. The model sees `[1, 1]`. Initially, their token embeddings are identical. However, the *Positional Embeddings* added to them will be different (one is position 4, one is position 5), allowing the model to know they are two distinct tokens in a sequence, not one giant unknown blob.
 
-Test text must not be used to fit the vocabulary. Doing so lets test information influence preprocessing and contaminates the experiment.
+## 11. Common Misunderstandings
 
-## 4. Encoding and decoding
+* **"The model can figure out the word behind `<UNK>`."** -> No. Once the word is converted to `<UNK>`, the actual string `Olivia` is completely erased. The model only sees ID `1`.
+* **"We should fit the tokenizer on the test data too."** -> ABSOLUTELY NOT. This is data leakage. Your model will appear to perform perfectly because it never encounters unseen data, but it will fail miserably in the real world.
 
-Encoding uses:
+## 12. Limitations and Trade-Offs
 
-```python
-self.token_to_id.get(token, unk)
-```
+Using a simple word tokenizer with an `<UNK>` token destroys information. Modern LLMs (like GPT-4) use subword tokenization (like Byte-Pair Encoding or BPE). In BPE, if `Martinez` is unseen, it might be split into `Mart` + `in` + `ez`, which are common subwords. This eliminates the need for `<UNK>` tokens entirely! We use word tokenization here for simplicity.
 
-Known tokens receive their ID. Missing tokens receive the same `<UNK>` ID.
+## 13. Where It Appears in the Current Assignment
 
-Decoding reverses the ID lookup and joins tokens with spaces. Punctuation may display as `Patel ,` rather than `Patel,`. That is a simple decoder-formatting limitation, not a Transformer failure.
+You will use the `WordTokenizer` class. You must ensure you only call `tokenizer.fit()` on your training data, and only call `tokenizer.encode()` on your test data.
 
-## 5. What happens to an unseen name
+## 14. Where It Appears in Modern AI Systems
 
-Assume training contains:
+Every LLM has a tokenizer. However, as mentioned above, modern systems use subword tokenization (BPE or SentencePiece) to handle unseen words efficiently without losing the actual characters.
 
-```text
-PATIENT John Smith DIAGNOSIS NSCLC
-```
+## 15. Connection to the Next Concept
 
-but not `Olivia` or `Martinez`. Test input:
+Now that we've turned our words into integer IDs, how do we give those arbitrary integers actual meaning? We do this by mapping them to dense vectors. We'll explore this and the core processing block in **Topic 3: Causal Decoder Block**.
 
-```text
-PATIENT Olivia Martinez DIAGNOSIS NSCLC
-```
+## 16. Teach-Back and Small Application Exercise
 
-may encode conceptually as:
+**Exercise:** If your vocabulary is `{"I": 0, "like": 1, "cats": 2, "<UNK>": 3}`. What is the encoded sequence for the sentence `I like blue dogs`? 
 
-```text
-PATIENT <UNK> <UNK> DIAGNOSIS NSCLC
-```
+## 17. Quick Revision Summary
 
-### Information that survives
+Tokenization converts text strings into integer IDs using a fixed vocabulary dictionary. To prevent crashes on unseen words, a special `<UNK>` token ID is used as a fallback.
 
-- two unknown tokens occur after `PATIENT`;
-- they occur before `DIAGNOSIS`;
-- their positions remain distinct;
-- the surrounding sentence template is visible.
+## 18. My Understanding
 
-### Information that is lost
+*(Write your own intuition here. How would you explain OOV to a teammate?)*
 
-- characters inside each name;
-- the distinction between these names and other unseen words;
-- useful word pieces or surname endings;
-- any semantic information that could have come from those forms.
+## 19. Flashcards
 
-The model may still redact correctly by learning a structural pattern such as:
+**Q:** Why must the tokenizer only be fitted on the training data?
+**A:** To simulate real-world conditions where the model encounters words it has never seen before. Fitting on test data is data leakage.
 
-```text
-tokens after PATIENT and before DIAGNOSIS are usually a name
-```
+**Q:** How does the model distinguish between two `<UNK>` tokens next to each other?
+**A:** By adding positional embeddings to them, giving them distinct spatial locations in the sequence.
 
-That is contextual generalization, not recognition of the actual unseen name.
-
-## 6. The `<UNK>` collision
-
-If different unseen spans produce the same IDs:
-
-```text
-PATIENT Olivia Martinez DIAGNOSIS NSCLC
-PATIENT Severe Persistent DIAGNOSIS ASTHMA
-```
-
-both may begin:
-
-```text
-PATIENT <UNK> <UNK> DIAGNOSIS ...
-```
-
-The model cannot recover which characters were present. It must rely entirely on context. Controlled templates make that feasible, but diverse clinical prose makes it risky.
-
-## 7. Tokenization alternatives
-
-| Strategy | Unseen text | Sequence length | Vocabulary | Complexity |
-|---|---|---:|---:|---:|
-| Word | Becomes `<UNK>` | Short | Moderate | Low |
-| Character | Every character represented | Long | Tiny | Medium |
-| Subword | Reusable pieces | Medium | Medium | Higher |
-| Hybrid | Known clinical words + fallback pieces | Medium | Medium | Higher |
-
-### Word-level
-
-Readable sequences and heatmaps make it a good baseline. Unknown values are its central limitation.
-
-### Character-level
-
-`Olivia` becomes `O l i v i a`. Unknown words disappear if all characters are covered, but sequences become much longer and the tiny model must learn words from characters.
-
-### Subword
-
-`Martinez` might become `Mart` + `inez`. Internal evidence is preserved with a manageable sequence length. Implementing BPE, WordPiece, or Unigram would be a separate learning exercise.
-
-### Hybrid
-
-Keep known medical concepts such as `BREAST_CANCER` intact while splitting unknown names and identifiers into smaller pieces.
-
-## 8. Entity-disjoint splits
-
-Tiny Mitra uses different pools:
-
-```text
-Training: John Smith, Mary Brown, ...
-Test:     Olivia Martinez, Noah Williams, ...
-```
-
-A validation function checks that test-only names and doctors do not occur in training.
-
-This tests:
-
-> Can the model redact a new value inside a familiar structure?
-
-It does not test:
-
-> Can the model understand every new sentence structure?
-
-## 9. Three generalization levels
-
-### Unseen value, familiar template
-
-```text
-Train: PATIENT John Smith DIAGNOSIS NSCLC
-Test:  PATIENT Olivia Martinez DIAGNOSIS ASTHMA
-```
-
-### Familiar value, unseen template
-
-```text
-Train: PATIENT John Smith DIAGNOSIS NSCLC
-Test:  NSCLC was confirmed for John Smith
-```
-
-### Unseen value and unseen template
-
-```text
-Olivia Martinez presented with findings consistent with NSCLC
-```
-
-The third is hardest. These conditions should be reported separately; one test-accuracy number hides what truly generalized.
-
-## 10. Padding and its masks
-
-Batch tensors need a common length. Short sequences receive `<PAD>`:
-
-```text
-Token IDs:      ... <EOS> <PAD> <PAD>
-Attention mask: 1 1 1 1 1 1 0 0
-Loss mask:      0 0 ... output ones ... 0 0
-```
-
-- **Padding attention mask:** prevents queries from reading artificial padding keys.
-- **Loss mask:** prevents padded targets and prompt targets from training the model.
-- **Causal mask:** prevents every real position from reading future real positions.
-
-These masks serve different purposes.
-
-## 11. Experiments
-
-1. Print token strings for a note containing a name, date, punctuation, MRN, and placeholders.
-2. Compare IDs for a training name and a test-only name.
-3. Count `<UNK>` tokens in train, validation, and test.
-4. Test unseen names containing one, two, and three words.
-5. Try a character tokenizer and compare sequence length and leakage.
-6. Keep entities unseen and change the sentence template.
-
-## 12. Common misconceptions
-
-**“`<UNK>` means this is a name.”**  
-No. It only means the token is absent from the vocabulary.
-
-**“An unknown name makes generalization impossible.”**  
-Not always. Context and positions may reveal its role.
-
-**“Unseen names mean the entire test is unseen.”**  
-No. Templates, clinical terms, and placeholder patterns may remain familiar.
-
-**“Padding and causal masks are the same.”**  
-No. Padding hides empty positions; causal masking hides future real positions.
-
-## 13. Explain without notes
-
-For:
-
-```text
-PATIENT Olivia Martinez PHONE 9876543210 RECEIVED DrugA FOR NSCLC
-```
-
-answer:
-
-1. What token strings are produced?
-2. Which are likely `<UNK>`?
-3. What information about the name survives encoding?
-4. Why can the model still possibly produce `[NAME]`?
-5. What if a clinical term also becomes unknown?
-6. How would character or subword tokenization change the input?
-
-## Key takeaway
-
-Tokenization determines what evidence reaches the Transformer. Our word-level baseline is inspectable, but unseen values collapse to `<UNK>`. Generalization claims must distinguish contextual pattern learning from processing the unseen entity text itself.
+## 20. Sources
+- AI Learning Lab - Tiny-GPT Core Concepts

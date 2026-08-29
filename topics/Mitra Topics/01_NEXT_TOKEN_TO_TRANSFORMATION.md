@@ -1,196 +1,151 @@
-# Topic 1 — From Next-Token Prediction to De-Identification
+# 01 - Next-Token Prediction to Transformation
 
-## Learning goal
+## 1. The Problem
 
-By the end of this topic, you should be able to explain why Tiny Mitra is still a next-token language model even though its visible job is to redact identifiers.
+Imagine a simple text classification model that reads a clinical note and outputs `[SAFE]` or `[CONTAINS_PHI]`. This is useful for flagging files, but what if we actually want to *share* the note for research without violating privacy? 
+We have the source note:
+`PATIENT John Smith DIAGNOSIS NSCLC`
 
-## 1. Two descriptions of the same model
+But our goal is a completely new sequence where identifiers are gone but clinical facts remain:
+`PATIENT [NAME] DIAGNOSIS NSCLC`
 
-Tiny Mitra can be described at two levels:
+A classification model cannot generate a new sequence. 
 
-- **Application task:** accept a clinical note, remove identifying information, and retain medical information.
-- **Learning objective:** predict the next token from the tokens that appear to its left.
+## 2. Why We Need Something New
 
-These statements do not contradict one another. Prompt formatting converts the application task into a sequence-completion problem.
+If we only flag words (Token Classification), we have to write separate rules to assemble a new string, handle variable lengths, and maintain grammar. What if a model could just read the original note and naturally "speak" the de-identified version back to us? We need a mechanism that can take a prompt and generate a transformed sequence from scratch.
 
-Suppose the original note is:
+## 3. One-Line Definition
 
-```text
-PATIENT John Smith DIAGNOSIS NSCLC
-```
+**Autoregressive sequence transformation** is the process of training a language model to generate a modified version of an input text by predicting it one token at a time as a natural continuation.
 
-The desired result is:
+## 4. Beginner Intuition / Mental Model
 
-```text
-PATIENT [NAME] DIAGNOSIS NSCLC
-```
+Think of the model as a highly trained medical scribe. 
+You hand the scribe a piece of paper with a patient's chart. At the bottom, there is a bold line. 
+The scribe's *only* job is to continue writing below the line. But they have been trained that whenever they see this bold line, they must re-write everything above it, swapping out names and dates for placeholders. 
+The "bold line" is our `<OUTPUT>` control token. The model is simply continuing the document, but its continuation happens to be a transformation.
 
-For training, we join them into one sequence:
+## 5. What Came Before → What Changes Now
 
-```text
-<BOS> <INPUT> PATIENT John Smith DIAGNOSIS NSCLC <OUTPUT> PATIENT [NAME] DIAGNOSIS NSCLC <EOS>
-```
+* **Before (Token Classification):** Assigning a label (e.g., `NAME`, `O`) to every single input token. Output length equals input length.
+* **Now (Sequence Generation):** The model predicts the first token of the *new* string, appends it, and predicts the next. The output length is learned and flexible.
 
-The model does not receive a special `redact()` operation. It sees tokens and learns that text after `<OUTPUT>` should be a transformed continuation of text after `<INPUT>`.
+## 6. How It Works
 
-## 2. Why the control tokens matter
+We convert the application task into a sequence-completion problem using control tokens:
 
 | Token | Meaning |
 |---|---|
 | `<BOS>` | The sequence begins here |
 | `<INPUT>` | The original note follows |
-| `<OUTPUT>` | Begin generating the transformed note |
+| `<OUTPUT>` | The bold line: begin generating the transformed note |
 | `<EOS>` | The transformed note is complete |
-| `<PAD>` | Empty batch space; not real content |
-| `<UNK>` | Token absent from the fitted vocabulary |
 
-Without `<OUTPUT>`, the model has no clear boundary between source and transformed text. It may continue the note instead of starting redaction. Without `<EOS>`, it has no learned stopping signal and must rely only on a fixed token limit.
+For training, we join the input and desired output into one long string:
+`<BOS> <INPUT> PATIENT John DIAGNOSIS NSCLC <OUTPUT> PATIENT [NAME] DIAGNOSIS NSCLC <EOS>`
 
-## 3. What next-token prediction means
+The model learns that text after `<OUTPUT>` should be a transformed continuation of the text after `<INPUT>`.
 
-For a sequence `x₀, x₁, ..., xₜ`, the model estimates:
+## 7. Visual Diagram
 
-```text
-P(xₜ₊₁ | x₀, x₁, ..., xₜ)
+```mermaid
+flowchart TD
+    subgraph Context
+        BOS[\<BOS\>] --> IN[\<INPUT\>]
+        IN --> P1[PATIENT]
+        P1 --> J[John]
+        J --> OUT[\<OUTPUT\>]
+    end
+    
+    subgraph Generation Loop
+        OUT -->|Predicts| Next1(PATIENT)
+        Next1 -->|Appended to context, predicts| Next2(\[NAME\])
+        Next2 -->|Appended to context, predicts| Next3(\<EOS\>)
+    end
+
+    style Context fill:#e1f5fe,stroke:#0288d1
+    style Generation Loop fill:#e8f5e9,stroke:#388e3c
 ```
 
-It does not output one certain answer. It produces one score, called a **logit**, for every vocabulary token. Softmax converts those scores into probabilities.
+## 8. Required Mathematics 
 
-After this context:
+For a sequence $x_0, x_1, ..., x_t$, the model estimates the probability distribution of the next token:
+$$P(x_{t+1} | x_0, x_1, ..., x_t)$$
 
-```text
-<BOS> <INPUT> PATIENT John Smith DIAGNOSIS NSCLC <OUTPUT>
-```
+It does not output one certain answer. It produces one score (**logit**) for every vocabulary token. We apply a function called Softmax to convert these logits into probabilities that sum to 1. 
 
-the model might assign:
+## 9. Complete Worked Example
 
-| Candidate | Probability |
-|---|---:|
-| `PATIENT` | 0.82 |
-| `[NAME]` | 0.07 |
-| `MRN` | 0.04 |
-| `NSCLC` | 0.02 |
-| Remaining tokens | 0.05 |
+After seeing this context: `<BOS> <INPUT> PATIENT John Smith DIAGNOSIS NSCLC <OUTPUT>`, the model outputs logits for its entire vocabulary.
 
-If `PATIENT` is selected, it is appended. The enlarged sequence is run through the model again, perhaps predicting `[NAME]`. This repeated process is autoregressive generation.
+* `PATIENT` (logit: 4.2) -> Probability 82%
+* `[NAME]` (logit: 1.1) -> Probability 7%
+* `MRN` (logit: -0.5) -> Probability 2%
 
-## 4. Inputs and targets are shifted
+Because `PATIENT` has the highest probability, it is selected and appended. The sequence is now longer. We feed the entire longer sequence back in to predict `[NAME]`, and so on.
 
-```text
-Full sequence: <BOS> <INPUT> PATIENT John Smith ... <OUTPUT> PATIENT [NAME] ... <EOS>
-Input IDs:     <BOS> <INPUT> PATIENT John Smith ... <OUTPUT> PATIENT [NAME] ...
-Targets:       <INPUT> PATIENT John Smith ... <OUTPUT> PATIENT [NAME] ... <EOS>
-```
+## 10. Math → Code Mapping
 
-At input position `t`, the model predicts target position `t`, which is the original token at `t + 1`.
-
-That is why the dataset code uses:
+The model evaluates prediction errors across the *entire* sequence during training, but we only care if it learns the transformation (the part after `<OUTPUT>`).
 
 ```python
-input_ids = ids[:-1]
-targets = ids[1:]
-```
+# Calculate loss (error) for every single token prediction
+token_losses = cross_entropy(logits, targets, reduction="none")
 
-The final token cannot be an input because no following token remains to predict. The first token cannot be a target because it has no preceding context in this sequence.
-
-## 5. Why loss is masked on the prompt
-
-The Transformer calculates logits at every input position, but our application cares about learning the output continuation:
-
-```text
-Prompt portion: 0 0 0 0 0 0
-Output portion: 1 1 1 1 1
-Padding:        0 0 0
-```
-
-For each supervised position:
-
-```text
-lossₜ = -log(probability assigned to the correct next token)
-```
-
-If the correct token receives probability `0.8`, loss is about `0.223`. If it receives `0.01`, loss is about `4.605`. Confidently wrong predictions are punished much more.
-
-The code computes each token loss before masking:
-
-```python
-token_losses = cross_entropy(..., reduction="none")
+# Mask out the prompt (multiply prompt positions by 0, target positions by 1)
+# so the model isn't punished for failing to predict the original prompt itself!
 loss = (token_losses * loss_mask).sum() / loss_mask.sum()
 ```
 
-Loss masking does **not** hide the prompt from attention. Generated output tokens may still read earlier prompt tokens. It only decides which prediction errors update parameters.
+## 11. Experiments / What-If Questions
 
-## 6. Training versus inference
+**What if we remove the `<OUTPUT>` token from the prompt?**
+*Prediction:* The model won't realize it's time to start the de-identification transformation. It will likely just continue hallucinating more of the original medical note (e.g. `DIAGNOSIS NSCLC REASON FOR VISIT...`). 
 
-### Training
+## 12. Common Misunderstandings
 
-The complete correct sequence is available. Causal masking ensures each position sees only itself and earlier positions. Predictions for all positions are calculated in parallel.
+* **"The model edits input tokens in place."** -> No, it generates an entirely separate sequence after the `<OUTPUT>` token.
+* **"Loss masking means the model cannot see the prompt."** -> No. Attention still reads earlier prompt tokens; the loss mask only controls which prediction errors are used to update weights during training.
+* **"The model makes one de-identification prediction."** -> No. It makes many next-token predictions, one by one.
 
-### Inference
+## 13. Limitations and Trade-Offs
 
-Only this exists initially:
+Autoregressive generation is computationally expensive compared to simple token classification because the model must be run repeatedly (once for every generated token), whereas classification runs once for the whole sequence. 
 
-```text
-<BOS> <INPUT> original note <OUTPUT>
-```
+## 14. Where It Appears in the Current Assignment
 
-The model predicts one token, appends it, and repeats. Training is parallel across sequence positions; generation is sequential because every selected token becomes context for the following prediction.
+This is the core paradigm for the **Tiny Mitra** project. You will format your synthetic dataset exactly like this so your Tiny-GPT learns to transform strings.
 
-## 7. Why this is not token classification
+## 15. Where It Appears in Modern AI Systems
 
-| Token classification | Tiny Mitra generation |
-|---|---|
-| One label per input token | One vocabulary distribution per generated position |
-| Output length follows input length | Output length is learned |
-| Redaction applied after labels | Placeholders generated directly |
-| No autoregressive decoding required | Predict and append until `<EOS>` |
+This is exactly how ChatGPT translates languages, summarizes text, or writes code. It is all cast as a next-token prediction task prompted by a control sequence (like `<|im_start|>user...`).
 
-A production de-identifier may prefer classification and deterministic rules. We use generation because the exercise is about understanding a decoder-only language model.
+## 16. Connection to the Next Concept
 
-## 8. What the model must learn
+To feed words like `PATIENT` and `John` into the model, they must be converted into numbers. But what happens if the model encounters a name it has never seen before? We will explore this in **Topic 2: Tokenization and Unseen Entities**.
 
-It must simultaneously:
+## 17. Teach-Back and Small Application Exercise
 
-1. copy safe structural and clinical tokens;
-2. replace identifying spans with placeholders;
-3. preserve order;
-4. start transformation after `<OUTPUT>`;
-5. stop by generating `<EOS>`.
+**Exercise:** Write out the exact training sequence (including all control tokens) for the following desired transformation:
+Source: `MRN 12345 DIAGNOSIS DIABETES`
+Target: `MRN [MRN] DIAGNOSIS DIABETES`
 
-This is harder than spotting a name: every output position requires choosing what should come next.
-
-## 9. Common misconceptions
-
-**“The model edits input tokens in place.”**  
-No. It generates another sequence after `<OUTPUT>`.
-
-**“Loss masking means the model cannot see the prompt.”**  
-No. Attention sees earlier prompt tokens; the loss mask only controls training errors.
-
-**“The model makes one de-identification prediction.”**  
-No. It makes many next-token predictions.
-
-**“Low average loss guarantees no leakage.”**  
-No. One leaked name can be clinically unacceptable despite low average loss.
-
-## 10. Trace this yourself
-
-Use:
-
-```text
-<BOS> <INPUT> MRN 456789 PATIENT Olivia Martinez DIAGNOSIS ASTHMA <OUTPUT>
-```
-
-Answer:
-
-1. What should the first generated token be?
-2. What is predicted after that token is appended?
-3. Which source tokens should be copied?
-4. Which spans should become placeholders?
-5. Why is each decision still next-token prediction?
-6. What happens if `<OUTPUT>` is missing?
-7. What changes if prompt tokens also contribute to loss?
-
-## Key takeaway
+## 18. Quick Revision Summary
 
 Tiny Mitra learns de-identification because the training format makes a redacted note the expected continuation of an original note. The transformation is produced through repeated next-token prediction.
+
+## 19. My Understanding
+
+*(Write your own intuition here. How would you explain this to a teammate?)*
+
+## 20. Flashcards
+
+**Q:** What is the purpose of the `<OUTPUT>` token?
+**A:** It acts as a boundary signal telling the model to switch from reading the prompt to generating the transformed continuation.
+
+**Q:** Why do we mask the loss on the prompt tokens?
+**A:** Because we only want to train the model to accurately generate the output transformation, not to predict the exact phrasing of the random input note.
+
+## 21. Sources
+- AI Learning Lab - Tiny-GPT Core Concepts

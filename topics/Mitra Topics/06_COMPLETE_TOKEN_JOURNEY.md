@@ -1,427 +1,164 @@
-# Topic 6 — Complete Token Journey: Input to Next-Token Prediction
+# 06 - Complete Token Journey: Input to Next-Token Prediction
 
-## Learning goal
+## 1. The Problem
 
-This is the end-to-end walkthrough every team member should be able to give. It connects the earlier topics using one prompt and concrete tensor shapes.
+We've learned about Tokenization (converting words to numbers), Embeddings (giving numbers meaning), Attention (mixing context), and the Decoder Block (processing the context). But it is easy to lose the forest for the trees. 
+If we feed `PATIENT Olivia Martinez DIAGNOSIS NSCLC` into the model, how do all these separate mathematical operations string together to eventually spit out `[NAME]` as the next token? 
 
-## The prompt
+## 2. Why We Need Something New
 
-```text
-<BOS> <INPUT> PATIENT Olivia Martinez DIAGNOSIS NSCLC <OUTPUT>
+We need a unified mental model that traces exactly how the shape and meaning of the data change at every step, from the moment a string enters the system to the moment a new string is generated.
+
+## 3. One-Line Definition
+
+The **Complete Token Journey** is the end-to-end forward pass of a causal language model, mapping discrete token IDs into dense vectors, processing them through stacked decoder blocks, and projecting them back into a vocabulary probability distribution.
+
+## 4. Beginner Intuition / Mental Model
+
+Imagine a factory assembly line. 
+1. **Raw Materials:** Words are boxed into standard crates (Token IDs).
+2. **Painting:** Each crate is painted with a specific color representing its meaning (Token Embeddings) and stamped with a serial number for its position (Positional Embeddings).
+3. **The Mixer (Attention):** The crates move down a conveyor belt. A machine looks at the colors of past crates and mixes some of their paint into the current crate, enriching its color.
+4. **The Oven (FFN):** The crate goes through an oven that chemically alters the paint to bring out new hues.
+5. **Quality Control (Output Projection):** At the very end of the belt, a scanner looks at the final color of the *last* crate on the belt and matches it against a color catalog (Vocabulary Logits) to decide what new crate to build next.
+
+## 5. What Came Before → What Changes Now
+
+* **Before:** Learning isolated mathematical concepts (softmax, cross-entropy, matrices).
+* **Now:** Connecting the pipeline end-to-end with concrete tensor shapes.
+
+## 6. How It Works
+
+Here is the exact journey of a token sequence through a Tiny-GPT.
+
+1. **Tokenization:** Text $\rightarrow$ List of Integer IDs of shape `(Batch, Time)`
+2. **Embeddings:** Integer IDs $\rightarrow$ Dense Vectors of shape `(Batch, Time, D_Model)`. Positional vectors are added here.
+3. **Decoder Blocks (Repeated N times):** 
+   - **Q/K/V Projection:** `(Batch, Time, D_Model)`
+   - **Multi-Head Attention:** Splitting `D_Model` into `H` heads, calculating scores, masking, mixing values.
+   - **Feed-Forward Network:** Expanding to `D_FF` and contracting back to `D_Model`.
+4. **Vocabulary Projection:** `(Batch, Time, D_Model)` $\rightarrow$ `(Batch, Time, Vocab_Size)`.
+5. **Generation:** We slice the matrix to only look at the *last* time step, yielding `(Batch, Vocab_Size)`. Softmax gives us the probability of the next token.
+
+## 7. Visual Diagram
+
+```mermaid
+flowchart TD
+    A[Input String: PATIENT Olivia] --> B[Tokenizer: 24, 89]
+    B --> C[Token Embeddings: B, T, D]
+    B -.-> P[Positional Embeddings]
+    P -.-> C
+    
+    subgraph Decoder Block 1
+        C --> LN1[LayerNorm]
+        LN1 --> QKV[Q, K, V Projections]
+        QKV --> MHA[Masked Multi-Head Attention]
+        MHA --> ADD1((+))
+        C --> ADD1
+        
+        ADD1 --> LN2[LayerNorm]
+        LN2 --> FFN[Feed Forward Network]
+        FFN --> ADD2((+))
+        ADD1 --> ADD2
+    end
+    
+    ADD2 --> DB2[Decoder Block 2...]
+    
+    DB2 --> OUT[Output Projection]
+    OUT --> LOGITS[Logits: B, T, Vocab]
+    LOGITS --> SLICE[Slice Last Position: B, Vocab]
+    SLICE --> SOFTMAX[Softmax Probabilities]
+    SOFTMAX --> NEXT[Next Token ID: 102]
+    NEXT --> APPEND[Append to Input and Repeat]
+
+    style A fill:#fff9c4,stroke:#fbc02d
+    style NEXT fill:#c8e6c9,stroke:#388e3c
+    style APPEND fill:#ffccbc,stroke:#d84315
 ```
 
-Desired continuation:
+## 8. Required Mathematics (Tensor Shapes)
 
-```text
-PATIENT [NAME] DIAGNOSIS NSCLC <EOS>
-```
-
-Assume:
-
-| Setting | Value |
-|---|---:|
-| Batch `B` | 1 |
-| Prompt length `T` | 8 |
-| Model width `D` | 24 |
-| Heads `H` | 4 |
-| Head width `d_head` | 6 |
-| FFN width `d_ff` | 96 |
-| Blocks | 2 |
-| Vocabulary `V` | 80 |
-
-The exact vocabulary IDs and learned values vary after training. Shapes and operations do not.
-
-## Stage 1 — Tokenization
-
-The regex produces:
-
-```text
-[
-  "<BOS>", "<INPUT>", "PATIENT", "Olivia",
-  "Martinez", "DIAGNOSIS", "NSCLC", "<OUTPUT>"
-]
-```
-
-The sequence length is `T=8`.
-
-If `Olivia` and `Martinez` are absent from the training vocabulary:
-
-```text
-[
-  <BOS_ID>, <INPUT_ID>, <PATIENT_ID>, <UNK_ID>,
-  <UNK_ID>, <DIAGNOSIS_ID>, <NSCLC_ID>, <OUTPUT_ID>
-]
-```
-
-Tensor:
-
-```text
-input_ids: (B,T) = (1,8)
-```
-
-The two unknown IDs are numerically identical, but their positions differ.
-
-## Stage 2 — Token embedding lookup
-
-The embedding table has:
-
-```text
-(V,D) = (80,24)
-```
-
-Each token ID selects one row:
-
-```text
-(1,8) → embedding lookup → (1,8,24)
-```
-
-No multiplication by the integer ID occurs. An ID is an index into a learned table.
-
-Both `<UNK>` positions initially retrieve the same token embedding. Their representations become different after positional vectors are added and context is processed.
-
-## Stage 3 — Positional embedding
-
-Position IDs are:
-
-```text
-[0,1,2,3,4,5,6,7]
-```
-
-The position table has shape:
-
-```text
-(max_seq_len,D)
-```
-
-Selected position vectors have shape:
-
-```text
-(T,D) = (8,24)
-```
-
-Broadcasting adds them to every batch:
-
-```python
-x = token_embedding(input_ids) + position_embedding(positions)[None,:,:]
-```
-
-Result:
-
-```text
-x: (1,8,24)
-```
-
-Now the two `<UNK>` tokens differ because one is at position 3 and one at position 4.
-
-## Stage 4 — Enter Decoder Block 1
-
-The block input is `x₀: (1,8,24)`.
-
-Pre-LayerNorm normalizes each 24-feature token vector independently:
-
-```text
-n₀ = LayerNorm(x₀): (1,8,24)
-```
-
-It changes values, not shape.
-
-## Stage 5 — Q, K, and V
-
-Three independent linear projections:
-
-```text
-Q = n₀ @ W_Q
-K = n₀ @ W_K
-V = n₀ @ W_V
-```
-
-Each weight is `(24,24)`, so each result is:
-
-```text
-Q, K, V: (1,8,24)
-```
-
-The `<OUTPUT>` position has its own query vector. All eight positions have key and value vectors.
-
-## Stage 6 — Split into four heads
-
-```text
-(1,8,24)
-→ reshape (1,8,4,6)
-→ transpose (1,4,8,6)
-```
-
-So:
-
-```text
-Q, K, V: (1,4,8,6)
-```
-
-Each head has six projected features per position. The four heads together still represent 24 features.
-
-## Stage 7 — Score every visible source position
-
-```text
-scores = Q @ Kᵀ / √6
-```
-
-Shape:
-
-```text
-(1,4,8,6) @ (1,4,6,8) → (1,4,8,8)
-```
-
-For the `<OUTPUT>` query at index 7:
-
-```text
-scores[0, head, 7, 0:8]
-```
-
-contains one compatibility score for every prompt position:
-
-```text
-<BOS>, <INPUT>, PATIENT, <UNK>, <UNK>, DIAGNOSIS, NSCLC, <OUTPUT>
-```
-
-## Stage 8 — Apply causal and padding masks
-
-At position 7, all prompt positions are at or before it, so all are causally visible.
-
-At position 3, only positions 0 through 3 are visible; positions 4 through 7 receive `-inf`.
-
-There is no padding in this eight-token prompt, so the padding mask is all ones. If padding existed, its key columns would also receive `-inf`.
-
-This is the exact point where future information is prevented from leaking.
-
-## Stage 9 — Softmax attention weights
-
-Softmax across the last dimension turns each row into probabilities:
-
-```text
-weights: (1,4,8,8)
-```
-
-Every valid row per head sums to one.
-
-An illustrative `<OUTPUT>` row for one head could be:
-
-```text
-[0.02, 0.03, 0.30, 0.20, 0.20, 0.10, 0.10, 0.05]
-```
-
-This head pays most attention to `PATIENT` and the two unknown positions. These are illustrative values, not guaranteed learned behaviour.
-
-## Stage 10 — Weighted value combination
-
-```text
-context = weights @ V
-```
-
-```text
-(1,4,8,8) @ (1,4,8,6) → (1,4,8,6)
-```
-
-For each query and head, source value vectors are mixed using the attention probabilities.
-
-## Stage 11 — Merge heads and project
-
-```text
-(1,4,8,6)
-→ transpose (1,8,4,6)
-→ reshape (1,8,24)
-→ output projection (1,8,24)
-```
-
-The output projection learns how features from different heads should interact.
-
-## Stage 12 — First residual update
-
-```text
-x₁ = x₀ + attention_output
-```
-
-Both tensors are `(1,8,24)`. The result is also `(1,8,24)`.
-
-The original representation follows the residual path; attention contributes a learned contextual update.
-
-## Stage 13 — Feed-forward update
-
-Normalize:
-
-```text
-n₁ = LayerNorm(x₁): (1,8,24)
-```
-
-Expand:
-
-```text
-(1,8,24) @ (24,96) → (1,8,96)
-```
-
-Apply GELU, then contract:
-
-```text
-(1,8,96) @ (96,24) → (1,8,24)
-```
-
-Second residual:
-
-```text
-x₂ = x₁ + FFN(n₁): (1,8,24)
-```
-
-The FFN transforms every position independently. The position-to-position mixing already occurred in attention.
-
-## Stage 14 — Decoder Block 2
-
-Block 2 receives `(1,8,24)` and repeats the same sequence with its own learned weights:
-
-```text
-LayerNorm → Q/K/V → four-head causal attention → residual
-→ LayerNorm → FFN → residual
-```
-
-It again outputs `(1,8,24)`.
-
-Shape stability does not mean nothing changed. The 24 features at each position now encode richer contextual information.
-
-## Stage 15 — Final normalization
-
-After all blocks:
-
-```text
-hidden = final_norm(x): (1,8,24)
-```
-
-The model has one final 24-feature hidden representation for every input position.
-
-## Stage 16 — Vocabulary projection
-
-The learned output matrix has shape:
-
-```text
-(D,V) = (24,80)
-```
-
-```text
-(1,8,24) @ (24,80) → logits (1,8,80)
-```
-
-Every position now has 80 scores—one for each vocabulary token.
-
-## Stage 17 — Select final-position logits
-
-```text
-logits[:, -1, :] → (1,80)
-```
-
-These scores answer:
-
-> Given the entire prompt ending in `<OUTPUT>`, what token should come next?
-
-Earlier-position logits are useful during parallel training, but only the final current position is needed for generation.
-
-## Stage 18 — Temperature and probability
-
-At temperature `0.1`:
-
-```text
-adjusted = final_logits / 0.1
-probabilities = softmax(adjusted)
-```
-
-Suppose `PATIENT` is highest. Greedy selection chooses its ID.
-
-## Stage 19 — Append and repeat
-
-New sequence:
-
-```text
-<BOS> <INPUT> PATIENT Olivia Martinez DIAGNOSIS NSCLC <OUTPUT> PATIENT
-```
-
-Now `T=9`. The model repeats token embedding, positional embedding, every decoder block, final normalization, and vocabulary projection.
-
-The new final-position distribution should ideally choose `[NAME]`.
-
-This continues:
-
-```text
-PATIENT
-PATIENT [NAME]
-PATIENT [NAME] DIAGNOSIS
-PATIENT [NAME] DIAGNOSIS NSCLC
-PATIENT [NAME] DIAGNOSIS NSCLC <EOS>
-```
-
-Generation stops at `<EOS>`.
-
-## Complete shape table for the first token
+Assume `Batch = 1`, `Time = 8`, `D_Model = 24`, `Heads = 4`, `Vocab = 80`.
 
 | Stage | Shape |
 |---|---|
-| Token IDs | `(1,8)` |
-| Token embeddings | `(1,8,24)` |
-| Position embeddings | `(8,24)` |
-| Combined input | `(1,8,24)` |
-| Q/K/V before heads | each `(1,8,24)` |
-| Q/K/V after heads | each `(1,4,8,6)` |
-| Attention scores | `(1,4,8,8)` |
-| Attention weights | `(1,4,8,8)` |
-| Head contexts | `(1,4,8,6)` |
-| Merged attention | `(1,8,24)` |
-| Block output | `(1,8,24)` |
-| Final hidden states | `(1,8,24)` |
-| All-position logits | `(1,8,80)` |
-| Final-position logits | `(1,80)` |
-| Selected next token | one integer ID |
+| Token IDs | `(1, 8)` |
+| Combined Embeddings | `(1, 8, 24)` |
+| Q, K, V (after split) | `(1, 4, 8, 6)` |
+| Attention Weights | `(1, 4, 8, 8)` |
+| Decoder Block Output | `(1, 8, 24)` |
+| All-position Logits | `(1, 8, 80)` |
+| Final-position Logits | `(1, 80)` |
 
-## What training did differently
+## 9. Complete Worked Example
 
-During training, the complete expected output was already included:
+Let's trace the sequence `<BOS> <INPUT> PATIENT Olivia Martinez DIAGNOSIS NSCLC <OUTPUT>`. (8 tokens).
+The vocabulary projection outputs an `(1, 8, 80)` tensor. We only care about the logits at index `-1` (the `<OUTPUT>` token's position).
+The shape becomes `(1, 80)`.
+We apply Temperature and Softmax, and token ID `45` (which maps to `PATIENT`) has the highest probability.
+We append `PATIENT` to the original sequence, making it 9 tokens long, and send the *entire 9-token sequence* through the factory again.
 
-```text
-... <OUTPUT> PATIENT [NAME] DIAGNOSIS NSCLC <EOS>
+## 10. Math → Code Mapping
+
+```python
+# The complete forward pass
+x = self.token_embedding(input_ids) + self.position_embedding(positions)
+for block in self.blocks:
+    x = block(x, padding_mask)
+x = self.final_norm(x)
+logits = self.vocabulary_projection(x)
+
+# Generation step
+next_token_logits = logits[:, -1, :]
+probs = torch.softmax(next_token_logits, dim=-1)
+next_token = torch.argmax(probs, dim=-1)
 ```
 
-Input and targets were shifted by one position. Causal masking prevented each position from inspecting its target or anything after it. Loss was applied only to targets after `<OUTPUT>`.
+## 11. Experiments / What-If Questions
 
-Thus training predicted all supervised output positions in parallel without future leakage. Inference must construct those output positions one at a time.
+**What if we slice `logits[:, 0, :]` instead of `logits[:, -1, :]` during generation?**
+*Prediction:* We would be looking at the predictions made by the very first token (`<BOS>`). The model would predict `<INPUT>` over and over again, completely ignoring the rest of the prompt!
 
-## Code map
+## 12. Common Misunderstandings
 
-| Concept | Implementation |
-|---|---|
-| Split strings | `WordTokenizer.split` |
-| IDs | `WordTokenizer.encode` |
-| Shift and loss mask | `CausalLMDataset.__getitem__` |
-| Token/position vectors | `TinyLanguageModel.forward` |
-| Q/K/V and heads | `ManualMultiHeadCausalAttention` |
-| Causal/padding masks | `ManualMultiHeadCausalAttention.forward` |
-| Residual + LayerNorm + FFN | `DecoderBlock.forward` |
-| Vocabulary logits | `vocabulary_projection` |
-| Output-only cross-entropy | `masked_cross_entropy` |
-| Predict/append loop | `generate` |
+* **"The model remembers earlier forward passes."** -> No. In our simple implementation, the *entire* enlarged token sequence is supplied again from scratch on every iteration. (Production models use "KV Caching" to save time, but the math is identical).
+* **"Why is concatenating four 6-dimensional heads equal to 24?"** -> Because $4 \times 6 = 24$. We just split the `D_Model` feature dimension across the heads so they can look for different things in parallel.
 
-## Questions the instructor may interrupt with
+## 13. Limitations and Trade-Offs
 
-1. Why are both unknown name tokens initially represented by the same embedding?
-2. What makes them different before attention?
-3. Which dimensions are multiplied to create `T×T` scores?
-4. Where exactly is the future set to `-inf`?
-5. Along which dimension is softmax applied?
-6. What do attention weights multiply?
-7. Why does concatenating four six-dimensional heads return 24?
-8. Does the FFN mix sequence positions?
-9. Why can residual addition occur?
-10. Why do we read the last position during generation?
-11. Why is the complete model rerun after appending one token?
-12. Why is this de-identification still next-token prediction?
+Because we pass the entire sequence through the model on every single token generation step, the computational cost grows quadratically as the sequence gets longer. Generating a 1000-token note takes significantly longer than a 10-token note.
 
-## One-minute explanation
+## 14. Where It Appears in the Current Assignment
 
-The prompt is split into tokens and converted to IDs. Each ID retrieves a token embedding, and a positional embedding is added so order is represented. Inside every decoder block, LayerNorm prepares the vectors, separate linear layers create Q, K, and V, and the features are divided into heads. Q and K create scaled `T×T` compatibility scores. The causal mask sets future scores to negative infinity, softmax creates attention weights, and those weights mix the value vectors. Head outputs are concatenated, projected, and added through a residual connection. A normalized feed-forward network expands and contracts each token representation, followed by another residual. After all blocks, the final hidden vectors are projected to vocabulary logits. We take logits at the last prompt position, apply temperature and softmax, select one token, append it, and repeat until `<EOS>`. Therefore the redacted note is generated one next-token prediction at a time.
+This is the `forward()` method of your `TinyLanguageModel` class and the `generate()` loop that runs it.
 
-## Key takeaway
+## 15. Where It Appears in Modern AI Systems
+
+This exact token journey is what happens inside a GPU when you watch ChatGPT type out an answer word by word. The shapes are just much larger (e.g. `D_Model = 4096`).
+
+## 16. Connection to the Next Concept
+
+You now understand the complete architecture of a Tiny-GPT. The next step is evaluating it. How do we prove it actually learned to de-identify, rather than just memorizing our training data? We explore this in the Evaluation metrics section.
+
+## 17. Teach-Back and Small Application Exercise
+
+**Exercise:** If you change the number of Attention Heads from 4 to 8 (keeping `D_Model` at 24), what is the new shape of the Q/K/V tensors after splitting into heads? Does the final output shape of the Decoder Block change?
+
+## 18. Quick Revision Summary
 
 At every generation step, one sequence becomes `(B,T,D)` contextual representations, then `(B,T,V)` vocabulary logits, and finally one selected next token. Appending that token starts the same journey again.
+
+## 19. My Understanding
+
+*(Write your own intuition here. Try to draw the tensor shapes changing on a piece of paper.)*
+
+## 20. Flashcards
+
+**Q:** Why do we only use the last position's logits during generation?
+**A:** Because we want to predict the token that comes *after* our current context, which is what the final token's representation has been trained to predict.
+
+**Q:** What is the shape of the tensor that goes into the Feed-Forward Network?
+**A:** `(Batch, Time, D_Model)`
+
+## 21. Sources
+- AI Learning Lab - Tiny-GPT Core Concepts
