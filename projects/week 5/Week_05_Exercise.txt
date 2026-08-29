@@ -1,0 +1,121 @@
+Week 5 — Build a Tiny Transformer Block from Scratch
+
+The goal should be:
+
+Take the Multi-Head Attention already built and turn it into the smallest possible Transformer block.
+
+You already understand: embeddings, attention, multi-head attention, residual connections, some positional encoding, ablation and head redundancy
+
+So Week 5 should add only the next few missing pieces:
+Layer Normalization
+Feed-Forward Network
+Residual + Norm
+Stack 2 Transformer blocks
+Predict the next token
+
+Question:What did each new component actually buy us?
+
+Dataset: Use a small GPO workflow vocabulary again:
+
+Receive → Restock → Inventory → Forecast → Order
+Order → Shipment → Receive → Restock
+Inventory → Forecast → Scenario → Contract
+PO → Shipment → Invoice → Reconcile
+Contract → Purchase → Rebate → NCR
+
+
+Generate a few hundred synthetic sequences with variations.
+
+The task: Given the preceding tokens, predict the next workflow token.
+
+Part 1 — Start with Week 4
+
+Reuse Multi-Head Attention implementation.
+
+No PyTorch `Transformer or nn.MultiheadAttention`.
+
+You should understand every line.
+
+Part 2 — Add the Feed-Forward Network
+
+Explain it simply:
+Attention decides what information matters.
+The Feed-Forward Network decides what to do with that information.
+
+Something as simple as:
+
+x = Linear(d_model, 4*d_model)
+x = ReLU(x)
+x = Linear(4*d_model, d_model)
+
+
+Then ask: Why does the Transformer expand the representation before shrinking it again?
+
+
+Part 3 — Add Layer Normalization
+After all these calculations, LayerNorm keeps the numbers from becoming unruly and puts the representation back onto a stable scale.
+
+
+Part 4 — Complete One Transformer Block
+
+Expectation: should eventually arrive at something conceptually like:
+
+Input
+  ↓
+Multi-Head Attention
+  ↓
+Add Residual
+  ↓
+LayerNorm
+  ↓
+Feed Forward Network
+  ↓
+Add Residual
+  ↓
+LayerNorm
+
+
+And then ask: What would happen if we removed each component?
+
+
+Part 5 — Stack Two Blocks
+
+One of the most important LLM ideas: Depth allows representations to evolve.
+
+Block 1 might learn: Forecast is related to Inventory.
+
+Block 2 might learn: Forecast after Inventory probably leads toward Order, while Forecast after Scenario has a different meaning.
+
+Part 6 — Add a Tiny Next-Token Head
+
+At the end:
+logits = Linear(d_model, vocab_size)
+probabilities = softmax(logits)
+
+
+Now you have, conceptually: a tiny language model.
+Tokens
+→ Embeddings
+→ Positional information
+→ Transformer blocks
+→ Vocabulary probabilities
+→ Next token
+
+
+
+Three models:
+
+Model A: Embedding → Linear → Prediction
+Model B: Embedding → Attention → Prediction
+Model C: Embedding → Transformer Block → Prediction
+
+Which one generalizes best to unseen workflow sequences?
+
+Goal is to establish whether the architecture actually matters.
+
+
+
+Last week you built the mechanism that decides where to look.
+This week, build the machinery that decides what to do with what it found.
+
+

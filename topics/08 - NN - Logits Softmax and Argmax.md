@@ -109,6 +109,77 @@ In **Week 1: Build a Basic Prediction Machine**, after the hidden layer $\mathbf
 
 ---
 
+## Numerical Stability: The Max-Subtraction Trick (`np.max(logits)`)
+
+### 1. The Problem: Exponent Overflow
+In theory, standard Softmax uses $P_i = \frac{e^{z_i}}{\sum e^{z_j}}$. However, in computer hardware, 64-bit floating-point numbers cap out around $10^{308}$. 
+
+If a neural network produces a raw logit like $z_i = 1000$ (which happens frequently during un-tuned training or large scale LLM output layers):
+- $e^{1000} \approx \text{infinity (`inf`)}$
+- $\frac{\text{inf}}{\text{inf}} = \text{NaN (`Not a Number`)}$
+
+This crashes model training completely!
+
+### 2. The Solution: Shift Logits by Subtracting the Maximum
+To prevent overflow, we subtract the maximum logit value $c = \max(\mathbf{z})$ from every logit before exponentiating:
+
+$$\text{Softmax}(\mathbf{z})_i = \frac{e^{z_i - \max(\mathbf{z})}}{\sum_{j=1}^{K} e^{z_j - \max(\mathbf{z})}}$$
+
+### 3. Mathematical Proof of Equivalence
+Why are we allowed to subtract $\max(\mathbf{z})$ without altering the probabilities?
+
+Using standard exponent rules ($e^{a-b} = e^a \cdot e^{-b}$):
+
+$$\frac{e^{z_i - c}}{\sum_{j=1}^K e^{z_j - c}} = \frac{e^{z_i} \cdot e^{-c}}{\sum_{j=1}^K (e^{z_j} \cdot e^{-c})} = \frac{e^{z_i} \cdot e^{-c}}{e^{-c} \sum_{j=1}^K e^{z_j}} = \frac{e^{z_i}}{\sum_{j=1}^K e^{z_j}}$$
+
+The constant factor $e^{-c}$ cancels out perfectly from the numerator and denominator!
+
+### 4. Component-by-Component Math Breakdown
+
+| Symbol / Term | Math Expression | Plain-English Meaning |
+| :--- | :--- | :--- |
+| $\max(\mathbf{z})$ | $c = \text{np.max(logits)}$ | The highest numerical score among all output classes in the logit vector $\mathbf{z}$. |
+| $z_i - \max(\mathbf{z})$ | `shifted_logits` | Every logit adjusted relative to the highest logit. The max logit becomes $0$, and all other logits become $\le 0$ (negative numbers). |
+| $e^{z_i - \max(\mathbf{z})}$ | `exponentials` | Exponentiated shifted logits. Since the exponent is at most $0$, $e^0 = 1.0$ and $e^{\text{negative}} \in (0, 1)$. **No value can ever exceed $1.0$**, completely eliminating floating-point overflow (`inf`)! |
+| $\sum e^{z_j - \max(\mathbf{z})}$ | `np.sum(exponentials)` | Sum of exponents (between $1.0$ and $K$). Guaranteed to be a safe, normal float. |
+
+### 5. Beginner Intuition & Contrasting Analogy
+
+> **Analogy: Sea Level vs. Mountain Peak Baseline**
+> Imagine measuring mountain heights:
+> - **Standard Softmax (Sea Level):** Measuring height from Earth's core produces massive numbers ($6,378,000$ meters). Raising those to powers explodes into infinity.
+> - **Stable Softmax (Peak Baseline):** Pick the tallest mountain peak (e.g. Mount Everest at $8,848$m) and set it as $0$m. Every other mountain is now measured as a negative offset relative to Everest (e.g., K2 is $-237$m). 
+> - **The Result:** The relative differences in height between all mountains remain **100% identical**, but the numbers are small, safe, and manageable!
+
+![Numerical Stability Softmax](images/numerical_stability_softmax.svg)
+
+---
+
+## Math to Code Mapping
+
+| Mathematical Step | Python / NumPy Line | Purpose |
+| :--- | :--- | :--- |
+| $c = \max(\mathbf{z})$ | `max_logit = np.max(logits)` | Find the largest logit for scaling. |
+| $\mathbf{z}_{\text{shifted}} = \mathbf{z} - c$ | `shifted_logits = logits - np.max(logits)` | Subtract max logit so largest shifted logit is $0$. |
+| $e^{\mathbf{z}_{\text{shifted}}}$ | `exponentials = np.exp(shifted_logits)` | Exponentiate safely without numerical overflow (`inf`). |
+| $\frac{e^{\mathbf{z}_{\text{shifted}}}}{\sum e^{\mathbf{z}_{\text{shifted}}}}$ | `return exponentials / np.sum(exponentials)` | Normalize into valid probabilities (summing to $1.0$). |
+
+---
+
+## Where is this used in AI?
+
+1. **Production Deep Learning Libraries:** Both **PyTorch** (`torch.nn.functional.softmax`) and **TensorFlow** (`tf.nn.softmax`) internally use this exact max-subtraction trick to ensure numerical stability during neural network training.
+2. **Next-Word Generation in LLMs:** When predicting over a $100,000$-word vocabulary, logits can easily reach values like $+50$ or $+100$. Numerically stable softmax prevents `NaN` loss values when computing cross-entropy loss.
+
+---
+
+## Connection to Active Assignment
+In **Week 1: `01_Next_Word_Predictor.ipynb`**, when implementing your softmax function, writing naive `np.exp(logits) / np.sum(np.exp(logits))` will crash or produce `NaN` if logits grow large during training. By using `shifted_logits = logits - np.max(logits)`, your forward pass remains stable across all training iterations.
+
+*(Reference: Ian Goodfellow, Yoshua Bengio, and Aaron Courville - Deep Learning, Chapter 6.2)*
+
+---
+
 ## Flashcards
 
 Are Logits restricted to be between 0 and 1? #card
@@ -117,6 +188,9 @@ No. Logits are raw, unconstrained output scores from the final layer. They can b
 Why do we use the Exponential function ($e^z$) inside Softmax instead of just dividing the logits by their sum? #card
 Two key reasons: First, exponentiating turns any negative or positive score into a strictly positive number ($e^z > 0$), which is required since probabilities cannot be negative. Second, exponentials exaggerate score differences, making the top prediction stand out cleanly.
 
+Why do we subtract `np.max(logits)` inside Softmax? #card
+Subtracting `np.max(logits)` prevents floating-point overflow (`inf`/`NaN`) when exponentiating large logits. Because $e^{-c}$ cancels out in the numerator and denominator, the resulting probabilities are mathematically identical to standard Softmax while remaining numerically safe.
+
 ---
 
 ## My Understanding
@@ -124,5 +198,9 @@ Two key reasons: First, exponentiating turns any negative or positive score into
 *This section is for you to fill in your own words after studying this topic.*
 - What are logits in simple terms?
 - Why do we need Softmax after computing logits?
+- What problem occurs when logits are very large (e.g., $1000$), and how does subtracting `np.max(logits)` solve it?
 - What is the difference between Softmax output and Argmax output?
+
+## Sources
+- Goodfellow, Bengio, Courville - *Deep Learning* (Chapter 6.2)
 

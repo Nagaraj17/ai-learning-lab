@@ -1,0 +1,151 @@
+# Week 04 Master Synthesis: Multi-Head Causal Self-Attention
+## *Complete Conceptual, Mathematical, & Empirical Framework*
+
+---
+
+## 🎨 Executive Visual Infographics
+
+![alt text](mha_parallel_experts_and_gradient_flow.png)
+
+---
+
+## 💡 Core Philosophy: What Embeddings & Attention Tell Us
+
+> **"Embeddings tell us what things are. Attention tells us what matters. Multi-Head Attention allows several 'experts' to look at the same information simultaneously, each discovering different patterns."**
+
+---
+
+## 🧠 Part 1: Multi-Head Causal Self-Attention Framework (Primary Focus)
+
+### 1. Parallel Panel of Experts (Horizontal, Not Sequential!)
+- **Identical Input $X$**: The input tensor $X = X_{\text{Embedding}} + PE$ is passed into Head 1, Head 2, Head 3, and Head 4 **simultaneously at the exact same moment**.
+- **No Head Feeds Another**: Multi-Head Attention is **100% parallel (horizontal)**. Head 1 does NOT feed into Head 2!
+- **Analogy**: 4 GPO supply chain specialists examining the exact same audit log $X$ simultaneously in a conference room. Each specialist writes an independent report ($head\_out_i$), which is concatenated and passed to the Chief Auditor ($W_O$) to make a final decision.
+
+### 2. Parameter Accounting & Matrix Projection Shapes
+- **Single-Head Projection**: $W_Q, W_K, W_V \in \mathbb{R}^{16 \times 16}$. 16 rows = input dimensions ($D_{\text{in}}$), 16 cols = output Query features ($D_{\text{out}}$). Total $= 256$ params per matrix.
+- **4-Head Projection**: $W_Q^i, W_K^i, W_V^i \in \mathbb{R}^{16 \times 4}$. 16 rows = input dimensions ($D_{\text{in}}$), 4 cols = head dimension ($d_{\text{head}} = 16/4 = 4$). Total across 4 heads $= 4 \times (16 \times 4) = 256$ params!
+- **Strict Parameter Equality**: Single-Head and 4-Head models both have **strictly 1,024 attention parameters** ($d_{\text{model}} = 16$). Any multi-head gain is purely due to multi-subspace representation!
+
+
+### 3. Single-Head vs Multi-Head Attention Core Comparison
+- **Single-Head Model**: Allocates all 16 dimensions to a single head. Squeezes all token relationships into one single attention matrix ($A$), causing vector averaging on long contexts.
+- **Multi-Head Model**: Splits 16 dimensions into 4 independent heads ($d_{\text{head}} = 4$). Computes 4 separate softmax distributions ($A_1, A_2, A_3, A_4$), preventing vector dilution and enabling parallel subspace searchlights!
+
+---
+
+## 📐 Part 2: Complete Backpropagation Gradient Flow Map
+
+### 1. Cross-Entropy Loss Derivative (`d_logits`)
+$$\text{d\_logits} = \frac{\partial L}{\partial \text{logits}} = \text{Softmax Probabilities } (P) \;-\; \text{True 1-Hot Target } (Y)$$
+- **Intuition**: Measures error directly ($P - Y$). If model predicts 80% for correct token, gradient is $0.80 - 1.0 = -0.20$ (increase logit!). If model predicts 15% for wrong token, gradient is $0.15 - 0.0 = +0.15$ (decrease logit!).
+
+### 2. Step-by-Step Backprop Tree
+```text
+Loss 
+  │
+  ├──> d_logits  =  Probs - Targets                                (Cross-Entropy & Softmax Gradient)
+  │
+  ├──> d_W_vocab =  out^T  @  d_logits                            (Gradient for W_vocab classification matrix)
+  │    d_out     =  d_logits  @  W_vocab^T                         (Error passed back to out vector)
+  │
+  ├──> d_W_O     =  head_out^T  @  d_out                          (Gradient for W_O output projection matrix)
+  │    d_head_out=  d_out  @  W_O^T                               (Error passed back to head_out vector)
+  │
+  ├──> d_V       =  A^T  @  d_head_out                            (Error passed back to Value vectors V)
+  │    d_A       =  d_head_out  @  V^T                            (Error passed back to Attention matrix A)
+  │
+  ├──> d_scores  =  A * (d_A - sum(d_A * A))                       (Error backproped through Softmax & Causal Mask)
+  │
+  ├──> d_Q       =  (d_scores @ K) / sqrt(d_k)                    (Error passed back to Query vectors Q)
+  │    d_K       =  (d_scores^T @ Q) / sqrt(d_k)                  (Error passed back to Key vectors K)
+  │
+  ├──> d_W_Q     =  X^T  @  d_Q                                   (Gradient for W_Q projection matrix)
+  │    d_W_K     =  X^T  @  d_K                                   (Gradient for W_K projection matrix)
+  │    d_W_V     =  X^T  @  d_V                                   (Gradient for W_V projection matrix)
+  │
+  └──> d_X       =  d_Q @ W_Q^T + d_K @ W_K^T + d_V @ W_V^T         (Accumulated error backproped to input X & embeddings)
+```
+
+### 3. Learning Rate Dynamics ($\eta = 0.20$)
+$$W_{\text{new}} = W_{\text{old}} - \eta \cdot \frac{\partial L}{\partial W}$$
+- **Why not `W - dW`?**: A derivative $dW$ is a **local slope**, valid only in an infinitely small region. Doing `W - dW` (setting $\eta = 1.0$) causes the model to jump across the loss valley, causing infinite ping-pong oscillations. The learning rate $\eta = 0.20$ scales the step down so the model glides smoothly to the minimum.
+
+---
+
+## 📊 Part 3: Key Empirical Discoveries & Insights that we found 
+![alt text](mha_loss_curves_and_ablation_insights.png)
+
+**Key Insight:**
+
+Initially we found that with less dataset both mutihead and single head attention models performed almost same, but when we increased the dataset size, the performance of multihead attention model improved significantly compared to single head attention model. 
+
+Although both models converged to the same loss and accuracy, it was interesting to note that multihead attention model converged faster than single head attention model. 
+
+### 1. Training Convergence & Entropy Floor (~0.46)
+- **Sample Efficiency**: On 1,000 GPO sequences, Multi-Head Attention (Green curve) drops **significantly faster in early epochs (150–350)** than Single-Head Attention (Red curve), reaching target loss in **25% fewer epochs**.
+- **Theoretical Entropy Floor (~0.46)**: Both models level off at ~0.46 because the GPO dataset contains stochastic 3-way branching choices (`Contract -> Order / Scenario / Drug` with 33% probability each). The minimum possible loss is $-\ln(1/3) \approx 1.09$. Averaged across deterministic and branching steps, **~0.46 is the irreducible mathematical limit of predictability**! Reaching 0.46 proves both models have 100% mastered the dataset's probability rules.
+
+### 2. Head Ablation Analysis & The Head 4 "Anchor" Reveal
+- **Heatmap Appearance**: Head 4 showed ~1.00 diagonal self-focus, making it look "simple" or "useless" at first glance.
+- **Ablation Proof**: Zeroing out Head 4 caused a **massive Loss Spike to 2.25** and a **catastrophic 50% Accuracy Drop**!
+- **Why Head 4 is Critical**: Head 4 acts as the **Self-Identity Anchor**. It carries the current token's feature identity into $W_O$, ensuring the model doesn't lose track of which token position it is predicting for.
+- **Redundant Heads**: Heads 2 & 3 showed ~0% accuracy drop when ablated, proving feature overlap and redundancy.
+
+---
+
+## 🏢 Part 4: Stretch Extension — ForecastIQ & Mixture of Experts (MoE)
+
+### 1. The ForecastIQ Scenario
+A healthcare GPO AI system named **ForecastIQ** needs to predict whether **`Drug A`** should be ordered.
+Consider 4 specialized expert perspectives observing the exact same log sequence:
+1. **Head 1 (Inventory Expert)**: Evaluates warehouse stock levels (`Inventory`).
+2. **Head 2 (Supply Chain Expert)**: Evaluates distributor lead times and logistics (`Shipment`).
+3. **Head 3 (Financial Expert)**: Evaluates seasonal volume forecasts & rebates (`Rebate` / `Forecast`).
+4. **Head 4 (Demand Planner)**: Evaluates tier pricing and GPO purchasing agreements (`Contract`).
+
+---
+
+### 2. Combining Opinions: Multi-Head Attention ($W_O$) vs MoE Router
+
+#### Method 1: Multi-Head Attention (Concatenation + $W_O$)
+1. **4 Independent Reports**: Each head generates a $d_{\text{head}} = 4$ contextual output vector ($\text{head\_out}_i = A_i @ V_i$).
+2. **Concatenation**: All 4 vectors are placed side-by-side: $\text{concat\_out} = [\text{head\_out}_1, \text{head\_out}_2, \text{head\_out}_3, \text{head\_out}_4]$.
+3. **The Executive Board Chairman ($W_O$)**: Output projection matrix $W_O \in \mathbb{R}^{16 \times 16}$ multiplies `concat_out @ W_O`, using fixed learned weights for all tokens.
+4. **Final Decision ($W_{\text{vocab}}$)**: Predicts vocabulary logits: **`Order Drug A`**.
+
+
+We also explored the MOE method in the same notebook:
+
+We found that it is just adding a new router network to the multihead attention model, and the router network learns to assign weights to each head based on the input tensor X and also gets updated during Back propogation.
+#### Method 2: Mixture of Experts (MoE Dynamic Router)
+1. **Gating Router Network**: Evaluates input tensor $X$ to compute dynamic expert probabilities:
+   $$\text{gate\_weights} = \text{softmax}(X @ W_{\text{router}}, \text{axis}=-1)$$
+2. **Conditional Activation**: Router assigns custom percentage allocations per token (e.g. $70\%$ Finance for `Invoice` vs $65\%$ Inventory for `Restock`).
+3. **Amplification & Suppression**:
+   $$\text{MoE\_out} = \mathbf{w_1} \cdot (A_1 @ V_1) + \mathbf{w_2} \cdot (A_2 @ V_2) + \mathbf{w_3} \cdot (A_3 @ V_3) + \mathbf{w_4} \cdot (A_4 @ V_4)$$
+   - **Amplifies** important heads ($w_1 = 0.70$).
+   - **Suppresses** irrelevant heads ($w_3 = 0.05$).
+   - **Shuts off** unselected heads ($w_4 = 0.00$) to save GPU compute!
+
+---
+
+## 🔬 Part 5: Production Architecture Perspectives (Residuals & LayerNorm)
+
+### 1. Residual Connections ($X + \text{MHA}(X)$) — The Gradient Highway
+- **The Problem Solved**: Eliminates vanishing gradients and prevents feature distortion in deep networks.
+- **Math Bypass**: $\frac{d}{dX}[X + f(X)] = \mathbf{1.0} + \frac{df(X)}{dX}$. The $+1.0$ term creates an uninterrupted gradient highway, allowing error signals to flow backward directly to initial layers.
+- **Analogy**: Submitting **[Original Textbook ($X$) + Student Notes ($\text{MHA}(X)$)]** so original input facts are never lost.
+
+### 2. Layer Normalization ($\text{LayerNorm}(X)$) — The Audio Volume Leveler
+- **The Problem Solved**: Rescales feature activation vectors so numbers don't blow up ($+50 \rightarrow +500 \rightarrow \text{NaN}$).
+- **Formula**: $\hat{X}_i = \frac{X_i - \mu}{\sqrt{\sigma^2 + \epsilon}}$ (rescales features to mean 0 and variance 1 per token).
+- **Analogy**: An **automatic audio leveler** that keeps room volume at a crisp, comfortable 70 dB so no single feature screams or overpowers the rest.
+
+### 3. Content Failure (Overfitting) vs Scale Failure (Numeric Explosion)
+- **Backup Heads (Content Protection)**: If 1 head overfits to data noise, other heads provide correct backup representations.
+- **LayerNorm (Scale Protection)**: Even if all 4 heads have great backup representations, concatenating them can produce large numeric sums ($+51.0$). LayerNorm rescales the vector back down so deep layers don't crash.
+
+### 4. Single-Layer vs Multi-Layer Threshold Rule
+- **1-Layer Models** *(Our Assignment)*: Residuals and LayerNorm are **not strictly required** because gradients flow directly over 1 layer.
+- **Deep Models (6+ to 96 Layers)** *(GPT-4, LLaMA)*: Residuals and LayerNorm are **mandatory** to maintain stability.

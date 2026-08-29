@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0f172a; }
+      .card { fill: #1e293b; stroke: #334155; stroke-width: 2; rx: 12px; }
+      .card-highlight { fill: #1e293b; stroke: #38bdf8; stroke-width: 2; rx: 12px; }
+      .title { font-family: system-ui, -apple-system, sans-serif; font-size: 22px; font-weight: bold; fill: #f8fafc; }
+      .subtitle { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; fill: #94a3b8; }
+      .section-title { font-family: system-ui, -apple-system, sans-serif; font-size: 16px; font-weight: bold; fill: #38bdf8; }
+      .text-main { font-family: system-ui, -apple-system, sans-serif; font-size: 13px; fill: #e2e8f0; }
+      .text-code { font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; fill: #38bdf8; }
+      .badge-pos { fill: #0284c7; font-family: 'Consolas', 'Courier New', monospace; font-size: 12px; font-weight: bold; fill: #ffffff; }
+      .wave-fast { stroke: #ef4444; stroke-width: 3; fill: none; }
+      .wave-med { stroke: #f59e0b; stroke-width: 3; fill: none; }
+      .wave-slow { stroke: #3b82f6; stroke-width: 3; fill: none; }
+      .axis { stroke: #64748b; stroke-width: 1.5; }
+      .grid { stroke: #334155; stroke-width: 1; stroke-dasharray: 4,4; }
+    </style>
+  </defs>
+
+  <rect width="100%" height="100%" class="bg" />
+
+  <!-- Title -->
+  <text x="480" y="35" text-anchor="middle" class="title">Visualizing Positional Encoding: The Multi-Frequency Clock</text>
+  <text x="480" y="60" text-anchor="middle" class="subtitle">How Sine &amp; Cosine waves create a unique fingerprint vector for every sequence position</text>
+
+  <!-- Left Container: Sine Waves (The Frequencies) -->
+  <rect x="30" y="85" width="530" height="400" class="card-highlight" />
+  <text x="50" y="115" class="section-title">1. Multi-Frequency Waves Across Positions (0 to 4)</text>
+
+  <!-- Axis & Grid -->
+  <!-- Pos 0: x=100, Pos 1: x=200, Pos 2: x=300, Pos 3: x=400, Pos 4: x=500 -->
+  <line x1="100" y1="140" x2="100" y2="450" class="grid" />
+  <line x1="200" y1="140" x2="200" y2="450" class="grid" />
+  <line x1="300" y1="140" x2="300" y2="450" class="grid" />
+  <line x1="400" y1="140" x2="400" y2="450" class="grid" />
+  <line x1="500" y1="140" x2="500" y2="450" class="grid" />
+
+  <text x="100" y="470" text-anchor="middle" class="text-main" font-weight="bold">Pos 0</text>
+  <text x="200" y="470" text-anchor="middle" class="text-main" font-weight="bold">Pos 1</text>
+  <text x="300" y="470" text-anchor="middle" class="text-main" font-weight="bold">Pos 2</text>
+  <text x="400" y="470" text-anchor="middle" class="text-main" font-weight="bold">Pos 3</text>
+  <text x="500" y="470" text-anchor="middle" class="text-main" font-weight="bold">Pos 4</text>
+
+  <!-- Wave 1: Fast (Dim 0) -->
+  <text x="50" y="175" class="text-main" fill="#f87171" font-weight="bold">Fast Wave (Dim 0 - Seconds hand):</text>
+  <path d="M 100 200 Q 150 160 200 200 T 300 200 T 400 200 T 500 200" class="wave-fast" />
+
+  <!-- Wave 2: Medium (Dim 2) -->
+  <text x="50" y="275" class="text-main" fill="#fbbf24" font-weight="bold">Medium Wave (Dim 2 - Minutes hand):</text>
+  <path d="M 100 300 Q 200 250 300 300 T 500 300" class="wave-med" />
+
+  <!-- Wave 3: Slow (Dim 4) -->
+  <text x="50" y="375" class="text-main" fill="#60a5fa" font-weight="bold">Slow Wave (Dim 4 - Hours hand):</text>
+  <path d="M 100 400 Q 300 360 500 400" class="wave-slow" />
+
+  <!-- Right Container: Vector Addition for "Rebate" -->
+  <rect x="580" y="85" width="350" height="400" class="card" />
+  <text x="600" y="115" class="section-title">2. Injecting Position into Embedding</text>
+
+  <rect x="600" y="135" width="310" height="60" fill="#0f172a" stroke="#475569" rx="6" />
+  <text x="615" y="160" class="text-main" font-weight="bold">Word Embedding X("Rebate"):</text>
+  <text x="615" y="180" class="text-code">[ 0.82, -0.45, 0.12, 0.67 ]</text>
+  <text x="615" y="193" class="text-main" font-size="11" fill="#94a3b8">(Same base meaning everywhere)</text>
+
+  <text x="755" y="215" text-anchor="middle" class="text-main" font-size="18" font-weight="bold" fill="#38bdf8">+</text>
+
+  <rect x="600" y="225" width="310" height="65" fill="#0f172a" stroke="#0284c7" rx="6" />
+  <text x="615" y="248" class="text-main" font-weight="bold">Position Vector P(Pos 0):</text>
+  <text x="615" y="270" class="text-code">[ 0.00,  1.00, 0.00, 1.00 ]</text>
+  <text x="615" y="283" class="text-main" font-size="11" fill="#94a3b8">(Sampled from waves at Pos 0)</text>
+
+  <text x="755" y="310" text-anchor="middle" class="text-main" font-size="18" font-weight="bold" fill="#38bdf8">=</text>
+
+  <rect x="600" y="325" width="310" height="75" fill="#172554" stroke="#2563eb" stroke-width="2" rx="6" />
+  <text x="615" y="350" class="text-main" font-weight="bold" fill="#60a5fa">Position-Aware Representation X(P):</text>
+  <text x="615" y="375" class="text-code" font-weight="bold" fill="#4ade80">[ 0.82,  0.55, 0.12, 1.67 ]</text>
+  <text x="615" y="390" class="text-main" font-size="11" fill="#94a3b8">✨ Unique vector for "Rebate at Pos 0"!</text>
+
+  <text x="600" y="440" class="text-main" font-size="12" fill="#cbd5e1">If "Rebate" moves to Pos 4, P(Pos 4) is different, producing a completely different X(P)!</text>
+</svg>

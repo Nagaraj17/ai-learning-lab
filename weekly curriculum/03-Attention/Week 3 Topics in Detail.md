@@ -23,5 +23,9 @@ The following deep-dive notes in the global `topics/` directory cover Week 3:
 7. **[25 - TRANSFORMER - Causal Masking](../../topics/25%20-%20TRANSFORMER%20-%20Causal%20Masking.md)**
    - Autoregressive lower-triangular mask setting future score positions to $-\infty$.
 
-8. **[26 - TRANSFORMER - Multi-Head Attention](../../topics/26%20-%20TRANSFORMER%20-%20Multi-Head%20Attention.md)**
-   - Parallel attention heads $h$, feature subspace splitting, and output projection $\mathbf{W}_O$.
+## Boundary Note
+
+Week 3 stops at single-head self-attention plus causal masking.
+Multi-Head Attention is intentionally deferred to Week 4 so that the learner
+fully understands one head before reasoning about multiple heads, concatenation,
+and output projection.

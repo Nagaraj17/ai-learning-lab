@@ -58,6 +58,14 @@ The entire network collapses into a single linear equation. No matter how many h
 What is the output range of the `tanh` activation function? #card
 It bounds the output strictly between `-1` and `1`, and is zero-centered. Inputs around +3 or -3 already push the output very close to the extreme bounds.
 
+## NN - Two-Layer Architecture and Forward Pass
+
+How many weight matrices exist in a 2-layer neural network? #card
+Two weight matrices: $W_1$ (Input to Hidden) and $W_2$ (Hidden to Output).
+
+What is the purpose of Layer 1 (Hidden Layer) in a 2-layer next-word predictor? #card
+It maps the sparse one-hot input vector into a dense, lower-dimensional non-linear feature representation using activation functions like $\tanh$.
+
 ## NN - Logits Softmax and Argmax
 
 Are Logits restricted to be between 0 and 1? #card

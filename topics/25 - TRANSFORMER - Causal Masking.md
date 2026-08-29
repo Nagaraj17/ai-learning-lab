@@ -1,9 +1,29 @@
-# 25 - TRANSFORMER - Causal Masking
+## 1. The Problem: How Unmasked Attention "Cheats" During Training
 
-## 1. The Problem
-In autoregressive language models (like GPT-4), the task is to **predict the next token** $t_{i+1}$ given previous tokens $[t_1, \dots, t_i]$.
-If we use standard un-masked Self-Attention, token $i$ can look forward into position $i+1$ and read the exact answer it is supposed to predict.
-**The limitation:** Un-masked self-attention allows "cheating" during training; it allows the training computation to access information that should not be available under the autoregressive factorization.
+To understand why Causal Masking is mandatory, we must understand how **Parallel Batch Training (Teacher Forcing)** works in Transformers.
+
+In older models (like RNNs), text was processed one word at a time. But in Transformers, to make GPU training ultra-fast, we feed the **entire full sequence** into the model at once!
+
+Suppose the training sentence is:  
+`Input X = ["A", "Cat", "sat", "on", "a", "mat"]` *(All 6 words fed simultaneously in matrix X)*
+
+The model is asked to predict the next word for **every position at the same time**:
+- Position 0 (`"A"`) $\to$ Predicts `"Cat"` (Position 1)
+- Position 1 (`"Cat"`) $\to$ Predicts `"sat"` (Position 2)
+- Position 2 (`"sat"`) $\to$ Predicts `"on"` (Position 3)
+- Position 3 (`"on"`) $\to$ Predicts `"a"` (Position 4)
+- Position 4 (`"a"`) $\to$ Predicts `"mat"` (Position 5)
+
+![alt text](images/causal_masking_cheating_diagram.svg)
+
+### Where the "Cheating" Happens:
+In standard un-masked Self-Attention ($\mathbf{A} = \text{Softmax}(\mathbf{Q}\mathbf{K}^\top)$), **every token is allowed to attend to every other token in matrix X**.
+
+Specifically, when computing the representation for Position 4 (`"a"`), Position 4's Query $\mathbf{q}_4$ multiplies Position 5's Key $\mathbf{k}_5$ (`"mat"`).
+
+Because `"mat"` is ALREADY present at Position 5 in input matrix $\mathbf{X}$, Position 4 simply copies the vector of `"mat"` directly from future position 5! 
+
+Instead of doing hard language reasoning (*"what word comes after 'sat on a'?"*), the model learns a trivial shortcut: **just copy the word from column $i+1$!** Training loss becomes $0.0$ instantly, but in production (where position 5 doesn't exist yet), the model fails completely.
 
 ## 2. Why We Need Something New
 We need a mathematical filter (**Causal Masking**) that blocks attention scores from position $i$ to any future position $j > i$, ensuring token $i$ can ONLY attend to past and present tokens ($j \le i$).

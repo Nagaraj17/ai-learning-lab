@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0f172a; }
+      .card { fill: #1e293b; stroke: #334155; stroke-width: 2; rx: 12px; }
+      .card-danger { fill: #1e293b; stroke: #ef4444; stroke-width: 2; rx: 12px; }
+      .card-success { fill: #1e293b; stroke: #3b82f6; stroke-width: 2; rx: 12px; }
+      .title { font-family: system-ui, -apple-system, sans-serif; font-size: 22px; font-weight: bold; fill: #f8fafc; }
+      .subtitle { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; fill: #94a3b8; }
+      .box-title-danger { font-family: system-ui, -apple-system, sans-serif; font-size: 18px; font-weight: bold; fill: #f87171; }
+      .box-title-success { font-family: system-ui, -apple-system, sans-serif; font-size: 18px; font-weight: bold; fill: #60a5fa; }
+      .text-main { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; fill: #e2e8f0; }
+      .text-code { font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; fill: #38bdf8; }
+      .text-danger { font-family: 'Consolas', 'Courier New', monospace; font-size: 14px; font-weight: bold; fill: #f87171; }
+      .text-success { font-family: 'Consolas', 'Courier New', monospace; font-size: 14px; font-weight: bold; fill: #4ade80; }
+      .arrow { stroke: #64748b; stroke-width: 2; marker-end: url(#arrowhead); }
+      .pill-danger { fill: #450a0a; stroke: #ef4444; stroke-width: 1.5; rx: 6px; }
+      .pill-success { fill: #172554; stroke: #3b82f6; stroke-width: 1.5; rx: 6px; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#64748b" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" class="bg" />
+
+  <!-- Main Title -->
+  <text x="450" y="40" text-anchor="middle" class="title">Numerically Stable Softmax: The Max-Subtraction Trick</text>
+  <text x="450" y="65" text-anchor="middle" class="subtitle">Why subtracting np.max(logits) prevents floating-point overflow without changing probabilities</text>
+
+  <!-- Left Card: Naive Softmax -->
+  <rect x="40" y="95" width="390" height="350" class="card-danger" />
+  <text x="235" y="130" text-anchor="middle" class="box-title-danger">❌ Naive Softmax (Overflow Risk)</text>
+  <text x="235" y="155" text-anchor="middle" class="text-code">exponentials = np.exp(logits)</text>
+
+  <rect x="65" y="175" width="340" height="70" class="pill-danger" />
+  <text x="80" y="200" class="text-main">Raw Logits z = [1000, 998, 995]</text>
+  <text x="80" y="225" class="text-danger">exp(1000) = inf  (Float64 Overflow!)</text>
+
+  <text x="235" y="270" text-anchor="middle" class="text-main">Calculation attempting division:</text>
+  <text x="235" y="300" text-anchor="middle" class="text-danger">sum([inf, inf, inf]) = inf</text>
+  <text x="235" y="330" text-anchor="middle" class="text-danger">inf / inf = NaN  (Not a Number!)</text>
+
+  <rect x="65" y="360" width="340" height="60" fill="#290e12" stroke="#b91c1c" stroke-width="1" rx="6" />
+  <text x="235" y="395" text-anchor="middle" class="text-danger" font-size="13">Result: Neural Network Crashes 💥</text>
+
+  <!-- Right Card: Numerically Stable Softmax -->
+  <rect x="470" y="95" width="390" height="350" class="card-success" />
+  <text x="665" y="130" text-anchor="middle" class="box-title-success">✅ Numerically Stable Softmax</text>
+  <text x="665" y="155" text-anchor="middle" class="text-code">shifted = logits - np.max(logits)</text>
+
+  <rect x="495" y="175" width="340" height="70" class="pill-success" />
+  <text x="510" y="198" class="text-main">Shifted z = [1000-1000, 998-1000, 995-1000]</text>
+  <text x="510" y="222" class="text-success">Shifted z = [0, -2, -5]  (All ≤ 0 !)</text>
+
+  <text x="665" y="270" text-anchor="middle" class="text-main">Exponentiating shifted logits:</text>
+  <text x="665" y="295" text-anchor="middle" class="text-code">exp([0, -2, -5]) = [1.0, 0.1353, 0.0067]</text>
+  <text x="665" y="320" text-anchor="middle" class="text-main">Sum = 1.1420 (Safe float!)</text>
+
+  <rect x="495" y="360" width="340" height="60" fill="#061e36" stroke="#1d4ed8" stroke-width="1" rx="6" />
+  <text x="665" y="395" text-anchor="middle" class="text-success" font-size="13">Probabilities = [0.8756, 0.1185, 0.0059] ✨</text>
+</svg>

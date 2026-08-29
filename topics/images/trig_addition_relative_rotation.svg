@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0f172a; }
+      .card { fill: #1e293b; stroke: #334155; stroke-width: 2; rx: 12px; }
+      .title { font-family: system-ui, -apple-system, sans-serif; font-size: 22px; font-weight: bold; fill: #f8fafc; }
+      .subtitle { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; fill: #94a3b8; }
+      .section-title { font-family: system-ui, -apple-system, sans-serif; font-size: 16px; font-weight: bold; fill: #38bdf8; }
+      .text-main { font-family: system-ui, -apple-system, sans-serif; font-size: 13px; fill: #e2e8f0; }
+      .text-code { font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; fill: #38bdf8; }
+      .vec-pos { stroke: #ef4444; stroke-width: 3; marker-end: url(#arrow-red); }
+      .vec-offset { stroke: #4ade80; stroke-width: 3; marker-end: url(#arrow-green); }
+      .arc-rotate { stroke: #f59e0b; stroke-width: 2; stroke-dasharray: 4,4; fill: none; marker-end: url(#arrow-amber); }
+      .matrix-box { fill: #0f172a; stroke: #a855f7; stroke-width: 2; rx: 8px; }
+    </style>
+    <marker id="arrow-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ef4444" />
+    </marker>
+    <marker id="arrow-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ade80" />
+    </marker>
+    <marker id="arrow-amber" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f59e0b" />
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" class="bg" />
+
+  <text x="480" y="35" text-anchor="middle" class="title">Visualizing Relative Distance: The Rotation Matrix</text>
+  <text x="480" y="60" text-anchor="middle" class="subtitle">Why sin(pos + k) is just a 2D Linear Rotation of sin(pos) by offset angle k</text>
+
+  <!-- Left Container: Geometric Circle Rotation -->
+  <rect x="30" y="85" width="440" height="370" class="card" />
+  <text x="50" y="115" class="section-title">1. Geometric 2D Rotation on Unit Circle</text>
+
+  <!-- Circle Center at (250, 270), radius 120 -->
+  <circle cx="250" cy="270" r="120" stroke="#334155" stroke-width="2" fill="none" stroke-dasharray="4,4" />
+  <line x1="110" y1="270" x2="390" y2="270" stroke="#475569" stroke-width="1.5" />
+  <line x1="250" y1="130" x2="250" y2="410" stroke="#475569" stroke-width="1.5" />
+
+  <!-- Vector at pos (Angle = 30 deg) -->
+  <!-- x = 250 + 120*cos(30) = 250 + 103.9 = 354, y = 270 - 120*sin(30) = 270 - 60 = 210 -->
+  <line x1="250" y1="270" x2="354" y2="210" class="vec-pos" />
+  <text x="365" y="205" class="text-main" fill="#ef4444" font-weight="bold">Vector at pos</text>
+
+  <!-- Vector at pos + k (Angle = 75 deg, offset k = 45 deg) -->
+  <!-- x = 250 + 120*cos(75) = 250 + 31 = 281, y = 270 - 120*sin(75) = 270 - 115.9 = 154 -->
+  <line x1="250" y1="270" x2="281" y2="154" class="vec-offset" />
+  <text x="290" y="145" class="text-main" fill="#4ade80" font-weight="bold">Vector at pos + k</text>
+
+  <!-- Arc showing rotation k -->
+  <path d="M 330 224 A 100 100 0 0 0 275 178" class="arc-rotate" />
+  <text x="325" y="180" class="text-main" fill="#fbbf24" font-weight="bold">Rotate by offset k</text>
+
+  <!-- Right Container: Linear Algebra Representation -->
+  <rect x="490" y="85" width="440" height="370" class="card" />
+  <text x="510" y="115" class="section-title">2. Linear Matrix Transformation</text>
+
+  <rect x="510" y="140" width="400" height="150" class="matrix-box" />
+  <text x="710" y="170" text-anchor="middle" class="text-code" font-size="14" fill="#a855f7">[ sin(pos + k) ]   [ cos(k)   sin(k) ] [ sin(pos) ]</text>
+  <text x="710" y="200" text-anchor="middle" class="text-code" font-size="14" fill="#a855f7">[ cos(pos + k) ] = [ -sin(k)  cos(k) ] [ cos(pos) ]</text>
+
+  <text x="710" y="240" text-anchor="middle" class="text-main" fill="#cbd5e1">Offset Matrix M_k is a constant 2x2 matrix!</text>
+  <text x="710" y="260" text-anchor="middle" class="text-main" fill="#94a3b8">It depends ONLY on the distance offset k, NOT on pos.</text>
+
+  <rect x="510" y="310" width="400" height="120" fill="#0f172a" stroke="#2563eb" rx="8" />
+  <text x="525" y="335" class="text-main" font-weight="bold" fill="#60a5fa">Why this is huge for Self-Attention:</text>
+  <text x="525" y="360" class="text-main">The model can learn linear weights W_Q and W_K that</text>
+  <text x="525" y="380" class="text-main">naturally measure relative distance (e.g. "look 2 steps back")</text>
+  <text x="525" y="400" class="text-main">without needing separate weights for every single position!</text>
+</svg>

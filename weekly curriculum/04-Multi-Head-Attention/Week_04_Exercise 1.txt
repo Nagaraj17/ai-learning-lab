@@ -83,7 +83,6 @@ Can you explain why each head chose different information?
 8. If You Don't Already Know...
 
 Learn these concepts before you begin:
-
 Multi-Head Attention
 Self-Attention
 Head Dimension
