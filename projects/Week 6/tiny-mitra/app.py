@@ -21,6 +21,9 @@ ASSIGNMENT_ROOT = ROOT / "artifacts/assignment_v2"
 TASK_ROOT = ROOT / "artifacts/mitra_final"
 REPEAT_MODELS = {f"final_seed{seed}/transformer_2": seed for seed in (7, 123)}
 MODEL_OPTIONS = tuple("task_tokens/" + name for name in ARCHITECTURES) + tuple(REPEAT_MODELS) + tuple("assignment_v2/" + name for name in ARCHITECTURES) + ARCHITECTURES + ("transformer_2_latest", "learning_pilot")
+# The submission contains one final study plus its separately labelled pilot.
+# Keep the original UI available for reproducing historical experiments.
+SUBMISSION_MODEL_OPTIONS = tuple("task_tokens/" + name for name in ARCHITECTURES) + tuple(REPEAT_MODELS) + ("learning_pilot",)
 
 
 def display_number(value):
@@ -351,16 +354,18 @@ def final_reviewed_findings():
     return "\n\n".join(lines)
 
 
-def build_app():
+def build_app(submission=False):
+    model_options = SUBMISSION_MODEL_OPTIONS if submission else MODEL_OPTIONS
     columns = ["architecture", "seed", "val loss", "val token accuracy", "recall", "precision", "F1", "exact match", "note leakage", "clinical preservation", "parameters", "examples"]
     with gr.Blocks(title="Tiny Mitra — learn, compare, investigate", analytics_enabled=False) as demo:
         gr.Markdown("# Tiny Mitra\nA small GPT assembled from PyTorch primitives. Synthetic educational task. Saved benchmarks and live generations are labeled separately.")
         with gr.Tab("Compare models"):
-            source = gr.Textbox(label="Synthetic input note", value="PATIENT Jo TREATMENT DrugA", lines=3)
-            architectures = gr.Dropdown(list(MODEL_OPTIONS), value=["learning_pilot"], multiselect=True, label="Trained models/checkpoints to compare")
+            source = gr.Textbox(label="Synthetic input note", value="PATIENT John Smith VISITED Dr Jones ON January 12" if submission else "PATIENT Jo TREATMENT DrugA", lines=3)
+            architectures = gr.Dropdown(list(model_options), value=["final_seed7/transformer_2"] if submission else ["learning_pilot"], multiselect=True, label="Trained models/checkpoints to compare")
             gr.Examples(examples=[["PATIENT Jo TREATMENT DrugA", ["learning_pilot"]], ["PATIENT Jo TREATMENT DrugB", ["learning_pilot"]], ["PATIENT John Smith VISITED Dr Jones ON January 12", ["task_tokens/transformer_2"]], ["PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC", ["task_tokens/transformer_2"]]], inputs=[source, architectures], label="Teaching pilot and fixed-task-piece experiment")
-            with gr.Accordion("Earlier character-study examples", open=False):
-                gr.Examples(examples=[["PATIENT John Smith VISITED Dr Jones ON January 12", ["assignment_v2/transformer_2"]], ["PATIENT Kevin Black LIVES 412 Main Street Dallas Texas", ["assignment_v2/transformer_2"]], ["PATIENT John Lee DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA", ["transformer_2", "transformer_2_latest"]]], inputs=[source, architectures], label="Preserved character studies; their outputs may be wrong")
+            if not submission:
+                with gr.Accordion("Earlier character-study examples", open=False):
+                    gr.Examples(examples=[["PATIENT John Smith VISITED Dr Jones ON January 12", ["assignment_v2/transformer_2"]], ["PATIENT Kevin Black LIVES 412 Main Street Dallas Texas", ["assignment_v2/transformer_2"]], ["PATIENT John Lee DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA", ["transformer_2", "transformer_2_latest"]]], inputs=[source, architectures], label="Preserved character studies; their outputs may be wrong")
             mode = gr.Radio(["greedy", "sample"], value="greedy", label="Decoding method")
             temperature = gr.Slider(0.1, 1.5, value=0.7, step=0.1, label="Sampling temperature (ignored by greedy)")
             button = gr.Button("Generate and compare")
@@ -369,19 +374,19 @@ def build_app():
                 trace = gr.JSON()
             button.click(compare, [source, architectures, mode, temperature], [outputs, trace], api_name="compare")
             with gr.Accordion("Watch actual next-token predictions", open=False):
-                live_model = gr.Dropdown(list(MODEL_OPTIONS), value="final_seed7/transformer_2", label="One trained checkpoint")
+                live_model = gr.Dropdown(list(model_options), value="final_seed7/transformer_2", label="One trained checkpoint")
                 live_button = gr.Button("Generate tokens one at a time")
                 live_text = gr.Markdown()
                 live_trace = gr.JSON(label="Growing actual token trace")
                 live_button.click(live_tokens, [source, live_model, mode, temperature], [live_text, live_trace], api_name="live_tokens")
             gr.Markdown("Live text has no reference answer, so no live precision/recall is invented. Missing checkpoints are shown explicitly.")
-            gr.Markdown("`transformer_2_latest` uses the same architecture at its last update. It is an exploratory checkpoint comparison; saved architecture benchmarks use their best-validation checkpoints.")
+            gr.Markdown("`transformer_2_latest` uses the same architecture at its last update. It is an exploratory checkpoint comparison; saved architecture benchmarks use their best-validation checkpoints.", visible=not submission)
             gr.Markdown("`learning_pilot` is a smaller two-block model trained on four short notes. Its successful demonstration is separate from the broader benchmark and its generalization limits.")
-            gr.Markdown("`assignment_v2/...` models use the corrected instructor sentence grammar and a separate training series. Unprefixed architecture names refer to the earlier flat-field study. A checkpoint may become available before its full training run has finished; the displayed update identifies what is loaded.")
+            gr.Markdown("`assignment_v2/...` models use the corrected instructor sentence grammar and a separate training series. Unprefixed architecture names refer to the earlier flat-field study. A checkpoint may become available before its full training run has finished; the displayed update identifies what is loaded.", visible=not submission)
             gr.Markdown("`task_tokens/...` models use fixed schema/clinical token pieces plus character spelling for other text, with a separately registered final-update comparison. Their generations and metrics must be measured; changing the tokenizer alone does not establish success.")
             gr.Markdown("`final_seed7/transformer_2` and `final_seed123/transformer_2` are separately identified development repeats on the same final corpus. They load only after all 4,000 updates. Seed42 remains the primary architecture benchmark; a repeat is not silently substituted for it.")
         with gr.Tab("Inspect heads"):
-            architecture = gr.Dropdown(list(MODEL_OPTIONS), value="task_tokens/transformer_2", label="Model/checkpoint")
+            architecture = gr.Dropdown(list(model_options), value="task_tokens/transformer_2", label="Model/checkpoint")
             note = gr.Textbox(value="PATIENT John Smith RECEIVED DrugA", label="Synthetic source")
             prefix = gr.Textbox(value="PATIENT [NAME] RECEIVED ", label="Conditional output prefix (supplied, not freely generated)")
             gr.Examples(examples=[["task_tokens/transformer_2", "PATIENT John Smith RECEIVED DrugA", "PATIENT [NAME] RECEIVED "], ["task_tokens/transformer_2", "PATIENT John Smith RECEIVED DrugB", "PATIENT [NAME] RECEIVED "], ["learning_pilot", "PATIENT Jo TREATMENT DrugA", "PATIENT [NAME] TREATMENT Drug"]], inputs=[architecture, note, prefix], label="Conditional probes use the selected tokenizer's piece boundaries")
@@ -399,7 +404,7 @@ def build_app():
             ablate_button.click(intervention_view, [architecture, note, layer, head], [intervention_text, intervention], api_name="intervene")
             head_button = gr.Button("Load saved head-ablation comparison")
             head_metric = gr.Radio(["recall", "conditional_loss", "clinical_preservation"], value="recall", label="Saved intervention metric")
-            head_study = gr.Radio(["task_tokens", "original_characters"], value="task_tokens", label="Saved head experiment study (read its checkpoint caption)")
+            head_study = gr.Radio(["task_tokens"] if submission else ["task_tokens", "original_characters"], value="task_tokens", label="Saved head experiment study (read its checkpoint caption)", visible=not submission)
             head_chart = gr.Plot()
             with gr.Accordion("Category metrics and exact diagnostic examples", open=False):
                 head_evidence = gr.JSON()
@@ -447,7 +452,7 @@ def build_app():
                 demo_final_table = gr.Dataframe(headers=["partition", "notes", "recall", "precision", "exact match", "clinical preservation", "note leakage"], interactive=False)
                 demo_final_status = gr.Markdown()
                 demo_final_button.click(demo_final_partitions, [], [demo_final_table, demo_final_status], api_name="demo_final_partitions")
-            with gr.Accordion("Earlier character studies and their findings", open=False):
+            with gr.Accordion("Earlier character studies and their findings", open=False, visible=not submission):
                 gr.Markdown("## Version 1 — flat-field study\nSaved benchmark results: generated-note metrics use the declared subset; validation token metrics use teacher forcing. Components select separately trained models. Read support counts and seed limitations.")
                 table = gr.Dataframe(headers=columns, interactive=False)
                 curves = gr.Plot()
@@ -486,10 +491,11 @@ def build_app():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", type=int, default=7860)
+    parser.add_argument("--submission", action="store_true", help="Show only the final study and teaching pilot supplied in the clean submission")
     parser.add_argument("--assignment-root", type=Path, default=ASSIGNMENT_ROOT, help="Separate downloaded cloud study directory; original local files stay intact")
     parser.add_argument("--task-root", type=Path, default=TASK_ROOT, help="Directory containing the fixed-task-piece study")
     args = parser.parse_args()
     ASSIGNMENT_ROOT = args.assignment_root.resolve()
     TASK_ROOT = args.task_root.resolve()
     torch.set_num_threads(2)
-    build_app().queue(default_concurrency_limit=1).launch(server_name="127.0.0.1", server_port=args.port, share=False, inbrowser=False)
+    build_app(submission=args.submission).queue(default_concurrency_limit=1).launch(server_name="127.0.0.1", server_port=args.port, share=False, inbrowser=False)

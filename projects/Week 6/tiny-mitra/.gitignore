@@ -6,6 +6,7 @@ __pycache__/
 artifacts/checkpoints/
 artifacts/*/checkpoints/
 artifacts/bundles/
+artifacts/submission/
 artifacts/archive/
 *.log
 artifacts/results/*_process.json
