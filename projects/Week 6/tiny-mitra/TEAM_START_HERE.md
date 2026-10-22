@@ -21,7 +21,7 @@ Nagar already has a separately verified `artifacts/bundles/tiny-mitra-demo.zip` 
 ## Get the source
 
 ```powershell
-git clone --branch codex/tiny-mitra-team-review https://github.com/Nagaraj17/ai-learning-lab.git
+git clone --branch master https://github.com/Nagaraj17/ai-learning-lab.git
 cd 'ai-learning-lab/projects/Week 6/tiny-mitra'
 ```
 
