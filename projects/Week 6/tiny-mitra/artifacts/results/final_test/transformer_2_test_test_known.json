@@ -1,0 +1,1905 @@
+{
+  "metrics": {
+    "tp": 24,
+    "fp": 44,
+    "fn": 79,
+    "identifiers": 103,
+    "leaked_identifiers": 0,
+    "leaked_note": 0,
+    "clinical_correct": 1,
+    "clinical_support": 107,
+    "exact": 0,
+    "examples": 50,
+    "precision": 0.35294117647058826,
+    "recall": 0.23300970873786409,
+    "f1": 0.2807017543859649,
+    "exact_match": 0.0,
+    "identifier_leakage": 0.0,
+    "note_leakage": 0.0,
+    "clinical_preservation": 0.009345794392523364,
+    "categories": {
+      "PATIENT": {
+        "tp": 10,
+        "support": 45,
+        "leaked": 0,
+        "recall": 0.2222222222222222
+      },
+      "MRN": {
+        "tp": 2,
+        "support": 7,
+        "leaked": 0,
+        "recall": 0.2857142857142857
+      },
+      "DOB": {
+        "tp": 7,
+        "support": 15,
+        "leaked": 0,
+        "recall": 0.4666666666666667
+      },
+      "PHONE": {
+        "tp": 0,
+        "support": 15,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "ADDRESS": {
+        "tp": 3,
+        "support": 15,
+        "leaked": 0,
+        "recall": 0.2
+      },
+      "DOCTOR": {
+        "tp": 0,
+        "support": 3,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "DATE": {
+        "tp": 2,
+        "support": 3,
+        "leaked": 0,
+        "recall": 0.6666666666666666
+      }
+    },
+    "controls": 5,
+    "control_over_redactions": 0,
+    "seconds": 106.9728124011308,
+    "generated_tokens": 2654,
+    "seconds_per_note": 2.139456248022616,
+    "valid_terminations": 50,
+    "mode": "greedy",
+    "temperature": null,
+    "sampling_seed": 42,
+    "device": "cpu",
+    "coverage": "declared subset; see IDs",
+    "example_ids": [
+      "example_0900",
+      "example_0901",
+      "example_0902",
+      "example_0903",
+      "example_0904",
+      "example_0905",
+      "example_0906",
+      "example_0907",
+      "example_0908",
+      "example_0909",
+      "example_0910",
+      "example_0911",
+      "example_0912",
+      "example_0913",
+      "example_0914",
+      "example_0915",
+      "example_0916",
+      "example_0917",
+      "example_0918",
+      "example_0919",
+      "example_0920",
+      "example_0921",
+      "example_0922",
+      "example_0923",
+      "example_0924",
+      "example_0925",
+      "example_0926",
+      "example_0927",
+      "example_0928",
+      "example_0929",
+      "example_0930",
+      "example_0931",
+      "example_0932",
+      "example_0933",
+      "example_0934",
+      "example_0935",
+      "example_0936",
+      "example_0937",
+      "example_0938",
+      "example_0939",
+      "example_0940",
+      "example_0941",
+      "example_0942",
+      "example_0943",
+      "example_0944",
+      "example_0945",
+      "example_0946",
+      "example_0947",
+      "example_0948",
+      "example_0949"
+    ]
+  },
+  "outputs": [
+    {
+      "id": "example_0900",
+      "split": "test_test_known",
+      "source": "DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA dose900",
+      "expected": "DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA dose900",
+      "generated": "DIAGNOSIS BIST BIOMA DIOS ENOSIS BIS TEAR BIS BES DrugBEATREATMEAT DrugC T DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.304152900353074,
+      "tokens": 81,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "example_0901",
+      "split": "test_test_known",
+      "source": "PATIENT Evan Park MRN 70000901 DIAGNOSIS ASTHMA TREATMENT DrugB",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA TREATMENT DrugB",
+      "generated": "PATIENT [NAME] [NAME] MAGNOSIAT T DIS DIA DOB [DATE] DISTREA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 2.0125915999524295,
+      "tokens": 46,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0902",
+      "split": "test_test_known",
+      "source": "PATIENT Evan Reed DIAGNOSIS NSCLC BIOMARKER ALK TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER ALK TREATMENT DrugA",
+      "generated": "PATIENT [NAME] DIAGNOSIS AGNTHMABIOMARKER NT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 9.876156100071967,
+      "tokens": 46,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0903",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Reed DIAGNOSIS ASTHMA BIOMARKER EGFR TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER EGFR TREATMENT DrugB",
+      "generated": "PATIENT DIAGNOSISISIS BIABIAGNTEATMAREATMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 6.6814520000480115,
+      "tokens": 43,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0904",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Reed DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA",
+      "generated": "PAT [NAME] DIAGNOSISISIS BIABIAGNTRKEAR B DIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 4.113293199799955,
+      "tokens": 41,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0905",
+      "split": "test_test_known",
+      "source": "PATIENT Evan Reed DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA",
+      "generated": "PATIENT [NAME] DIAGNOSIOSIS DIS BIOMAGNOMENS DIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 13.174384599551558,
+      "tokens": 44,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0906",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Reed DOB 1985-12-18 PHONE 555-000-0906 ADDRESS 1006 Oak St TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB",
+      "generated": "PAT AT [NAME] DOB [DATE] PHONE [PHONE] ADDRES [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 9.293626800179482,
+      "tokens": 48,
+      "counts": {
+        "tp": 1,
+        "fp": 3,
+        "fn": 3,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0907",
+      "split": "test_test_known",
+      "source": "PATIENT Evan Reed DOB 1951-02-07 PHONE 555-000-0907 ADDRESS 1007 Oak St TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugC",
+      "generated": "PAT DIATREATMENST ATREAT DRES DrugAT DIENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 2.397837500087917,
+      "tokens": 49,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0908",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Park DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA",
+      "generated": "PATIENT [NAME] DIAGNOSIS AS DIS BIOMARKER NTR TREATMENT DrugATREARK D TMAS DrugC B",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 3.1609457000158727,
+      "tokens": 78,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0909",
+      "split": "test_test_known",
+      "source": "DOCTOR Dr Gamma DATE 2026-11-21 PATIENT Evan Reed DIAGNOSIS DIABETES",
+      "expected": "DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS DIABETES",
+      "generated": "DOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.5792392999865115,
+      "tokens": 39,
+      "counts": {
+        "tp": 2,
+        "fp": 1,
+        "fn": 1,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0910",
+      "split": "test_test_known",
+      "source": "DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugC dose910",
+      "expected": "DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugC dose910",
+      "generated": "PAAGNOSIS ATMAT DIOMAR DIAGNOSISTENT DIA DrugC DrugAGNTEADrugB DrugB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 2.715474400203675,
+      "tokens": 69,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "example_0911",
+      "split": "test_test_known",
+      "source": "DOCTOR Dr Gamma DATE 2026-10-05 PATIENT Asha Park DIAGNOSIS ASTHMA",
+      "expected": "DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA",
+      "generated": "DOCTOS [DOCTOR] DATE PATIENTIENT DIAGNOSISIS DIABETEADATS DATREATMENT DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 2.3763041999191046,
+      "tokens": 69,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 3,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0912",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Reed DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA",
+      "generated": "PATIENT DIAGNOSISISIS DIABIAGNTRKEARKEATMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.076675099786371,
+      "tokens": 43,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0913",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Reed DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA",
+      "generated": "PATIENT DIAGNOSISISIS DIABIAGNTRER DIS DrugBEADrugB DrugB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 3.4262230000458658,
+      "tokens": 58,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0914",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Reed DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugB",
+      "generated": "PATIENT [NAME] DIAGNOSIOSIS DIS BIOMAGNOMENS DIS TMES",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.5524090002290905,
+      "tokens": 49,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0915",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Park DIAGNOSIS NSCLC BIOMARKER ALK TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER ALK TREATMENT DrugC",
+      "generated": "PATIENT [NAME] DIAGNOSIS AGNTHMABIOMAGNOS NT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.370848000049591,
+      "tokens": 46,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0916",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Reed DOB 1956-11-18 PHONE 555-000-0916 ADDRESS 1016 Oak St TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB",
+      "generated": "PAT AT [NAME] DOB [DATE] PHONE [PHONE] ADDRES [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.9441289003007114,
+      "tokens": 48,
+      "counts": {
+        "tp": 1,
+        "fp": 3,
+        "fn": 3,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0917",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Park DIAGNOSIS NSCLC BIOMARKER NONE TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER NONE TREATMENT DrugB",
+      "generated": "PATIENT [NAME] DIAGNOSIS AS DIS BIOMARKER NTR TREATMENT DrugATREARK DrugBIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.42826720001176,
+      "tokens": 71,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0918",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Reed MRN 70000918 DIAGNOSIS DIABETES TREATMENT DrugC",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugC",
+      "generated": "PATIENT [NAME] DIAGNOSISIS DIS DIAGNTETRENTR DrugATREAT DrugB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.2836641003377736,
+      "tokens": 57,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0919",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Reed DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugC",
+      "generated": "PATIENT DIAGNOSIAGNSIS BENTES DrugC AS DIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.8757166001014411,
+      "tokens": 43,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0920",
+      "split": "test_test_known",
+      "source": "DIAGNOSIS DIABETES BIOMARKER NONE TREATMENT DrugA dose920",
+      "expected": "DIAGNOSIS DIABETES BIOMARKER NONE TREATMENT DrugA dose920",
+      "generated": "DIAGNOSIS DIAT T DIARKESIAR TRENS DIA DrugC DrugAGNTEADrugB DrugB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.2178575000725687,
+      "tokens": 66,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "example_0921",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Park DOB 1993-04-14 PHONE 555-000-0921 ADDRESS 1021 Oak St TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA",
+      "generated": "PAT DIATRENO AT DONE [PHONE] ADDRES DrugAT MENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.2929171998985112,
+      "tokens": 48,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0922",
+      "split": "test_test_known",
+      "source": "PATIENT Evan Park MRN 70000922 DIAGNOSIS NSCLC TREATMENT DrugC",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugC",
+      "generated": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NS DIAGNOSIS NSTMENTREA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.1285585998557508,
+      "tokens": 50,
+      "counts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0923",
+      "split": "test_test_known",
+      "source": "PATIENT Asha Park DOB 1985-11-18 PHONE 555-000-0923 ADDRESS 1023 Oak St TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugC",
+      "generated": "PAT DIATRENOMENST ATREATRENSS DrugAT MENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.1904662000015378,
+      "tokens": 48,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0924",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Reed DOB 1982-07-17 PHONE 555-000-0924 ADDRESS 1024 Oak St TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA",
+      "generated": "PAT AT [NAME] DOB [DATE] PHONE [PHONE] ADDRES [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.2868923996575177,
+      "tokens": 48,
+      "counts": {
+        "tp": 1,
+        "fp": 3,
+        "fn": 3,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0925",
+      "split": "test_test_known",
+      "source": "PATIENT Asha Reed DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugC",
+      "generated": "PATIENT DIAGNOSIAGN AS BENTERKERKEAR B DIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.48962200013920665,
+      "tokens": 43,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0926",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Reed DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugC",
+      "generated": "PATIENT DIAGNOSIOSIS DIS DIARETRER NTR TREATMENT DrugATREAGNT DrugAGNTRNOS T TENTIE DIS T A TMENTMENOC rugB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 2.4766804999671876,
+      "tokens": 108,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0927",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Reed DOB 1975-01-12 PHONE 555-000-0927 ADDRESS 1027 Oak St TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugC",
+      "generated": "PAT AT [NAME] DOB [DATE] PHONE [PHONE] ADDRES [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.0483951000496745,
+      "tokens": 48,
+      "counts": {
+        "tp": 1,
+        "fp": 3,
+        "fn": 3,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0928",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Reed MRN 70000928 DIAGNOSIS NSCLC TREATMENT DrugA",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugA",
+      "generated": "PATIENT [NAME] [NAME] MAT DIAGNOSIS AS DIAREAGNTRENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.8133665001951158,
+      "tokens": 49,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0929",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Park DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA",
+      "generated": "PATIENT DIAGNOSIAGNSIS BENTES DrugC AS DIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 3.7279189000837505,
+      "tokens": 43,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0930",
+      "split": "test_test_known",
+      "source": "DIAGNOSIS ASTHMA BIOMARKER EGFR TREATMENT DrugB",
+      "expected": "DIAGNOSIS ASTHMA BIOMARKER EGFR TREATMENT DrugB",
+      "generated": "DrugBIAR AGNOSIS BISTOR T DIAR EAGNOSIS DIAS BIAGNOSISIS TR TREA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.1136925998143852,
+      "tokens": 65,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "example_0931",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Reed DOB 1973-08-13 PHONE 555-000-0931 ADDRESS 1031 Oak St TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB",
+      "generated": "PAT AT [NAME] DOB [DATE] PHONE [PHONE] ADDRES [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.2604498001746833,
+      "tokens": 48,
+      "counts": {
+        "tp": 1,
+        "fp": 3,
+        "fn": 3,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0932",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Park DOB 1965-02-11 PHONE 555-000-0932 ADDRESS 1032 Oak St TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugC",
+      "generated": "PAT DIATRENO AT DONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.018418800085783,
+      "tokens": 49,
+      "counts": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 3,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0933",
+      "split": "test_test_known",
+      "source": "PATIENT Evan Park MRN 70000933 DIAGNOSIS DIABETES TREATMENT DrugB",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB",
+      "generated": "PATIENT [NAME] MR DIAGNOSIS AS DIAGNTETMENT DIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.8760214000940323,
+      "tokens": 43,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0934",
+      "split": "test_test_known",
+      "source": "PATIENT Evan Reed DIAGNOSIS DIABETES BIOMARKER NONE TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER NONE TREATMENT DrugC",
+      "generated": "PATIENT [NAME] DIAGNOSIS NTIATENTR B AR NT NENTMENDISS DrugAT MENT DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.4688051999546587,
+      "tokens": 68,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0935",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Reed DOB 1987-09-16 PHONE 555-000-0935 ADDRESS 1035 Oak St TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB",
+      "generated": "PAT AT [NAME] DOB [DATE] PHONE [PHONE] ADDRES [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.0062060998752713,
+      "tokens": 48,
+      "counts": {
+        "tp": 1,
+        "fp": 3,
+        "fn": 3,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0936",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Reed DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugB",
+      "generated": "PATIENT [NAME] DIAGNOSIOSIS DIS AS TRKEAR AS DIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.715830700006336,
+      "tokens": 44,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0937",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Park MRN 70000937 DIAGNOSIS NSCLC TREATMENT DrugB",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugB",
+      "generated": "PATIENT [NAME] MRN [MRN] DIAGNOSIS AS DIAGNOSIS ASTMENTREA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.0091372998431325,
+      "tokens": 50,
+      "counts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0938",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Park DOB 1983-02-12 PHONE 555-000-0938 ADDRESS 1038 Oak St TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB",
+      "generated": "PAT DIATRENO AT DONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.167070799972862,
+      "tokens": 49,
+      "counts": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 3,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0939",
+      "split": "test_test_known",
+      "source": "PATIENT Asha Reed DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugC",
+      "generated": "PATIENT [NAME] DIAGNOSIOSIS DIS BIOMAGNOMENS DIS TMES",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.9803535998798907,
+      "tokens": 49,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0940",
+      "split": "test_test_known",
+      "source": "DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA dose940",
+      "expected": "DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA dose940",
+      "generated": "DIAGNORENOS TOR T DIAR DIAGNOSIS TIS TRKEAGNOSIS TMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.0213239998556674,
+      "tokens": 53,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "example_0941",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Reed DOB 1972-07-09 PHONE 555-000-0941 ADDRESS 1041 Oak St TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA",
+      "generated": "PAT DIATRENO AT DrugATEATENSS DrugAT MENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.9455571002326906,
+      "tokens": 48,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0942",
+      "split": "test_test_known",
+      "source": "DOCTOR Dr Gamma DATE 2026-08-20 PATIENT Evan Park DIAGNOSIS DIABETES",
+      "expected": "DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS DIABETES",
+      "generated": "DOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.7388406000100076,
+      "tokens": 39,
+      "counts": {
+        "tp": 2,
+        "fp": 1,
+        "fn": 1,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0943",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Park DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugB",
+      "generated": "PATIENT [NAME] DIAGNOSIOSISTHMAS BIOMAGNOMENTMENTREATMEAT DrugAT DMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.367732800077647,
+      "tokens": 72,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0944",
+      "split": "test_test_known",
+      "source": "PATIENT Evan Park DOB 1991-01-26 PHONE 555-000-0944 ADDRESS 1044 Oak St TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugC",
+      "generated": "PAT DIATRENO AT DrugAT ATENT DrugATIATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.7153652999550104,
+      "tokens": 49,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0945",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Park DOB 1997-06-16 PHONE 555-000-0945 ADDRESS 1045 Oak St TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugC",
+      "generated": "PAT DIATRENO AT DONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.990370400249958,
+      "tokens": 49,
+      "counts": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 3,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0946",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Park DIAGNOSIS NSCLC BIOMARKER NONE TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER NONE TREATMENT DrugA",
+      "generated": "PATIENT [NAME] DIAGNOSIS AS DIS BIOMARKER NTR TREATMENT DrugATREARK DrugBIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 3.1330302003771067,
+      "tokens": 71,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0947",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Reed DOB 1971-06-03 PHONE 555-000-0947 ADDRESS 1047 Oak St TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugC",
+      "generated": "PAT AT [NAME] DOB [DATE] PHONE [PHONE] ADDRES [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.9773112996481359,
+      "tokens": 48,
+      "counts": {
+        "tp": 1,
+        "fp": 3,
+        "fn": 3,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0948",
+      "split": "test_test_known",
+      "source": "PATIENT Asha Reed MRN 70000948 DIAGNOSIS NSCLC TREATMENT DrugA",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugA",
+      "generated": "PATIENT [NAME] [NAME] MAT DIAGNOSIS AS DIAREAGNTRENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.4203103999607265,
+      "tokens": 49,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0949",
+      "split": "test_test_known",
+      "source": "PATIENT Asha Reed DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA",
+      "generated": "PATIENT [NAME] DIAGNOSIOSIS DIS BIOMAGNOMENS DIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.7309189001098275,
+      "tokens": 44,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    }
+  ],
+  "experiment_id": "final_transformer_2_test_test_known",
+  "architecture": "transformer_2",
+  "seed": 42,
+  "split": "test_test_known",
+  "source_hash": "a399a568af148bd3b0e2cd08c5aaa07f9ab045cbc5035ee0446c03d832d4b33d",
+  "dataset_hash": "368646b32a01c79aed83b468b999afebaeff47f31d97f8e66c3a75bdb1a24113",
+  "tokenizer_hash": "20d5ed18ecc52a6b1dc6c3ac9e4f1892a5759c0af3cf32be7042673aadacebd7",
+  "checkpoint_step": 400,
+  "teacher_forced": {
+    "loss": 1.1775856449918927,
+    "next_token_accuracy": 0.690188679245283,
+    "scored_tokens": 2650,
+    "examples": 50
+  },
+  "scope": "complete declared final partition; no tuning from these outputs"
+}

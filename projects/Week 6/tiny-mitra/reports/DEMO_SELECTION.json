@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "selected": {
+    "seed": 7,
+    "model_id": "final_seed7/transformer_2",
+    "authored_correct": 11,
+    "authored_notes": 11,
+    "clinical_correct": 2,
+    "clinical_notes": 2,
+    "passed": true,
+    "checkpoint": "artifacts/mitra_final/checkpoints/transformer_2_seed7/latest.pt",
+    "checkpoint_sha256": "f14ee15b289b1af0ab457e2b9c25024b01ad71ba3d0c8ff41be891f1f977134a"
+  },
+  "candidates": [
+    {
+      "seed": 42,
+      "model_id": "task_tokens/transformer_2",
+      "authored_correct": 10,
+      "authored_notes": 11,
+      "clinical_correct": 2,
+      "clinical_notes": 2,
+      "passed": false,
+      "checkpoint": "artifacts/mitra_final/checkpoints/transformer_2_seed42/latest.pt",
+      "checkpoint_sha256": "aecfd119eefc955c0ecbe024d6889847c2ba8448b30388916744b0b4a9302684"
+    },
+    {
+      "seed": 7,
+      "model_id": "final_seed7/transformer_2",
+      "authored_correct": 11,
+      "authored_notes": 11,
+      "clinical_correct": 2,
+      "clinical_notes": 2,
+      "passed": true,
+      "checkpoint": "artifacts/mitra_final/checkpoints/transformer_2_seed7/latest.pt",
+      "checkpoint_sha256": "f14ee15b289b1af0ab457e2b9c25024b01ad71ba3d0c8ff41be891f1f977134a"
+    },
+    {
+      "seed": 123,
+      "model_id": "final_seed123/transformer_2",
+      "authored_correct": 11,
+      "authored_notes": 11,
+      "clinical_correct": 2,
+      "clinical_notes": 2,
+      "passed": true,
+      "checkpoint": "artifacts/mitra_final/checkpoints/transformer_2_seed123/latest.pt",
+      "checkpoint_sha256": "5b5f9815d4ff6b042067ee951bd30ac5d70532c4bab9f9dab4de247f02c93fd7"
+    }
+  ],
+  "protocol": {
+    "candidate_seeds_in_priority_order": [
+      42,
+      7,
+      123
+    ],
+    "architecture": "transformer_2",
+    "checkpoint": "latest.pt at fixed update4000",
+    "acceptance_gate": "all11 authored notes exactly correct with valid EOS plus both additional clinical checks exactly correct with valid EOS",
+    "selection": "first passing candidate in declared priority order; otherwise no passing demo candidate",
+    "timing_disclosure": "declared after observing seed42 authored10/11 and before either repeat completed; exploratory development selection",
+    "benchmark": "primary architecture comparison remains seed42, independent of demo selection",
+    "no_final_test_selection": true
+  },
+  "scope": "development-only demo selection, not final-test accuracy or production readiness"
+}

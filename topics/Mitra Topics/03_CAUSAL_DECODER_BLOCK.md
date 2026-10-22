@@ -26,6 +26,12 @@ Imagine a group of students (tokens) taking a test in a row of desks. The teache
 ## 6. How It Works
 
 Inside the block, three independent linear projections create the Query (Q), Key (K), and Value (V) matrices. 
+
+**The Q, K, V Analogy (from *Hands-On LLMs*):**
+*   **Query (Q):** What I am looking for (e.g., "I am an adjective looking for a noun").
+*   **Key (K):** What I contain (e.g., "I am a noun").
+*   **Value (V):** What I offer if my Key matches your Query (e.g., the actual meaning/features of the noun).
+
 The attention scores are calculated as $Q \times K^T$. 
 Before these scores are turned into probabilities using Softmax, we apply a **Causal Mask**. The mask replaces all the score values "above the diagonal" (which correspond to future tokens) with negative infinity (`-inf`). When Softmax processes `-inf`, it outputs exactly `0`, meaning zero attention is paid to the future.
 
@@ -33,20 +39,31 @@ Before these scores are turned into probabilities using Softmax, we apply a **Ca
 
 ```mermaid
 flowchart LR
-    subgraph Causal Mask Matrix
+    subgraph Causal Mask Matrix - Forward Pass
     direction TB
-        Row1[Token 1: 1 0 0 0]
-        Row2[Token 2: 1 1 0 0]
-        Row3[Token 3: 1 1 1 0]
-        Row4[Token 4: 1 1 1 1]
+        Row1["Token 1 sees: [ 1, -inf, -inf, -inf ]"]
+        Row2["Token 2 sees: [ 1,    1, -inf, -inf ]"]
+        Row3["Token 3 sees: [ 1,    1,    1, -inf ]"]
+        Row4["Token 4 sees: [ 1,    1,    1,    1 ]"]
+    end
+    
+    subgraph Softmax Transformation
+    direction TB
+        Out1["Outputs: [ 1.0, 0.0, 0.0, 0.0 ]"]
+        Out2["Outputs: [ 0.5, 0.5, 0.0, 0.0 ]"]
+        Out3["Outputs: [ 0.3, 0.3, 0.3, 0.0 ]"]
+        Out4["Outputs: [ 0.2, 0.2, 0.2, 0.2 ]"]
     end
     
     subgraph Legend
-        One[1 = Visible]
-        Zero[0 = Blocked by Mask]
+        One["1 = Visible"]
+        Zero["-inf = Blocked (Becomes 0.0)"]
     end
     
-    Row1 --> Row2 --> Row3 --> Row4
+    Row1 --> Out1
+    Row2 --> Out2
+    Row3 --> Out3
+    Row4 --> Out4
     
     style One fill:#c8e6c9,stroke:#388e3c
     style Zero fill:#ffcdd2,stroke:#d32f2f
@@ -146,3 +163,4 @@ A decoder block uses causal attention to gather relevant earlier context, preven
 
 ## 21. Sources
 - AI Learning Lab - Tiny-GPT Core Concepts
+- *Hands-On Large Language Models* by Jay Alammar & Maarten Grootendorst (Q, K, V analogy and intuitive mechanics)

@@ -1,0 +1,882 @@
+{
+  "metrics": {
+    "tp": 13,
+    "fp": 59,
+    "fn": 23,
+    "identifiers": 36,
+    "leaked_identifiers": 0,
+    "leaked_note": 0,
+    "clinical_correct": 2,
+    "clinical_support": 24,
+    "exact": 5,
+    "examples": 24,
+    "precision": 0.18055555555555555,
+    "recall": 0.3611111111111111,
+    "f1": 0.24074074074074073,
+    "exact_match": 0.20833333333333334,
+    "identifier_leakage": 0.0,
+    "note_leakage": 0.0,
+    "clinical_preservation": 0.08333333333333333,
+    "categories": {
+      "PATIENT": {
+        "tp": 7,
+        "support": 21,
+        "leaked": 0,
+        "recall": 0.3333333333333333
+      },
+      "MRN": {
+        "tp": 0,
+        "support": 5,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "DOCTOR": {
+        "tp": 0,
+        "support": 1,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "DATE": {
+        "tp": 0,
+        "support": 1,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "ADDRESS": {
+        "tp": 6,
+        "support": 6,
+        "leaked": 0,
+        "recall": 1.0
+      },
+      "DOB": {
+        "tp": 0,
+        "support": 1,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "PHONE": {
+        "tp": 0,
+        "support": 1,
+        "leaked": 0,
+        "recall": 0.0
+      }
+    },
+    "controls": 3,
+    "control_over_redactions": 18,
+    "example_ids": [
+      "assignment_0700",
+      "assignment_0701",
+      "assignment_0702",
+      "assignment_0704",
+      "assignment_0705",
+      "assignment_0717",
+      "assignment_0719",
+      "assignment_0703",
+      "assignment_0706",
+      "assignment_0707",
+      "assignment_0708",
+      "assignment_0709",
+      "assignment_0710",
+      "assignment_0711",
+      "assignment_0712",
+      "assignment_0713",
+      "assignment_0714",
+      "assignment_0715",
+      "assignment_0716",
+      "assignment_0718",
+      "assignment_0720",
+      "assignment_0721",
+      "assignment_0722",
+      "assignment_0723"
+    ],
+    "valid_terminations": 24,
+    "evaluation": "sentence-anchor version 2; exact-surface leakage; complete clinical associations",
+    "device": "cpu"
+  },
+  "outputs": [
+    {
+      "id": "assignment_0700",
+      "split": "validation",
+      "source": "BIOMARKER ALK TREATMENT DrugA DIAGNOSIS NSCLC",
+      "expected": "BIOMARKER ALK TREATMENT DrugA DIAGNOSIS NSCLC",
+      "generated": "BIOMARKER ALK TREATMENT [NAME] DIAGNOSIS [MRN] [NAME] [NAME] [NAME] [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.01949209999293089,
+      "tokens": 24,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0701",
+      "split": "validation",
+      "source": "PATIENT Ravi Rao RECEIVED DrugB",
+      "expected": "PATIENT [NAME] RECEIVED DrugB",
+      "generated": "PATIENT [NAME] DIAGNOSIS DrugB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.006118100136518478,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0702",
+      "split": "validation",
+      "source": "PATIENT Leah Shah MRN 480702 DIAGNOSIS ASTHMA",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA",
+      "generated": "PATIENT [NAME] [NAME] [NAME] DIAGNOSIS TREATMENT [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.010630200151354074,
+      "tokens": 14,
+      "counts": {
+        "tp": 0,
+        "fp": 4,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0704",
+      "split": "validation",
+      "source": "PATIENT Maya Lee VISITED Dr Jones ON April 10",
+      "expected": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+      "generated": "PATIENT [NAME] [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.01077610021457076,
+      "tokens": 10,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 3,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0705",
+      "split": "validation",
+      "source": "PATIENT John Rao LIVES 805 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] LIVES [ADDRESS]",
+      "generated": "PATIENT [NAME] LIVES [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.00644140038639307,
+      "tokens": 8,
+      "counts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 1,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0717",
+      "split": "validation",
+      "source": "PATIENT John Smith DOB March 28 1990",
+      "expected": "PATIENT [NAME] DOB [DATE]",
+      "generated": "PATIENT [NAME] [NAME] [NAME] DIAGNOSIS TREATMENT [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.01752509968355298,
+      "tokens": 14,
+      "counts": {
+        "tp": 0,
+        "fp": 4,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0719",
+      "split": "validation",
+      "source": "PATIENT Maya Shah PHONE 5550000719",
+      "expected": "PATIENT [NAME] PHONE [PHONE]",
+      "generated": "PATIENT [NAME] [NAME] [NAME] [NAME] DIAGNOSIS TREATMENT [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.028201099950820208,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0703",
+      "split": "validation",
+      "source": "PATIENT Sara Rao MRN 480703 DIAGNOSIS ASTHMA",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA",
+      "generated": "PATIENT [NAME] [NAME] [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.05753089999780059,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0706",
+      "split": "validation",
+      "source": "PATIENT Noah Lee RECEIVED DrugB",
+      "expected": "PATIENT [NAME] RECEIVED DrugB",
+      "generated": "PATIENT [NAME] DIAGNOSIS DrugB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.0074754999950528145,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0707",
+      "split": "validation",
+      "source": "PATIENT Ravi Rao RECEIVED DrugA",
+      "expected": "PATIENT [NAME] RECEIVED DrugA",
+      "generated": "PATIENT [NAME] DIAGNOSIS DrugB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.010270799975842237,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0708",
+      "split": "validation",
+      "source": "PATIENT Sara Lee DIAGNOSIS ASTHMA",
+      "expected": "PATIENT [NAME] DIAGNOSIS ASTHMA",
+      "generated": "PATIENT [NAME] DIAGNOSIS DrugB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.008677399717271328,
+      "tokens": 8,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0709",
+      "split": "validation",
+      "source": "PATIENT Sara Lee LIVES 809 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] LIVES [ADDRESS]",
+      "generated": "PATIENT [NAME] LIVES [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.015121599659323692,
+      "tokens": 8,
+      "counts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 1,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0710",
+      "split": "validation",
+      "source": "DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugB",
+      "expected": "DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugB",
+      "generated": "BIOMARKER ALK TREATMENT [NAME] DIAGNOSIS [MRN] [NAME] [NAME] [NAME] [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.029613199643790722,
+      "tokens": 24,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0711",
+      "split": "validation",
+      "source": "PATIENT Alice White MRN 480711 DIAGNOSIS DIABETES",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES",
+      "generated": "PATIENT [NAME] [NAME] DIAGNOSIS TREATMENT [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.05517400009557605,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0712",
+      "split": "validation",
+      "source": "PATIENT Sara Lee LIVES 812 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] LIVES [ADDRESS]",
+      "generated": "PATIENT [NAME] LIVES [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.020333500113338232,
+      "tokens": 8,
+      "counts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 1,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0713",
+      "split": "validation",
+      "source": "PATIENT Maya Rao LIVES 813 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] LIVES [ADDRESS]",
+      "generated": "PATIENT [NAME] [NAME] LIVES [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.0075323996134102345,
+      "tokens": 10,
+      "counts": {
+        "tp": 1,
+        "fp": 2,
+        "fn": 1,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0714",
+      "split": "validation",
+      "source": "MRN 480714 PATIENT Robert Green",
+      "expected": "MRN [MRN] PATIENT [NAME]",
+      "generated": "PATIENT [NAME] [NAME] [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.007571700029075146,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0715",
+      "split": "validation",
+      "source": "MRN 480715 PATIENT John Cole DIAGNOSIS NSCLC",
+      "expected": "MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC",
+      "generated": "PATIENT [NAME] [NAME] [NAME] DIAGNOSIS TREATMENT [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.00865060044452548,
+      "tokens": 14,
+      "counts": {
+        "tp": 0,
+        "fp": 4,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0716",
+      "split": "validation",
+      "source": "PATIENT Sara Shah DIAGNOSIS NSCLC BIOMARKER NONE TREATMENT Chemotherapy",
+      "expected": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER NONE TREATMENT Chemotherapy",
+      "generated": "PATIENT [NAME] [NAME] [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.008368199691176414,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0718",
+      "split": "validation",
+      "source": "PATIENT John Lee DIAGNOSIS ASTHMA",
+      "expected": "PATIENT [NAME] DIAGNOSIS ASTHMA",
+      "generated": "PATIENT [NAME] DIAGNOSIS DrugB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.004477399867027998,
+      "tokens": 8,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0720",
+      "split": "validation",
+      "source": "BIOMARKER EGFR DIAGNOSIS ASTHMA TREATMENT DrugC",
+      "expected": "BIOMARKER EGFR DIAGNOSIS ASTHMA TREATMENT DrugC",
+      "generated": "BIOMARKER ALK TREATMENT [NAME] DIAGNOSIS [MRN] [NAME] [NAME] [NAME] [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.015155599918216467,
+      "tokens": 24,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0721",
+      "split": "validation",
+      "source": "PATIENT John Rao LIVES 821 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] LIVES [ADDRESS]",
+      "generated": "PATIENT [NAME] LIVES [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.005490500014275312,
+      "tokens": 8,
+      "counts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 1,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0722",
+      "split": "validation",
+      "source": "PATIENT Noah Cole LIVES 822 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] LIVES [ADDRESS]",
+      "generated": "PATIENT [NAME] LIVES [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.008159900084137917,
+      "tokens": 8,
+      "counts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 1,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0723",
+      "split": "validation",
+      "source": "PATIENT Ravi Rao DIAGNOSIS DIABETES BIOMARKER NONE TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER NONE TREATMENT DrugB",
+      "generated": "PATIENT [NAME] [NAME] [NAME] [NAME] DIAGNOSIS TREATMENT [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.037739300169050694,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    }
+  ],
+  "series": "task_tokens",
+  "architecture": "embedding_only",
+  "selected_step": 2000,
+  "dataset_hash": "1754352412d811cc35a09da5b44450ca39c68ffaf4b6b86b0d9b002bbdff17fd",
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+  "scope": "development evidence, not final test"
+}

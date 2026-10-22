@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "scope": "API: all eight original models and available/required assignment-v2 generation, attention row, request-local intervention/restoration, saved/repeated rows, both controlled pilot outputs, three head metrics, reviewed findings, partition table, checkpoint comparison and separately labelled assignment evidence; browser/visual check separately",
+  "generated": {
+    "embedding_only": "PATIENOR [NAME] DIAGNOS DIATENTIENT [NAME] DOB [DATE] PHONT [PHONE] DDRESS [ADDRESS] TREATMENT DrugB",
+    "single_attention": "PAT T DIE TMAT DISISISIAT BIAT RATIATMANONOSIAT NTMENOS TMENTMENT NOSENTMENOS Dru DTIE DIASONOS DrugATIENNONATMRENOSTMENT NOSENTMNT NTMAANOS DIENOSIATIATMENNTMENTMENIENNONTIENOS uTENTMENT NONT Dru",
+    "multi_attention": "PATIENTIENT [NAME] DIESIAT [NAME] DIENENOS DrugC DrugASIOSTREAT DrugAT NTMENTHOS [PHONE] ATME AT ENEAT DDIAT NT ENT NONONAGNATMOSC TMEAT MENONTMENTMENTRENOS AT NTHOS DugNONTMATHMENEASIAGNST NONTMENT DrugC DIAGNAGNTINT AGNT DrSSIAGNugCT ",
+    "transformer_1": "PATIENT [NAME] DIAGNOSIAGNSIS NTRENTRERER NS T DrugATRERESS NTREATMENT DrugA",
+    "transformer_2": "PATIENT [NAME] DIAGNOSIS AGNTHMABIOMAGNOS B TR B",
+    "no_ffn": "PATIENT [NAME] DIS [NAME] TIATISIS TIATMA DrugC DIET DrugC",
+    "no_layernorm": "PATIENT [NAME] [NAME] DIAGNOSISIS ATIATMAGNOSIS T DrugC",
+    "no_residual": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMAR TR TME DrugA"
+  },
+  "assignment_generated": {
+    "assignment_v2/embedding_only": "PATIENT [NAME] [NAME] DIAGNOS NS DIABENTESIS AS DIATISIAGNOMR ARKEREATRETREATMENT DrugA",
+    "assignment_v2/single_attention": "PATISIENTHISITENT ONT [NAME] [NAME] [NAME] [DOCTOR] EABEAGNAGNT [NAME] OMAGNT [DOCTOR] OgALIATENTENT B T TRENT TEA",
+    "assignment_v2/multi_attention": "PAT [DATE]",
+    "assignment_v2/transformer_1": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+    "assignment_v2/transformer_2": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+    "assignment_v2/no_ffn": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+    "assignment_v2/no_layernorm": "PATIENT [NAME] DIAGNONOSISIS DIAGNOSISIS OSIS DIAS BISIS ONONONONONONSIASCherugBENONONOS DIAAS ABIOSTMATMABENOSTENS NOMAT ATES",
+    "assignment_v2/no_residual": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]"
+  },
+  "assignment_checkpoint_step": 500,
+  "assignment_rows": 8,
+  "checkpoint_rows": 16,
+  "attention_tokens": 121,
+  "final_partition_rows_so_far": 32,
+  "task_model_rows": 8,
+  "task_generated": {
+    "task_tokens/embedding_only": "PATIENT DIAGNOSIS [NAME] ON [DATE]",
+    "task_tokens/single_attention": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+    "task_tokens/multi_attention": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+    "task_tokens/transformer_1": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+    "task_tokens/transformer_2": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+    "task_tokens/no_ffn": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+    "task_tokens/no_layernorm": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+    "task_tokens/no_residual": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]"
+  },
+  "quality_scope": "Engineering path checks are separate from authored-prompt and held-out model-quality gates",
+  "final_repeat_rows": 8,
+  "repeat_generated": {
+    "final_seed7/transformer_2": "PATIENT [NAME] RECEIVED DrugA",
+    "final_seed123/transformer_2": "PATIENT [NAME] RECEIVED DrugA"
+  },
+  "task_final_partition_rows": 32,
+  "task_attention_and_intervention_restoration_checked": true
+}

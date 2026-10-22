@@ -1,0 +1,16 @@
+[
+  {
+    "architecture": "transformer_2",
+    "seed": 42,
+    "selected_step": 200,
+    "updates": 500,
+    "parameters": 118802,
+    "validation_loss": 1.24534849020151,
+    "validation_token_accuracy": 0.7087912087912088,
+    "diagnostic_exact": 0.375,
+    "diagnostic_recall": 0.7777777777777778,
+    "diagnostic_clinical_preservation": 0.25,
+    "acceptance_correct_notes": 2,
+    "acceptance_notes": 11
+  }
+]

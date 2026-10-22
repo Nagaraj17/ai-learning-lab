@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "context_models": 4,
+  "matched_source_results": [
+    [
+      "embedding_only",
+      "[MRN]",
+      "[MRN]",
+      false,
+      0.0
+    ],
+    [
+      "single_attention",
+      "DrugA",
+      "DrugB",
+      true,
+      0.892
+    ],
+    [
+      "multi_attention",
+      "Chemotherapy",
+      "DrugB",
+      false,
+      0.892
+    ],
+    [
+      "transformer_2",
+      "DrugA",
+      "DrugB",
+      true,
+      0.987
+    ]
+  ],
+  "scope": "new saved-context endpoint and explicit pending states; full all28route verification remains queued"
+}

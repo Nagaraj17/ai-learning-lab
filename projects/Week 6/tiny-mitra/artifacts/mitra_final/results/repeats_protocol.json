@@ -1,0 +1,23 @@
+{
+  "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "runner_source_hash": "61b04483dd79ea890f94b9cf32e94b0c1544e8824fa549e27d851de532a0adb4",
+  "architectures": [
+    "transformer_2",
+    "embedding_only",
+    "single_attention",
+    "multi_attention"
+  ],
+  "seeds": [
+    7,
+    123
+  ],
+  "steps": 4000,
+  "lr": 0.0007,
+  "batch_size": 16,
+  "context": 256,
+  "selection": "fixed final update",
+  "seed_changes": "weight initialization and sampled minibatch order",
+  "scope": "same24 validation diagnostics and11 authored development prompts; no final-test seed selection",
+  "primary_unchanged": "seed42 remains the registered primary architecture comparison; any demo checkpoint must be separately identified and selected from development evidence"
+}

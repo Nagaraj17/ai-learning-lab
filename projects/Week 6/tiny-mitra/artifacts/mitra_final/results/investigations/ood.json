@@ -1,0 +1,272 @@
+{
+  "run_id": "mitra_final/transformer_2_seed42",
+  "checkpoint_step": 4000,
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+  "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+  "example_ids": [
+    "assignment_0700",
+    "assignment_0701",
+    "assignment_0702",
+    "assignment_0704",
+    "assignment_0705",
+    "assignment_0717",
+    "assignment_0719",
+    "assignment_0703"
+  ],
+  "scope": "authored qualitative probes; no invented gold accuracy",
+  "outputs": [
+    {
+      "source": "Patient Kai received DrugA yesterday.",
+      "result": {
+        "text": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+        "tokens": [
+          {
+            "id": 109,
+            "token": "PATIENT",
+            "probability": 0.7073326706886292
+          },
+          {
+            "id": 106,
+            "token": " ",
+            "probability": 0.9999784231185913
+          },
+          {
+            "id": 6,
+            "token": "[NAME]",
+            "probability": 0.9999750852584839
+          },
+          {
+            "id": 106,
+            "token": " ",
+            "probability": 0.9999804496765137
+          },
+          {
+            "id": 119,
+            "token": "VISITED",
+            "probability": 0.6898770928382874
+          },
+          {
+            "id": 106,
+            "token": " ",
+            "probability": 0.9999715089797974
+          },
+          {
+            "id": 7,
+            "token": "[DOCTOR]",
+            "probability": 0.9992183446884155
+          },
+          {
+            "id": 106,
+            "token": " ",
+            "probability": 0.9999363422393799
+          },
+          {
+            "id": 120,
+            "token": "ON",
+            "probability": 0.9990078806877136
+          },
+          {
+            "id": 106,
+            "token": " ",
+            "probability": 0.6962476968765259
+          },
+          {
+            "id": 8,
+            "token": "[DATE]",
+            "probability": 0.9038488864898682
+          },
+          {
+            "id": 3,
+            "token": "<EOS>",
+            "probability": 0.9999173879623413
+          }
+        ],
+        "termination": "eos",
+        "mode": "greedy",
+        "temperature": null,
+        "seed": 42,
+        "protocol_valid": true
+      }
+    },
+    {
+      "source": "PATIENT Kai DIAGNOSIS UNKNOWN",
+      "result": {
+        "text": "PATIENT [NAME] DIAGNOSIS DIABETES",
+        "tokens": [
+          {
+            "id": 109,
+            "token": "PATIENT",
+            "probability": 0.9996310472488403
+          },
+          {
+            "id": 106,
+            "token": " ",
+            "probability": 0.9999614953994751
+          },
+          {
+            "id": 6,
+            "token": "[NAME]",
+            "probability": 0.999951958656311
+          },
+          {
+            "id": 106,
+            "token": " ",
+            "probability": 0.9999685287475586
+          },
+          {
+            "id": 116,
+            "token": "DIAGNOSIS",
+            "probability": 0.9998142123222351
+          },
+          {
+            "id": 106,
+            "token": " ",
+            "probability": 0.999962329864502
+          },
+          {
+            "id": 126,
+            "token": "DIABETES",
+            "probability": 0.8110631704330444
+          },
+          {
+            "id": 3,
+            "token": "<EOS>",
+            "probability": 0.9999176263809204
+          }
+        ],
+        "termination": "eos",
+        "mode": "greedy",
+        "temperature": null,
+        "seed": 42,
+        "protocol_valid": true
+      }
+    },
+    {
+      "source": "PATIENT Kai TREATMENT DrugA TREATMENT DrugB",
+      "result": {
+        "text": "PATIENT [NAME] RECEIVED DrugB",
+        "tokens": [
+          {
+            "id": 109,
+            "token": "PATIENT",
+            "probability": 0.9998983144760132
+          },
+          {
+            "id": 106,
+            "token": " ",
+            "probability": 0.999953031539917
+          },
+          {
+            "id": 6,
+            "token": "[NAME]",
+            "probability": 0.9998458623886108
+          },
+          {
+            "id": 106,
+            "token": " ",
+            "probability": 0.9999748468399048
+          },
+          {
+            "id": 122,
+            "token": "RECEIVED",
+            "probability": 0.8934574127197266
+          },
+          {
+            "id": 106,
+            "token": " ",
+            "probability": 0.9999591112136841
+          },
+          {
+            "id": 131,
+            "token": "DrugB",
+            "probability": 0.9959048628807068
+          },
+          {
+            "id": 3,
+            "token": "<EOS>",
+            "probability": 0.9997840523719788
+          }
+        ],
+        "termination": "eos",
+        "mode": "greedy",
+        "temperature": null,
+        "seed": 42,
+        "protocol_valid": true
+      }
+    },
+    {
+      "source": "PATIENT Zoe DIAGNOSIS NSCLC",
+      "result": {
+        "text": "PATIENT [NAME] DrugC DIAGNOSIS ASTHMA ASTHMA",
+        "tokens": [
+          {
+            "id": 109,
+            "token": "PATIENT",
+            "probability": 0.9996122717857361
+          },
+          {
+            "id": 106,
+            "token": " ",
+            "probability": 0.999970555305481
+          },
+          {
+            "id": 6,
+            "token": "[NAME]",
+            "probability": 0.9999415874481201
+          },
+          {
+            "id": 106,
+            "token": " ",
+            "probability": 0.9999589920043945
+          },
+          {
+            "id": 132,
+            "token": "DrugC",
+            "probability": 0.7556672692298889
+          },
+          {
+            "id": 106,
+            "token": " ",
+            "probability": 0.9999366998672485
+          },
+          {
+            "id": 116,
+            "token": "DIAGNOSIS",
+            "probability": 0.8211654424667358
+          },
+          {
+            "id": 106,
+            "token": " ",
+            "probability": 0.9999717473983765
+          },
+          {
+            "id": 125,
+            "token": "ASTHMA",
+            "probability": 0.8663865923881531
+          },
+          {
+            "id": 106,
+            "token": " ",
+            "probability": 0.9999727010726929
+          },
+          {
+            "id": 125,
+            "token": "ASTHMA",
+            "probability": 0.9087123274803162
+          },
+          {
+            "id": 3,
+            "token": "<EOS>",
+            "probability": 0.9999575614929199
+          }
+        ],
+        "termination": "eos",
+        "mode": "greedy",
+        "temperature": null,
+        "seed": 42,
+        "protocol_valid": true
+      }
+    }
+  ]
+}

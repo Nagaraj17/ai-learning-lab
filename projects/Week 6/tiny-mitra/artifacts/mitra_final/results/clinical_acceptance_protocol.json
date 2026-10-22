@@ -1,0 +1,13 @@
+{
+  "scope": "two authored clinical development checks, not final-test estimates",
+  "cases": [
+    {
+      "source": "PATIENT John Smith RECEIVED Chemotherapy",
+      "expected": "PATIENT [NAME] RECEIVED Chemotherapy"
+    },
+    {
+      "source": "DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT Chemotherapy"
+    }
+  ]
+}

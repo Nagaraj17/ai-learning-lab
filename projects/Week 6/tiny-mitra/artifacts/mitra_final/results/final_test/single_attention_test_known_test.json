@@ -1,0 +1,2014 @@
+{
+  "metrics": {
+    "tp": 0,
+    "fp": 92,
+    "fn": 128,
+    "identifiers": 128,
+    "leaked_identifiers": 0,
+    "leaked_note": 0,
+    "clinical_correct": 22,
+    "clinical_support": 67,
+    "exact": 5,
+    "examples": 50,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "exact_match": 0.1,
+    "identifier_leakage": 0.0,
+    "note_leakage": 0.0,
+    "clinical_preservation": 0.3283582089552239,
+    "categories": {
+      "PATIENT": {
+        "tp": 0,
+        "support": 45,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "MRN": {
+        "tp": 0,
+        "support": 26,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "DATE": {
+        "tp": 0,
+        "support": 19,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "DOCTOR": {
+        "tp": 0,
+        "support": 19,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "ADDRESS": {
+        "tp": 0,
+        "support": 19,
+        "leaked": 0,
+        "recall": 0.0
+      }
+    },
+    "controls": 5,
+    "control_over_redactions": 0,
+    "example_ids": [
+      "assignment_0850",
+      "assignment_0851",
+      "assignment_0852",
+      "assignment_0853",
+      "assignment_0854",
+      "assignment_0855",
+      "assignment_0856",
+      "assignment_0857",
+      "assignment_0858",
+      "assignment_0859",
+      "assignment_0860",
+      "assignment_0861",
+      "assignment_0862",
+      "assignment_0863",
+      "assignment_0864",
+      "assignment_0865",
+      "assignment_0866",
+      "assignment_0867",
+      "assignment_0868",
+      "assignment_0869",
+      "assignment_0870",
+      "assignment_0871",
+      "assignment_0872",
+      "assignment_0873",
+      "assignment_0874",
+      "assignment_0875",
+      "assignment_0876",
+      "assignment_0877",
+      "assignment_0878",
+      "assignment_0879",
+      "assignment_0880",
+      "assignment_0881",
+      "assignment_0882",
+      "assignment_0883",
+      "assignment_0884",
+      "assignment_0885",
+      "assignment_0886",
+      "assignment_0887",
+      "assignment_0888",
+      "assignment_0889",
+      "assignment_0890",
+      "assignment_0891",
+      "assignment_0892",
+      "assignment_0893",
+      "assignment_0894",
+      "assignment_0895",
+      "assignment_0896",
+      "assignment_0897",
+      "assignment_0898",
+      "assignment_0899"
+    ],
+    "valid_terminations": 50,
+    "evaluation": "sentence-anchor version 2; exact-surface leakage; complete clinical associations",
+    "device": "cpu"
+  },
+  "outputs": [
+    {
+      "id": "assignment_0850",
+      "split": "test_known_test",
+      "source": "TREATMENT Chemotherapy DIAGNOSIS ASTHMA BIOMARKER ALK",
+      "expected": "TREATMENT Chemotherapy DIAGNOSIS ASTHMA BIOMARKER ALK",
+      "generated": "TREATMENT Chemotherapy DIAGNOSIS ASTHMA BIOMARKER ALK",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.02524550026282668,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 3,
+        "clinical_support": 3,
+        "exact": 1,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0851",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Ravi Shah MRN 152748 TREATMENT DrugA",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT DrugA",
+      "generated": "MRN [MRN] DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.017428900115191936,
+      "tokens": 6,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0852",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS ASTHMA PATIENT Noah Shah MRN 818616 TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS ASTHMA PATIENT [NAME] MRN [MRN] TREATMENT Chemotherapy",
+      "generated": "PATIENT [NAME]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.014414800330996513,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0853",
+      "split": "test_known_test",
+      "source": "PATIENT Zachary Thompson ON October 18 VISITED Dr Jones LIVES 953 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT[NAME] [DOCTOR] [NAME] [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.03987340023741126,
+      "tokens": 11,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0854",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS ASTHMA PATIENT Maya Shah MRN 859215 TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS ASTHMA PATIENT [NAME] MRN [MRN] TREATMENT Chemotherapy",
+      "generated": "PATIENT [NAME] DIAGNOSIS BIOMARKER DIAGNOSIS ASTHMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.02644379995763302,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0855",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Maya Lee MRN 252957 TREATMENT DrugB",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT DrugB",
+      "generated": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER DrugB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.023532100021839142,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0856",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Quentin Malhotra MRN 608409 TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT Chemotherapy",
+      "generated": "PATIENT [NAME] DIAGNOSIS TREATMENT Chemotherapy",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.061227299738675356,
+      "tokens": 10,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0857",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS ASTHMA PATIENT John Shah MRN 118781 TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS ASTHMA PATIENT [NAME] MRN [MRN] TREATMENT Chemotherapy",
+      "generated": "MRN [MRN] Chemotherapy",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.01448730006814003,
+      "tokens": 6,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0858",
+      "split": "test_known_test",
+      "source": "PATIENT Benjamin Macdonald ON March 1 VISITED Dr Jones LIVES 958 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] [DOCTOR] [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.026034800335764885,
+      "tokens": 10,
+      "counts": {
+        "tp": 0,
+        "fp": 4,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0859",
+      "split": "test_known_test",
+      "source": "PATIENT Xavier Sundaram ON March 21 VISITED Dr Jones LIVES 959 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] [DATE] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.028218800202012062,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0860",
+      "split": "test_known_test",
+      "source": "TREATMENT Chemotherapy BIOMARKER NONE DIAGNOSIS ASTHMA",
+      "expected": "TREATMENT Chemotherapy BIOMARKER NONE DIAGNOSIS ASTHMA",
+      "generated": "TREATMENT Chemotherapy BIOMARKER NONE DIAGNOSIS ASTHMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.01601980021223426,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 3,
+        "clinical_support": 3,
+        "exact": 1,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0861",
+      "split": "test_known_test",
+      "source": "PATIENT Noah Cole ON December 7 VISITED Dr Jones LIVES 961 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] [DOCTOR] ON ON[NAME][NAME] [NAME] ON ON",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.061797000002115965,
+      "tokens": 18,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0862",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Sara Shah MRN 383463 TREATMENT DrugC",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT DrugC",
+      "generated": "MRN [MRN] DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.012376300059258938,
+      "tokens": 6,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0863",
+      "split": "test_known_test",
+      "source": "PATIENT Raquel Mendoza ON October 27 VISITED Dr Jones LIVES 963 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.017168599646538496,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0864",
+      "split": "test_known_test",
+      "source": "PATIENT Maya Lee ON October 27 VISITED Dr Jones LIVES 964 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.012780200224369764,
+      "tokens": 6,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0865",
+      "split": "test_known_test",
+      "source": "PATIENT John Lee ON January 7 VISITED Dr Jones LIVES 965 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "MRN [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.020698899868875742,
+      "tokens": 6,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0866",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Noah Cole MRN 304244 TREATMENT DrugC",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT DrugC",
+      "generated": "PATIENT [NAME]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.007848899811506271,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0867",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Leah Lee MRN 981096 TREATMENT DrugC",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT DrugC",
+      "generated": "PATIENT [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.019497199915349483,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0868",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Ravi Cole MRN 846929 TREATMENT DrugC",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT DrugC",
+      "generated": "PATIENT [NAME]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.007266100030392408,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0869",
+      "split": "test_known_test",
+      "source": "PATIENT Adrian Montgomery ON October 9 VISITED Dr Jones LIVES 969 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT[NAME] [DOCTOR] [NAME] [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.028445399831980467,
+      "tokens": 11,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0870",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS NSCLC TREATMENT DrugB BIOMARKER EGFR",
+      "expected": "DIAGNOSIS NSCLC TREATMENT DrugB BIOMARKER EGFR",
+      "generated": "DIAGNOSIS NSCLC TREATMENT DrugB BIOMARKER EGFR",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.022550900001078844,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 3,
+        "clinical_support": 3,
+        "exact": 1,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0871",
+      "split": "test_known_test",
+      "source": "PATIENT Nathaniel Brooks ON March 2 VISITED Dr Jones LIVES 971 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] [DATE] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.02717649983242154,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0872",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Charlotte Iyer MRN 223876 TREATMENT DrugC",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT DrugC",
+      "generated": "PATIENT [NAME] DIAGNOSIS NSCLC TREATMENT DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.021393100265413523,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0873",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Alexander Hudson MRN 383813 TREATMENT DrugC",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT DrugC",
+      "generated": "PATIENT [NAME] DIAGNOSIS TREATMENT DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.02082099998369813,
+      "tokens": 10,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0874",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Nathaniel Brooks MRN 952499 TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT Chemotherapy",
+      "generated": "PATIENT [NAME] DIAGNOSIS DIABETES",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.019358200021088123,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0875",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Charlotte Iyer MRN 545178 TREATMENT DrugC",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT DrugC",
+      "generated": "PATIENT [NAME] DIAGNOSIS NSCLC TREATMENT DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.0246842997148633,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0876",
+      "split": "test_known_test",
+      "source": "PATIENT Ravi Cole ON August 17 VISITED Dr Jones LIVES 976 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.012109399773180485,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0877",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Rafael Gonzalez MRN 223507 TREATMENT DrugC",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT DrugC",
+      "generated": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER NONE TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.027001400012522936,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0878",
+      "split": "test_known_test",
+      "source": "PATIENT Noah Lee ON January 16 VISITED Dr Jones LIVES 978 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] [DOCTOR] ON ON[NAME] [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.02924130018800497,
+      "tokens": 15,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0879",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Leah Rao MRN 502359 TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT Chemotherapy",
+      "generated": "PATIENT [NAME] DIAGNOSIS DIABETES",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.015691500157117844,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0880",
+      "split": "test_known_test",
+      "source": "TREATMENT DrugC BIOMARKER ALK DIAGNOSIS ASTHMA",
+      "expected": "TREATMENT DrugC BIOMARKER ALK DIAGNOSIS ASTHMA",
+      "generated": "TREATMENT DrugC BIOMARKER ALK DIAGNOSIS ASTHMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.020053400192409754,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 3,
+        "clinical_support": 3,
+        "exact": 1,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0881",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Noah Rao MRN 187152 TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT Chemotherapy",
+      "generated": "PATIENT [NAME] DIAGNOSIS DIABETES",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.012633200269192457,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0882",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS ASTHMA PATIENT Leah Shah MRN 650060 TREATMENT DrugA",
+      "expected": "DIAGNOSIS ASTHMA PATIENT [NAME] MRN [MRN] TREATMENT DrugA",
+      "generated": "MRN [MRN] DIAGNOSIS TREATMENT DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.014889600221067667,
+      "tokens": 10,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0883",
+      "split": "test_known_test",
+      "source": "PATIENT Ravi Shah ON January 1 VISITED Dr Jones LIVES 983 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] [DOCTOR] ONDrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.015581700019538403,
+      "tokens": 9,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0884",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Leah Rao MRN 637306 TREATMENT DrugA",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT DrugA",
+      "generated": "PATIENT [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.010406500194221735,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0885",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Elena Ramirez MRN 696562 TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT Chemotherapy",
+      "generated": "MRN [MRN] DIAGNOSIS ASTHMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.011543199885636568,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0886",
+      "split": "test_known_test",
+      "source": "PATIENT Fatima Mehra ON April 9 VISITED Dr Jones LIVES 986 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.010977800004184246,
+      "tokens": 6,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0887",
+      "split": "test_known_test",
+      "source": "PATIENT Zachary Thompson ON April 26 VISITED Dr Jones LIVES 987 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT[NAME] [DOCTOR] [NAME] [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.019637000281363726,
+      "tokens": 11,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0888",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS ASTHMA PATIENT Ravi Shah MRN 187503 TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS ASTHMA PATIENT [NAME] MRN [MRN] TREATMENT Chemotherapy",
+      "generated": "MRN [MRN] Chemotherapy",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.009803100023418665,
+      "tokens": 6,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0889",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Uma Li MRN 221170 TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT Chemotherapy",
+      "generated": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER NONE TREATMENT DIAGNOSIS DIAGNOSIS TREATMENT Chemotherapy BIOMARKER BIOMARKER DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.03906040033325553,
+      "tokens": 28,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0890",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS DIABETES TREATMENT Chemotherapy BIOMARKER ALK",
+      "expected": "DIAGNOSIS DIABETES TREATMENT Chemotherapy BIOMARKER ALK",
+      "generated": "DIAGNOSIS DIABETES TREATMENT Chemotherapy BIOMARKER ALK",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.016421400010585785,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 3,
+        "clinical_support": 3,
+        "exact": 1,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0891",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Sara Shah MRN 884831 TREATMENT DrugB",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT DrugB",
+      "generated": "MRN [MRN] DIAGNOSIS TREATMENT DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.014762999955564737,
+      "tokens": 10,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0892",
+      "split": "test_known_test",
+      "source": "PATIENT Priya Venkatesh ON March 23 VISITED Dr Jones LIVES 992 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] [DATE] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.015126800164580345,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0893",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Ravi Lee MRN 347988 TREATMENT DrugB",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT DrugB",
+      "generated": "PATIENT [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.00971550028771162,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0894",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Maya Rao MRN 289643 TREATMENT DrugA",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT DrugA",
+      "generated": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER NONE TREATMENT BIOMARKER NONE TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.03288740012794733,
+      "tokens": 22,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0895",
+      "split": "test_known_test",
+      "source": "PATIENT Mary Brown ON April 17 VISITED Dr Jones LIVES 995 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] ON ON[NAME] [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.025545800104737282,
+      "tokens": 13,
+      "counts": {
+        "tp": 0,
+        "fp": 4,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0896",
+      "split": "test_known_test",
+      "source": "PATIENT Zachary Thompson ON August 5 VISITED Dr Jones LIVES 996 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] [DATE] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.028682200238108635,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0897",
+      "split": "test_known_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Priya Venkatesh MRN 825136 TREATMENT DrugC",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT DrugC",
+      "generated": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER NONE TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.036085700150579214,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0898",
+      "split": "test_known_test",
+      "source": "PATIENT Alice White ON April 9 VISITED Dr Jones LIVES 998 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] ON ON[NAME] [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.028422399889677763,
+      "tokens": 13,
+      "counts": {
+        "tp": 0,
+        "fp": 4,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0899",
+      "split": "test_known_test",
+      "source": "PATIENT Ravi Cole ON March 9 VISITED Dr Jones LIVES 999 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] [DOCTOR] ON ON[NAME][NAME] [NAME] ON ON",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.03536490024998784,
+      "tokens": 18,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    }
+  ],
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+  "protocol_hash": "f69f297980fdf411fa23b270684d890ec9b15af7d73cc68e1d635fd1aff7d010",
+  "data_producer_source_hash": "f2ae852fc4af39e317f5fdb5528146ead5c48299e0a5720c866a5e4facce655f",
+  "checkpoint_sha256": "1582f3b9034f82c9d2df622bff9d62352d851c902e5482c51aba3a4df3d757a5",
+  "checkpoint_step": 4000,
+  "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+  "architecture": "single_attention",
+  "seed": 42,
+  "split": "test_known_test",
+  "teacher_forced": {
+    "loss": 6.878156182704828,
+    "next_token_accuracy": 0.5717948717948718,
+    "scored_tokens": 780,
+    "examples": 50
+  },
+  "scope": "complete frozen final partition; no tuning from these outcomes"
+}

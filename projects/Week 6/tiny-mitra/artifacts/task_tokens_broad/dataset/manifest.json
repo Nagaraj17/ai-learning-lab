@@ -1,0 +1,44 @@
+{
+  "version": "broad_coverage_v1",
+  "dataset_hash": "29141b9e65ccfc90c18046f1c6b6d0ed5136cd284fda7b282cc4eeeebce4420a",
+  "counts": {
+    "train": 700,
+    "validation": 100,
+    "test_known_known": 50,
+    "test_known_test": 50,
+    "test_test_known": 50,
+    "test_test_test": 50
+  },
+  "category_counts": {
+    "BIOMARKER": 183,
+    "TREATMENT": 340,
+    "DIAGNOSIS": 481,
+    "MRN": 291,
+    "PATIENT": 898,
+    "ADDRESS": 108,
+    "DOB": 82,
+    "PHONE": 77,
+    "DOCTOR": 131,
+    "DATE": 131
+  },
+  "maximum_full_tokens": 86,
+  "context": 256,
+  "trained_templates": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "policy": "replace identity spans including physician titles; retain surrounding wording and clinical field/value associations",
+  "novelty_limitations": "Controls share layouts; dates/doctor/address policy unchanged; authored development sources excluded from this stage, but some may occur in the earlier parent training corpus",
+  "maximum_character_full_tokens": 151,
+  "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+  "vocabulary_size": 146,
+  "change": "Expanded name lengths and random numerical identifier digits; same pattern/split/clinical-target assignments"
+}

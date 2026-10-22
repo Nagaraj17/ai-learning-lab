@@ -1,0 +1,35 @@
+{
+  "dataset_hash": "368646b32a01c79aed83b468b999afebaeff47f31d97f8e66c3a75bdb1a24113",
+  "source_hash": "a399a568af148bd3b0e2cd08c5aaa07f9ab045cbc5035ee0446c03d832d4b33d",
+  "hypotheses": {
+    "H1": "Attention models can condition a next-token decision on an earlier source change.",
+    "H2": "Multiple bare heads improve held-out behavior relative to one bare head under this budget.",
+    "H3": "Two full blocks improve held-out behavior relative to one, at greater parameter cost.",
+    "H4": "LayerNorm improves stability or held-out quality under the declared settings.",
+    "H5": "Residual paths improve learning or held-out quality under the declared settings.",
+    "H6": "The FFN branch improves held-out quality under the declared settings.",
+    "H7": "At least one head intervention changes a measured output capability.",
+    "H8": "Novel entities/templates reveal limitations beyond familiar combinations.",
+    "H9": "Sampling temperature changes validity, leakage or content preservation."
+  },
+  "steps": 1000,
+  "batch_size": 16,
+  "lr": 0.0003,
+  "width": 64,
+  "seeds": [
+    7,
+    123
+  ],
+  "architectures": [
+    "embedding_only",
+    "single_attention",
+    "multi_attention",
+    "transformer_2"
+  ],
+  "split": "validation",
+  "generation_subset_limit": 12,
+  "decoding": "greedy",
+  "checkpoint_rule": "minimum token-weighted validation cross entropy",
+  "head_intervention": "zero context before output projection; no retraining",
+  "status": "registered before these benchmark runs; CPU preliminary until cloud/repeats verified"
+}

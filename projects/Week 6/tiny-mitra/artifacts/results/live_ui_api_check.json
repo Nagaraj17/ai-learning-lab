@@ -1,0 +1,93 @@
+{
+  "passed": true,
+  "model_id": "final_seed7/transformer_2",
+  "source": "PATIENT John Smith VISITED Dr Jones ON January 12",
+  "streamed_frames": 12,
+  "frame_lengths": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "final": {
+    "text": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+    "tokens": [
+      {
+        "id": 109,
+        "token": "PATIENT",
+        "probability": 0.99996018409729
+      },
+      {
+        "id": 106,
+        "token": " ",
+        "probability": 0.9999715089797974
+      },
+      {
+        "id": 6,
+        "token": "[NAME]",
+        "probability": 0.9999691247940063
+      },
+      {
+        "id": 106,
+        "token": " ",
+        "probability": 0.9999741315841675
+      },
+      {
+        "id": 119,
+        "token": "VISITED",
+        "probability": 0.9997010827064514
+      },
+      {
+        "id": 106,
+        "token": " ",
+        "probability": 0.9999759197235107
+      },
+      {
+        "id": 7,
+        "token": "[DOCTOR]",
+        "probability": 0.9996042847633362
+      },
+      {
+        "id": 106,
+        "token": " ",
+        "probability": 0.9999586343765259
+      },
+      {
+        "id": 120,
+        "token": "ON",
+        "probability": 0.9995874762535095
+      },
+      {
+        "id": 106,
+        "token": " ",
+        "probability": 0.9999740123748779
+      },
+      {
+        "id": 8,
+        "token": "[DATE]",
+        "probability": 0.9997864365577698
+      },
+      {
+        "id": 3,
+        "token": "<EOS>",
+        "probability": 0.9999421834945679
+      }
+    ],
+    "termination": "eos",
+    "mode": "greedy",
+    "temperature": null,
+    "seed": 42,
+    "protocol_valid": true
+  },
+  "token_metric_rows": 32,
+  "reviewed_hypotheses": 9,
+  "scope": "actual incremental Gradio API events match frozen generate.py probabilities/text/stopping; final metrics and reviewed findings loaded; browser inspection separate"
+}

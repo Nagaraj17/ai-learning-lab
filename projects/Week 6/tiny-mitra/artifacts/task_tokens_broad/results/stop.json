@@ -1,0 +1,5 @@
+{
+  "status": "stopped intentionally, not numerical failure",
+  "reason": "Final assignment model will start from random weights on one 1000-example corpus; continued-stage experiment retained as supplementary evidence",
+  "stopped": "2026-10-18T03:18:32.1567528+05:30"
+}

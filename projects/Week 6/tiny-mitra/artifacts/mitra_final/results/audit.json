@@ -1,0 +1,75 @@
+{
+  "engineering_audit_passed": true,
+  "demo_ready": false,
+  "demo_gate": "full two-block model: all 11 authored development notes exact and valid EOS; held-out generalization is a separate measurement",
+  "full_model_authored_exact": 10,
+  "full_model_authored_notes": 11,
+  "selection_contract": "Benchmark uses latest.pt at the fixed 4,000th update. Trainer manifest.selected_step describes the separately retained minimum-loss best.pt, not the benchmark choice.",
+  "checks": [
+    {
+      "architecture": "embedding_only",
+      "benchmark_checkpoint": "latest.pt",
+      "benchmark_step": 4000,
+      "minimum_loss_checkpoint_step": 600,
+      "parameters": 35218,
+      "passed": true
+    },
+    {
+      "architecture": "single_attention",
+      "benchmark_checkpoint": "latest.pt",
+      "benchmark_step": 4000,
+      "minimum_loss_checkpoint_step": 200,
+      "parameters": 51858,
+      "passed": true
+    },
+    {
+      "architecture": "multi_attention",
+      "benchmark_checkpoint": "latest.pt",
+      "benchmark_step": 4000,
+      "minimum_loss_checkpoint_step": 200,
+      "parameters": 51858,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_1",
+      "benchmark_checkpoint": "latest.pt",
+      "benchmark_step": 4000,
+      "minimum_loss_checkpoint_step": 500,
+      "parameters": 77074,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_2",
+      "benchmark_checkpoint": "latest.pt",
+      "benchmark_step": 4000,
+      "minimum_loss_checkpoint_step": 600,
+      "parameters": 118802,
+      "passed": true
+    },
+    {
+      "architecture": "no_ffn",
+      "benchmark_checkpoint": "latest.pt",
+      "benchmark_step": 4000,
+      "minimum_loss_checkpoint_step": 300,
+      "parameters": 68882,
+      "passed": true
+    },
+    {
+      "architecture": "no_layernorm",
+      "benchmark_checkpoint": "latest.pt",
+      "benchmark_step": 4000,
+      "minimum_loss_checkpoint_step": 100,
+      "parameters": 118162,
+      "passed": true
+    },
+    {
+      "architecture": "no_residual",
+      "benchmark_checkpoint": "latest.pt",
+      "benchmark_step": 4000,
+      "minimum_loss_checkpoint_step": 1100,
+      "parameters": 118802,
+      "passed": true
+    }
+  ],
+  "limits": "Author self-review. Authored acceptance is not final-test performance. Different tokenizers have different per-token units and vocabulary/parameter counts."
+}

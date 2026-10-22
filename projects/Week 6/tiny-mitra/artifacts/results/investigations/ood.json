@@ -1,0 +1,988 @@
+{
+  "checkpoint": "artifacts\\checkpoints\\transformer_2_seed42\\best.pt",
+  "run_id": "transformer_2_seed42",
+  "checkpoint_step": 400,
+  "dataset_hash": "368646b32a01c79aed83b468b999afebaeff47f31d97f8e66c3a75bdb1a24113",
+  "tokenizer_hash": "20d5ed18ecc52a6b1dc6c3ac9e4f1892a5759c0af3cf32be7042673aadacebd7",
+  "source_hash": "a399a568af148bd3b0e2cd08c5aaa07f9ab045cbc5035ee0446c03d832d4b33d",
+  "split": "validation",
+  "example_ids": [
+    "example_0700",
+    "example_0701",
+    "example_0703",
+    "example_0704",
+    "example_0706",
+    "example_0702",
+    "example_0705",
+    "example_0707"
+  ],
+  "status": "exploratory validation evidence; interpretation pending review",
+  "experiment_id": "ood",
+  "hypothesis_id": "H8",
+  "outputs": [
+    {
+      "source": "PATIENT Zoya Park DIAGNOSIS RARE_DISEASE TREATMENT DrugZ",
+      "text": "PAGNONT NOSC [NAME] [NAME] DIAGNOSISISISTHMABIOMAR BIS BER B",
+      "tokens": [
+        {
+          "id": 53,
+          "token": "P",
+          "probability": 0.6660347580909729
+        },
+        {
+          "id": 38,
+          "token": "A",
+          "probability": 0.6848483681678772
+        },
+        {
+          "id": 44,
+          "token": "G",
+          "probability": 0.5885375738143921
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.5771877765655518
+        },
+        {
+          "id": 52,
+          "token": "O",
+          "probability": 0.5441085696220398
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.49276793003082275
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.5019651651382446
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.6794288158416748
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.3756563365459442
+        },
+        {
+          "id": 52,
+          "token": "O",
+          "probability": 0.578608512878418
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.39024946093559265
+        },
+        {
+          "id": 40,
+          "token": "C",
+          "probability": 0.3626064956188202
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.4321654438972473
+        },
+        {
+          "id": 6,
+          "token": "[NAME]",
+          "probability": 0.5743206143379211
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.9589096903800964
+        },
+        {
+          "id": 6,
+          "token": "[NAME]",
+          "probability": 0.34649375081062317
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.9625123739242554
+        },
+        {
+          "id": 41,
+          "token": "D",
+          "probability": 0.315707802772522
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.7713513374328613
+        },
+        {
+          "id": 38,
+          "token": "A",
+          "probability": 0.40847259759902954
+        },
+        {
+          "id": 44,
+          "token": "G",
+          "probability": 0.38299381732940674
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.7797554135322571
+        },
+        {
+          "id": 52,
+          "token": "O",
+          "probability": 0.9060471653938293
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.6784895658493042
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.9491333961486816
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.5611411333084106
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.7549747824668884
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.5803400874137878
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.7285490036010742
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.8821285963058472
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.29564717411994934
+        },
+        {
+          "id": 45,
+          "token": "H",
+          "probability": 0.2587006390094757
+        },
+        {
+          "id": 50,
+          "token": "M",
+          "probability": 0.8044701814651489
+        },
+        {
+          "id": 38,
+          "token": "A",
+          "probability": 0.7616796493530273
+        },
+        {
+          "id": 39,
+          "token": "B",
+          "probability": 0.3410837650299072
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.578411877155304
+        },
+        {
+          "id": 52,
+          "token": "O",
+          "probability": 0.5606722831726074
+        },
+        {
+          "id": 50,
+          "token": "M",
+          "probability": 0.7253628373146057
+        },
+        {
+          "id": 38,
+          "token": "A",
+          "probability": 0.8633912801742554
+        },
+        {
+          "id": 55,
+          "token": "R",
+          "probability": 0.45447322726249695
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.4040362536907196
+        },
+        {
+          "id": 39,
+          "token": "B",
+          "probability": 0.2632858455181122
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.2523057162761688
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.6982684135437012
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.8236002326011658
+        },
+        {
+          "id": 39,
+          "token": "B",
+          "probability": 0.16262103617191315
+        },
+        {
+          "id": 42,
+          "token": "E",
+          "probability": 0.47327205538749695
+        },
+        {
+          "id": 55,
+          "token": "R",
+          "probability": 0.2202865481376648
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.7549561262130737
+        },
+        {
+          "id": 39,
+          "token": "B",
+          "probability": 0.3103931248188019
+        },
+        {
+          "id": 3,
+          "token": "<EOS>",
+          "probability": 0.5597268342971802
+        }
+      ],
+      "termination": "eos",
+      "mode": "greedy",
+      "temperature": null,
+      "seed": 42,
+      "protocol_valid": true
+    },
+    {
+      "source": "PLEASE SUMMARIZE THIS NOTE IN FRENCH",
+      "text": "DIArugBET DIAGNOMER DIENT DIATIATIENT DIAGNOSIATISTRNT DIAGNOSIS DrugB",
+      "tokens": [
+        {
+          "id": 41,
+          "token": "D",
+          "probability": 0.7541366219520569
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.7804309725761414
+        },
+        {
+          "id": 38,
+          "token": "A",
+          "probability": 0.8220149874687195
+        },
+        {
+          "id": 29,
+          "token": "r",
+          "probability": 0.20169954001903534
+        },
+        {
+          "id": 32,
+          "token": "u",
+          "probability": 0.8196965456008911
+        },
+        {
+          "id": 18,
+          "token": "g",
+          "probability": 0.7031303644180298
+        },
+        {
+          "id": 39,
+          "token": "B",
+          "probability": 0.5801289677619934
+        },
+        {
+          "id": 42,
+          "token": "E",
+          "probability": 0.24109476804733276
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.45516806840896606
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.7130025029182434
+        },
+        {
+          "id": 41,
+          "token": "D",
+          "probability": 0.8190937042236328
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.49531522393226624
+        },
+        {
+          "id": 38,
+          "token": "A",
+          "probability": 0.4369986653327942
+        },
+        {
+          "id": 44,
+          "token": "G",
+          "probability": 0.49437713623046875
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.8044240474700928
+        },
+        {
+          "id": 52,
+          "token": "O",
+          "probability": 0.6875033378601074
+        },
+        {
+          "id": 50,
+          "token": "M",
+          "probability": 0.31752321124076843
+        },
+        {
+          "id": 42,
+          "token": "E",
+          "probability": 0.5271110534667969
+        },
+        {
+          "id": 55,
+          "token": "R",
+          "probability": 0.5314175486564636
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.5839354991912842
+        },
+        {
+          "id": 41,
+          "token": "D",
+          "probability": 0.683170735836029
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.7515075206756592
+        },
+        {
+          "id": 42,
+          "token": "E",
+          "probability": 0.40671226382255554
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.8457152247428894
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.6111785769462585
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.387352854013443
+        },
+        {
+          "id": 41,
+          "token": "D",
+          "probability": 0.8003544807434082
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.6976448893547058
+        },
+        {
+          "id": 38,
+          "token": "A",
+          "probability": 0.5242673754692078
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.9292572736740112
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.8136470913887024
+        },
+        {
+          "id": 38,
+          "token": "A",
+          "probability": 0.5487620234489441
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.8981842398643494
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.6270259022712708
+        },
+        {
+          "id": 42,
+          "token": "E",
+          "probability": 0.6091678738594055
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.6735255718231201
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.6602447628974915
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.8091095089912415
+        },
+        {
+          "id": 41,
+          "token": "D",
+          "probability": 0.869010865688324
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.8369694948196411
+        },
+        {
+          "id": 38,
+          "token": "A",
+          "probability": 0.9487484693527222
+        },
+        {
+          "id": 44,
+          "token": "G",
+          "probability": 0.6632491946220398
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.8799602389335632
+        },
+        {
+          "id": 52,
+          "token": "O",
+          "probability": 0.9406481385231018
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.7849242687225342
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.481766015291214
+        },
+        {
+          "id": 38,
+          "token": "A",
+          "probability": 0.45437127351760864
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.4278838336467743
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.7388655543327332
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.8707897067070007
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.5198288559913635
+        },
+        {
+          "id": 55,
+          "token": "R",
+          "probability": 0.21355046331882477
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.23949767649173737
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.5482001304626465
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.7845443487167358
+        },
+        {
+          "id": 41,
+          "token": "D",
+          "probability": 0.8416760563850403
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.9252375364303589
+        },
+        {
+          "id": 38,
+          "token": "A",
+          "probability": 0.41318607330322266
+        },
+        {
+          "id": 44,
+          "token": "G",
+          "probability": 0.3781467378139496
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.8549737930297852
+        },
+        {
+          "id": 52,
+          "token": "O",
+          "probability": 0.39440226554870605
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.5640355348587036
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.4805070161819458
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.7892000079154968
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.913996696472168
+        },
+        {
+          "id": 41,
+          "token": "D",
+          "probability": 0.38675883412361145
+        },
+        {
+          "id": 29,
+          "token": "r",
+          "probability": 0.6050186157226562
+        },
+        {
+          "id": 32,
+          "token": "u",
+          "probability": 0.816703736782074
+        },
+        {
+          "id": 18,
+          "token": "g",
+          "probability": 0.9186297655105591
+        },
+        {
+          "id": 39,
+          "token": "B",
+          "probability": 0.36290639638900757
+        },
+        {
+          "id": 3,
+          "token": "<EOS>",
+          "probability": 0.386563777923584
+        }
+      ],
+      "termination": "eos",
+      "mode": "greedy",
+      "temperature": null,
+      "seed": 42,
+      "protocol_valid": true
+    },
+    {
+      "source": "PATIENT John Lee MRN 88888888 DIAGNOSIS NSCLC",
+      "text": "DrugAGNONONOSISIATNOSCTONT T MRNOS NOSISISISCLC TRETREATREATREA",
+      "tokens": [
+        {
+          "id": 41,
+          "token": "D",
+          "probability": 0.8833742737770081
+        },
+        {
+          "id": 29,
+          "token": "r",
+          "probability": 0.6420652866363525
+        },
+        {
+          "id": 32,
+          "token": "u",
+          "probability": 0.6146730780601501
+        },
+        {
+          "id": 18,
+          "token": "g",
+          "probability": 0.9060856699943542
+        },
+        {
+          "id": 38,
+          "token": "A",
+          "probability": 0.827454149723053
+        },
+        {
+          "id": 44,
+          "token": "G",
+          "probability": 0.4666915535926819
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.20507372915744781
+        },
+        {
+          "id": 52,
+          "token": "O",
+          "probability": 0.3861255645751953
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.6864498257637024
+        },
+        {
+          "id": 52,
+          "token": "O",
+          "probability": 0.7886963486671448
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.35147127509117126
+        },
+        {
+          "id": 52,
+          "token": "O",
+          "probability": 0.7856959700584412
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.4792234003543854
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.6236767172813416
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.47621071338653564
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.7941611409187317
+        },
+        {
+          "id": 38,
+          "token": "A",
+          "probability": 0.39579930901527405
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.8226097226142883
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.47580575942993164
+        },
+        {
+          "id": 52,
+          "token": "O",
+          "probability": 0.4828580617904663
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.5812739133834839
+        },
+        {
+          "id": 40,
+          "token": "C",
+          "probability": 0.6384525299072266
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.6042124629020691
+        },
+        {
+          "id": 52,
+          "token": "O",
+          "probability": 0.28650471568107605
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.5267019867897034
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.6713600754737854
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.7399763464927673
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.3012399673461914
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.5428692698478699
+        },
+        {
+          "id": 50,
+          "token": "M",
+          "probability": 0.37770721316337585
+        },
+        {
+          "id": 55,
+          "token": "R",
+          "probability": 0.44038835167884827
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.3589470386505127
+        },
+        {
+          "id": 52,
+          "token": "O",
+          "probability": 0.35024210810661316
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.5776127576828003
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.5789454579353333
+        },
+        {
+          "id": 51,
+          "token": "N",
+          "probability": 0.25739631056785583
+        },
+        {
+          "id": 52,
+          "token": "O",
+          "probability": 0.7173156142234802
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.505719780921936
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.5100576877593994
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.8723794221878052
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.5906709432601929
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.8274520039558411
+        },
+        {
+          "id": 46,
+          "token": "I",
+          "probability": 0.6963691711425781
+        },
+        {
+          "id": 56,
+          "token": "S",
+          "probability": 0.7606494426727295
+        },
+        {
+          "id": 40,
+          "token": "C",
+          "probability": 0.5574752688407898
+        },
+        {
+          "id": 49,
+          "token": "L",
+          "probability": 0.5908205509185791
+        },
+        {
+          "id": 40,
+          "token": "C",
+          "probability": 0.7443722486495972
+        },
+        {
+          "id": 106,
+          "token": " ",
+          "probability": 0.2940598130226135
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.6509391069412231
+        },
+        {
+          "id": 55,
+          "token": "R",
+          "probability": 0.7457793951034546
+        },
+        {
+          "id": 42,
+          "token": "E",
+          "probability": 0.779414713382721
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.33072081208229065
+        },
+        {
+          "id": 55,
+          "token": "R",
+          "probability": 0.22791896760463715
+        },
+        {
+          "id": 42,
+          "token": "E",
+          "probability": 0.6807926297187805
+        },
+        {
+          "id": 38,
+          "token": "A",
+          "probability": 0.447177916765213
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.28684282302856445
+        },
+        {
+          "id": 55,
+          "token": "R",
+          "probability": 0.46427422761917114
+        },
+        {
+          "id": 42,
+          "token": "E",
+          "probability": 0.47141313552856445
+        },
+        {
+          "id": 38,
+          "token": "A",
+          "probability": 0.4883216917514801
+        },
+        {
+          "id": 57,
+          "token": "T",
+          "probability": 0.6059876084327698
+        },
+        {
+          "id": 55,
+          "token": "R",
+          "probability": 0.3739504814147949
+        },
+        {
+          "id": 42,
+          "token": "E",
+          "probability": 0.6350278258323669
+        },
+        {
+          "id": 38,
+          "token": "A",
+          "probability": 0.5849952697753906
+        },
+        {
+          "id": 3,
+          "token": "<EOS>",
+          "probability": 0.5070641040802002
+        }
+      ],
+      "termination": "eos",
+      "mode": "greedy",
+      "temperature": null,
+      "seed": 42,
+      "protocol_valid": true
+    }
+  ],
+  "limitation": "Authored stress prompts without gold labels; qualitative outputs only"
+}

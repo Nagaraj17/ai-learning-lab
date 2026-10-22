@@ -1,0 +1,463 @@
+{
+  "metrics": {
+    "tp": 2,
+    "fp": 47,
+    "fn": 17,
+    "identifiers": 19,
+    "leaked_identifiers": 0,
+    "leaked_note": 0,
+    "clinical_correct": 0,
+    "clinical_support": 8,
+    "exact": 0,
+    "examples": 11,
+    "precision": 0.04081632653061224,
+    "recall": 0.10526315789473684,
+    "f1": 0.058823529411764705,
+    "exact_match": 0.0,
+    "identifier_leakage": 0.0,
+    "note_leakage": 0.0,
+    "clinical_preservation": 0.0,
+    "categories": {
+      "PATIENT": {
+        "tp": 0,
+        "support": 11,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "DOCTOR": {
+        "tp": 0,
+        "support": 1,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "DATE": {
+        "tp": 1,
+        "support": 1,
+        "leaked": 0,
+        "recall": 1.0
+      },
+      "DOB": {
+        "tp": 0,
+        "support": 1,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "MRN": {
+        "tp": 0,
+        "support": 3,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "PHONE": {
+        "tp": 0,
+        "support": 1,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "ADDRESS": {
+        "tp": 1,
+        "support": 1,
+        "leaked": 0,
+        "recall": 1.0
+      }
+    },
+    "controls": 0,
+    "control_over_redactions": 0,
+    "example_ids": [
+      "instructor_0",
+      "instructor_1",
+      "instructor_2",
+      "instructor_3",
+      "instructor_4",
+      "instructor_5",
+      "instructor_6",
+      "instructor_7",
+      "instructor_8",
+      "instructor_9",
+      "instructor_10"
+    ],
+    "valid_terminations": 11,
+    "evaluation": "sentence-anchor version 2; exact-surface leakage; complete clinical associations",
+    "device": "cpu"
+  },
+  "outputs": [
+    {
+      "id": "instructor_0",
+      "split": "authored_acceptance",
+      "source": "PATIENT John Smith VISITED Dr Jones ON January 12",
+      "expected": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+      "generated": "PATIENT DIAGNOSIS [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.0162821002304554,
+      "tokens": 10,
+      "counts": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "instructor_1",
+      "split": "authored_acceptance",
+      "source": "PATIENT Mary Brown DOB March 4 1965",
+      "expected": "PATIENT [NAME] DOB [DATE]",
+      "generated": "PATIENT [NAME] [NAME] [NAME] DIAGNOSIS [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.030839599668979645,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "instructor_2",
+      "split": "authored_acceptance",
+      "source": "MRN 482991 PATIENT Robert Green",
+      "expected": "MRN [MRN] PATIENT [NAME]",
+      "generated": "PATIENT [NAME] [NAME] [NAME] DIAGNOSIS [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.01827250001952052,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "instructor_3",
+      "split": "authored_acceptance",
+      "source": "PATIENT Alice White PHONE 5551234567",
+      "expected": "PATIENT [NAME] PHONE [PHONE]",
+      "generated": "MRN [MRN] [NAME] [NAME] DIAGNOSIS ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.040779999922961,
+      "tokens": 14,
+      "counts": {
+        "tp": 0,
+        "fp": 4,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "instructor_4",
+      "split": "authored_acceptance",
+      "source": "PATIENT Kevin Black LIVES 412 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] LIVES [ADDRESS]",
+      "generated": "PATIENT LIVES [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.006499799899756908,
+      "tokens": 6,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 1,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "instructor_5",
+      "split": "authored_acceptance",
+      "source": "PATIENT Susan Gray DIAGNOSIS NSCLC",
+      "expected": "PATIENT [NAME] DIAGNOSIS NSCLC",
+      "generated": "PATIENT RECEIVED RECEIVED [MRN] [NAME] [NAME] [MRN] [NAME] [NAME] DIAGNOSIS ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.02280159993097186,
+      "tokens": 24,
+      "counts": {
+        "tp": 0,
+        "fp": 7,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "instructor_6",
+      "split": "authored_acceptance",
+      "source": "MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC",
+      "expected": "MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC",
+      "generated": "PATIENT [NAME] [NAME] DIAGNOSIS [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.013174999970942736,
+      "tokens": 14,
+      "counts": {
+        "tp": 0,
+        "fp": 4,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "instructor_7",
+      "split": "authored_acceptance",
+      "source": "PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC",
+      "generated": "PATIENT [NAME] DIAGNOSIS ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.007885499857366085,
+      "tokens": 10,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "instructor_8",
+      "split": "authored_acceptance",
+      "source": "PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA",
+      "generated": "PATIENT [NAME] [MRN] [NAME] [NAME] DIAGNOSIS ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.014144300017505884,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "instructor_9",
+      "split": "authored_acceptance",
+      "source": "PATIENT John Smith RECEIVED DrugA",
+      "expected": "PATIENT [NAME] RECEIVED DrugA",
+      "generated": "PATIENT RECEIVED RECEIVED [MRN] [NAME] [NAME] [MRN] [NAME] [NAME] DIAGNOSIS ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.019259499851614237,
+      "tokens": 24,
+      "counts": {
+        "tp": 0,
+        "fp": 7,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "instructor_10",
+      "split": "authored_acceptance",
+      "source": "PATIENT John Smith RECEIVED DrugB",
+      "expected": "PATIENT [NAME] RECEIVED DrugB",
+      "generated": "PATIENT RECEIVED RECEIVED [MRN] [NAME] [NAME] [MRN] [NAME] [NAME] DIAGNOSIS ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.016492700204253197,
+      "tokens": 24,
+      "counts": {
+        "tp": 0,
+        "fp": 7,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    }
+  ],
+  "series": "final training-seed repeats",
+  "architecture": "embedding_only",
+  "seed": 7,
+  "selected_step": 4000,
+  "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+  "scope": "development diagnostics, not final-test performance"
+}

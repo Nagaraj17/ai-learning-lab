@@ -1,0 +1,84 @@
+{
+  "run_id": "mitra_final/transformer_2_seed42",
+  "checkpoint_step": 4000,
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+  "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+  "example_ids": [
+    "assignment_0700",
+    "assignment_0701",
+    "assignment_0702",
+    "assignment_0704",
+    "assignment_0705",
+    "assignment_0717",
+    "assignment_0719",
+    "assignment_0703"
+  ],
+  "diagnostic_source_hash": "e5f1753781d8fd43eae11c75675b18826db2dcfc7d8ffcfcd04d8108d4d0975f",
+  "single_heads": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ]
+  ],
+  "pairs": [
+    {
+      "layer": 0,
+      "heads": [
+        0,
+        1
+      ]
+    },
+    {
+      "layer": 1,
+      "heads": [
+        0,
+        1
+      ]
+    }
+  ],
+  "pair_selection": "fixed before these interventions, not chosen from their effects",
+  "field_probe": {
+    "field": "MRN",
+    "values": [
+      "991723",
+      "991724"
+    ],
+    "scope": "one authored source-field edit, not category-wide specialization evidence"
+  },
+  "temperatures": [
+    0.1,
+    0.7,
+    1.2
+  ],
+  "decoding": "greedy for interventions; sampling only for temperature trials",
+  "scope": "eight validation diagnostics; small category supports; no semantic head roles"
+}

@@ -1,0 +1,436 @@
+{
+  "run_id": "mitra_final/transformer_2_seed42",
+  "checkpoint_step": 4000,
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+  "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+  "example_ids": [
+    "assignment_0700",
+    "assignment_0701",
+    "assignment_0702",
+    "assignment_0704",
+    "assignment_0705",
+    "assignment_0717",
+    "assignment_0719",
+    "assignment_0703"
+  ],
+  "effects": [
+    {
+      "layer": 0,
+      "head": 0,
+      "baseline_recall": 1.0,
+      "ablated_recall": 0.2857142857142857,
+      "recall_delta": -0.7142857142857143,
+      "exact_delta": -0.875,
+      "category_metrics": {
+        "PATIENT": {
+          "tp": 0,
+          "support": 7,
+          "leaked": 0,
+          "recall": 0.0
+        },
+        "MRN": {
+          "tp": 0,
+          "support": 2,
+          "leaked": 0,
+          "recall": 0.0
+        },
+        "DOCTOR": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DATE": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "ADDRESS": {
+          "tp": 0,
+          "support": 1,
+          "leaked": 0,
+          "recall": 0.0
+        },
+        "DOB": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "PHONE": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        }
+      }
+    },
+    {
+      "layer": 0,
+      "head": 1,
+      "baseline_recall": 1.0,
+      "ablated_recall": 0.7142857142857143,
+      "recall_delta": -0.2857142857142857,
+      "exact_delta": -0.25,
+      "category_metrics": {
+        "PATIENT": {
+          "tp": 5,
+          "support": 7,
+          "leaked": 0,
+          "recall": 0.7142857142857143
+        },
+        "MRN": {
+          "tp": 0,
+          "support": 2,
+          "leaked": 0,
+          "recall": 0.0
+        },
+        "DOCTOR": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DATE": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "ADDRESS": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DOB": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "PHONE": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        }
+      }
+    },
+    {
+      "layer": 0,
+      "head": 2,
+      "baseline_recall": 1.0,
+      "ablated_recall": 0.8571428571428571,
+      "recall_delta": -0.1428571428571429,
+      "exact_delta": -0.375,
+      "category_metrics": {
+        "PATIENT": {
+          "tp": 7,
+          "support": 7,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "MRN": {
+          "tp": 2,
+          "support": 2,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DOCTOR": {
+          "tp": 0,
+          "support": 1,
+          "leaked": 0,
+          "recall": 0.0
+        },
+        "DATE": {
+          "tp": 0,
+          "support": 1,
+          "leaked": 0,
+          "recall": 0.0
+        },
+        "ADDRESS": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DOB": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "PHONE": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        }
+      }
+    },
+    {
+      "layer": 0,
+      "head": 3,
+      "baseline_recall": 1.0,
+      "ablated_recall": 1.0,
+      "recall_delta": 0.0,
+      "exact_delta": -0.125,
+      "category_metrics": {
+        "PATIENT": {
+          "tp": 7,
+          "support": 7,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "MRN": {
+          "tp": 2,
+          "support": 2,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DOCTOR": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DATE": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "ADDRESS": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DOB": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "PHONE": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        }
+      }
+    },
+    {
+      "layer": 1,
+      "head": 0,
+      "baseline_recall": 1.0,
+      "ablated_recall": 0.9285714285714286,
+      "recall_delta": -0.0714285714285714,
+      "exact_delta": -0.125,
+      "category_metrics": {
+        "PATIENT": {
+          "tp": 7,
+          "support": 7,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "MRN": {
+          "tp": 2,
+          "support": 2,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DOCTOR": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DATE": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "ADDRESS": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DOB": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "PHONE": {
+          "tp": 0,
+          "support": 1,
+          "leaked": 0,
+          "recall": 0.0
+        }
+      }
+    },
+    {
+      "layer": 1,
+      "head": 1,
+      "baseline_recall": 1.0,
+      "ablated_recall": 1.0,
+      "recall_delta": 0.0,
+      "exact_delta": -0.125,
+      "category_metrics": {
+        "PATIENT": {
+          "tp": 7,
+          "support": 7,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "MRN": {
+          "tp": 2,
+          "support": 2,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DOCTOR": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DATE": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "ADDRESS": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DOB": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "PHONE": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        }
+      }
+    },
+    {
+      "layer": 1,
+      "head": 2,
+      "baseline_recall": 1.0,
+      "ablated_recall": 0.9285714285714286,
+      "recall_delta": -0.0714285714285714,
+      "exact_delta": -0.25,
+      "category_metrics": {
+        "PATIENT": {
+          "tp": 7,
+          "support": 7,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "MRN": {
+          "tp": 1,
+          "support": 2,
+          "leaked": 0,
+          "recall": 0.5
+        },
+        "DOCTOR": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DATE": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "ADDRESS": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DOB": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "PHONE": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        }
+      }
+    },
+    {
+      "layer": 1,
+      "head": 3,
+      "baseline_recall": 1.0,
+      "ablated_recall": 1.0,
+      "recall_delta": 0.0,
+      "exact_delta": -0.125,
+      "category_metrics": {
+        "PATIENT": {
+          "tp": 7,
+          "support": 7,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "MRN": {
+          "tp": 2,
+          "support": 2,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DOCTOR": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DATE": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "ADDRESS": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "DOB": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        },
+        "PHONE": {
+          "tp": 1,
+          "support": 1,
+          "leaked": 0,
+          "recall": 1.0
+        }
+      }
+    }
+  ],
+  "pair_selection": "fixed before these interventions, not chosen from their effects"
+}

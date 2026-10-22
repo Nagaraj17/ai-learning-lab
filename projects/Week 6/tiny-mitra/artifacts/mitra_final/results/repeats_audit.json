@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "architecture": "transformer_2",
+      "seed": 7,
+      "updates": 4000,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_2",
+      "seed": 123,
+      "updates": 4000,
+      "passed": true
+    },
+    {
+      "architecture": "embedding_only",
+      "seed": 7,
+      "updates": 4000,
+      "passed": true
+    },
+    {
+      "architecture": "embedding_only",
+      "seed": 123,
+      "updates": 4000,
+      "passed": true
+    },
+    {
+      "architecture": "single_attention",
+      "seed": 7,
+      "updates": 4000,
+      "passed": true
+    },
+    {
+      "architecture": "single_attention",
+      "seed": 123,
+      "updates": 4000,
+      "passed": true
+    },
+    {
+      "architecture": "multi_attention",
+      "seed": 7,
+      "updates": 4000,
+      "passed": true
+    },
+    {
+      "architecture": "multi_attention",
+      "seed": 123,
+      "updates": 4000,
+      "passed": true
+    }
+  ],
+  "scope": "training-seed repeats vary initialization and minibatch order; shared development notes are not independent datasets; primary seed42 is unchanged"
+}

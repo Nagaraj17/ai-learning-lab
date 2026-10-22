@@ -1,0 +1,2202 @@
+{
+  "run_id": "mitra_final/transformer_2_seed42",
+  "checkpoint_step": 4000,
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+  "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+  "example_ids": [
+    "assignment_0700",
+    "assignment_0701",
+    "assignment_0702",
+    "assignment_0704",
+    "assignment_0705",
+    "assignment_0717",
+    "assignment_0719",
+    "assignment_0703"
+  ],
+  "scope": "one authored source-field edit, not category-wide specialization evidence",
+  "expected_free_text": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC",
+  "measurements": [
+    {
+      "disabled": null,
+      "probes": [
+        {
+          "source": "PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            67,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.9997654557228088
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999613761901855
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.999972939491272
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9998131394386292
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999788999557495
+              },
+              {
+                "id": 113,
+                "token": "MRN",
+                "probability": 0.9997798800468445
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.999957799911499
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9997654557228088
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999779462814331
+              },
+              {
+                "id": 116,
+                "token": "DIAGNOSIS",
+                "probability": 0.9999105930328369
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999662637710571
+              },
+              {
+                "id": 124,
+                "token": "NSCLC",
+                "probability": 0.999631404876709
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9999363422393799
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        },
+        {
+          "source": "PATIENT Olivia Martinez MRN 991724 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            68,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.9997538924217224
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999614953994751
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999717473983765
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9997965693473816
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999786615371704
+              },
+              {
+                "id": 113,
+                "token": "MRN",
+                "probability": 0.9997852444648743
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999575614929199
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9997538924217224
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999772310256958
+              },
+              {
+                "id": 116,
+                "token": "DIAGNOSIS",
+                "probability": 0.999915361404419
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999659061431885
+              },
+              {
+                "id": 124,
+                "token": "NSCLC",
+                "probability": 0.9996474981307983
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9999343156814575
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        }
+      ]
+    },
+    {
+      "disabled": [
+        0,
+        0
+      ],
+      "probes": [
+        {
+          "source": "PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            67,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.9997583031654358
+          },
+          "free_generation": {
+            "text": "PATIENT MRN [MRN] [MRN] DIAGNOSIS NSCLC",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9778774380683899
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999774694442749
+              },
+              {
+                "id": 113,
+                "token": "MRN",
+                "probability": 0.9983540773391724
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999616146087646
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9996721744537354
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999772310256958
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9321733117103577
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999761581420898
+              },
+              {
+                "id": 116,
+                "token": "DIAGNOSIS",
+                "probability": 0.9987545013427734
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999693632125854
+              },
+              {
+                "id": 124,
+                "token": "NSCLC",
+                "probability": 0.9994980096817017
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.999859094619751
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        },
+        {
+          "source": "PATIENT Olivia Martinez MRN 991724 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            68,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.9997432827949524
+          },
+          "free_generation": {
+            "text": "PATIENT MRN [MRN] [MRN] DIAGNOSIS NSCLC",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9769513010978699
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999767541885376
+              },
+              {
+                "id": 113,
+                "token": "MRN",
+                "probability": 0.9983903169631958
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999618530273438
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9996471405029297
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999772310256958
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9473273158073425
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999758005142212
+              },
+              {
+                "id": 116,
+                "token": "DIAGNOSIS",
+                "probability": 0.9986955523490906
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.999969482421875
+              },
+              {
+                "id": 124,
+                "token": "NSCLC",
+                "probability": 0.9994964599609375
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9998608827590942
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        }
+      ]
+    },
+    {
+      "disabled": [
+        0,
+        1
+      ],
+      "probes": [
+        {
+          "source": "PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            67,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.9782488346099854
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] DOB [DATE]",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999313354492188
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999711513519287
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9999656677246094
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999792575836182
+              },
+              {
+                "id": 112,
+                "token": "DOB",
+                "probability": 0.9233824014663696
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999740123748779
+              },
+              {
+                "id": 8,
+                "token": "[DATE]",
+                "probability": 0.9865649938583374
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9999468326568604
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        },
+        {
+          "source": "PATIENT Olivia Martinez MRN 991724 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            68,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.978871762752533
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] DOB [DATE]",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999314546585083
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999704360961914
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9999653100967407
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999791383743286
+              },
+              {
+                "id": 112,
+                "token": "DOB",
+                "probability": 0.886297881603241
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999738931655884
+              },
+              {
+                "id": 8,
+                "token": "[DATE]",
+                "probability": 0.9885118007659912
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9999477863311768
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        }
+      ]
+    },
+    {
+      "disabled": [
+        0,
+        2
+      ],
+      "probes": [
+        {
+          "source": "PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            67,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.9997825026512146
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] MRN [MRN] DIAGNOSIS DrugC",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999570846557617
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999700784683228
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9998346567153931
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999738931655884
+              },
+              {
+                "id": 113,
+                "token": "MRN",
+                "probability": 0.9996621608734131
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999384880065918
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9997825026512146
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999790191650391
+              },
+              {
+                "id": 116,
+                "token": "DIAGNOSIS",
+                "probability": 0.9972856044769287
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999678134918213
+              },
+              {
+                "id": 132,
+                "token": "DrugC",
+                "probability": 0.8897278904914856
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9997467398643494
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        },
+        {
+          "source": "PATIENT Olivia Martinez MRN 991724 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            68,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.9998055100440979
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] MRN [MRN] DIAGNOSIS DrugC",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999572038650513
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999690055847168
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9998244643211365
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999731779098511
+              },
+              {
+                "id": 113,
+                "token": "MRN",
+                "probability": 0.9996780157089233
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999381303787231
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9998055100440979
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999785423278809
+              },
+              {
+                "id": 116,
+                "token": "DIAGNOSIS",
+                "probability": 0.9979287385940552
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999674558639526
+              },
+              {
+                "id": 132,
+                "token": "DrugC",
+                "probability": 0.928421139717102
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9997569918632507
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        }
+      ]
+    },
+    {
+      "disabled": [
+        0,
+        3
+      ],
+      "probes": [
+        {
+          "source": "PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            67,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.9995682835578918
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999632835388184
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999686479568481
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9998873472213745
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999780654907227
+              },
+              {
+                "id": 113,
+                "token": "MRN",
+                "probability": 0.9997448325157166
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999675750732422
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9995682835578918
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999780654907227
+              },
+              {
+                "id": 116,
+                "token": "DIAGNOSIS",
+                "probability": 0.9998656511306763
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999673366546631
+              },
+              {
+                "id": 124,
+                "token": "NSCLC",
+                "probability": 0.9996060729026794
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9999376535415649
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        },
+        {
+          "source": "PATIENT Olivia Martinez MRN 991724 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            68,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.9995673298835754
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999632835388184
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999673366546631
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9998830556869507
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999778270721436
+              },
+              {
+                "id": 113,
+                "token": "MRN",
+                "probability": 0.99974125623703
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999674558639526
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9995673298835754
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999775886535645
+              },
+              {
+                "id": 116,
+                "token": "DIAGNOSIS",
+                "probability": 0.9998716115951538
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999674558639526
+              },
+              {
+                "id": 124,
+                "token": "NSCLC",
+                "probability": 0.9995914101600647
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9999381303787231
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        }
+      ]
+    },
+    {
+      "disabled": [
+        1,
+        0
+      ],
+      "probes": [
+        {
+          "source": "PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            67,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.9996477365493774
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999526739120483
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999686479568481
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9998937845230103
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999774694442749
+              },
+              {
+                "id": 113,
+                "token": "MRN",
+                "probability": 0.9997276663780212
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999514818191528
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9996477365493774
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999760389328003
+              },
+              {
+                "id": 116,
+                "token": "DIAGNOSIS",
+                "probability": 0.9988310933113098
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999617338180542
+              },
+              {
+                "id": 124,
+                "token": "NSCLC",
+                "probability": 0.9995463490486145
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9999126195907593
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        },
+        {
+          "source": "PATIENT Olivia Martinez MRN 991724 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            68,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.9996589422225952
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999527931213379
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999688863754272
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9998868703842163
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999773502349854
+              },
+              {
+                "id": 113,
+                "token": "MRN",
+                "probability": 0.9997343420982361
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999513626098633
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9996589422225952
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.999975323677063
+              },
+              {
+                "id": 116,
+                "token": "DIAGNOSIS",
+                "probability": 0.9991170763969421
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999617338180542
+              },
+              {
+                "id": 124,
+                "token": "NSCLC",
+                "probability": 0.9995629191398621
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9999082088470459
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        }
+      ]
+    },
+    {
+      "disabled": [
+        1,
+        1
+      ],
+      "probes": [
+        {
+          "source": "PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            67,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.9999173879623413
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] MRN [MRN] DIAGNOSIS BIOMARKER NSCLC",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.999950647354126
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999703168869019
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9997186064720154
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999768733978271
+              },
+              {
+                "id": 113,
+                "token": "MRN",
+                "probability": 0.999699592590332
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999587535858154
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9999173879623413
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999779462814331
+              },
+              {
+                "id": 116,
+                "token": "DIAGNOSIS",
+                "probability": 0.9998358488082886
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.999966025352478
+              },
+              {
+                "id": 117,
+                "token": "BIOMARKER",
+                "probability": 0.527177631855011
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9997023940086365
+              },
+              {
+                "id": 124,
+                "token": "NSCLC",
+                "probability": 0.9964039325714111
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9998775720596313
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        },
+        {
+          "source": "PATIENT Olivia Martinez MRN 991724 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            68,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.9999125003814697
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999507665634155
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999690055847168
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9996966123580933
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.999976634979248
+              },
+              {
+                "id": 113,
+                "token": "MRN",
+                "probability": 0.9997077584266663
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999581575393677
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9999125003814697
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999773502349854
+              },
+              {
+                "id": 116,
+                "token": "DIAGNOSIS",
+                "probability": 0.9998337030410767
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999654293060303
+              },
+              {
+                "id": 124,
+                "token": "NSCLC",
+                "probability": 0.7370027899742126
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9999368190765381
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        }
+      ]
+    },
+    {
+      "disabled": [
+        1,
+        2
+      ],
+      "probes": [
+        {
+          "source": "PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            67,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.997638463973999
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] MRN [MRN] [MRN] ASTHMA",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999480247497559
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999712705612183
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9998146891593933
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999786615371704
+              },
+              {
+                "id": 113,
+                "token": "MRN",
+                "probability": 0.9993670582771301
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999555349349976
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.997638463973999
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999717473983765
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.7566896677017212
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999650716781616
+              },
+              {
+                "id": 125,
+                "token": "ASTHMA",
+                "probability": 0.5325241684913635
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9999185800552368
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        },
+        {
+          "source": "PATIENT Olivia Martinez MRN 991724 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            68,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.9971154928207397
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] MRN [MRN] [MRN] ASTHMA",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999481439590454
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999704360961914
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.999799907207489
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999785423278809
+              },
+              {
+                "id": 113,
+                "token": "MRN",
+                "probability": 0.9993962049484253
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999552965164185
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9971154928207397
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.999970555305481
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.752930760383606
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999645948410034
+              },
+              {
+                "id": 125,
+                "token": "ASTHMA",
+                "probability": 0.587410032749176
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9999186992645264
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        }
+      ]
+    },
+    {
+      "disabled": [
+        1,
+        3
+      ],
+      "probes": [
+        {
+          "source": "PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            67,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.9992235898971558
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999490976333618
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999774694442749
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9998249411582947
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9996460676193237
+              },
+              {
+                "id": 113,
+                "token": "MRN",
+                "probability": 0.9994819760322571
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.999751627445221
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9992235898971558
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999196529388428
+              },
+              {
+                "id": 116,
+                "token": "DIAGNOSIS",
+                "probability": 0.9998587369918823
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9998382329940796
+              },
+              {
+                "id": 124,
+                "token": "NSCLC",
+                "probability": 0.9978162050247192
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9999377727508545
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        },
+        {
+          "source": "PATIENT Olivia Martinez MRN 991724 DIAGNOSIS NSCLC",
+          "conditional_prefix": "PATIENT [NAME] MRN ",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            52,
+            23,
+            20,
+            33,
+            20,
+            12,
+            106,
+            50,
+            12,
+            29,
+            31,
+            20,
+            25,
+            16,
+            37,
+            106,
+            113,
+            106,
+            73,
+            73,
+            65,
+            71,
+            66,
+            68,
+            106,
+            116,
+            106,
+            124,
+            5,
+            109,
+            106,
+            6,
+            106,
+            113,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "[MRN]": 0.9987403750419617
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999493360519409
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999772310256958
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9998130202293396
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9996247291564941
+              },
+              {
+                "id": 113,
+                "token": "MRN",
+                "probability": 0.9995245933532715
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9997532963752747
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.9987403750419617
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999222755432129
+              },
+              {
+                "id": 116,
+                "token": "DIAGNOSIS",
+                "probability": 0.999869704246521
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9998223185539246
+              },
+              {
+                "id": 124,
+                "token": "NSCLC",
+                "probability": 0.9984421133995056
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9999346733093262
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        }
+      ]
+    }
+  ]
+}

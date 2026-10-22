@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "review_type": "author self-review",
+  "date_ist": "2026-10-18",
+  "source_hash": "a399a568af148bd3b0e2cd08c5aaa07f9ab045cbc5035ee0446c03d832d4b33d",
+  "dataset_hash": "368646b32a01c79aed83b468b999afebaeff47f31d97f8e66c3a75bdb1a24113",
+  "protocol_hash": "0ec45e2dac8604819ca99eb768f770a311b8a506ef2b7f01ab38ef8b69f6a048",
+  "scope": "release fixed-budget seed42 best-validation checkpoints on all four untouched 50-note final partitions",
+  "frozen_choices": {
+    "architectures": [
+      "embedding_only",
+      "single_attention",
+      "multi_attention",
+      "transformer_1",
+      "transformer_2",
+      "no_ffn",
+      "no_layernorm",
+      "no_residual"
+    ],
+    "updates_per_run": 1000,
+    "seed": 42,
+    "checkpoint_rule": "minimum validation token cross entropy",
+    "decoding": "greedy",
+    "max_new_tokens": 220,
+    "context": 512
+  },
+  "limitations": [
+    "No preregistered effect-size or significance threshold; hypothesis verdicts are exploratory.",
+    "Original baseline generated diagnostics are small and category-selected.",
+    "Latest-checkpoint and extended-training investigations are validation-only, separately labeled.",
+    "Extra 5000-step budget was registered before final-test release; these final results will not tune it.",
+    "Seed repeats pending; component ablations have one seed."
+  ],
+  "freeze_commitment": "Do not change these reported runs or their selection using final-test outcomes."
+}

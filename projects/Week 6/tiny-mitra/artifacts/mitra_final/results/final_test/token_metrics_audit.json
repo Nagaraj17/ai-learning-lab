@@ -1,0 +1,294 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "architecture": "embedding_only",
+      "split": "test_known_known",
+      "checkpoint_sha256": "1a90c2dde0ab0377f240b98399b943314ecc0326c462709deb510b9d6d22149a",
+      "loss": 1.0818380771723008,
+      "next_token_accuracy": 0.6672932330827067,
+      "scored_tokens": 532,
+      "examples": 50
+    },
+    {
+      "architecture": "embedding_only",
+      "split": "test_known_test",
+      "checkpoint_sha256": "1a90c2dde0ab0377f240b98399b943314ecc0326c462709deb510b9d6d22149a",
+      "loss": 2.245132602789463,
+      "next_token_accuracy": 0.5256410256410257,
+      "scored_tokens": 780,
+      "examples": 50
+    },
+    {
+      "architecture": "embedding_only",
+      "split": "test_test_known",
+      "checkpoint_sha256": "1a90c2dde0ab0377f240b98399b943314ecc0326c462709deb510b9d6d22149a",
+      "loss": 0.8717212596861255,
+      "next_token_accuracy": 0.7226890756302521,
+      "scored_tokens": 476,
+      "examples": 50
+    },
+    {
+      "architecture": "embedding_only",
+      "split": "test_test_test",
+      "checkpoint_sha256": "1a90c2dde0ab0377f240b98399b943314ecc0326c462709deb510b9d6d22149a",
+      "loss": 2.309049332447541,
+      "next_token_accuracy": 0.517948717948718,
+      "scored_tokens": 780,
+      "examples": 50
+    },
+    {
+      "architecture": "single_attention",
+      "split": "test_known_known",
+      "checkpoint_sha256": "1582f3b9034f82c9d2df622bff9d62352d851c902e5482c51aba3a4df3d757a5",
+      "loss": 0.16327654296196156,
+      "next_token_accuracy": 0.9699248120300752,
+      "scored_tokens": 532,
+      "examples": 50
+    },
+    {
+      "architecture": "single_attention",
+      "split": "test_known_test",
+      "checkpoint_sha256": "1582f3b9034f82c9d2df622bff9d62352d851c902e5482c51aba3a4df3d757a5",
+      "loss": 6.878156182704828,
+      "next_token_accuracy": 0.5717948717948718,
+      "scored_tokens": 780,
+      "examples": 50
+    },
+    {
+      "architecture": "single_attention",
+      "split": "test_test_known",
+      "checkpoint_sha256": "1582f3b9034f82c9d2df622bff9d62352d851c902e5482c51aba3a4df3d757a5",
+      "loss": 0.38174209574691387,
+      "next_token_accuracy": 0.9621848739495799,
+      "scored_tokens": 476,
+      "examples": 50
+    },
+    {
+      "architecture": "single_attention",
+      "split": "test_test_test",
+      "checkpoint_sha256": "1582f3b9034f82c9d2df622bff9d62352d851c902e5482c51aba3a4df3d757a5",
+      "loss": 7.932833920992338,
+      "next_token_accuracy": 0.5820512820512821,
+      "scored_tokens": 780,
+      "examples": 50
+    },
+    {
+      "architecture": "multi_attention",
+      "split": "test_known_known",
+      "checkpoint_sha256": "790c8c56b167589f14822d5648b42105b628b5a98a39dd4cc990236055aa072c",
+      "loss": 0.19818328018475295,
+      "next_token_accuracy": 0.9680451127819549,
+      "scored_tokens": 532,
+      "examples": 50
+    },
+    {
+      "architecture": "multi_attention",
+      "split": "test_known_test",
+      "checkpoint_sha256": "790c8c56b167589f14822d5648b42105b628b5a98a39dd4cc990236055aa072c",
+      "loss": 5.898170940692609,
+      "next_token_accuracy": 0.5692307692307692,
+      "scored_tokens": 780,
+      "examples": 50
+    },
+    {
+      "architecture": "multi_attention",
+      "split": "test_test_known",
+      "checkpoint_sha256": "790c8c56b167589f14822d5648b42105b628b5a98a39dd4cc990236055aa072c",
+      "loss": 0.06565488862390277,
+      "next_token_accuracy": 0.9852941176470589,
+      "scored_tokens": 476,
+      "examples": 50
+    },
+    {
+      "architecture": "multi_attention",
+      "split": "test_test_test",
+      "checkpoint_sha256": "790c8c56b167589f14822d5648b42105b628b5a98a39dd4cc990236055aa072c",
+      "loss": 5.934569451747796,
+      "next_token_accuracy": 0.5897435897435898,
+      "scored_tokens": 780,
+      "examples": 50
+    },
+    {
+      "architecture": "transformer_1",
+      "split": "test_known_known",
+      "checkpoint_sha256": "352d0ba1d6d0543732a12f455b4265773eacf2702c70fd70280186884dadb511",
+      "loss": 0.012741418421019878,
+      "next_token_accuracy": 0.9962406015037594,
+      "scored_tokens": 532,
+      "examples": 50
+    },
+    {
+      "architecture": "transformer_1",
+      "split": "test_known_test",
+      "checkpoint_sha256": "352d0ba1d6d0543732a12f455b4265773eacf2702c70fd70280186884dadb511",
+      "loss": 3.154352051172501,
+      "next_token_accuracy": 0.6153846153846154,
+      "scored_tokens": 780,
+      "examples": 50
+    },
+    {
+      "architecture": "transformer_1",
+      "split": "test_test_known",
+      "checkpoint_sha256": "352d0ba1d6d0543732a12f455b4265773eacf2702c70fd70280186884dadb511",
+      "loss": 0.00045945185643597313,
+      "next_token_accuracy": 1.0,
+      "scored_tokens": 476,
+      "examples": 50
+    },
+    {
+      "architecture": "transformer_1",
+      "split": "test_test_test",
+      "checkpoint_sha256": "352d0ba1d6d0543732a12f455b4265773eacf2702c70fd70280186884dadb511",
+      "loss": 2.8341879428961336,
+      "next_token_accuracy": 0.6217948717948718,
+      "scored_tokens": 780,
+      "examples": 50
+    },
+    {
+      "architecture": "transformer_2",
+      "split": "test_known_known",
+      "checkpoint_sha256": "aecfd119eefc955c0ecbe024d6889847c2ba8448b30388916744b0b4a9302684",
+      "loss": 0.024225384888897434,
+      "next_token_accuracy": 0.9943609022556391,
+      "scored_tokens": 532,
+      "examples": 50
+    },
+    {
+      "architecture": "transformer_2",
+      "split": "test_known_test",
+      "checkpoint_sha256": "aecfd119eefc955c0ecbe024d6889847c2ba8448b30388916744b0b4a9302684",
+      "loss": 2.874952854254307,
+      "next_token_accuracy": 0.6435897435897436,
+      "scored_tokens": 780,
+      "examples": 50
+    },
+    {
+      "architecture": "transformer_2",
+      "split": "test_test_known",
+      "checkpoint_sha256": "aecfd119eefc955c0ecbe024d6889847c2ba8448b30388916744b0b4a9302684",
+      "loss": 0.0015882147239333316,
+      "next_token_accuracy": 1.0,
+      "scored_tokens": 476,
+      "examples": 50
+    },
+    {
+      "architecture": "transformer_2",
+      "split": "test_test_test",
+      "checkpoint_sha256": "aecfd119eefc955c0ecbe024d6889847c2ba8448b30388916744b0b4a9302684",
+      "loss": 2.947947761340019,
+      "next_token_accuracy": 0.6153846153846154,
+      "scored_tokens": 780,
+      "examples": 50
+    },
+    {
+      "architecture": "no_ffn",
+      "split": "test_known_known",
+      "checkpoint_sha256": "fe974e2080a63a76828be1a68373c9577dff08eb3c701def856bc6a3e1d53ec5",
+      "loss": 0.02639631674138311,
+      "next_token_accuracy": 0.9962406015037594,
+      "scored_tokens": 532,
+      "examples": 50
+    },
+    {
+      "architecture": "no_ffn",
+      "split": "test_known_test",
+      "checkpoint_sha256": "fe974e2080a63a76828be1a68373c9577dff08eb3c701def856bc6a3e1d53ec5",
+      "loss": 3.361402795253656,
+      "next_token_accuracy": 0.617948717948718,
+      "scored_tokens": 780,
+      "examples": 50
+    },
+    {
+      "architecture": "no_ffn",
+      "split": "test_test_known",
+      "checkpoint_sha256": "fe974e2080a63a76828be1a68373c9577dff08eb3c701def856bc6a3e1d53ec5",
+      "loss": 0.0030858385681855577,
+      "next_token_accuracy": 1.0,
+      "scored_tokens": 476,
+      "examples": 50
+    },
+    {
+      "architecture": "no_ffn",
+      "split": "test_test_test",
+      "checkpoint_sha256": "fe974e2080a63a76828be1a68373c9577dff08eb3c701def856bc6a3e1d53ec5",
+      "loss": 3.283904100075746,
+      "next_token_accuracy": 0.6166666666666667,
+      "scored_tokens": 780,
+      "examples": 50
+    },
+    {
+      "architecture": "no_layernorm",
+      "split": "test_known_known",
+      "checkpoint_sha256": "0130ae09a8b800af91856f18a79d99edd0708e09e2ccc1a0a737cce00d640641",
+      "loss": 0.053466642495304154,
+      "next_token_accuracy": 0.9924812030075187,
+      "scored_tokens": 532,
+      "examples": 50
+    },
+    {
+      "architecture": "no_layernorm",
+      "split": "test_known_test",
+      "checkpoint_sha256": "0130ae09a8b800af91856f18a79d99edd0708e09e2ccc1a0a737cce00d640641",
+      "loss": 4.313171719282101,
+      "next_token_accuracy": 0.6423076923076924,
+      "scored_tokens": 780,
+      "examples": 50
+    },
+    {
+      "architecture": "no_layernorm",
+      "split": "test_test_known",
+      "checkpoint_sha256": "0130ae09a8b800af91856f18a79d99edd0708e09e2ccc1a0a737cce00d640641",
+      "loss": 0.014717506188038392,
+      "next_token_accuracy": 0.9936974789915967,
+      "scored_tokens": 476,
+      "examples": 50
+    },
+    {
+      "architecture": "no_layernorm",
+      "split": "test_test_test",
+      "checkpoint_sha256": "0130ae09a8b800af91856f18a79d99edd0708e09e2ccc1a0a737cce00d640641",
+      "loss": 4.245521780160757,
+      "next_token_accuracy": 0.6294871794871795,
+      "scored_tokens": 780,
+      "examples": 50
+    },
+    {
+      "architecture": "no_residual",
+      "split": "test_known_known",
+      "checkpoint_sha256": "9e8b66b51701521a9de94e0215fa35a3554ccdfc840bba2630cfb101959f2239",
+      "loss": 0.0002806676688246933,
+      "next_token_accuracy": 1.0,
+      "scored_tokens": 532,
+      "examples": 50
+    },
+    {
+      "architecture": "no_residual",
+      "split": "test_known_test",
+      "checkpoint_sha256": "9e8b66b51701521a9de94e0215fa35a3554ccdfc840bba2630cfb101959f2239",
+      "loss": 2.505211443778796,
+      "next_token_accuracy": 0.5769230769230769,
+      "scored_tokens": 780,
+      "examples": 50
+    },
+    {
+      "architecture": "no_residual",
+      "split": "test_test_known",
+      "checkpoint_sha256": "9e8b66b51701521a9de94e0215fa35a3554ccdfc840bba2630cfb101959f2239",
+      "loss": 0.0007446773766986086,
+      "next_token_accuracy": 1.0,
+      "scored_tokens": 476,
+      "examples": 50
+    },
+    {
+      "architecture": "no_residual",
+      "split": "test_test_test",
+      "checkpoint_sha256": "9e8b66b51701521a9de94e0215fa35a3554ccdfc840bba2630cfb101959f2239",
+      "loss": 2.436765142587515,
+      "next_token_accuracy": 0.6128205128205129,
+      "scored_tokens": 780,
+      "examples": 50
+    }
+  ],
+  "scope": "32 recomputed output/EOS-token-weighted teacher-forced metrics; correct prefixes are supplied, unlike free generation; no fitting or checkpoint selection"
+}

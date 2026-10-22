@@ -1,0 +1,2084 @@
+{
+  "metrics": {
+    "tp": 0,
+    "fp": 91,
+    "fn": 142,
+    "identifiers": 142,
+    "leaked_identifiers": 0,
+    "leaked_note": 0,
+    "clinical_correct": 15,
+    "clinical_support": 53,
+    "exact": 5,
+    "examples": 50,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "exact_match": 0.1,
+    "identifier_leakage": 0.0,
+    "note_leakage": 0.0,
+    "clinical_preservation": 0.2830188679245283,
+    "categories": {
+      "PATIENT": {
+        "tp": 0,
+        "support": 45,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "DATE": {
+        "tp": 0,
+        "support": 26,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "DOCTOR": {
+        "tp": 0,
+        "support": 26,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "ADDRESS": {
+        "tp": 0,
+        "support": 26,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "MRN": {
+        "tp": 0,
+        "support": 19,
+        "leaked": 0,
+        "recall": 0.0
+      }
+    },
+    "controls": 5,
+    "control_over_redactions": 0,
+    "example_ids": [
+      "assignment_0950",
+      "assignment_0951",
+      "assignment_0952",
+      "assignment_0953",
+      "assignment_0954",
+      "assignment_0955",
+      "assignment_0956",
+      "assignment_0957",
+      "assignment_0958",
+      "assignment_0959",
+      "assignment_0960",
+      "assignment_0961",
+      "assignment_0962",
+      "assignment_0963",
+      "assignment_0964",
+      "assignment_0965",
+      "assignment_0966",
+      "assignment_0967",
+      "assignment_0968",
+      "assignment_0969",
+      "assignment_0970",
+      "assignment_0971",
+      "assignment_0972",
+      "assignment_0973",
+      "assignment_0974",
+      "assignment_0975",
+      "assignment_0976",
+      "assignment_0977",
+      "assignment_0978",
+      "assignment_0979",
+      "assignment_0980",
+      "assignment_0981",
+      "assignment_0982",
+      "assignment_0983",
+      "assignment_0984",
+      "assignment_0985",
+      "assignment_0986",
+      "assignment_0987",
+      "assignment_0988",
+      "assignment_0989",
+      "assignment_0990",
+      "assignment_0991",
+      "assignment_0992",
+      "assignment_0993",
+      "assignment_0994",
+      "assignment_0995",
+      "assignment_0996",
+      "assignment_0997",
+      "assignment_0998",
+      "assignment_0999"
+    ],
+    "valid_terminations": 50,
+    "evaluation": "sentence-anchor version 2; exact-surface leakage; complete clinical associations",
+    "device": "cpu"
+  },
+  "outputs": [
+    {
+      "id": "assignment_0950",
+      "split": "test_test_test",
+      "source": "TREATMENT DrugC BIOMARKER ALK DIAGNOSIS DIABETES",
+      "expected": "TREATMENT DrugC BIOMARKER ALK DIAGNOSIS DIABETES",
+      "generated": "TREATMENT DrugC BIOMARKER ALK DIAGNOSIS DIABETES",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.021445199847221375,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 3,
+        "clinical_support": 3,
+        "exact": 1,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0951",
+      "split": "test_test_test",
+      "source": "PATIENT Vikram Patel ON August 15 VISITED Dr Reed LIVES 1051 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.005942599847912788,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0952",
+      "split": "test_test_test",
+      "source": "PATIENT Asha Reed ON August 17 VISITED Dr Reed LIVES 1052 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [NAME] [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.01462200004607439,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0953",
+      "split": "test_test_test",
+      "source": "PATIENT Evan Reed ON June 15 VISITED Dr Reed LIVES 1053 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "MRN [NAME] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.008484600111842155,
+      "tokens": 6,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0954",
+      "split": "test_test_test",
+      "source": "PATIENT Evan Park ON April 11 VISITED Dr Reed LIVES 1054 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.00854620011523366,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0955",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Hugo Reed MRN 861506 TREATMENT DrugA",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT DrugA",
+      "generated": "PATIENT [NAME]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.006121799815446138,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0956",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS ASTHMA PATIENT Zoya Reed MRN 990565 TREATMENT DrugC",
+      "expected": "DIAGNOSIS ASTHMA PATIENT [NAME] MRN [MRN] TREATMENT DrugC",
+      "generated": "PATIENT [NAME]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.006568700075149536,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0957",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS ASTHMA PATIENT Hugo Reed MRN 803620 TREATMENT DrugA",
+      "expected": "DIAGNOSIS ASTHMA PATIENT [NAME] MRN [MRN] TREATMENT DrugA",
+      "generated": "PATIENT [NAME]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.004615499638020992,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0958",
+      "split": "test_test_test",
+      "source": "PATIENT Zoya Park ON March 25 VISITED Dr Reed LIVES 1058 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [NAME] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.010910300072282553,
+      "tokens": 6,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0959",
+      "split": "test_test_test",
+      "source": "PATIENT Asha Reed ON October 18 VISITED Dr Reed LIVES 1059 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.010367000009864569,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0960",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS ASTHMA TREATMENT Chemotherapy BIOMARKER EGFR",
+      "expected": "DIAGNOSIS ASTHMA TREATMENT Chemotherapy BIOMARKER EGFR",
+      "generated": "DIAGNOSIS ASTHMA TREATMENT Chemotherapy BIOMARKER EGFR",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.015398399904370308,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 3,
+        "clinical_support": 3,
+        "exact": 1,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0961",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Hugo Park MRN 756711 TREATMENT DrugC",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT DrugC",
+      "generated": "PATIENT [NAME]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.010110300034284592,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0962",
+      "split": "test_test_test",
+      "source": "PATIENT Asha Reed ON March 8 VISITED Dr Reed LIVES 1062 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] [DOCTOR] ON ON[NAME][NAME] [NAME] ON ON",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.02813450014218688,
+      "tokens": 18,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0963",
+      "split": "test_test_test",
+      "source": "PATIENT Zoya Park ON January 23 VISITED Dr Reed LIVES 1063 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [NAME] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.010597599670290947,
+      "tokens": 6,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0964",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS ASTHMA PATIENT Vikram Patel MRN 616071 TREATMENT DrugB",
+      "expected": "DIAGNOSIS ASTHMA PATIENT [NAME] MRN [MRN] TREATMENT DrugB",
+      "generated": "PATIENT [NAME] RECEIVED DIAGNOSIS TREATMENT BIOMARKER DrugB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.026087299920618534,
+      "tokens": 14,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0965",
+      "split": "test_test_test",
+      "source": "PATIENT Asha Reed ON June 3 VISITED Dr Reed LIVES 1065 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "MRN [DOCTOR] [DOCTOR] ONDrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.015626300126314163,
+      "tokens": 9,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0966",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Zoya Park MRN 607382 TREATMENT DrugB",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT DrugB",
+      "generated": "PATIENT [NAME]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.0073168003000319,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0967",
+      "split": "test_test_test",
+      "source": "PATIENT Asha Reed ON January 5 VISITED Dr Reed LIVES 1067 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] [DOCTOR] ON ON[NAME][NAME] [NAME] ON ON",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.028844100423157215,
+      "tokens": 18,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0968",
+      "split": "test_test_test",
+      "source": "PATIENT Evelyn Banerjee ON October 4 VISITED Dr Reed LIVES 1068 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "MRN [DATE]MRN [DOCTOR] [NAME] [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.021323999855667353,
+      "tokens": 13,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0969",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Asha Park MRN 140095 TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT Chemotherapy",
+      "generated": "PATIENT [NAME]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.004370400216430426,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0970",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugB",
+      "expected": "DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugB",
+      "generated": "DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.012659300118684769,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 3,
+        "clinical_support": 3,
+        "exact": 1,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0971",
+      "split": "test_test_test",
+      "source": "PATIENT Asha Park ON December 18 VISITED Dr Reed LIVES 1071 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.008278799708932638,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0972",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Anastasia Mehta MRN 876720 TREATMENT DrugC",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT DrugC",
+      "generated": "MRN [MRN] DIAGNOSIS NSCLC BIOMARKER NONE TREATMENT NONE [MRN] TREATMENT TREATMENT TREATMENT DIAGNOSIS NONE TREATMENT TREATMENT [MRN]TREATMENT NONE NONE  TREATMENT",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.0652236002497375,
+      "tokens": 42,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0973",
+      "split": "test_test_test",
+      "source": "PATIENT Asha Reed ON August 23 VISITED Dr Reed LIVES 1073 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [NAME] [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.013400699943304062,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0974",
+      "split": "test_test_test",
+      "source": "PATIENT Evelyn Banerjee ON March 21 VISITED Dr Reed LIVES 1074 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "MRN VISITED [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.011692800093442202,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0975",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Anastasia Mehta MRN 959538 TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT Chemotherapy",
+      "generated": "MRN [MRN] DIAGNOSIS Chemotherapy",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.011595700401812792,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0976",
+      "split": "test_test_test",
+      "source": "PATIENT Evan Park ON August 28 VISITED Dr Reed LIVES 1076 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.009755800012499094,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0977",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Zoya Park MRN 311296 TREATMENT DrugA",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT DrugA",
+      "generated": "PATIENT [NAME]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.008163799997419119,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0978",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Anastasia Mehta MRN 653773 TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT Chemotherapy",
+      "generated": "MRN [MRN] DIAGNOSIS Chemotherapy",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.014628200326114893,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0979",
+      "split": "test_test_test",
+      "source": "PATIENT Evan Park ON June 5 VISITED Dr Reed LIVES 1079 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "MRN [DOCTOR] [DOCTOR] ON ON[NAME][NAME] [NAME] ON ON",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.029956799931824207,
+      "tokens": 18,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0980",
+      "split": "test_test_test",
+      "source": "TREATMENT DrugC DIAGNOSIS ASTHMA BIOMARKER ALK",
+      "expected": "TREATMENT DrugC DIAGNOSIS ASTHMA BIOMARKER ALK",
+      "generated": "TREATMENT DrugC DIAGNOSIS ASTHMA BIOMARKER ALK",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.015601000282913446,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 3,
+        "clinical_support": 3,
+        "exact": 1,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0981",
+      "split": "test_test_test",
+      "source": "PATIENT Hugo Reed ON December 28 VISITED Dr Reed LIVES 1081 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.012380100321024656,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0982",
+      "split": "test_test_test",
+      "source": "PATIENT Hugo Reed ON March 8 VISITED Dr Reed LIVES 1082 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] [DOCTOR] ON ON[NAME][NAME] [NAME] ON ON",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.032706599682569504,
+      "tokens": 18,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0983",
+      "split": "test_test_test",
+      "source": "PATIENT Evelyn Banerjee ON January 27 VISITED Dr Reed LIVES 1083 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "MRN VISITED [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.02138029970228672,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0984",
+      "split": "test_test_test",
+      "source": "PATIENT Hugo Park ON March 19 VISITED Dr Reed LIVES 1084 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [NAME] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.010670399758964777,
+      "tokens": 6,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0985",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS ASTHMA PATIENT Vikram Patel MRN 384695 TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS ASTHMA PATIENT [NAME] MRN [MRN] TREATMENT Chemotherapy",
+      "generated": "MRN [MRN] ChemotherapyDrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.012430600356310606,
+      "tokens": 7,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0986",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Asha Park MRN 752220 TREATMENT DrugC",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT DrugC",
+      "generated": "PATIENT [NAME]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.006464200094342232,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0987",
+      "split": "test_test_test",
+      "source": "PATIENT Hugo Park ON October 23 VISITED Dr Reed LIVES 1087 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.011177000124007463,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0988",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Hugo Park MRN 949740 TREATMENT DrugC",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT DrugC",
+      "generated": "PATIENT [NAME]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.00849140016362071,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0989",
+      "split": "test_test_test",
+      "source": "PATIENT Evelyn Banerjee ON April 2 VISITED Dr Reed LIVES 1089 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "MRN [DATE]MRN [DOCTOR] [NAME] [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.041600499767810106,
+      "tokens": 13,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0990",
+      "split": "test_test_test",
+      "source": "TREATMENT DrugA BIOMARKER ALK DIAGNOSIS ASTHMA",
+      "expected": "TREATMENT DrugA BIOMARKER ALK DIAGNOSIS ASTHMA",
+      "generated": "TREATMENT DrugA BIOMARKER ALK DIAGNOSIS ASTHMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.013806200120598078,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 3,
+        "clinical_support": 3,
+        "exact": 1,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0991",
+      "split": "test_test_test",
+      "source": "PATIENT Hugo Park ON January 2 VISITED Dr Reed LIVES 1091 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [DOCTOR] [DOCTOR] ON ON[NAME][NAME] [NAME] ON ON",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.04841519985347986,
+      "tokens": 18,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0992",
+      "split": "test_test_test",
+      "source": "PATIENT Evelyn Banerjee ON October 26 VISITED Dr Reed LIVES 1092 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "MRN VISITED [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.012535800226032734,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0993",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Hugo Park MRN 842873 TREATMENT DrugC",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT DrugC",
+      "generated": "PATIENT [NAME]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.006739600095897913,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0994",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS DIABETES PATIENT Anastasia Mehta MRN 798385 TREATMENT DrugA",
+      "expected": "DIAGNOSIS DIABETES PATIENT [NAME] MRN [MRN] TREATMENT DrugA",
+      "generated": "MRN [MRN] DIAGNOSIS NSCLC BIOMARKER NONE TREATMENT NONE [MRN] TREATMENT TREATMENT TREATMENT DIAGNOSIS NONE TREATMENT TREATMENTNONE TREATMENT NONE NONE NONE BIOMARKERDrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.059222299605607986,
+      "tokens": 44,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0995",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Evan Reed MRN 273875 TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT Chemotherapy",
+      "generated": "PATIENT [NAME]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.00778160011395812,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0996",
+      "split": "test_test_test",
+      "source": "PATIENT Zoya Park ON January 27 VISITED Dr Reed LIVES 1096 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [NAME] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.009728200268000364,
+      "tokens": 6,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0997",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Hugo Park MRN 336876 TREATMENT DrugC",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT DrugC",
+      "generated": "PATIENT [NAME]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.005733100231736898,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0998",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS NSCLC PATIENT Anastasia Mehta MRN 186625 TREATMENT DrugB",
+      "expected": "DIAGNOSIS NSCLC PATIENT [NAME] MRN [MRN] TREATMENT DrugB",
+      "generated": "MRN [MRN] DrugB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.008204999845474958,
+      "tokens": 6,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0999",
+      "split": "test_test_test",
+      "source": "PATIENT Zoya Reed ON October 26 VISITED Dr Reed LIVES 1099 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] ON [DATE] VISITED [DOCTOR] LIVES [ADDRESS]",
+      "generated": "PATIENT [NAME] [DOCTOR] [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.008866600226610899,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    }
+  ],
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+  "protocol_hash": "f69f297980fdf411fa23b270684d890ec9b15af7d73cc68e1d635fd1aff7d010",
+  "data_producer_source_hash": "f2ae852fc4af39e317f5fdb5528146ead5c48299e0a5720c866a5e4facce655f",
+  "checkpoint_sha256": "1582f3b9034f82c9d2df622bff9d62352d851c902e5482c51aba3a4df3d757a5",
+  "checkpoint_step": 4000,
+  "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+  "architecture": "single_attention",
+  "seed": 42,
+  "split": "test_test_test",
+  "teacher_forced": {
+    "loss": 7.932833920992338,
+    "next_token_accuracy": 0.5820512820512821,
+    "scored_tokens": 780,
+    "examples": 50
+  },
+  "scope": "complete frozen final partition; no tuning from these outcomes"
+}

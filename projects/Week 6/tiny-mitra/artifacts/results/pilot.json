@@ -1,0 +1,63 @@
+{
+  "purpose": "source-dependent tiny-batch learning, not final-test performance",
+  "passed": true,
+  "elapsed_seconds_this_invocation": 8.164113199803978,
+  "outputs": [
+    {
+      "split": "train",
+      "source": "PATIENT Jo TREATMENT DrugA",
+      "expected": "PATIENT [NAME] TREATMENT DrugA",
+      "generated": "PATIENT [NAME] TREATMENT DrugA",
+      "termination": "eos",
+      "exact": true
+    },
+    {
+      "split": "train",
+      "source": "PATIENT Li TREATMENT DrugB",
+      "expected": "PATIENT [NAME] TREATMENT DrugB",
+      "generated": "PATIENT [NAME] TREATMENT DrugB",
+      "termination": "eos",
+      "exact": true
+    },
+    {
+      "split": "train",
+      "source": "PATIENT Mo TREATMENT DrugA",
+      "expected": "PATIENT [NAME] TREATMENT DrugA",
+      "generated": "PATIENT [NAME] TREATMENT DrugA",
+      "termination": "eos",
+      "exact": true
+    },
+    {
+      "split": "train",
+      "source": "PATIENT Bo TREATMENT DrugB",
+      "expected": "PATIENT [NAME] TREATMENT DrugB",
+      "generated": "PATIENT [NAME] TREATMENT DrugB",
+      "termination": "eos",
+      "exact": true
+    },
+    {
+      "split": "validation",
+      "source": "PATIENT Xi TREATMENT DrugA",
+      "expected": "PATIENT [NAME] TREATMENT DrugA",
+      "generated": "PATIENT [NAME] TREATMENT DrugA",
+      "termination": "eos",
+      "exact": true
+    },
+    {
+      "split": "validation",
+      "source": "PATIENT Yu TREATMENT DrugB",
+      "expected": "PATIENT [NAME] TREATMENT DrugB",
+      "generated": "PATIENT [NAME] TREATMENT DrugB",
+      "termination": "eos",
+      "exact": true
+    }
+  ],
+  "device": "cpu",
+  "gpu_peak_allocated_bytes": null,
+  "budget": {
+    "steps": 500,
+    "width": 32,
+    "batch": 4,
+    "lr": 0.003
+  }
+}

@@ -1,0 +1,1955 @@
+{
+  "metrics": {
+    "tp": 29,
+    "fp": 99,
+    "fn": 84,
+    "identifiers": 113,
+    "leaked_identifiers": 0,
+    "leaked_note": 0,
+    "clinical_correct": 2,
+    "clinical_support": 93,
+    "exact": 0,
+    "examples": 50,
+    "precision": 0.2265625,
+    "recall": 0.25663716814159293,
+    "f1": 0.24066390041493776,
+    "exact_match": 0.0,
+    "identifier_leakage": 0.0,
+    "note_leakage": 0.0,
+    "clinical_preservation": 0.021505376344086023,
+    "categories": {
+      "PATIENT": {
+        "tp": 9,
+        "support": 45,
+        "leaked": 0,
+        "recall": 0.2
+      },
+      "DOB": {
+        "tp": 6,
+        "support": 11,
+        "leaked": 0,
+        "recall": 0.5454545454545454
+      },
+      "PHONE": {
+        "tp": 5,
+        "support": 11,
+        "leaked": 0,
+        "recall": 0.45454545454545453
+      },
+      "ADDRESS": {
+        "tp": 5,
+        "support": 11,
+        "leaked": 0,
+        "recall": 0.45454545454545453
+      },
+      "MRN": {
+        "tp": 0,
+        "support": 17,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "DOCTOR": {
+        "tp": 4,
+        "support": 9,
+        "leaked": 0,
+        "recall": 0.4444444444444444
+      },
+      "DATE": {
+        "tp": 0,
+        "support": 9,
+        "leaked": 0,
+        "recall": 0.0
+      }
+    },
+    "controls": 5,
+    "control_over_redactions": 0,
+    "seconds": 80.06138489907607,
+    "generated_tokens": 3611,
+    "seconds_per_note": 1.6012276979815214,
+    "valid_terminations": 49,
+    "mode": "greedy",
+    "temperature": null,
+    "sampling_seed": 42,
+    "device": "cpu",
+    "coverage": "declared subset; see IDs",
+    "example_ids": [
+      "example_0800",
+      "example_0801",
+      "example_0802",
+      "example_0803",
+      "example_0804",
+      "example_0805",
+      "example_0806",
+      "example_0807",
+      "example_0808",
+      "example_0809",
+      "example_0810",
+      "example_0811",
+      "example_0812",
+      "example_0813",
+      "example_0814",
+      "example_0815",
+      "example_0816",
+      "example_0817",
+      "example_0818",
+      "example_0819",
+      "example_0820",
+      "example_0821",
+      "example_0822",
+      "example_0823",
+      "example_0824",
+      "example_0825",
+      "example_0826",
+      "example_0827",
+      "example_0828",
+      "example_0829",
+      "example_0830",
+      "example_0831",
+      "example_0832",
+      "example_0833",
+      "example_0834",
+      "example_0835",
+      "example_0836",
+      "example_0837",
+      "example_0838",
+      "example_0839",
+      "example_0840",
+      "example_0841",
+      "example_0842",
+      "example_0843",
+      "example_0844",
+      "example_0845",
+      "example_0846",
+      "example_0847",
+      "example_0848",
+      "example_0849"
+    ]
+  },
+  "outputs": [
+    {
+      "id": "example_0800",
+      "split": "test_known_known",
+      "source": "DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugC dose800",
+      "expected": "DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugC dose800",
+      "generated": "DIAGNONTRENTIOC TIAGNTEATENTMENTR NTMENT TEAGNTMEATEASSIATENTRENTOSIATMENTMATONTMAS DrugC AGNOC DDIATMONT",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 3.576028199866414,
+      "tokens": 106,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "example_0801",
+      "split": "test_known_known",
+      "source": "PATIENT Ravi Rao DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugB",
+      "generated": "PATIENTIENT [NAME] DIESIAT [NAME] DIENENOS DrugATHONENESIOS DrugBEATHONONT DrugOMEST DrugC ENEAT DDIAT NT g[ADDRESS] T DrugAGNATMOSGNENENON NEATHF",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 7.672544099856168,
+      "tokens": 129,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0802",
+      "split": "test_known_known",
+      "source": "PATIENT Ravi Lee DOB 1997-07-15 PHONE 555-000-0802 ADDRESS 902 Oak St TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA",
+      "generated": "PATIENT [NAME] DOS [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.193518300075084,
+      "tokens": 50,
+      "counts": {
+        "tp": 2,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0803",
+      "split": "test_known_known",
+      "source": "PATIENT Leah Shah DIAGNOSIS NSCLC BIOMARKER NONE TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER NONE TREATMENT DrugC",
+      "generated": "PAT DR DIE NTMAT DIS [NAME] T T DIS TEAT NENT DIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.6305773998610675,
+      "tokens": 45,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0804",
+      "split": "test_known_known",
+      "source": "PATIENT Noah Cole MRN 70000804 DIAGNOSIS DIABETES TREATMENT DrugA",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugA",
+      "generated": "PAT DIAGN [NAME] DIAGNOS AT NTMENT DOSIENT DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.4195171999745071,
+      "tokens": 44,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0805",
+      "split": "test_known_known",
+      "source": "PATIENT Ravi Rao MRN 70000805 DIAGNOSIS NSCLC TREATMENT DrugA",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugA",
+      "generated": "PATIENT [NAME] MRN MT DISISISIS NTMENT TRENTRNTRENTMENTRENTISSIOSIONONT DIOSIAGNT DrugC AGNT RENTMENOS DugNT DIATISIAT DrugNTR AGNTIONugCTMENTRENOSCT DRN DugONIgC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 2.5651695001870394,
+      "tokens": 158,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 1,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0806",
+      "split": "test_known_known",
+      "source": "PATIENT Maya Cole DOB 1993-09-10 PHONE 555-000-0806 ADDRESS 906 Oak St TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugC",
+      "generated": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ENT DrugCLMEATMENT PATONT PAT NT MENT [NAME] DRENT NT ENT NT DDAGNTMPADrugNTR AGNTIONT MAGNTMAT [NAME] NT  [NAME] EADOS RNONTMAT [NAME]ONTONTRENTR NTISIENT DrugC RNTIEAT DINT [DATE] T DrugNT NTOS NTR TIENTENT ME DIAT DrS ",
+      "termination": "output_limit",
+      "protocol_valid": false,
+      "seconds": 6.609215100295842,
+      "tokens": 220,
+      "counts": {
+        "tp": 2,
+        "fp": 6,
+        "fn": 2,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0807",
+      "split": "test_known_known",
+      "source": "PATIENT Maya Cole MRN 70000807 DIAGNOSIS DIABETES TREATMENT DrugB",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB",
+      "generated": "PAT DIAGN [NAME] DIAGNOS AT NTMENT DOSIENT DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.6632371000014246,
+      "tokens": 44,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0808",
+      "split": "test_known_known",
+      "source": "PATIENT Maya Shah DOB 1961-06-14 PHONE 555-000-0808 ADDRESS 908 Oak St TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB",
+      "generated": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ENT DrugCLMEATMENT PATONT PAT NT MENT [NAME] DRENTMENT",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.674729899968952,
+      "tokens": 74,
+      "counts": {
+        "tp": 2,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0809",
+      "split": "test_known_known",
+      "source": "PATIENT Sara Lee MRN 70000809 DIAGNOSIS ASTHMA TREATMENT DrugA",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA TREATMENT DrugA",
+      "generated": "PATIENT [NAME] [NAME] [NAME] DIATIS AGNT [NAME] [NAME] [NAME] T DrugC [DATE] DIOC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.6954534999094903,
+      "tokens": 47,
+      "counts": {
+        "tp": 0,
+        "fp": 7,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0810",
+      "split": "test_known_known",
+      "source": "DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugC dose810",
+      "expected": "DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugC dose810",
+      "generated": "DIATONSS ATIONTIOMA NEATESSCR NOSC NONOS DrugAGNONONOSIOSIATIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.723474099766463,
+      "tokens": 63,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "example_0811",
+      "split": "test_known_known",
+      "source": "PATIENT Maya Shah DOB 1982-08-23 PHONE 555-000-0811 ADDRESS 911 Oak St TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugC",
+      "generated": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] DDDRESS [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.7542665000073612,
+      "tokens": 50,
+      "counts": {
+        "tp": 2,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0812",
+      "split": "test_known_known",
+      "source": "PATIENT Ravi Cole DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA",
+      "generated": "ATHMENT [NAME] DIATME DIS TMENT [NAME] T DIENENENTHMENTRENENTMAT DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.7561121000908315,
+      "tokens": 61,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0813",
+      "split": "test_known_known",
+      "source": "PATIENT Ravi Cole MRN 70000813 DIAGNOSIS NSCLC TREATMENT DrugC",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugC",
+      "generated": "PATIENT [NAME] [NAME] DIE DIAGNOS T NTMENT TEATMATMET DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.7873212997801602,
+      "tokens": 50,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0814",
+      "split": "test_known_known",
+      "source": "DOCTOR Dr Alpha DATE 2026-12-05 PATIENT John Rao DIAGNOSIS NSCLC",
+      "expected": "DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS NSCLC",
+      "generated": "DOCTOR DIATENOC DIATIS DrugC [NAME] DOSIAGNONTENOSIONTRENONTOSIONONORENSIONSIATOSIOSIAGNOC DDrAT NTE",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 3.3686700998805463,
+      "tokens": 96,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 3,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0815",
+      "split": "test_known_known",
+      "source": "PATIENT Sara Shah MRN 70000815 DIAGNOSIS DIABETES TREATMENT DrugA",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugA",
+      "generated": "PAT DIAGN [NAME] DIAGNOS AT NTMENT DOSIENT DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.8349322997964919,
+      "tokens": 44,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0816",
+      "split": "test_known_known",
+      "source": "PATIENT Noah Cole MRN 70000816 DIAGNOSIS ASTHMA TREATMENT DrugA",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA TREATMENT DrugA",
+      "generated": "PATIENT DIS [NAME] DIENT [NAME] [NAME] NTIATMTIATIAT DIONTHMENOSIATMTMPATHON [ADDRESS] [NAME] TETONOS NOSIOS ENTE  DDIAT NT ugCLNONONTIENTMOSGNTMEN AGNTIONugCLCTENTENOS AT [NAME] EATR",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 6.433365100063384,
+      "tokens": 151,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0817",
+      "split": "test_known_known",
+      "source": "DOCTOR Dr Alpha DATE 2026-11-04 PATIENT Ravi Rao DIAGNOSIS ASTHMA",
+      "expected": "DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA",
+      "generated": "DOCTOR [DOCTOR] DATE [DATE] DIATIS NOC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.14378219982609153,
+      "tokens": 27,
+      "counts": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0818",
+      "split": "test_known_known",
+      "source": "PATIENT Leah Shah MRN 70000818 DIAGNOSIS NSCLC TREATMENT DrugA",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugA",
+      "generated": "PATIENT [NAME] [NAME] DIE DIAGNOS T NTMENT TEATMATMET DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.28713220031931996,
+      "tokens": 50,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0819",
+      "split": "test_known_known",
+      "source": "PATIENT John Cole MRN 70000819 DIAGNOSIS ASTHMA TREATMENT DrugA",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA TREATMENT DrugA",
+      "generated": "PATIENT DIS [NAME] DIENT [NAME] [NAME] NTIATMTIATIAT DIONTHMENOSIATMTMPATHON [ADDRESS] [NAME] TETONOS NOSIOS ENTE  DDIAT NT ugCLNONONTIENTMOSB TMEN AGNTIONugCLCTRENONOS AT [NAME] EATR",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.5041743996553123,
+      "tokens": 151,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0820",
+      "split": "test_known_known",
+      "source": "DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugB dose820",
+      "expected": "DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugB dose820",
+      "generated": "DIATONS ATIOBIAGNS DIAT DrugAGNOSC DIAGNTOSIOREATMAGNOSIOB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.2935063000768423,
+      "tokens": 59,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "example_0821",
+      "split": "test_known_known",
+      "source": "PATIENT Noah Rao DOB 1985-09-04 PHONE 555-000-0821 ADDRESS 921 Oak St TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugC",
+      "generated": "PATIENT [NAME] DOS [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.33052749978378415,
+      "tokens": 50,
+      "counts": {
+        "tp": 2,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0822",
+      "split": "test_known_known",
+      "source": "PATIENT Sara Lee DOB 1992-09-02 PHONE 555-000-0822 ADDRESS 922 Oak St TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA",
+      "generated": "PATIENT [NAME] DOS [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.34776390017941594,
+      "tokens": 50,
+      "counts": {
+        "tp": 2,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0823",
+      "split": "test_known_known",
+      "source": "PATIENT Noah Rao MRN 70000823 DIAGNOSIS ASTHMA TREATMENT DrugA",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA TREATMENT DrugA",
+      "generated": "PATIENT [NAME] [NAME] [NAME] DIATISISIS T T DIS TENT NTENT NTENTRENTR DIS DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.4909489997662604,
+      "tokens": 65,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0824",
+      "split": "test_known_known",
+      "source": "PATIENT John Shah DOB 1956-04-22 PHONE 555-000-0824 ADDRESS 924 Oak St TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB",
+      "generated": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] DDDRESS [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.3149049999192357,
+      "tokens": 50,
+      "counts": {
+        "tp": 2,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0825",
+      "split": "test_known_known",
+      "source": "PATIENT John Shah MRN 70000825 DIAGNOSIS ASTHMA TREATMENT DrugA",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA TREATMENT DrugA",
+      "generated": "PATIENT DIS [NAME] DIENT [NAME] [NAME] NTIATMTIATIAT DIONTHMENOSIATMTMPATHON [ADDRESS] [NAME] TETONOS NOSIOC ENTE  DDIAT NT ugCLNONONTIENTMOSGNTMEN AGNTIONugCLCTENTENOS AT [NAME] EATR",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 7.383595199789852,
+      "tokens": 151,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0826",
+      "split": "test_known_known",
+      "source": "PATIENT Leah Lee DIAGNOSIS DIABETES BIOMARKER NONE TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER NONE TREATMENT DrugB",
+      "generated": "DrugC MEC DIATISISIS DIENT T T DIOSS DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 2.1234537004493177,
+      "tokens": 43,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0827",
+      "split": "test_known_known",
+      "source": "PATIENT Sara Cole MRN 70000827 DIAGNOSIS DIABETES TREATMENT DrugB",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB",
+      "generated": "PAT DIAGN [NAME] DIAGNOS AT NTMENT DOSIENT DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.2208517999388278,
+      "tokens": 44,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0828",
+      "split": "test_known_known",
+      "source": "PATIENT Maya Lee MRN 70000828 DIAGNOSIS NSCLC TREATMENT DrugC",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugC",
+      "generated": "PATIENT [NAME] MRN [NAME] DIAGNOSIS TIENT [NAME] T AT NT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.3986336002126336,
+      "tokens": 48,
+      "counts": {
+        "tp": 1,
+        "fp": 2,
+        "fn": 1,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0829",
+      "split": "test_known_known",
+      "source": "PATIENT Maya Rao DOB 1971-02-10 PHONE 555-000-0829 ADDRESS 929 Oak St TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugC",
+      "generated": "PATIENT [NAME] DOS [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.3280843999236822,
+      "tokens": 50,
+      "counts": {
+        "tp": 2,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0830",
+      "split": "test_known_known",
+      "source": "DIAGNOSIS ASTHMA BIOMARKER EGFR TREATMENT DrugA dose830",
+      "expected": "DIAGNOSIS ASTHMA BIOMARKER EGFR TREATMENT DrugA dose830",
+      "generated": "DIATONS ATIOBIAGNS DIAT DIATIAGNT NTENS TISIENOC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.2525243000127375,
+      "tokens": 49,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "example_0831",
+      "split": "test_known_known",
+      "source": "DOCTOR Dr Alpha DATE 2026-11-12 PATIENT Ravi Rao DIAGNOSIS ASTHMA",
+      "expected": "DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA",
+      "generated": "DOCTOR [DOCTOR] DATE [DATE] DIATIS NOC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.22644479991868138,
+      "tokens": 27,
+      "counts": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0832",
+      "split": "test_known_known",
+      "source": "DOCTOR Dr Alpha DATE 2026-11-05 PATIENT Sara Cole DIAGNOSIS NSCLC",
+      "expected": "DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS NSCLC",
+      "generated": "DOCTOR [DOCTOR] DATE [DATE] DOSIS [NAME] [DATE] DIAGNOSIAGNONONONONONTRENONTREAT ASIS DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.38877830002456903,
+      "tokens": 70,
+      "counts": {
+        "tp": 1,
+        "fp": 3,
+        "fn": 2,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0833",
+      "split": "test_known_known",
+      "source": "PATIENT Maya Shah MRN 70000833 DIAGNOSIS DIABETES TREATMENT DrugB",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB",
+      "generated": "PAT DIAGN [NAME] DIAGNOS AT NTMENT DOSIENT DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.2554301000200212,
+      "tokens": 44,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0834",
+      "split": "test_known_known",
+      "source": "PATIENT Sara Rao DIAGNOSIS NSCLC BIOMARKER ALK TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER ALK TREATMENT DrugB",
+      "generated": "PATIENT T [NAME] [NAME] DIOSS MENOR NTMENOS DrugC AT DIATRENENOSSSIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.3418047996237874,
+      "tokens": 59,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0835",
+      "split": "test_known_known",
+      "source": "DOCTOR Dr Alpha DATE 2026-05-09 PATIENT Sara Shah DIAGNOSIS ASTHMA",
+      "expected": "DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA",
+      "generated": "DOCL DIATENOC [DATE] DIATONTIEATIAGNOSIS DONONONONTMATR DrugAT ASIS DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.47705089999362826,
+      "tokens": 69,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 3,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0836",
+      "split": "test_known_known",
+      "source": "DOCTOR Dr Alpha DATE 2026-03-17 PATIENT John Shah DIAGNOSIS NSCLC",
+      "expected": "DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS NSCLC",
+      "generated": "DOCTOR [DOCTOR] DATE DISIAGNT NTMENOSIOSIAGNONONONONONTRENONTREAT NTMATENOB [ADDRESS] PATMRER DISIOSIATMENONT",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.3912690998986363,
+      "tokens": 95,
+      "counts": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0837",
+      "split": "test_known_known",
+      "source": "PATIENT Ravi Lee DOB 1954-09-10 PHONE 555-000-0837 ADDRESS 937 Oak St TREATMENT DrugC",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugC",
+      "generated": "PATIENT [NAME] DOS [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.7274552001617849,
+      "tokens": 50,
+      "counts": {
+        "tp": 2,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0838",
+      "split": "test_known_known",
+      "source": "PATIENT Sara Shah DOB 1953-06-22 PHONE 555-000-0838 ADDRESS 938 Oak St TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB",
+      "generated": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] DDDRESS [ADDRESS] TREATMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.41504030022770166,
+      "tokens": 50,
+      "counts": {
+        "tp": 2,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0839",
+      "split": "test_known_known",
+      "source": "DOCTOR Dr Alpha DATE 2026-05-28 PATIENT Noah Shah DIAGNOSIS ASTHMA",
+      "expected": "DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA",
+      "generated": "DOCL DIATENOC [DATE] DIATONTIEATIAGNOSIS DONONONONTMENSIONOSIONONT DrugONSIENOSIOBIENTOC DDrATMETE",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.5686586000956595,
+      "tokens": 94,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 3,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0840",
+      "split": "test_known_known",
+      "source": "DIAGNOSIS DIABETES BIOMARKER NONE TREATMENT DrugA dose840",
+      "expected": "DIAGNOSIS DIABETES BIOMARKER NONE TREATMENT DrugA dose840",
+      "generated": "DIATENTEATENOR TE NTE DIATR TR NTMENT TRENOC NONONOSIOS TREATMATRENONTRENSIOC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.4549874998629093,
+      "tokens": 78,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "example_0841",
+      "split": "test_known_known",
+      "source": "PATIENT Leah Cole DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA",
+      "generated": "PAT [NAME] [NAME] NTMAT DISIS DIS DIS TEATMAT DIENOSIENT DrugATREATMENT TEG[ADDRESS] NT NT NER ENTE  DDIAT NT ENT NT DrA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.7154300999827683,
+      "tokens": 103,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0842",
+      "split": "test_known_known",
+      "source": "PATIENT Ravi Rao DIAGNOSIS DIABETES BIOMARKER NONE TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER NONE TREATMENT DrugA",
+      "generated": "DrugC MEC DIATISISIS DIENT T T DIOSS DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.2768763997592032,
+      "tokens": 43,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0843",
+      "split": "test_known_known",
+      "source": "DOCTOR Dr Alpha DATE 2026-06-05 PATIENT Maya Shah DIAGNOSIS ASTHMA",
+      "expected": "DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA",
+      "generated": "DOCL DIATENOC [DATE] DIATONTIEATIAGNOSIS DONONONONTMENSIONOSIONONT DrugONSIENOSIOB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.4700151002034545,
+      "tokens": 78,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 3,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0844",
+      "split": "test_known_known",
+      "source": "PATIENT John Lee MRN 70000844 DIAGNOSIS NSCLC TREATMENT DrugC",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugC",
+      "generated": "PATIENT [NAME] MRN [NAME] DIAGNOSIS TIENT [NAME] T AT NT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.32464500004425645,
+      "tokens": 48,
+      "counts": {
+        "tp": 1,
+        "fp": 2,
+        "fn": 1,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0845",
+      "split": "test_known_known",
+      "source": "PATIENT Maya Shah DOB 1990-06-05 PHONE 555-000-0845 ADDRESS 945 Oak St TREATMENT DrugA",
+      "expected": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA",
+      "generated": "PATIENT [NAME] DOB [DATE] PHONE [PHONE] DDDRESS [ADDRESS] TRE MENT PADrugAT ME PAGNTRE RENT DIONT",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 7.510701099876314,
+      "tokens": 74,
+      "counts": {
+        "tp": 2,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0846",
+      "split": "test_known_known",
+      "source": "PATIENT Leah Shah DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugB",
+      "expected": "PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugB",
+      "generated": "PAT [NAME] [NAME] NTMAT DISIS DIS DIS TESIS ATRENEA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 2.2157491999678314,
+      "tokens": 42,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0847",
+      "split": "test_known_known",
+      "source": "PATIENT Leah Cole MRN 70000847 DIAGNOSIS NSCLC TREATMENT DrugB",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugB",
+      "generated": "PATIENT [NAME] [NAME] DIE DIAGNOS T NTMENT TEATMATMET DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 3.2633981998078525,
+      "tokens": 50,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0848",
+      "split": "test_known_known",
+      "source": "DOCTOR Dr Alpha DATE 2026-06-15 PATIENT Leah Lee DIAGNOSIS NSCLC",
+      "expected": "DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS NSCLC",
+      "generated": "DOCTOMATIATENOC [DATE] DIATONTIATESIATIATENONTENONOCTH DrugATONONONT DrugONSIANOSIOS DIOSIATENT NONSIOCLNONONTIS DDrugCLNOS AT DONTMATRENTMDrugAGNTIAGNOS ugONONTISIORENTONONOS",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 4.692576600238681,
+      "tokens": 171,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 3,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0849",
+      "split": "test_known_known",
+      "source": "PATIENT Ravi Rao MRN 70000849 DIAGNOSIS ASTHMA TREATMENT DrugB",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA TREATMENT DrugB",
+      "generated": "PATIENT [NAME] [NAME] [NAME] DIATISISIS TIENT [NAME] T AT [NAME] [DATE] DIEA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.5670583001337945,
+      "tokens": 47,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    }
+  ],
+  "experiment_id": "final_multi_attention_test_known_known",
+  "architecture": "multi_attention",
+  "seed": 42,
+  "split": "test_known_known",
+  "source_hash": "a399a568af148bd3b0e2cd08c5aaa07f9ab045cbc5035ee0446c03d832d4b33d",
+  "dataset_hash": "368646b32a01c79aed83b468b999afebaeff47f31d97f8e66c3a75bdb1a24113",
+  "tokenizer_hash": "20d5ed18ecc52a6b1dc6c3ac9e4f1892a5759c0af3cf32be7042673aadacebd7",
+  "checkpoint_step": 400,
+  "teacher_forced": {
+    "loss": 0.8788675762358166,
+    "next_token_accuracy": 0.7253968253968254,
+    "scored_tokens": 2520,
+    "examples": 50
+  },
+  "scope": "complete declared final partition; no tuning from these outputs"
+}

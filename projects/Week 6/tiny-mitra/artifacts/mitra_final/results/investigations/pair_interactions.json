@@ -1,0 +1,64 @@
+{
+  "run_id": "mitra_final/transformer_2_seed42",
+  "checkpoint_step": 4000,
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+  "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+  "example_ids": [
+    "assignment_0700",
+    "assignment_0701",
+    "assignment_0702",
+    "assignment_0704",
+    "assignment_0705",
+    "assignment_0717",
+    "assignment_0719",
+    "assignment_0703"
+  ],
+  "observations": [
+    {
+      "layer": 0,
+      "heads": [
+        0,
+        1
+      ],
+      "metric": "recall",
+      "pair_delta": -0.9285714285714286,
+      "sum_single_deltas": -1.0,
+      "interaction_residual": 0.0714285714285714
+    },
+    {
+      "layer": 0,
+      "heads": [
+        0,
+        1
+      ],
+      "metric": "conditional_loss",
+      "pair_delta": 1.525905133516062,
+      "sum_single_deltas": 1.4514546418795362,
+      "interaction_residual": 0.07445049163652584
+    },
+    {
+      "layer": 1,
+      "heads": [
+        0,
+        1
+      ],
+      "metric": "recall",
+      "pair_delta": -0.1428571428571429,
+      "sum_single_deltas": -0.0714285714285714,
+      "interaction_residual": -0.07142857142857151
+    },
+    {
+      "layer": 1,
+      "heads": [
+        0,
+        1
+      ],
+      "metric": "conditional_loss",
+      "pair_delta": 0.12256641510175541,
+      "sum_single_deltas": 0.08266050613019615,
+      "interaction_residual": 0.039905908971559254
+    }
+  ],
+  "limit": "Descriptive non-additivity; free-decoding thresholds and nonlinear network behavior do not establish a unique semantic mechanism"
+}

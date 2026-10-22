@@ -1,0 +1,919 @@
+{
+  "protocol": {
+    "architectures": [
+      "embedding_only",
+      "single_attention",
+      "multi_attention",
+      "transformer_2"
+    ],
+    "seed": 42,
+    "updates": 4000,
+    "sources": [
+      "PATIENT John Smith RECEIVED DrugA",
+      "PATIENT John Smith RECEIVED DrugB"
+    ],
+    "conditional_prefix": "PATIENT [NAME] RECEIVED ",
+    "selection": "primary fixed-update checkpoints; no training or model selection from this probe",
+    "runner_source_hash": "7857ae1c897489f696acf81f5f78c34dc54141a3e00a851bf0d2d46caf29b8b5",
+    "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173"
+  },
+  "changed_token_positions": [
+    17
+  ],
+  "matched_query_index": 24,
+  "models": [
+    {
+      "architecture": "embedding_only",
+      "checkpoint_step": 4000,
+      "checkpoint_sha256": "1a90c2dde0ab0377f240b98399b943314ecc0326c462709deb510b9d6d22149a",
+      "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+      "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+      "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+      "identical_distributions": true,
+      "maximum_probability_change": 0.0,
+      "both_conditional_and_free_correct": false,
+      "observations": [
+        {
+          "source": "PATIENT John Smith RECEIVED DrugA",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            47,
+            26,
+            19,
+            25,
+            106,
+            56,
+            24,
+            20,
+            31,
+            19,
+            106,
+            122,
+            106,
+            130,
+            5,
+            109,
+            106,
+            6,
+            106,
+            122,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "DrugA": 0.0019017707090824842,
+            "DrugB": 0.01618567854166031
+          },
+          "free_generation": {
+            "text": "PATIENT RECEIVED [NAME] [MRN] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9719233512878418
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9997885823249817
+              },
+              {
+                "id": 122,
+                "token": "RECEIVED",
+                "probability": 0.3818391263484955
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9986074566841125
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.15104803442955017
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.7873461842536926
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.3480425775051117
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9996346235275269
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.5085768699645996
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9329780340194702
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.4305298328399658
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.7634122371673584
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.1553657352924347
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9489100575447083
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.3134167790412903
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9549593329429626
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.3028031289577484
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.8064919114112854
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.1052166298031807
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.7672503590583801
+              },
+              {
+                "id": 120,
+                "token": "ON",
+                "probability": 0.12505888938903809
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9995449185371399
+              },
+              {
+                "id": 8,
+                "token": "[DATE]",
+                "probability": 0.1999548226594925
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9994219541549683
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        },
+        {
+          "source": "PATIENT John Smith RECEIVED DrugB",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            47,
+            26,
+            19,
+            25,
+            106,
+            56,
+            24,
+            20,
+            31,
+            19,
+            106,
+            122,
+            106,
+            131,
+            5,
+            109,
+            106,
+            6,
+            106,
+            122,
+            106
+          ],
+          "selected_token": "[MRN]",
+          "candidates": {
+            "DrugA": 0.0019017707090824842,
+            "DrugB": 0.01618567854166031
+          },
+          "free_generation": {
+            "text": "PATIENT RECEIVED [NAME] [MRN] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9719233512878418
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9997885823249817
+              },
+              {
+                "id": 122,
+                "token": "RECEIVED",
+                "probability": 0.3818391263484955
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9986074566841125
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.15104803442955017
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.7873461842536926
+              },
+              {
+                "id": 9,
+                "token": "[MRN]",
+                "probability": 0.3480425775051117
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9996346235275269
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.5085768699645996
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9329780340194702
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.4305298328399658
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.7634122371673584
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.1553657352924347
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9489100575447083
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.3134167790412903
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9549593329429626
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.3028031289577484
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.8064919114112854
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.1052166298031807
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.7672503590583801
+              },
+              {
+                "id": 120,
+                "token": "ON",
+                "probability": 0.12505888938903809
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9995449185371399
+              },
+              {
+                "id": 8,
+                "token": "[DATE]",
+                "probability": 0.1999548226594925
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9994219541549683
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        }
+      ]
+    },
+    {
+      "architecture": "single_attention",
+      "checkpoint_step": 4000,
+      "checkpoint_sha256": "1582f3b9034f82c9d2df622bff9d62352d851c902e5482c51aba3a4df3d757a5",
+      "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+      "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+      "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+      "identical_distributions": false,
+      "maximum_probability_change": 0.8922832012176514,
+      "both_conditional_and_free_correct": true,
+      "observations": [
+        {
+          "source": "PATIENT John Smith RECEIVED DrugA",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            47,
+            26,
+            19,
+            25,
+            106,
+            56,
+            24,
+            20,
+            31,
+            19,
+            106,
+            122,
+            106,
+            130,
+            5,
+            109,
+            106,
+            6,
+            106,
+            122,
+            106
+          ],
+          "selected_token": "DrugA",
+          "candidates": {
+            "DrugA": 0.44841235876083374,
+            "DrugB": 0.10652697831392288
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] RECEIVED DrugA",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999107122421265
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 1.0
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9999974966049194
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 1.0
+              },
+              {
+                "id": 122,
+                "token": "RECEIVED",
+                "probability": 0.9902106523513794
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 1.0
+              },
+              {
+                "id": 130,
+                "token": "DrugA",
+                "probability": 0.44841235876083374
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.999869704246521
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        },
+        {
+          "source": "PATIENT John Smith RECEIVED DrugB",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            47,
+            26,
+            19,
+            25,
+            106,
+            56,
+            24,
+            20,
+            31,
+            19,
+            106,
+            122,
+            106,
+            131,
+            5,
+            109,
+            106,
+            6,
+            106,
+            122,
+            106
+          ],
+          "selected_token": "DrugB",
+          "candidates": {
+            "DrugA": 4.368770021301316e-07,
+            "DrugB": 0.9988101720809937
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] RECEIVED DrugB",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9999068975448608
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 1.0
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9999879598617554
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 1.0
+              },
+              {
+                "id": 122,
+                "token": "RECEIVED",
+                "probability": 0.9990183115005493
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 1.0
+              },
+              {
+                "id": 131,
+                "token": "DrugB",
+                "probability": 0.9988101720809937
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9999988079071045
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        }
+      ]
+    },
+    {
+      "architecture": "multi_attention",
+      "checkpoint_step": 4000,
+      "checkpoint_sha256": "790c8c56b167589f14822d5648b42105b628b5a98a39dd4cc990236055aa072c",
+      "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+      "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+      "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+      "identical_distributions": false,
+      "maximum_probability_change": 0.8923880457878113,
+      "both_conditional_and_free_correct": false,
+      "observations": [
+        {
+          "source": "PATIENT John Smith RECEIVED DrugA",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            47,
+            26,
+            19,
+            25,
+            106,
+            56,
+            24,
+            20,
+            31,
+            19,
+            106,
+            122,
+            106,
+            130,
+            5,
+            109,
+            106,
+            6,
+            106,
+            122,
+            106
+          ],
+          "selected_token": "Chemotherapy",
+          "candidates": {
+            "DrugA": 0.08944005519151688,
+            "DrugB": 0.0005447037401609123
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] RECEIVED Chemotherapy",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 1.0
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999998807907104
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9999995231628418
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999979734420776
+              },
+              {
+                "id": 122,
+                "token": "RECEIVED",
+                "probability": 0.9944122433662415
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999918937683105
+              },
+              {
+                "id": 133,
+                "token": "Chemotherapy",
+                "probability": 0.8554218411445618
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 1.0
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        },
+        {
+          "source": "PATIENT John Smith RECEIVED DrugB",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            47,
+            26,
+            19,
+            25,
+            106,
+            56,
+            24,
+            20,
+            31,
+            19,
+            106,
+            122,
+            106,
+            131,
+            5,
+            109,
+            106,
+            6,
+            106,
+            122,
+            106
+          ],
+          "selected_token": "DrugB",
+          "candidates": {
+            "DrugA": 3.6090145840717014e-06,
+            "DrugB": 0.8929327726364136
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] RECEIVED DrugB",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 1.0
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999998807907104
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9514263272285461
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999977350234985
+              },
+              {
+                "id": 122,
+                "token": "RECEIVED",
+                "probability": 0.9999144077301025
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.999991774559021
+              },
+              {
+                "id": 131,
+                "token": "DrugB",
+                "probability": 0.8929327726364136
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9983750581741333
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        }
+      ]
+    },
+    {
+      "architecture": "transformer_2",
+      "checkpoint_step": 4000,
+      "checkpoint_sha256": "aecfd119eefc955c0ecbe024d6889847c2ba8448b30388916744b0b4a9302684",
+      "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+      "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+      "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+      "identical_distributions": false,
+      "maximum_probability_change": 0.986674964427948,
+      "both_conditional_and_free_correct": true,
+      "observations": [
+        {
+          "source": "PATIENT John Smith RECEIVED DrugA",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            47,
+            26,
+            19,
+            25,
+            106,
+            56,
+            24,
+            20,
+            31,
+            19,
+            106,
+            122,
+            106,
+            130,
+            5,
+            109,
+            106,
+            6,
+            106,
+            122,
+            106
+          ],
+          "selected_token": "DrugA",
+          "candidates": {
+            "DrugA": 0.9703051447868347,
+            "DrugB": 0.012258509173989296
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] RECEIVED DrugA",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9998925924301147
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999634027481079
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9998661279678345
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999781847000122
+              },
+              {
+                "id": 122,
+                "token": "RECEIVED",
+                "probability": 0.9992844462394714
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999730587005615
+              },
+              {
+                "id": 130,
+                "token": "DrugA",
+                "probability": 0.9703051447868347
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9998602867126465
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        },
+        {
+          "source": "PATIENT John Smith RECEIVED DrugB",
+          "input_ids": [
+            2,
+            4,
+            109,
+            106,
+            47,
+            26,
+            19,
+            25,
+            106,
+            56,
+            24,
+            20,
+            31,
+            19,
+            106,
+            122,
+            106,
+            131,
+            5,
+            109,
+            106,
+            6,
+            106,
+            122,
+            106
+          ],
+          "selected_token": "DrugB",
+          "candidates": {
+            "DrugA": 1.4912088772689458e-05,
+            "DrugB": 0.9989334940910339
+          },
+          "free_generation": {
+            "text": "PATIENT [NAME] RECEIVED DrugB",
+            "tokens": [
+              {
+                "id": 109,
+                "token": "PATIENT",
+                "probability": 0.9998646974563599
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999635219573975
+              },
+              {
+                "id": 6,
+                "token": "[NAME]",
+                "probability": 0.9999185800552368
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999779462814331
+              },
+              {
+                "id": 122,
+                "token": "RECEIVED",
+                "probability": 0.9966762065887451
+              },
+              {
+                "id": 106,
+                "token": " ",
+                "probability": 0.9999699592590332
+              },
+              {
+                "id": 131,
+                "token": "DrugB",
+                "probability": 0.9989334940910339
+              },
+              {
+                "id": 3,
+                "token": "<EOS>",
+                "probability": 0.9997655749320984
+              }
+            ],
+            "termination": "eos",
+            "mode": "greedy",
+            "temperature": null,
+            "seed": 42,
+            "protocol_valid": true
+          }
+        }
+      ]
+    }
+  ],
+  "scope": "one authored development source pair; a supplied prefix is distinct from free generation; no broad generalization or significance claim"
+}

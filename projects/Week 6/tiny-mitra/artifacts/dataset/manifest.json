@@ -1,0 +1,36 @@
+{
+  "counts": {
+    "train": 700,
+    "validation": 100,
+    "test_known_known": 50,
+    "test_known_test": 50,
+    "test_test_known": 50,
+    "test_test_test": 50
+  },
+  "category_counts": {
+    "DIAGNOSIS": 756,
+    "BIOMARKER": 270,
+    "TREATMENT": 799,
+    "PATIENT": 898,
+    "DOB": 244,
+    "PHONE": 244,
+    "ADDRESS": 244,
+    "DOCTOR": 201,
+    "DATE": 201,
+    "MRN": 285
+  },
+  "maximum_full_tokens": {
+    "train": 139,
+    "validation": 139,
+    "test_known_known": 139,
+    "test_known_test": 139,
+    "test_test_known": 140,
+    "test_test_test": 140
+  },
+  "dataset_hash": "368646b32a01c79aed83b468b999afebaeff47f31d97f8e66c3a75bdb1a24113",
+  "examples": 1000,
+  "context": 512,
+  "tokenizer_hash": "20d5ed18ecc52a6b1dc6c3ac9e4f1892a5759c0af3cf32be7042673aadacebd7",
+  "policy": "replace identifier field values; preserve clinical field/value associations",
+  "novelty": "names/doctors use separate pools; MRNs/phones globally unique; dates may recur; control layout shared; addresses unique where present"
+}

@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "architecture": "embedding_only",
+      "selected_step": 1000,
+      "completed_steps": 1000,
+      "parameters": 46829,
+      "validation_notes": 100,
+      "raw_generation_notes": 12,
+      "passed": true
+    },
+    {
+      "architecture": "single_attention",
+      "selected_step": 400,
+      "completed_steps": 1000,
+      "parameters": 63469,
+      "validation_notes": 100,
+      "raw_generation_notes": 12,
+      "passed": true
+    },
+    {
+      "architecture": "multi_attention",
+      "selected_step": 400,
+      "completed_steps": 1000,
+      "parameters": 63469,
+      "validation_notes": 100,
+      "raw_generation_notes": 12,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_1",
+      "selected_step": 500,
+      "completed_steps": 1000,
+      "parameters": 88685,
+      "validation_notes": 100,
+      "raw_generation_notes": 12,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_2",
+      "selected_step": 400,
+      "completed_steps": 1000,
+      "parameters": 130413,
+      "validation_notes": 100,
+      "raw_generation_notes": 12,
+      "passed": true
+    },
+    {
+      "architecture": "no_ffn",
+      "selected_step": 600,
+      "completed_steps": 1000,
+      "parameters": 80493,
+      "validation_notes": 100,
+      "raw_generation_notes": 12,
+      "passed": true
+    },
+    {
+      "architecture": "no_layernorm",
+      "selected_step": 200,
+      "completed_steps": 1000,
+      "parameters": 129773,
+      "validation_notes": 100,
+      "raw_generation_notes": 12,
+      "passed": true
+    },
+    {
+      "architecture": "no_residual",
+      "selected_step": 600,
+      "completed_steps": 1000,
+      "parameters": 130413,
+      "validation_notes": 100,
+      "raw_generation_notes": 12,
+      "passed": true
+    }
+  ],
+  "review": "author self-review; matched saved provenance, loaded each checkpoint, finite logits, budgets and raw-example counts"
+}

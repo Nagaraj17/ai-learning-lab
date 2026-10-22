@@ -1,0 +1,18 @@
+{
+  "architectures": [
+    "embedding_only",
+    "single_attention",
+    "multi_attention",
+    "transformer_2"
+  ],
+  "seed": 42,
+  "updates": 4000,
+  "sources": [
+    "PATIENT John Smith RECEIVED DrugA",
+    "PATIENT John Smith RECEIVED DrugB"
+  ],
+  "conditional_prefix": "PATIENT [NAME] RECEIVED ",
+  "selection": "primary fixed-update checkpoints; no training or model selection from this probe",
+  "runner_source_hash": "7857ae1c897489f696acf81f5f78c34dc54141a3e00a851bf0d2d46caf29b8b5",
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173"
+}

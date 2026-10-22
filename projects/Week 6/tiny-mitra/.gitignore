@@ -1,0 +1,13 @@
+.venv/
+.venv-repro/
+__pycache__/
+.pytest_cache/
+.build/
+artifacts/checkpoints/
+artifacts/*/checkpoints/
+artifacts/bundles/
+artifacts/archive/
+*.log
+artifacts/results/*_process.json
+artifacts/results/power_request.json
+artifacts/*/results/process.json

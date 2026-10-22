@@ -1,0 +1,208 @@
+{
+  "passed": true,
+  "bundle_sha256": "cf9b06e4026b64082f815891d6a2d2e479cc2fe91c5bbfdc0e55856d0610bf1f",
+  "manifest_files": 546,
+  "isolated_interpreter": "C:\\Users\\Nagar\\source\\repos\\ai-learning-lab\\projects\\Week 6\\tiny-mitra\\.venv-repro\\Scripts\\python.exe",
+  "fresh_extraction_smoke": {
+    "passed": true,
+    "checkpoint_routes": [
+      {
+        "model_id": "task_tokens/embedding_only",
+        "update": 4000,
+        "seed": 42,
+        "generated": "PATIENT DIAGNOSIS [NAME] ON [DATE]",
+        "termination": "eos"
+      },
+      {
+        "model_id": "task_tokens/single_attention",
+        "update": 4000,
+        "seed": 42,
+        "generated": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+        "termination": "eos"
+      },
+      {
+        "model_id": "task_tokens/multi_attention",
+        "update": 4000,
+        "seed": 42,
+        "generated": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+        "termination": "eos"
+      },
+      {
+        "model_id": "task_tokens/transformer_1",
+        "update": 4000,
+        "seed": 42,
+        "generated": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+        "termination": "eos"
+      },
+      {
+        "model_id": "task_tokens/transformer_2",
+        "update": 4000,
+        "seed": 42,
+        "generated": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+        "termination": "eos"
+      },
+      {
+        "model_id": "task_tokens/no_ffn",
+        "update": 4000,
+        "seed": 42,
+        "generated": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+        "termination": "eos"
+      },
+      {
+        "model_id": "task_tokens/no_layernorm",
+        "update": 4000,
+        "seed": 42,
+        "generated": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+        "termination": "eos"
+      },
+      {
+        "model_id": "task_tokens/no_residual",
+        "update": 4000,
+        "seed": 42,
+        "generated": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+        "termination": "eos"
+      },
+      {
+        "model_id": "final_seed7/transformer_2",
+        "update": 4000,
+        "seed": 7,
+        "generated": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+        "termination": "eos"
+      },
+      {
+        "model_id": "final_seed123/transformer_2",
+        "update": 4000,
+        "seed": 123,
+        "generated": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+        "termination": "eos"
+      },
+      {
+        "model_id": "assignment_v2/embedding_only",
+        "update": 2000,
+        "seed": 42,
+        "generated": "PATIENT [NAME] [NAME] DIAGNOS NS DIABENTESIS AS DIATISIAGNOMR ARKEREATRETREATMENT DrugA",
+        "termination": "eos"
+      },
+      {
+        "model_id": "assignment_v2/single_attention",
+        "update": 900,
+        "seed": 42,
+        "generated": "PATISIENTHISITENT ONT [NAME] [NAME] [NAME] [DOCTOR] EABEAGNAGNT [NAME] OMAGNT [DOCTOR] OgALIATENTENT B T TRENT TEA",
+        "termination": "eos"
+      },
+      {
+        "model_id": "assignment_v2/multi_attention",
+        "update": 400,
+        "seed": 42,
+        "generated": "PAT [DATE]",
+        "termination": "eos"
+      },
+      {
+        "model_id": "assignment_v2/transformer_1",
+        "update": 800,
+        "seed": 42,
+        "generated": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+        "termination": "eos"
+      },
+      {
+        "model_id": "assignment_v2/transformer_2",
+        "update": 500,
+        "seed": 42,
+        "generated": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+        "termination": "eos"
+      },
+      {
+        "model_id": "assignment_v2/no_ffn",
+        "update": 600,
+        "seed": 42,
+        "generated": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+        "termination": "eos"
+      },
+      {
+        "model_id": "assignment_v2/no_layernorm",
+        "update": 200,
+        "seed": 42,
+        "generated": "PATIENT [NAME] DIAGNONOSISIS DIAGNOSISIS OSIS DIAS BISIS ONONONONONONSIASCherugBENONONOS DIAAS ABIOSTMATMABENOSTENS NOMAT ATES",
+        "termination": "eos"
+      },
+      {
+        "model_id": "assignment_v2/no_residual",
+        "update": 1400,
+        "seed": 42,
+        "generated": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+        "termination": "eos"
+      },
+      {
+        "model_id": "embedding_only",
+        "update": 1000,
+        "seed": 42,
+        "generated": "DIAGNOSIS DIS DIATIENT [NAME] DIAGNOS DIATENTIENT [NAME] DOB [DATE] PHONT [PHONE] DDRESS [ADDRESS] TREATMENT DrugB",
+        "termination": "eos"
+      },
+      {
+        "model_id": "single_attention",
+        "update": 400,
+        "seed": 42,
+        "generated": "T TRE DIAT T DIET PATIE PAT DIS PAT T P DIAT TIATIE TRENOS AT NT AT DrugAT NENT NOSENTIA DIATOS NTIS DT NOSIS DrugSIS [PHONE]NT [PHONE]NTMENT DIENOS DIADruPNS DrugNT NOS DISIAT NO[PHONE] NNT DIS DIE DAT DIENIS DIATIADIS NOS NOS NOSSS NT D",
+        "termination": "output_limit"
+      },
+      {
+        "model_id": "multi_attention",
+        "update": 400,
+        "seed": 42,
+        "generated": "A DrugC DIONONTMATHMAT [NAME] DIEATMENONONONTIATHIS DrugC DrugASISIONONOS NOSIONONONTMESIASIENONONOC B",
+        "termination": "eos"
+      },
+      {
+        "model_id": "transformer_1",
+        "update": 500,
+        "seed": 42,
+        "generated": "PA DIA DIENTRENOSCL [NAME] [NAME] [NAME] NEAGNOSISISC AS DIAGNOSIS ASTRE A",
+        "termination": "eos"
+      },
+      {
+        "model_id": "transformer_2",
+        "update": 400,
+        "seed": 42,
+        "generated": "DIAGNONENONENTNTIENTIENT MAGNOSIAGNSISISCLCLCLCLC AR TR TREATMENTMENT TREATMENT DrugC",
+        "termination": "eos"
+      },
+      {
+        "model_id": "no_ffn",
+        "update": 600,
+        "seed": 42,
+        "generated": "DIOSIATIAGNAGNTIATIENT [NAME] T AGNOSISISISISIAT TRETRES S DrugC",
+        "termination": "eos"
+      },
+      {
+        "model_id": "no_layernorm",
+        "update": 200,
+        "seed": 42,
+        "generated": "PAB",
+        "termination": "eos"
+      },
+      {
+        "model_id": "no_residual",
+        "update": 600,
+        "seed": 42,
+        "generated": "S TOATOATIR NORATOENT [NAME] MRNT [NAME] DIASIS AGNOS B BIOSRENSTREATREATRENTMENT DrugA",
+        "termination": "eos"
+      },
+      {
+        "model_id": "transformer_2_latest",
+        "update": 1000,
+        "seed": 42,
+        "generated": "DIAAGNTIAGNAGNTIAGNT [NAME] ER DIAGNOSISIS THMATES SISIS  EATMATREA",
+        "termination": "eos"
+      },
+      {
+        "model_id": "learning_pilot",
+        "update": 500,
+        "seed": 42,
+        "generated": "gA",
+        "termination": "eos"
+      }
+    ]
+  },
+  "scope": "local fresh extraction/hash verification/all28 matching checkpoint routes/UI construction; live browser checks and learner rehearsal are separate"
+}

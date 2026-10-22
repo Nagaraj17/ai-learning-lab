@@ -1,0 +1,17 @@
+{
+  "source_hash": "63296d4066c4d4287dac5b4f524d2982a0ffa77be8611d0ddbb0f3852de31627",
+  "files": {
+    "config.py": "d70db06b68dac884e81d169484b2f26a483b471f801ada3745730bff7e8b4479",
+    "data.py": "50edc821a3dd7c2c13aaa2f5b9412325df3809dbfd2c4a8a2ebe055614592912",
+    "tokenizer.py": "8cec044c0b22e33939a6fd23e821eb302bd0593fe73e7fa7bfba75a60ea89c6d",
+    "model.py": "89b1ca24d3670803c3facaae30c52aff68128a42668484d6af283fa2486babfa",
+    "train.py": "e5060b55aa7a6d776acbc71143a86a838afffa09f9d73565ede4ce923d468998",
+    "generate.py": "f16fa6ae710674f5875c2766832eb324ecc3652328b1b808c792aab195ef00e6",
+    "evaluate.py": "441c08f916944ca60d9a2392d1ea45e8f9823ce70c9743414b0e98f8a3ada642",
+    "assignment_data.py": "401862bc732c31cd1589a1c3313cec684a11abc63df7e25f9ac621d9669c7921",
+    "assignment_evaluate.py": "f7fc74b79ac901f9bb3ec56bda32207bb76a61dff2817988033448f824a4bf6a",
+    "task_tokenizer.py": "0489f66ed337491584309e3860d82ef8eb34dc81731a15db8518f1500dfe1028",
+    "task_runtime.py": "e4b9a01a2e2cb731c94e588387ef7f2ee92fbec9767436224e746ce8e072258a",
+    "task_experiments.py": "66d03a4fdb314ec803077cec4ae2986f67b64899ee94413ab3a9846c27d792b7"
+  }
+}
