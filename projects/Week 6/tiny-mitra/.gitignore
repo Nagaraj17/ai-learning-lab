@@ -2,6 +2,7 @@
 .venv-repro/
 __pycache__/
 .pytest_cache/
+.build/
 artifacts/checkpoints/
 artifacts/*/checkpoints/
 artifacts/bundles/
