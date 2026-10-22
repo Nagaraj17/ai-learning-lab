@@ -1,0 +1,121 @@
+[
+  {
+    "hypothesis_id": "H1",
+    "question": "Does attention enable the required source-dependent next-token behavior?",
+    "change": "Change only the DrugA/DrugB source character while holding the supplied output prefix and query position fixed.",
+    "observation": "The embedding baseline has exactly unchanged candidate probabilities. The primary seed-42 single-head, multi-head and full checkpoints do not choose the correct A/B pair. The separate four-note pilot chooses A and B correctly, with expected-token probabilities 0.9987 and 0.9975, and freely generates the correct paired short notes.",
+    "verdict": "Main benchmark behavior is not established by this probe; the small-grammar pilot supports the mechanism under its limited conditions.",
+    "interpretation": "An attention architecture provides access to context, but a particular trained checkpoint must demonstrate useful context use. The pilot is a valid learning demonstration, not evidence of broad task transfer.",
+    "limitations": "Two authored source variants; supplied prefixes are conditional probes. Main and pilot models differ in width and training data. No universal role is assigned to a head.",
+    "evidence": [
+      "artifacts/results/investigations/conditional_probabilities.json",
+      "artifacts/results/pilot_controlled_context.json"
+    ]
+  },
+  {
+    "hypothesis_id": "H2",
+    "question": "Do four bare heads improve behavior over one bare head?",
+    "change": "Same model width, parameter count, bare attention policy and 1,000-update budget; change one head to four.",
+    "observation": "Version 1, seeds 42/7/123: single-head recall is 0/22 for every seed; four-head recall is 4/22, 6/22 and 2/22. Both bare models produce 0/12 exact notes and 0/25 correct clinical fields at all three seeds. Mean multi-head recall is 18.2%, with observed range 9.1%-27.3%.",
+    "verdict": "Consistent recall improvement in the three tested training seeds; no complete-note or clinical-preservation successes for either bare model on these diagnostics.",
+    "interpretation": "Multiple bare heads improve one measured capability in this fixed-width/budget study. The outputs remain inadequate for the complete transformation. Three seeds do not prove a universal architectural advantage.",
+    "limitations": "Three training seeds (initialization and minibatch order) share the same 12 selected validation notes; this is not three independent datasets. Different selected updates; no component-specific hyperparameter tuning. Version-1 flat-field grammar only; final partitions are separate descriptive evidence.",
+    "evidence": [
+      "artifacts/results/benchmark_summary.json",
+      "artifacts/results/protocol.json",
+      "artifacts/results/repeats_summary.json",
+      "artifacts/results/completed_original_study_audit.json"
+    ]
+  },
+  {
+    "hypothesis_id": "H3",
+    "question": "Does a second full decoder block improve held-out output quality?",
+    "change": "One versus two pre-LN blocks, with parameter count increasing from 88,685 to 130,413.",
+    "observation": "Seed 42: validation loss 1.422 versus 1.416, token accuracy 59.3% versus 63.9%, exact notes 1/12 versus 1/12, correct clinical fields 2/25 versus 1/25. Redaction recall is 11/22 for both.",
+    "verdict": "Mixed; a second block does not uniformly improve generated-note metrics here.",
+    "interpretation": "A small loss improvement and greater capacity do not guarantee better complete transformations. Report the capacity and quality trade-offs together.",
+    "limitations": "One seed for the depth comparison; small validation generation subset; final partitions are reviewed separately.",
+    "evidence": [
+      "artifacts/results/benchmark_summary.json"
+    ]
+  },
+  {
+    "hypothesis_id": "H4",
+    "question": "Does LayerNorm help optimization or quality under these settings?",
+    "change": "Full model versus removing all block and final normalization.",
+    "observation": "Selected validation loss is 1.416 with normalization versus 1.431 without it. Both have 1/12 exact notes and 1/25 correct clinical fields. Maximum logged pre-clipping gradient norm is approximately 0.833 versus 2.419; final validation loss is approximately 1.798 versus 3.425. Neither run failed numerically.",
+    "verdict": "Some support for scale/optimization differences; generated-quality evidence is mixed and preliminary.",
+    "interpretation": "The recorded traces support a setup-specific stability/scale benefit, not a claim that normalization was required for any learning or that every output metric improved.",
+    "limitations": "Gradient maxima cover logged validation intervals, not every update. One seed; normalization removal changes parameters; learning rate was not separately tuned per variant.",
+    "evidence": [
+      "artifacts/checkpoints/transformer_2_seed42/history.json",
+      "artifacts/checkpoints/no_layernorm_seed42/history.json"
+    ]
+  },
+  {
+    "hypothesis_id": "H5",
+    "question": "Do residual paths improve learning and output quality here?",
+    "change": "Full model versus omitting residual additions while retaining the other declared components.",
+    "observation": "The full model has lower selected validation loss, 1.416 versus 1.586. The no-residual model has more exact diagnostic notes, 3/12 versus 1/12, more correct redactions, 16/22 versus 11/22, and more preserved clinical fields, 7/25 versus 1/25.",
+    "verdict": "Mixed; the generated-quality direction contradicts a blanket residual-benefit claim under this budget.",
+    "interpretation": "Different objectives rank the variants differently. The evidence should be shown rather than rewritten to match the architectural expectation.",
+    "limitations": "One seed and 12 diagnostics; different selected updates; no architecture-specific optimizer tuning. This is not a universal conclusion against residuals.",
+    "evidence": [
+      "artifacts/results/benchmark_summary.json"
+    ]
+  },
+  {
+    "hypothesis_id": "H6",
+    "question": "Does the FFN improve the transformation?",
+    "change": "Full model versus omitting both FFN update branches and their unused pre-normalization parameters.",
+    "observation": "The full model improves selected validation loss, 1.416 versus 1.578, and redaction recall, 11/22 versus 8/22. No-FFN has 2/12 exact notes versus 1/12 and 2/25 preserved clinical fields versus 1/25.",
+    "verdict": "Mixed preliminary evidence.",
+    "interpretation": "The FFN helps some criteria in this run, but the complete-note metrics do not move uniformly. The architectural and parameter changes must be disclosed.",
+    "limitations": "One seed; small diagnostic subset; coupled branch/normalization removal and parameter-count difference.",
+    "evidence": [
+      "artifacts/results/benchmark_summary.json",
+      "model.py"
+    ]
+  },
+  {
+    "hypothesis_id": "H7",
+    "question": "Do individual heads make different contributions?",
+    "change": "Zero one head's context before output projection, then test two validation-selected pairs without retraining.",
+    "observation": "At full-model update 400, baseline recall is 7/15. Disabling L0 H1 gives 0/15; L0 H0 gives 4/15. L1 H0 leaves free outputs unchanged on these eight notes, yet conditional loss rises from 0.624 to 0.698. The selected L1 pair gives 2/15 recall.",
+    "verdict": "Supported as different measured dependencies of this checkpoint; semantic specialization remains unestablished.",
+    "interpretation": "Importance depends on the metric and intervention. No visible free-output change does not imply no probability-level contribution. A harmful change identifies dependence, not a permanent clinical role.",
+    "limitations": "Only eight notes; baseline MRN recall is already zero and several categories have one example. Pair selection uses these validation diagnostics and is exploratory. Head indices do not identify equivalent functions across seeds.",
+    "evidence": [
+      "artifacts/results/investigations/enriched_head_measurements.json",
+      "artifacts/results/investigations/single_head_summary.json"
+    ]
+  },
+  {
+    "hypothesis_id": "H8",
+    "question": "Does redaction transfer to new entities and layouts?",
+    "change": "Evaluate all four complete 50-note final partitions after freezing and reviewing the seed-42 protocol.",
+    "observation": "All32 version-1 architecture/partition rows completed. Full model, seed42 selected update400: known names/known layouts gives 7/50 exact notes,76/113 correct identifier replacements and7/93 clinical fields; known/new gives0/50,34/124 and4/88; new/known gives0/50,24/103 and1/107; new/new gives0/50,22/136 and1/82. No exact-surface leakage was detected, despite poor note/content quality.",
+    "verdict": "Broad transfer is not supported. The measured full-model outputs degrade in novel conditions and remain weak even in the familiar condition.",
+    "interpretation": "Redaction markers, absence of exact-surface leakage and valid EOS do not establish a useful preserved note. Separate names/layout conditions and complete-note/clinical counts reveal failures hidden by a single metric. These frozen models were not tuned from final outcomes.",
+    "limitations": "One selected checkpoint/seed for final partitions. Different50-note samples and field supports; these are descriptive conditions, not matched source pairs. Synthetic flat-field grammar, shared control layouts, recurring dates and exact-surface leakage limits. The corrected assignment-format series is a separate development study.",
+    "evidence": [
+      "reports/PROTOCOL_REVIEW.json",
+      "artifacts/results/final_test/summary.json",
+      "artifacts/results/completed_original_study_audit.json"
+    ]
+  },
+  {
+    "hypothesis_id": "H9",
+    "question": "Does sampling temperature change output reliability?",
+    "change": "Sample at 0.1, 0.7 and 1.2 using the same update-400 checkpoint, eight notes and declared seeds.",
+    "observation": "Correct redactions are 7/15, 7/15 and 0/15; exact notes are 1/8, 0/8 and 0/8; valid EOS terminations are 8/8, 8/8 and 6/8, respectively.",
+    "verdict": "Supported as an observed difference in these trials, with substantial uncertainty.",
+    "interpretation": "Higher temperature spread probability and produced worse measured behavior in this small sample. Low positive temperature is still sampling, not a guarantee of correctness or deterministic decoding.",
+    "limitations": "One sampling seed per note at each temperature; eight prompts; weak selected checkpoint. These trials do not estimate a general temperature-quality relationship.",
+    "evidence": [
+      "artifacts/results/investigations/temperature_0.1.json",
+      "artifacts/results/investigations/temperature_0.7.json",
+      "artifacts/results/investigations/temperature_1.2.json"
+    ]
+  }
+]

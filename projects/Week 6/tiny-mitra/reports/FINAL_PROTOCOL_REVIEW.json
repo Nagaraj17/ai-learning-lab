@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "reviewed_utc": "2026-10-17T22:47:45.371691+00:00",
+  "reviewer": "author self-review; no independent reviewer sign-off",
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+  "protocol_hash": "f69f297980fdf411fa23b270684d890ec9b15af7d73cc68e1d635fd1aff7d010",
+  "data_producer_source_hash": "f2ae852fc4af39e317f5fdb5528146ead5c48299e0a5720c866a5e4facce655f",
+  "no_test_tuning": true,
+  "checkpoint_rule": "fixed final update for all architectures; minimum-loss checkpoints saved separately",
+  "scope": "Protocol, source, data/holdout construction and checkpoint rule review only. All8 completed-model audit is separately required by the release runner. This does not claim model quality or learner mastery.",
+  "verification": [
+    "29 tests passed in isolated Python3.10 CPU environment",
+    "saved1000-example data/spans/splits/character exposure and heldout pools reviewed",
+    "manual model primitives and source/producer hashes unchanged",
+    "primary fixed4,000th update/seed42 retained; no weights chosen from final outcomes",
+    "repeat demo selection uses only declared development acceptance and remains separately labelled"
+  ],
+  "known_quality_limit": "primary full seed42 gets10/11 authored notes; PHONE failure retained",
+  "final_results_observed_at_review": false
+}

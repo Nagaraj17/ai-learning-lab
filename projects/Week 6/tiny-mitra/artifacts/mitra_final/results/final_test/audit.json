@@ -1,0 +1,200 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "architecture": "embedding_only",
+      "split": "test_known_known",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "embedding_only",
+      "split": "test_known_test",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "embedding_only",
+      "split": "test_test_known",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "embedding_only",
+      "split": "test_test_test",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "single_attention",
+      "split": "test_known_known",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "single_attention",
+      "split": "test_known_test",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "single_attention",
+      "split": "test_test_known",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "single_attention",
+      "split": "test_test_test",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "multi_attention",
+      "split": "test_known_known",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "multi_attention",
+      "split": "test_known_test",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "multi_attention",
+      "split": "test_test_known",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "multi_attention",
+      "split": "test_test_test",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_1",
+      "split": "test_known_known",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_1",
+      "split": "test_known_test",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_1",
+      "split": "test_test_known",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_1",
+      "split": "test_test_test",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_2",
+      "split": "test_known_known",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_2",
+      "split": "test_known_test",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_2",
+      "split": "test_test_known",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_2",
+      "split": "test_test_test",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "no_ffn",
+      "split": "test_known_known",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "no_ffn",
+      "split": "test_known_test",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "no_ffn",
+      "split": "test_test_known",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "no_ffn",
+      "split": "test_test_test",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "no_layernorm",
+      "split": "test_known_known",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "no_layernorm",
+      "split": "test_known_test",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "no_layernorm",
+      "split": "test_test_known",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "no_layernorm",
+      "split": "test_test_test",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "no_residual",
+      "split": "test_known_known",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "no_residual",
+      "split": "test_known_test",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "no_residual",
+      "split": "test_test_known",
+      "notes": 50,
+      "passed": true
+    },
+    {
+      "architecture": "no_residual",
+      "split": "test_test_test",
+      "notes": 50,
+      "passed": true
+    }
+  ],
+  "model_note_evaluations": 1600,
+  "distinct_notes": 200,
+  "scope": "author audit of saved identities and recomputed counts; no training or test-based selection"
+}

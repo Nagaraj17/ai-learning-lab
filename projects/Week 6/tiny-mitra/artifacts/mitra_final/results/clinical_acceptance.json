@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "training_seed": 42,
+  "checkpoint_step": 4000,
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+  "scope": "two authored clinical development checks, not final-test estimates",
+  "outputs": [
+    {
+      "source": "PATIENT John Smith RECEIVED Chemotherapy",
+      "expected": "PATIENT [NAME] RECEIVED Chemotherapy",
+      "generated": "PATIENT [NAME] RECEIVED Chemotherapy",
+      "termination": "eos",
+      "seen_exact_source_in_training": true,
+      "passed": true
+    },
+    {
+      "source": "DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT Chemotherapy",
+      "expected": "DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT Chemotherapy",
+      "generated": "DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT Chemotherapy",
+      "termination": "eos",
+      "seen_exact_source_in_training": true,
+      "passed": true
+    }
+  ]
+}

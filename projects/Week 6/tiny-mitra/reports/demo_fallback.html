@@ -1,0 +1,834 @@
+<!doctype html><html lang='en'><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Tiny Mitra saved demo evidence</title><style>body{font:17px/1.55 system-ui,sans-serif;color:#17313e;background:#f6f4ee;max-width:1100px;margin:auto;padding:32px}h1,h2{line-height:1.2}h2{margin-top:48px}a{color:#176b68}nav{display:flex;gap:24px;flex-wrap:wrap;margin:28px 0}.notice{background:#e1eee8;border-left:5px solid #207b70;padding:18px}.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;background:white;font-size:14px}th{background:#17313e;color:white}td,th{text-align:left;border:1px solid #ddd;padding:10px}details{background:white;border:1px solid #ddd;margin:10px 0;padding:14px}summary{cursor:pointer;font-weight:600}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 monospace}img{width:100%;height:auto;border:1px solid #ddd}figure{margin:24px 0}figcaption{font-size:14px;color:#526772}</style><main><h1>Tiny Mitra — saved demo evidence</h1>
+<p class='notice'>Offline snapshot of actual saved runs. This page does not generate text. Expected labels, measured outputs and study versions remain separate.</p>
+<p>Snapshot: 2026-10-18T00:08:52+00:00. Synthetic educational notes only. Real cloud execution and learner teach-back remain pending.</p>
+<nav><a href='#pilot'>Teaching pilot</a><a href='#assignment'>Instructor forms</a><a href='#original'>Original study</a><a href='#heldout'>Held-out partitions</a></nav>
+<h2 id='pilot'>Start with the four-note teaching pilot</h2><p>The width32, two-block pilot learned four short training notes. Both controlled Jo/DrugA and Jo/DrugB continuations were observed. This is a mechanism demonstration, not the 1,000-example benchmark.</p>
+<figure><img src='demo-pilot.png' alt='Actual DrugA teaching-pilot generation'><figcaption>Actual DrugA teaching-pilot generation</figcaption></figure>
+<figure><img src='demo-pilot-drugb.png' alt='Actual DrugB teaching-pilot generation'><figcaption>Actual DrugB teaching-pilot generation</figcaption></figure>
+<h2 id='current'>Current final submission</h2>
+<p>8 of8 models have saved development outputs. One corpus of1,000 notes; random initial weights;4,000updates per architecture. The eleven authored prompts are development checks, not final-test accuracy.</p>
+<div class='scroll'><table><thead><tr><th>Architecture</th><th>Update</th><th>Authored exact notes</th><th>Diagnostic exact</th><th>Clinical preservation</th></tr></thead><tbody><tr><td>transformer_2</td><td>4000</td><td>10/11</td><td>0.9583333333333334</td><td>0.9583333333333334</td></tr><tr><td>embedding_only</td><td>4000</td><td>0/11</td><td>0.08333333333333333</td><td>0.041666666666666664</td></tr><tr><td>single_attention</td><td>4000</td><td>10/11</td><td>0.9166666666666666</td><td>0.9583333333333334</td></tr><tr><td>multi_attention</td><td>4000</td><td>8/11</td><td>0.8333333333333334</td><td>0.875</td></tr><tr><td>transformer_1</td><td>4000</td><td>11/11</td><td>0.9583333333333334</td><td>1.0</td></tr><tr><td>no_ffn</td><td>4000</td><td>11/11</td><td>0.9583333333333334</td><td>1.0</td></tr><tr><td>no_layernorm</td><td>4000</td><td>9/11</td><td>0.9583333333333334</td><td>0.9583333333333334</td></tr><tr><td>no_residual</td><td>4000</td><td>11/11</td><td>1.0</td><td>1.0</td></tr></tbody></table></div>
+<h3>Current Mitra: transformer_2</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — exact</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — differs from label</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] DOB DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — exact</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — exact</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_8 — exact</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h3>Current Mitra: embedding_only</h3>
+<details><summary>instructor_0 — differs from label</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT DIAGNOSIS [NAME] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — differs from label</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] [NAME] [NAME] DIAGNOSIS [NAME] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: PATIENT [NAME] [NAME] [NAME] DIAGNOSIS [NAME] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — differs from label</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: MRN [NAME] [NAME] [NAME] [NAME] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — differs from label</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — differs from label</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT RECEIVED [NAME] [MRN] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_6 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] [NAME] DIAGNOSIS [NAME] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] [NAME] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_8 — differs from label</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_9 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT RECEIVED [NAME] [MRN] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_10 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT RECEIVED [NAME] [MRN] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]</pre><p>Stop: eos</p></details>
+<h3>Current Mitra: single_attention</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — exact</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — exact</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] PHONE [PHONE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — exact</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — exact</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_8 — differs from label</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h3>Current Mitra: multi_attention</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — exact</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — differs from label</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] PHONE [PHONE][PHONE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — exact</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — exact</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_8 — differs from label</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_9 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED Chemotherapy</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h3>Current Mitra: transformer_1</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — exact</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — exact</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] PHONE [PHONE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — exact</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — exact</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_8 — exact</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h3>Current Mitra: no_ffn</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — exact</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — exact</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] PHONE [PHONE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — exact</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — exact</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_8 — exact</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h3>Current Mitra: no_layernorm</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — exact</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — differs from label</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] [PHONE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — differs from label</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS ASTHMA</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — exact</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_8 — exact</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h3>Current Mitra: no_residual</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — exact</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — exact</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] PHONE [PHONE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — exact</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — exact</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_8 — exact</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h2>Separately labelled demo candidate: full model seed7</h2><p>Same final corpus, random initialization and4,000updates. This candidate uses development evidence; the seed42 benchmark and its failures remain above. It is not selected from final-test outcomes.</p>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — exact</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — exact</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] PHONE [PHONE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — exact</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — exact</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_8 — exact</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<figure><img src='demo-final-phone-seeds.png' alt='Actual seed42 and seed7 phone generations with checkpoint labels'><figcaption>Actual browser comparison; primary failure retained beside passing development repeat.</figcaption></figure>
+<h2>Current final-corpus held-out partitions</h2>
+<p>32/32 rows saved;50 notes per row,200 distinct notes reused across eight models. This evidence belongs to the final corpus, separate from the earlier character study.</p>
+<div class='scroll'><table><thead><tr><th>Architecture</th><th>Partition</th><th>Exact notes</th><th>Correct identifiers</th><th>Clinical fields</th></tr></thead><tbody><tr><td>embedding_only</td><td>test_known_known</td><td>2/50</td><td>11/89</td><td>2/44</td></tr><tr><td>embedding_only</td><td>test_known_test</td><td>0/50</td><td>3/128</td><td>1/67</td></tr><tr><td>embedding_only</td><td>test_test_known</td><td>2/50</td><td>12/86</td><td>3/33</td></tr><tr><td>embedding_only</td><td>test_test_test</td><td>0/50</td><td>16/142</td><td>0/53</td></tr><tr><td>single_attention</td><td>test_known_known</td><td>39/50</td><td>78/89</td><td>34/44</td></tr><tr><td>single_attention</td><td>test_known_test</td><td>5/50</td><td>0/128</td><td>22/67</td></tr><tr><td>single_attention</td><td>test_test_known</td><td>38/50</td><td>67/86</td><td>29/33</td></tr><tr><td>single_attention</td><td>test_test_test</td><td>5/50</td><td>0/142</td><td>15/53</td></tr><tr><td>multi_attention</td><td>test_known_known</td><td>35/50</td><td>82/89</td><td>32/44</td></tr><tr><td>multi_attention</td><td>test_known_test</td><td>5/50</td><td>1/128</td><td>20/67</td></tr><tr><td>multi_attention</td><td>test_test_known</td><td>44/50</td><td>82/86</td><td>29/33</td></tr><tr><td>multi_attention</td><td>test_test_test</td><td>5/50</td><td>0/142</td><td>16/53</td></tr><tr><td>transformer_1</td><td>test_known_known</td><td>48/50</td><td>89/89</td><td>42/44</td></tr><tr><td>transformer_1</td><td>test_known_test</td><td>5/50</td><td>10/128</td><td>25/67</td></tr><tr><td>transformer_1</td><td>test_test_known</td><td>50/50</td><td>86/86</td><td>33/33</td></tr><tr><td>transformer_1</td><td>test_test_test</td><td>5/50</td><td>0/142</td><td>20/53</td></tr><tr><td>transformer_2</td><td>test_known_known</td><td>47/50</td><td>88/89</td><td>42/44</td></tr><tr><td>transformer_2</td><td>test_known_test</td><td>5/50</td><td>0/128</td><td>31/67</td></tr><tr><td>transformer_2</td><td>test_test_known</td><td>50/50</td><td>86/86</td><td>33/33</td></tr><tr><td>transformer_2</td><td>test_test_test</td><td>5/50</td><td>1/142</td><td>30/53</td></tr><tr><td>no_ffn</td><td>test_known_known</td><td>48/50</td><td>89/89</td><td>42/44</td></tr><tr><td>no_ffn</td><td>test_known_test</td><td>5/50</td><td>1/128</td><td>28/67</td></tr><tr><td>no_ffn</td><td>test_test_known</td><td>50/50</td><td>86/86</td><td>33/33</td></tr><tr><td>no_ffn</td><td>test_test_test</td><td>5/50</td><td>1/142</td><td>28/53</td></tr><tr><td>no_layernorm</td><td>test_known_known</td><td>46/50</td><td>87/89</td><td>42/44</td></tr><tr><td>no_layernorm</td><td>test_known_test</td><td>5/50</td><td>1/128</td><td>27/67</td></tr><tr><td>no_layernorm</td><td>test_test_known</td><td>47/50</td><td>77/86</td><td>33/33</td></tr><tr><td>no_layernorm</td><td>test_test_test</td><td>5/50</td><td>0/142</td><td>21/53</td></tr><tr><td>no_residual</td><td>test_known_known</td><td>50/50</td><td>89/89</td><td>44/44</td></tr><tr><td>no_residual</td><td>test_known_test</td><td>5/50</td><td>5/128</td><td>33/67</td></tr><tr><td>no_residual</td><td>test_test_known</td><td>50/50</td><td>86/86</td><td>33/33</td></tr><tr><td>no_residual</td><td>test_test_test</td><td>5/50</td><td>6/142</td><td>28/53</td></tr></tbody></table></div>
+<h2>Earlier fixed-piece study</h2>
+<p>8 of 8 runs have saved development outputs. This earlier study used2,000updates and the narrower input corpus. Its numbers are not current final-model results.</p>
+<div class='scroll'><table><thead><tr><th>Architecture</th><th>Fixed update</th><th>Authored exact notes</th><th>Diagnostic exact</th><th>Clinical preservation</th></tr></thead><tbody><tr><td>transformer_2</td><td>2000</td><td>9/11</td><td>0.9583333333333334</td><td>1.0</td></tr><tr><td>embedding_only</td><td>2000</td><td>0/11</td><td>0.20833333333333334</td><td>0.08333333333333333</td></tr><tr><td>single_attention</td><td>2000</td><td>7/11</td><td>0.5416666666666666</td><td>0.375</td></tr><tr><td>multi_attention</td><td>2000</td><td>10/11</td><td>0.875</td><td>0.875</td></tr><tr><td>transformer_1</td><td>2000</td><td>10/11</td><td>1.0</td><td>1.0</td></tr><tr><td>no_ffn</td><td>2000</td><td>9/11</td><td>1.0</td><td>1.0</td></tr><tr><td>no_layernorm</td><td>2000</td><td>9/11</td><td>1.0</td><td>1.0</td></tr><tr><td>no_residual</td><td>2000</td><td>10/11</td><td>1.0</td><td>1.0</td></tr></tbody></table></div>
+<h3>Task pieces: transformer_2</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — exact</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — differs from label</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] ON VISITED [DOCTOR] [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — exact</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_8 — exact</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h3>Task pieces: embedding_only</h3>
+<details><summary>instructor_0 — differs from label</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_1 — differs from label</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] [NAME] [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_2 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: PATIENT [NAME] [NAME] [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_3 — differs from label</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] [NAME] DIAGNOSIS TREATMENT [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — differs from label</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — differs from label</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT DIAGNOSIS DrugB</pre><p>Stop: eos</p></details><details><summary>instructor_6 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT DIAGNOSIS TREATMENT [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_8 — differs from label</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] [NAME] [NAME] DIAGNOSIS TREATMENT [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_9 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT DIAGNOSIS DrugB</pre><p>Stop: eos</p></details><details><summary>instructor_10 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT DIAGNOSIS DrugB</pre><p>Stop: eos</p></details>
+<h3>Task pieces: single_attention</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — exact</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — exact</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] PHONE [PHONE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — differs from label</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS DIABETES</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: MRN DIAGNOSIS ASTHMA</pre><p>Stop: eos</p></details><details><summary>instructor_8 — differs from label</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h3>Task pieces: multi_attention</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — exact</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — exact</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] PHONE [PHONE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — exact</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: MRN TREATMENT TREATMENT TREATMENT [NAME] DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_8 — exact</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h3>Task pieces: transformer_1</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — exact</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — exact</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] PHONE [PHONE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — exact</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS DIABETES</pre><p>Stop: eos</p></details><details><summary>instructor_8 — exact</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h3>Task pieces: no_ffn</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — exact</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] PHONE [PHONE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — exact</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_8 — exact</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h3>Task pieces: no_layernorm</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — exact</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — differs from label</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] DIAGNOSIS DIABETES</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — exact</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT BIOMARKER DrugB</pre><p>Stop: eos</p></details><details><summary>instructor_8 — exact</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h3>Task pieces: no_residual</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — exact</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — exact</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] PHONE [PHONE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — exact</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_8 — exact</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h2 id='assignment'>Version 2 — instructor sentence forms, characters</h2>
+<p>8 of 8 runs have saved development outputs. Separate dataset, context256, 2,000-update protocol; 24 validation diagnostics and 11 authored prompts. These are not final-test scores.</p>
+<div class='scroll'><table><thead><tr><th>Architecture</th><th>Selected update</th><th>Authored exact notes</th><th>Diagnostic exact</th><th>Clinical preservation</th></tr></thead><tbody><tr><td>transformer_2</td><td>500</td><td>4/11</td><td>0.5416666666666666</td><td>0.2916666666666667</td></tr><tr><td>embedding_only</td><td>2000</td><td>0/11</td><td>0.0</td><td>0.0</td></tr><tr><td>single_attention</td><td>900</td><td>0/11</td><td>0.125</td><td>0.041666666666666664</td></tr><tr><td>multi_attention</td><td>400</td><td>0/11</td><td>0.20833333333333334</td><td>0.0</td></tr><tr><td>transformer_1</td><td>800</td><td>4/11</td><td>0.5416666666666666</td><td>0.20833333333333334</td></tr><tr><td>no_ffn</td><td>600</td><td>3/11</td><td>0.5</td><td>0.125</td></tr><tr><td>no_layernorm</td><td>200</td><td>0/11</td><td>0.4166666666666667</td><td>0.125</td></tr><tr><td>no_residual</td><td>1400</td><td>6/11</td><td>0.7916666666666666</td><td>0.625</td></tr></tbody></table></div>
+<h3>transformer_2</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — differs from label</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] D [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — differs from label</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIENT [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — differs from label</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOMARNT AT BE BETET N N DIA</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIEN [NAME] DIAGNOSIS NSCLCLCLCLCherugCLCLCLCLCLCLCLC NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_8 — differs from label</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS ASTHMAMAR BIOMAR AR A</pre><p>Stop: eos</p></details><details><summary>instructor_9 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h3>embedding_only</h3>
+<details><summary>instructor_0 — differs from label</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] [NAME] DIAGNOS NS DIABENTESIS AS DIATISIAGNOMR ARKEREATRETREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_1 — differs from label</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DIENOS [NAME] [NAME] [NAME] [NAME] DIAGNOSIS NS DIABENOSIS AS DIATISIAGNOMR ARKEREATRETREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_2 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: PATIENTIENT [NAME] DIENOS [NAME] [NAME] [NAME] [NAME] DIAGNOSIS NS DIABENOSIS AS DIATISIAGNOMR ARKEREATRETREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_3 — differs from label</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PAT [NAME] [NAME] PHONONT [NAME] [NAME] [NAME] [NAME] DIAGNOSIS NS DIABENOSIS AS DIATISIAGNOMR ARKEREATRETREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_4 — differs from label</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: MRNT [NAME] DIAGNOS NS DIABENTESIS AS DIATISIAGNOMR ARKEREATRETREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_5 — differs from label</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] PHONONT [NAME] [NAME] [NAME] [NAME] DIAGNOSIS NS DIABENOSIS AS DIATISIAGNOMR ARKEREATRETREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_6 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PAGNOS [NAME] [NAME] [NAME] [NAME] DIAGNOSIS NS DIABENOSIS AS DIATISIAGNOMR ARKEREATRETREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATISIENT DIAGNOSIS NS DIABENOSIS AS DIATISIAGNOMR ARKEREATRETREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_8 — differs from label</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PAT NS DIABENTESIS AS DIATISIAGNOMR ARKEREATRETREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] [NAME] DIENOS [NAME] [NAME] [NAME] [NAME] DIAGNOSIS NS DIABENOSIS AS DIATISIAGNOMR ARKEREATRETREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_10 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] [NAME] DIENOS [NAME] [NAME] [NAME] [NAME] DIAGNOSIS NS DIABENOSIS AS DIATISIAGNOMR ARKEREATRETREATMENT DrugA</pre><p>Stop: eos</p></details>
+<h3>single_attention</h3>
+<details><summary>instructor_0 — differs from label</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATISIENTHISITENT ONT [NAME] [NAME] [NAME] [DOCTOR] EABEAGNAGNT [NAME] OMAGNT [DOCTOR] OgALIATENTENT B T TRENT TEA</pre><p>Stop: eos</p></details><details><summary>instructor_1 — differs from label</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DONRENOSIAT DIA</pre><p>Stop: eos</p></details><details><summary>instructor_2 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: PATMATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — differs from label</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT DIVEDIEDIEIEIEDIATED DIAT ATEDIATEIAGNONRKEDIA</pre><p>Stop: eos</p></details><details><summary>instructor_4 — differs from label</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PA [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — differs from label</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_6 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIATIATIENT DIENTENOSIS NTR NTHOS NOS NTENOSC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATISIS DrugCLCLC</pre><p>Stop: eos</p></details><details><summary>instructor_8 — differs from label</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT DIA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] D [NAME] PHOS PATIED py</pre><p>Stop: eos</p></details><details><summary>instructor_10 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] D [NAME] PHOS PATIED py</pre><p>Stop: eos</p></details>
+<h3>multi_attention</h3>
+<details><summary>instructor_0 — differs from label</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PAT [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — differs from label</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — differs from label</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] PAT [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — differs from label</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PAGNT [NAME] [NAME] VES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — differs from label</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENTISIEIAT [PHONE]</pre><p>Stop: eos</p></details><details><summary>instructor_6 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN PAGNT [NAME] [NAME] [NAME] [NAME] [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PAT DIE DIAB DIAB T T DIS</pre><p>Stop: eos</p></details><details><summary>instructor_8 — differs from label</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATISIESC</pre><p>Stop: eos</p></details><details><summary>instructor_9 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] [MRN] DOS [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_10 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] [MRN] DOS [DATE]</pre><p>Stop: eos</p></details>
+<h3>transformer_1</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — differs from label</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] [NAME] [NAME] [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — differs from label</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOSISISTHMVIABEGNOS TMASCLC</pre><p>Stop: eos</p></details><details><summary>instructor_6 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS ASCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENSIVISIAGNOSIS SCLCLNONSIONSCLCLCLCLC</pre><p>Stop: eos</p></details><details><summary>instructor_8 — differs from label</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIAS ATHMA BIOMARKER ARKEALKENTREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_9 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h3>no_ffn</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — exact</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — exact</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — differs from label</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] D [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — differs from label</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] VES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — differs from label</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DOSIATIS ATISISCLC</pre><p>Stop: eos</p></details><details><summary>instructor_6 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENTENT DIAGNOSIS DIABETESIS [NAME] AGNTESIAGNTMRN ARNOS EAGNS TRNOSCherugBENTES AGFTHMAS DrugBISTHMRENOS TM DIS AGrugB</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOS TIENS DIATES NOS DIAGN TE AGNTERENOMAGNOMATRKEATMENT DrugAT DIAGFDrugC DrugBIS DIOBPAGN NTMATMA</pre><p>Stop: eos</p></details><details><summary>instructor_8 — differs from label</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT DIAGNOS</pre><p>Stop: eos</p></details><details><summary>instructor_9 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] REIVED [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_10 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] REIVED [DATE]</pre><p>Stop: eos</p></details>
+<h3>no_layernorm</h3>
+<details><summary>instructor_0 — differs from label</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] DIAGNONOSISIS DIAGNOSISIS OSIS DIAS BISIS ONONONONONONSIASCherugBENONONOS DIAAS ABIOSTMATMABENOSTENS NOMAT ATES</pre><p>Stop: eos</p></details><details><summary>instructor_1 — differs from label</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] DOB D [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN PATIENT [NAME]</pre><p>Stop: eos</p></details><details><summary>instructor_3 — differs from label</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] DIENT [NAME] [NAME] D D D D DOSIENT DIABETETEDISIS DIA</pre><p>Stop: eos</p></details><details><summary>instructor_4 — differs from label</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENTIT [DOCTOR] [DOCTOR] [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — differs from label</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] [NAME] DIEDIENT DIS [NAME] DIAGNOSIS ASTHMA</pre><p>Stop: eos</p></details><details><summary>instructor_6 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSTHMA</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT DISIAGNOS [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_8 — differs from label</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PAGNOSISIABENOSISISIS AS BENTENONONOS AGNONONOSTMATMATENAS NOSIATET NOMAS CherugBETMABENOMAS TENOMAT NTMAT AGNOMAST AGNS NOBENOMASCLC</pre><p>Stop: eos</p></details><details><summary>instructor_9 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] [NAME] [NAME] D [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] LIVESIESIS [NAME] [NAME] [NAME] DISISISIS [NAME] LIETERERECERERKERETRECLCIET [NAME] DIOMAT D DIT DITEN CherugBET DIE D D CLIVEDIT CLCLCEDIothe</pre><p>Stop: eos</p></details><details><summary>instructor_10 — differs from label</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] [NAME] [NAME] D [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] LIVESIEN [DOCTOR] [NAME] [NAME] [NAME] DISISISIS [NAME] LIETEREREIS DITIONTRE DIENT [NAME] VEC</pre><p>Stop: eos</p></details>
+<h3>no_residual</h3>
+<details><summary>instructor_0 — exact</summary><pre>Source:    PATIENT John Smith VISITED Dr Jones ON January 12
+Expected:  PATIENT [NAME] VISITED [DOCTOR] ON [DATE]
+Generated: PATIENT [NAME] VISITED [DOCTOR] ON [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_1 — differs from label</summary><pre>Source:    PATIENT Mary Brown DOB March 4 1965
+Expected:  PATIENT [NAME] DOB [DATE]
+Generated: PATIENT [NAME] D DOB [DATE]</pre><p>Stop: eos</p></details><details><summary>instructor_2 — differs from label</summary><pre>Source:    MRN 482991 PATIENT Robert Green
+Expected:  MRN [MRN] PATIENT [NAME]
+Generated: MRN [MRN] PATIENT [NAME] PAT PENT [NAME] VISITEN</pre><p>Stop: eos</p></details><details><summary>instructor_3 — exact</summary><pre>Source:    PATIENT Alice White PHONE 5551234567
+Expected:  PATIENT [NAME] PHONE [PHONE]
+Generated: PATIENT [NAME] PHONE [PHONE]</pre><p>Stop: eos</p></details><details><summary>instructor_4 — exact</summary><pre>Source:    PATIENT Kevin Black LIVES 412 Main Street Dallas Texas
+Expected:  PATIENT [NAME] LIVES [ADDRESS]
+Generated: PATIENT [NAME] LIVES [ADDRESS]</pre><p>Stop: eos</p></details><details><summary>instructor_5 — differs from label</summary><pre>Source:    PATIENT Susan Gray DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] DIAGNOS NSCLC BISC</pre><p>Stop: eos</p></details><details><summary>instructor_6 — exact</summary><pre>Source:    MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC
+Expected:  MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC
+Generated: MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_7 — differs from label</summary><pre>Source:    PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC
+Generated: PATIENT [NAME] MERN DIAGNOS DIAGNSCLC</pre><p>Stop: eos</p></details><details><summary>instructor_8 — differs from label</summary><pre>Source:    PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER ALK TREATMENT DrugC</pre><p>Stop: eos</p></details><details><summary>instructor_9 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugA
+Expected:  PATIENT [NAME] RECEIVED DrugA
+Generated: PATIENT [NAME] RECEIVED DrugA</pre><p>Stop: eos</p></details><details><summary>instructor_10 — exact</summary><pre>Source:    PATIENT John Smith RECEIVED DrugB
+Expected:  PATIENT [NAME] RECEIVED DrugB
+Generated: PATIENT [NAME] RECEIVED DrugB</pre><p>Stop: eos</p></details>
+<h2 id='original'>Version 1 — original flat-field study</h2><p>Eight seed42 models, 1,000 updates. The free-generation table uses 12 validation diagnostics; teacher-forced validation uses 100 notes. This grammar missed some instructor sentence forms. Its numbers must not be mixed with version 2.</p>
+<div class='scroll'><table><thead><tr><th>Architecture</th><th>Validation loss</th><th>Recall</th><th>Exact match</th><th>Clinical preservation</th></tr></thead><tbody><tr><td>embedding_only</td><td>1.618</td><td>0.0</td><td>0.0</td><td>0.16</td></tr><tr><td>single_attention</td><td>1.8</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><td>multi_attention</td><td>1.57</td><td>0.182</td><td>0.0</td><td>0.0</td></tr><tr><td>transformer_1</td><td>1.422</td><td>0.5</td><td>0.083</td><td>0.08</td></tr><tr><td>transformer_2</td><td>1.416</td><td>0.5</td><td>0.083</td><td>0.04</td></tr><tr><td>no_ffn</td><td>1.578</td><td>0.364</td><td>0.167</td><td>0.08</td></tr><tr><td>no_layernorm</td><td>1.431</td><td>0.409</td><td>0.083</td><td>0.04</td></tr><tr><td>no_residual</td><td>1.586</td><td>0.727</td><td>0.25</td><td>0.28</td></tr></tbody></table></div>
+<h3>embedding_only — all 12 saved diagnostics</h3>
+<details><summary>example_0700 — differs from label</summary><pre>Source:    DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA dose700
+Expected:  DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA dose700
+Generated: DIAGNONOSTRENTIAT [NAME] DIAGNOS DIATENTIENT [NAME] DOB [DATE] PHONT [PHONE] DDRESS [ADDRESS] TREATMENT DrugB</pre><p>Stop: eos</p></details><details><summary>example_0701 — differs from label</summary><pre>Source:    PATIENT John Cole DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA
+Generated: DIAT [NAME] DIAGNOS DIATENTIENT [NAME] DOB [DATE] PHONT [PHONE] DDRESS [ADDRESS] TREATMENT DrugB</pre><p>Stop: eos</p></details><details><summary>example_0703 — differs from label</summary><pre>Source:    PATIENT Sara Shah MRN 70000703 DIAGNOSIS DIABETES TREATMENT DrugA
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugA
+Generated: PATIAT [NAME] DIAGNOS DIATENTIENT [NAME] DOB [DATE] PHONT [PHONE] DDRESS [ADDRESS] TREATMENT DrugB</pre><p>Stop: eos</p></details><details><summary>example_0704 — differs from label</summary><pre>Source:    DOCTOR Dr Alpha DATE 2026-12-22 PATIENT Maya Rao DIAGNOSIS ASTHMA
+Expected:  DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA
+Generated: PATIAT [NAME] DIAGNOS DIATENTIENT [NAME] DOB [DATE] PHONT [PHONE] DDRESS [ADDRESS] TREATMENT DrugB</pre><p>Stop: eos</p></details><details><summary>example_0706 — differs from label</summary><pre>Source:    PATIENT Leah Rao DOB 1992-01-09 PHONE 555-000-0706 ADDRESS 806 Oak St TREATMENT DrugB
+Expected:  PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB
+Generated: PATIS DIAT DOB [DATE] PHONT [PHONE] DDRESS [ADDRESS] TREATMENT DrugB</pre><p>Stop: eos</p></details><details><summary>example_0702 — differs from label</summary><pre>Source:    PATIENT Noah Cole DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA
+Generated: PATIAT [NAME] DIAGNOS DIATENTIENT [NAME] DOB [DATE] PHONT [PHONE] DDRESS [ADDRESS] TREATMENT DrugB</pre><p>Stop: eos</p></details><details><summary>example_0705 — differs from label</summary><pre>Source:    PATIENT Leah Shah MRN 70000705 DIAGNOSIS DIABETES TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB
+Generated: PATIAT [NAME] DIAGNOS DIATENTIENT [NAME] DOB [DATE] PHONT [PHONE] DDRESS [ADDRESS] TREATMENT DrugB</pre><p>Stop: eos</p></details><details><summary>example_0707 — differs from label</summary><pre>Source:    PATIENT John Cole MRN 70000707 DIAGNOSIS DIABETES TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB
+Generated: PATIAT [NAME] DIAGNOS DIATENTIENT [NAME] DOB [DATE] PHONT [PHONE] DDRESS [ADDRESS] TREATMENT DrugB</pre><p>Stop: eos</p></details><details><summary>example_0708 — differs from label</summary><pre>Source:    PATIENT Noah Lee MRN 70000708 DIAGNOSIS ASTHMA TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA TREATMENT DrugB
+Generated: PAT TIENT [NAME] DIAGNOS DIATENTIENT [NAME] DOB [DATE] PHONT [PHONE] DDRESS [ADDRESS] TREATMENT DrugB</pre><p>Stop: eos</p></details><details><summary>example_0709 — differs from label</summary><pre>Source:    DOCTOR Dr Alpha DATE 2026-03-04 PATIENT Noah Shah DIAGNOSIS DIABETES
+Expected:  DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS DIABETES
+Generated: PAT [NAME] DIAGNOS DIATENTIENT [NAME] DOB [DATE] PHONT [PHONE] DDRESS [ADDRESS] TREATMENT DrugB</pre><p>Stop: eos</p></details><details><summary>example_0710 — differs from label</summary><pre>Source:    DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA dose710
+Expected:  DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA dose710
+Generated: DIENT PAT TIENT [NAME] DIAGNOS DIATENTIENT [NAME] DOB [DATE] PHONT [PHONE] DDRESS [ADDRESS] TREATMENT DrugB</pre><p>Stop: eos</p></details><details><summary>example_0711 — differs from label</summary><pre>Source:    PATIENT Maya Rao MRN 70000711 DIAGNOSIS NSCLC TREATMENT DrugA
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugA
+Generated: PATRENTIAT [NAME] DIAGNOS DIATENTIENT [NAME] DOB [DATE] PHONT [PHONE] DDRESS [ADDRESS] TREATMENT DrugB</pre><p>Stop: eos</p></details>
+<h3>single_attention — all 12 saved diagnostics</h3>
+<details><summary>example_0700 — differs from label</summary><pre>Source:    DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA dose700
+Expected:  DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA dose700
+Generated: NTMAT ATMAT AT DIAT DATEAT DrugAT DrugAT AT DrugS DrugATMATMAT DrugAT AAST NOSIS rugATMAgS TEN TMNT DrugNEN DrugAgSIS DrugN NN AENTMEATHMENT NTMNANIANEN N DrugANINATMAT DrugSIENN NT DrugSIADrug[DOCTOR] N NT NS DIS TMREN ATMENOS</pre><p>Stop: output_limit</p></details><details><summary>example_0701 — differs from label</summary><pre>Source:    PATIENT John Cole DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA
+Generated: T DOS DIAT DOS DISIAT DIATMATMENTMANTMENOSISIATMATMATMENTMENT DrugBISA DIERENT NT TMNT Dru</pre><p>Stop: eos</p></details><details><summary>example_0703 — differs from label</summary><pre>Source:    PATIENT Sara Shah MRN 70000703 DIAGNOSIS DIABETES TREATMENT DrugA
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugA
+Generated: T DIENT DAN D DIS A AT AT DIS DIS D DRENOS Drug[PHONE] DrugNT DrugAS DIAgAT DrDrugAgS DOSI DT AT DIA</pre><p>Stop: eos</p></details><details><summary>example_0704 — differs from label</summary><pre>Source:    DOCTOR Dr Alpha DATE 2026-12-22 PATIENT Maya Rao DIAGNOSIS ASTHMA
+Expected:  DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA
+Generated: PAT DIAT DATEAT DIAT DIS DIAT DIAT NS [NAME] DIAT DrugAT DrugAT [NAME] DT DrugC</pre><p>Stop: eos</p></details><details><summary>example_0706 — differs from label</summary><pre>Source:    PATIENT Leah Rao DOB 1992-01-09 PHONE 555-000-0706 ADDRESS 806 Oak St TREATMENT DrugB
+Expected:  PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB
+Generated: T AT DIE DIEAT ATMEATME ADAT DrugBIE AT [PHONE] DIS DOS DR DIEAT DIEAT DT NOAT PAD DIS DrugBIBISEN DDOA A DIEAg[PHONE]ANT DDrugATENO T N ATR DIB DDrugATO TOS AT DIENAT DIADIOBIS NT ATREN DIBrugAT Drug[PHONE]</pre><p>Stop: eos</p></details><details><summary>example_0702 — differs from label</summary><pre>Source:    PATIENT Noah Cole DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA
+Generated: TIENT DrugAT DISSISISSISGNTMENTRET ATRETMENTMENTMENTMNTMENTMENT DrugBISENOSIAT NTENOSINT DTMNTMATMAT RANTENTMRENT DIENT DrugDrugNSSTRNENTENT RNSISSTMNOBENNT DISI RE DTMNTMENOSTMENTENT DOSTMNTMENSIENT NTMATHREN</pre><p>Stop: eos</p></details><details><summary>example_0705 — differs from label</summary><pre>Source:    PATIENT Leah Shah MRN 70000705 DIAGNOSIS DIABETES TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB
+Generated: TIENT AT AT D DIAT DIAT DIS DIATIAT N DIAT ugAT DIS DIS DIS DIS DrugAT NT DIAT N NO  DT NIS NT DIS DIATMENATMREN NT DIA N DrugANT NT DONIA DIEN DIENINIBENNT DIS DIEAT DIS DugATMENATMENT NT AT DIS NTMENT DrugATHME DIAT DI</pre><p>Stop: output_limit</p></details><details><summary>example_0707 — differs from label</summary><pre>Source:    PATIENT John Cole MRN 70000707 DIAGNOSIS DIABETES TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB
+Generated: TIENT AT AT D DIAT DIAT DIAT DIAT D PAT DIAT DrugAT DIS DIS DIS DrugAT A DIAT DIS DI DT NIAT PADIS DIATMENATMAEN NT A A DIS DrugN NT DONIA DIEN DIATIAIBENNT N DIS DIS DIS DrugSIATMENTIS NT N DIA DIS N DIS gBIAgS DugS NO </pre><p>Stop: output_limit</p></details><details><summary>example_0708 — differs from label</summary><pre>Source:    PATIENT Noah Lee MRN 70000708 DIAGNOSIS ASTHMA TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA TREATMENT DrugB
+Generated: PATIENT PAT AT PAT PAT AT AT PATENOS A PMENOS AT AT AT DrugATIS NT DrugA</pre><p>Stop: eos</p></details><details><summary>example_0709 — differs from label</summary><pre>Source:    DOCTOR Dr Alpha DATE 2026-03-04 PATIENT Noah Shah DIAGNOSIS DIABETES
+Expected:  DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS DIABETES
+Generated: DIAT DATMATENTIS DIS DIAT DIATOS DOATOAT DIAT [NAME] DrugDIS [NAME]MENT DrugATENT Drug DTIS DDrBIAT DIB DIS NTMENATMRENT DIEN Drug[PHONE]TMENT DruDIS D DIENS DrugNO[PHONE] NNT DIS DIS DAT DIENIS DIS DrugAT DIS DIATISSS DrugAg[PHONE] DgATMEN DruTME </pre><p>Stop: output_limit</p></details><details><summary>example_0710 — differs from label</summary><pre>Source:    DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA dose710
+Expected:  DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA dose710
+Generated: AT DOAT DOS DIAS DIATENT DrugAT DIS DrugAT DIAS DrugATMAT NS DrugAR MENT DrugATMAS DrugS NTES DgNS DrugENSTMATMANTEATMRENT DrugATMES gNTMNSSTMNRNTMNT  N MENTMN DOSNTMENTME gAT DOSOSSISS NTMENT NT DOS Dru</pre><p>Stop: eos</p></details><details><summary>example_0711 — differs from label</summary><pre>Source:    PATIENT Maya Rao MRN 70000711 DIAGNOSIS NSCLC TREATMENT DrugA
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugA
+Generated: PATIENT DIENT DIAT DIS DIAT DIugS Drug NT DrugNOS DT DrugATIEAT DIS DrugC DuDrugAT PATIS DTMNONOS DrugATIENNONATMRENT PAT A DrugDrugB PAT DISS DIENT DugBugDOS DrugBI TIENNOS DrugATR DrugPAT NTMNTMENS DrugATMNTMNONrugMOS </pre><p>Stop: output_limit</p></details>
+<h3>multi_attention — all 12 saved diagnostics</h3>
+<details><summary>example_0700 — differs from label</summary><pre>Source:    DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA dose700
+Expected:  DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA dose700
+Generated: DIATIATIATIOS DIA MENTMATIENTIATMAGNT TIATEAT NTHONTMATHIATMENTMAGNTHHMENTMATOB DruNT NTOC [NAME] DISIENT NONTHs NT [NAME] DAGNTMA</pre><p>Stop: eos</p></details><details><summary>example_0701 — differs from label</summary><pre>Source:    PATIENT John Cole DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA
+Generated: PAT [NAME] [NAME] NTMAT DISIS DIS DIS TEATMAT DIENOSIENT DrugATREATMENT TEG[ADDRESS] NT NT NER ENTE  DDIAT NT ENT NT DrA</pre><p>Stop: eos</p></details><details><summary>example_0703 — differs from label</summary><pre>Source:    PATIENT Sara Shah MRN 70000703 DIAGNOSIS DIABETES TREATMENT DrugA
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugA
+Generated: PAT DIAGN [NAME] DIAGNOS AT NTMENT DOSIENT DrugC</pre><p>Stop: eos</p></details><details><summary>example_0704 — differs from label</summary><pre>Source:    DOCTOR Dr Alpha DATE 2026-12-22 PATIENT Maya Rao DIAGNOSIS ASTHMA
+Expected:  DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA
+Generated: DOCTOR [DOCTOR] DATE [DATE] DOS [NAME] DrugC [NAME] DOSIAGNONONONOSIONOSIS NOSIONONORENOSIAGNONOSIOS DIOSIOS [DOCTOR] DAT [DOCTOR]</pre><p>Stop: eos</p></details><details><summary>example_0706 — differs from label</summary><pre>Source:    PATIENT Leah Rao DOB 1992-01-09 PHONE 555-000-0706 ADDRESS 806 Oak St TREATMENT DrugB
+Expected:  PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB
+Generated: PATIENT [NAME] DOS [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>example_0702 — differs from label</summary><pre>Source:    PATIENT Noah Cole DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA
+Generated: PAT DIAGN NTMAT DISIS T T DISIATR NTRENTENENOS DIENTRENTEATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>example_0705 — differs from label</summary><pre>Source:    PATIENT Leah Shah MRN 70000705 DIAGNOSIS DIABETES TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB
+Generated: PAT DIAGN [NAME] DIAGNOS AT NTMENT DOSIENT DrugC</pre><p>Stop: eos</p></details><details><summary>example_0707 — differs from label</summary><pre>Source:    PATIENT John Cole MRN 70000707 DIAGNOSIS DIABETES TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB
+Generated: PAT DIAGN [NAME] DIAGNOS AT NTMENT DOSIENT DONONT DDrugS DrugA</pre><p>Stop: eos</p></details><details><summary>example_0708 — differs from label</summary><pre>Source:    PATIENT Noah Lee MRN 70000708 DIAGNOSIS ASTHMA TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA TREATMENT DrugB
+Generated: PATIENT [NAME] [NAME] [NAME] DIATIS AGNT [NAME] [NAME] [NAME] T DrugC PAT NTME DISIS [ADDRESS] TREATMENT DrugC</pre><p>Stop: eos</p></details><details><summary>example_0709 — differs from label</summary><pre>Source:    DOCTOR Dr Alpha DATE 2026-03-04 PATIENT Noah Shah DIAGNOSIS DIABETES
+Expected:  DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS DIABETES
+Generated: DOR [NAME] DATE DIATIATONTIAS [NAME] DOSIAGNONTENOSIONTRENONTOSIONONORENOSIASIATOSIOSIAGNOC DDrAT NTE</pre><p>Stop: eos</p></details><details><summary>example_0710 — differs from label</summary><pre>Source:    DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA dose710
+Expected:  DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA dose710
+Generated: PATEABIATEATR TETE MAT DIATES DIS DIAGNTEATEATENTESS TETMESS DIA</pre><p>Stop: eos</p></details><details><summary>example_0711 — differs from label</summary><pre>Source:    PATIENT Maya Rao MRN 70000711 DIAGNOSIS NSCLC TREATMENT DrugA
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugA
+Generated: PATIENT [NAME] MRN MT DISISISIS NTMENT DIOSIS AT DIATRENTRES DIOSIONONTRENTRENSIENOSIOS ENTR RENTMENONT</pre><p>Stop: eos</p></details>
+<h3>transformer_1 — all 12 saved diagnostics</h3>
+<details><summary>example_0700 — differs from label</summary><pre>Source:    DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA dose700
+Expected:  DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA dose700
+Generated: PIAGNOS BIS DDrugC [NAME] NTERERKER DIATIA BIAGNOMEREASTREA</pre><p>Stop: eos</p></details><details><summary>example_0701 — differs from label</summary><pre>Source:    PATIENT John Cole DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA
+Generated: PAT [NAME] [NAME] [NAME] DIAGNOSIS NTIA BIAGNOMARENONE A</pre><p>Stop: eos</p></details><details><summary>example_0703 — differs from label</summary><pre>Source:    PATIENT Sara Shah MRN 70000703 DIAGNOSIS DIABETES TREATMENT DrugA
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugA
+Generated: PAT [NAME] [NAME] [NAME] DIAGNOSISIS TIS DIAGNOS TREAST DrugATMENT [ADDRESS] T DrugB</pre><p>Stop: eos</p></details><details><summary>example_0704 — exact</summary><pre>Source:    DOCTOR Dr Alpha DATE 2026-12-22 PATIENT Maya Rao DIAGNOSIS ASTHMA
+Expected:  DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA
+Generated: DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA</pre><p>Stop: eos</p></details><details><summary>example_0706 — differs from label</summary><pre>Source:    PATIENT Leah Rao DOB 1992-01-09 PHONE 555-000-0706 ADDRESS 806 Oak St TREATMENT DrugB
+Expected:  PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB
+Generated: PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugC</pre><p>Stop: eos</p></details><details><summary>example_0702 — differs from label</summary><pre>Source:    PATIENT Noah Cole DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA
+Generated: DIENT [NAME] [NAME] DIAGNOS AGNTRNS DIAGNOMEAREASC DrugB</pre><p>Stop: eos</p></details><details><summary>example_0705 — differs from label</summary><pre>Source:    PATIENT Leah Shah MRN 70000705 DIAGNOSIS DIABETES TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB
+Generated: PAT [NAME] [NAME] [NAME] DIAGNOSISIS TISTENT DOS TREAST DrugB</pre><p>Stop: eos</p></details><details><summary>example_0707 — differs from label</summary><pre>Source:    PATIENT John Cole MRN 70000707 DIAGNOSIS DIABETES TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB
+Generated: PAT [NAME] [NAME] [NAME] DIAGNOSISIS TIS DIAGNOS TREAST DrugATMENT [ADDRESS] T DrugB</pre><p>Stop: eos</p></details><details><summary>example_0708 — differs from label</summary><pre>Source:    PATIENT Noah Lee MRN 70000708 DIAGNOSIS ASTHMA TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA TREATMENT DrugB
+Generated: PATIENT [NAME] MRN [MRN] DIAGNOSIS NST MA DOSIS DrugC</pre><p>Stop: eos</p></details><details><summary>example_0709 — differs from label</summary><pre>Source:    DOCTOR Dr Alpha DATE 2026-03-04 PATIENT Noah Shah DIAGNOSIS DIABETES
+Expected:  DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS DIABETES
+Generated: DOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASCLC</pre><p>Stop: eos</p></details><details><summary>example_0710 — differs from label</summary><pre>Source:    DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA dose710
+Expected:  DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA dose710
+Generated: DIAR DIAGNTIAT NT N BIS DIAGNTRENT DIAGNOS TMEAS A</pre><p>Stop: eos</p></details><details><summary>example_0711 — differs from label</summary><pre>Source:    PATIENT Maya Rao MRN 70000711 DIAGNOSIS NSCLC TREATMENT DrugA
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugA
+Generated: PATIENT [NAME] [NAME] [NAME] DIAGNOSISIS NSCLC DIAGN TREAT T DrugBENOS [ADDRESS] TREATMENT DrugA</pre><p>Stop: eos</p></details>
+<h3>transformer_2 — all 12 saved diagnostics</h3>
+<details><summary>example_0700 — differs from label</summary><pre>Source:    DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA dose700
+Expected:  DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA dose700
+Generated: PAAGNOSIS ATMAT DI DIAR DIAGNOSISTMASTES TRKEARKEAGNEA</pre><p>Stop: eos</p></details><details><summary>example_0701 — differs from label</summary><pre>Source:    PATIENT John Cole DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA
+Generated: PAT [NAME] DIAGNOSIAGNSIS BIS TER TRKER B TR T DrugB</pre><p>Stop: eos</p></details><details><summary>example_0703 — differs from label</summary><pre>Source:    PATIENT Sara Shah MRN 70000703 DIAGNOSIS DIABETES TREATMENT DrugA
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOS AGNTIS DIAGNTEATR DISTMA</pre><p>Stop: eos</p></details><details><summary>example_0704 — exact</summary><pre>Source:    DOCTOR Dr Alpha DATE 2026-12-22 PATIENT Maya Rao DIAGNOSIS ASTHMA
+Expected:  DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA
+Generated: DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA</pre><p>Stop: eos</p></details><details><summary>example_0706 — differs from label</summary><pre>Source:    PATIENT Leah Rao DOB 1992-01-09 PHONE 555-000-0706 ADDRESS 806 Oak St TREATMENT DrugB
+Expected:  PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB
+Generated: PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>example_0702 — differs from label</summary><pre>Source:    PATIENT Noah Cole DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA
+Generated: PATIENT DIAGNOSISISIS DIABIAGNTRKEAR DONENTREADrugB DrugB</pre><p>Stop: eos</p></details><details><summary>example_0705 — differs from label</summary><pre>Source:    PATIENT Leah Shah MRN 70000705 DIAGNOSIS DIABETES TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB
+Generated: PATIENT [NAME] MAGNOSIAT AT BENT TRETER TREATMEA</pre><p>Stop: eos</p></details><details><summary>example_0707 — differs from label</summary><pre>Source:    PATIENT John Cole MRN 70000707 DIAGNOSIS DIABETES TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB
+Generated: PATIENT [NAME] DIAGNOSISIS DIS DIAGNTETRENTR DrugATREAT DrugB</pre><p>Stop: eos</p></details><details><summary>example_0708 — differs from label</summary><pre>Source:    PATIENT Noah Lee MRN 70000708 DIAGNOSIS ASTHMA TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA TREATMENT DrugB
+Generated: PATIENT [NAME] MRN DIAGNOSISIS ABIS TREREATRENT B</pre><p>Stop: eos</p></details><details><summary>example_0709 — differs from label</summary><pre>Source:    DOCTOR Dr Alpha DATE 2026-03-04 PATIENT Noah Shah DIAGNOSIS DIABETES
+Expected:  DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS DIABETES
+Generated: DOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASCLC</pre><p>Stop: eos</p></details><details><summary>example_0710 — differs from label</summary><pre>Source:    DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA dose710
+Expected:  DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA dose710
+Generated: DIAGNOS BES DIER DIAGNOSISISIS DrugC TRKERKERKER TRETEA</pre><p>Stop: eos</p></details><details><summary>example_0711 — differs from label</summary><pre>Source:    PATIENT Maya Rao MRN 70000711 DIAGNOSIS NSCLC TREATMENT DrugA
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugA
+Generated: PATIENT [NAME] MRN MRNOSIAGNSISISCLC TREAGNTRENT T T DrugB</pre><p>Stop: eos</p></details>
+<h3>no_ffn — all 12 saved diagnostics</h3>
+<details><summary>example_0700 — differs from label</summary><pre>Source:    DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA dose700
+Expected:  DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA dose700
+Generated: DIAGNTHMAGNOST B AR AGNTMAGNOS TRENS B</pre><p>Stop: eos</p></details><details><summary>example_0701 — differs from label</summary><pre>Source:    PATIENT John Cole DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA
+Generated: PAT  [NAME] DIAGNOSIS ENS AST T ARKENOST DrugC</pre><p>Stop: eos</p></details><details><summary>example_0703 — differs from label</summary><pre>Source:    PATIENT Sara Shah MRN 70000703 DIAGNOSIS DIABETES TREATMENT DrugA
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugA
+Generated: PAT DIS [NAME] [NAME] DIAGNTREN TIS DIATRK T N DIDIA</pre><p>Stop: eos</p></details><details><summary>example_0704 — exact</summary><pre>Source:    DOCTOR Dr Alpha DATE 2026-12-22 PATIENT Maya Rao DIAGNOSIS ASTHMA
+Expected:  DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA
+Generated: DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA</pre><p>Stop: eos</p></details><details><summary>example_0706 — exact</summary><pre>Source:    PATIENT Leah Rao DOB 1992-01-09 PHONE 555-000-0706 ADDRESS 806 Oak St TREATMENT DrugB
+Expected:  PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB
+Generated: PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB</pre><p>Stop: eos</p></details><details><summary>example_0702 — differs from label</summary><pre>Source:    PATIENT Noah Cole DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA
+Generated: PAT DIS [NAME] DIAGNOSIS T TMEN B ARKER AR DIA</pre><p>Stop: eos</p></details><details><summary>example_0705 — differs from label</summary><pre>Source:    PATIENT Leah Shah MRN 70000705 DIAGNOSIS DIABETES TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB
+Generated: PAT DIS [NAME] [NAME] DIAGNTREN TIS DIATRK T N DIDIA</pre><p>Stop: eos</p></details><details><summary>example_0707 — differs from label</summary><pre>Source:    PATIENT John Cole MRN 70000707 DIAGNOSIS DIABETES TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB
+Generated: PAT DIS [NAME] [NAME] DIAGNTREN T AGN T DrugC DIEATRENOMENTRENTIATREN AGNT DrugA</pre><p>Stop: eos</p></details><details><summary>example_0708 — differs from label</summary><pre>Source:    PATIENT Noah Lee MRN 70000708 DIAGNOSIS ASTHMA TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA TREATMENT DrugB
+Generated: PATIENT [NAME] [NAME] D DIATIATISIENTIEN DrugC T DIPATRENO DrugB [ADDRESS] TREATMENT DrugC</pre><p>Stop: eos</p></details><details><summary>example_0709 — differs from label</summary><pre>Source:    DOCTOR Dr Alpha DATE 2026-03-04 PATIENT Noah Shah DIAGNOSIS DIABETES
+Expected:  DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS DIABETES
+Generated: DOR [DOCTOR] DATE [DATE] PATIENT DIAT [NAME] DOS AT DrugC</pre><p>Stop: eos</p></details><details><summary>example_0710 — differs from label</summary><pre>Source:    DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA dose710
+Expected:  DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA dose710
+Generated: DIATIAGNOMENTMAGNOMAGNOMAGNOS BIS BIA</pre><p>Stop: eos</p></details><details><summary>example_0711 — differs from label</summary><pre>Source:    PATIENT Maya Rao MRN 70000711 DIAGNOSIS NSCLC TREATMENT DrugA
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugA
+Generated: PATIENT DISIAIAGNOSIARENOSISIENT ATRENTMENT T A</pre><p>Stop: eos</p></details>
+<h3>no_layernorm — all 12 saved diagnostics</h3>
+<details><summary>example_0700 — differs from label</summary><pre>Source:    DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA dose700
+Expected:  DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA dose700
+Generated: PA DIONOMATIOS [NAME] DIONENERENOS NOS NOST DrugBIS PHONENEAS DIS</pre><p>Stop: eos</p></details><details><summary>example_0701 — differs from label</summary><pre>Source:    PATIENT John Cole DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA
+Generated: PAT [NAME] TMRNENOSIS NOSISC DIAGNOS TMENT TMEATMENT DrugB</pre><p>Stop: eos</p></details><details><summary>example_0703 — differs from label</summary><pre>Source:    PATIENT Sara Shah MRN 70000703 DIAGNOSIS DIABETES TREATMENT DrugA
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugA
+Generated: PATISIET [NAME] DIATIA</pre><p>Stop: eos</p></details><details><summary>example_0704 — exact</summary><pre>Source:    DOCTOR Dr Alpha DATE 2026-12-22 PATIENT Maya Rao DIAGNOSIS ASTHMA
+Expected:  DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA
+Generated: DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA</pre><p>Stop: eos</p></details><details><summary>example_0706 — differs from label</summary><pre>Source:    PATIENT Leah Rao DOB 1992-01-09 PHONE 555-000-0706 ADDRESS 806 Oak St TREATMENT DrugB
+Expected:  PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB
+Generated: PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugC</pre><p>Stop: eos</p></details><details><summary>example_0702 — differs from label</summary><pre>Source:    PATIENT Noah Cole DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA
+Generated: PATISIENTMATEAT TMR ATISC DIAGNOSIS PHONE [PHONE] ADrugATMENTREATMENT DrugC</pre><p>Stop: eos</p></details><details><summary>example_0705 — differs from label</summary><pre>Source:    PATIENT Leah Shah MRN 70000705 DIAGNOSIS DIABETES TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB
+Generated: PATISIET [NAME] DIATIA</pre><p>Stop: eos</p></details><details><summary>example_0707 — differs from label</summary><pre>Source:    PATIENT John Cole MRN 70000707 DIAGNOSIS DIABETES TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB
+Generated: PATIS [NAME] DIATEGNOSIAGNTISCLC</pre><p>Stop: eos</p></details><details><summary>example_0708 — differs from label</summary><pre>Source:    PATIENT Noah Lee MRN 70000708 DIAGNOSIS ASTHMA TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA TREATMENT DrugB
+Generated: PATIENT [NAME] MRN [MRN] DIAGNOSIS NS TREN DOMENT DrugC</pre><p>Stop: eos</p></details><details><summary>example_0709 — differs from label</summary><pre>Source:    DOCTOR Dr Alpha DATE 2026-03-04 PATIENT Noah Shah DIAGNOSIS DIABETES
+Expected:  DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS DIABETES
+Generated: DOCTOR DATE PATENTIENT DIAGNOSIS AS DIA</pre><p>Stop: eos</p></details><details><summary>example_0710 — differs from label</summary><pre>Source:    DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA dose710
+Expected:  DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA dose710
+Generated: DIAS DISIOS DIS [NAME] NE DIASIS NOSISC DIAS DIS BESTHMES ES</pre><p>Stop: eos</p></details><details><summary>example_0711 — differs from label</summary><pre>Source:    PATIENT Maya Rao MRN 70000711 DIAGNOSIS NSCLC TREATMENT DrugA
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugA
+Generated: PATIENTIAT [NAME] MRN DIAT NTIS NTMET [NAME] DOMENT DrugC</pre><p>Stop: eos</p></details>
+<h3>no_residual — all 12 saved diagnostics</h3>
+<details><summary>example_0700 — differs from label</summary><pre>Source:    DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA dose700
+Expected:  DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugA dose700
+Generated: DIASISTAS ABHMA B BIOMARKERE TREATMENT Dr DrugB</pre><p>Stop: eos</p></details><details><summary>example_0701 — differs from label</summary><pre>Source:    PATIENT John Cole DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER BRER TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>example_0703 — differs from label</summary><pre>Source:    PATIENT Sara Shah MRN 70000703 DIAGNOSIS DIABETES TREATMENT DrugA
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugA
+Generated: PATIENT [NAME] MRNT [NAME] DIASIABENTMA DIABEGNS DIA</pre><p>Stop: eos</p></details><details><summary>example_0704 — exact</summary><pre>Source:    DOCTOR Dr Alpha DATE 2026-12-22 PATIENT Maya Rao DIAGNOSIS ASTHMA
+Expected:  DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA
+Generated: DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS ASTHMA</pre><p>Stop: eos</p></details><details><summary>example_0706 — differs from label</summary><pre>Source:    PATIENT Leah Rao DOB 1992-01-09 PHONE 555-000-0706 ADDRESS 806 Oak St TREATMENT DrugB
+Expected:  PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugB
+Generated: PATIENT [NAME] DOB [DATE] PHONE [PHONE] ADDRESS [ADDRESS] TREATMENT DrugA</pre><p>Stop: eos</p></details><details><summary>example_0702 — differs from label</summary><pre>Source:    PATIENT Noah Cole DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA
+Expected:  PATIENT [NAME] DIAGNOSIS ASTHMA BIOMARKER NONE TREATMENT DrugA
+Generated: PATIENT [NAME] DIAGNOSIS ASTHMA BIOMAR  B NONE TRE TMENT DrugB</pre><p>Stop: eos</p></details><details><summary>example_0705 — differs from label</summary><pre>Source:    PATIENT Leah Shah MRN 70000705 DIAGNOSIS DIABETES TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB
+Generated: PATIENT [NAME] MRNT [NAME] DIASIABENT DIABEABENAT DrugA</pre><p>Stop: eos</p></details><details><summary>example_0707 — differs from label</summary><pre>Source:    PATIENT John Cole MRN 70000707 DIAGNOSIS DIABETES TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES TREATMENT DrugB
+Generated: PATIENT [NAME] MRNT [NAME] DIASIABENT DrNOSIABATMENENT DrugB</pre><p>Stop: eos</p></details><details><summary>example_0708 — differs from label</summary><pre>Source:    PATIENT Noah Lee MRN 70000708 DIAGNOSIS ASTHMA TREATMENT DrugB
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA TREATMENT DrugB
+Generated: PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMATRENT DrugA</pre><p>Stop: eos</p></details><details><summary>example_0709 — exact</summary><pre>Source:    DOCTOR Dr Alpha DATE 2026-03-04 PATIENT Noah Shah DIAGNOSIS DIABETES
+Expected:  DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS DIABETES
+Generated: DOCTOR [DOCTOR] DATE [DATE] PATIENT [NAME] DIAGNOSIS DIABETES</pre><p>Stop: eos</p></details><details><summary>example_0710 — differs from label</summary><pre>Source:    DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA dose710
+Expected:  DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugA dose710
+Generated: DIAGNOSIS DIABETES BIOMARKER ATR DIONTMER DrugA</pre><p>Stop: eos</p></details><details><summary>example_0711 — exact</summary><pre>Source:    PATIENT Maya Rao MRN 70000711 DIAGNOSIS NSCLC TREATMENT DrugA
+Expected:  PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugA
+Generated: PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC TREATMENT DrugA</pre><p>Stop: eos</p></details>
+<h2 id='heldout'>Original-study frozen final partitions</h2>
+<p>32 of 32 rows saved. Each row evaluates all50 notes in one declared entity/layout condition. Checkpoints were frozen before release. Shared control layouts and recurring date values limit novelty claims.</p>
+<div class='scroll'><table><thead><tr><th>Architecture</th><th>Partition</th><th>Exact notes</th><th>Correct identifiers</th><th>Clinical fields</th></tr></thead><tbody><tr><td>embedding_only</td><td>test_known_known</td><td>0/50</td><td>6/113</td><td>12/93</td></tr><tr><td>embedding_only</td><td>test_known_test</td><td>0/50</td><td>9/124</td><td>15/88</td></tr><tr><td>embedding_only</td><td>test_test_known</td><td>0/50</td><td>0/103</td><td>13/107</td></tr><tr><td>embedding_only</td><td>test_test_test</td><td>0/50</td><td>0/136</td><td>16/82</td></tr><tr><td>single_attention</td><td>test_known_known</td><td>0/50</td><td>0/113</td><td>0/93</td></tr><tr><td>single_attention</td><td>test_known_test</td><td>0/50</td><td>0/124</td><td>0/88</td></tr><tr><td>single_attention</td><td>test_test_known</td><td>0/50</td><td>0/103</td><td>0/107</td></tr><tr><td>single_attention</td><td>test_test_test</td><td>0/50</td><td>0/136</td><td>0/82</td></tr><tr><td>multi_attention</td><td>test_known_known</td><td>0/50</td><td>29/113</td><td>2/93</td></tr><tr><td>multi_attention</td><td>test_known_test</td><td>0/50</td><td>0/124</td><td>0/88</td></tr><tr><td>multi_attention</td><td>test_test_known</td><td>0/50</td><td>0/103</td><td>0/107</td></tr><tr><td>multi_attention</td><td>test_test_test</td><td>0/50</td><td>0/136</td><td>0/82</td></tr><tr><td>transformer_1</td><td>test_known_known</td><td>12/50</td><td>68/113</td><td>13/93</td></tr><tr><td>transformer_1</td><td>test_known_test</td><td>0/50</td><td>0/124</td><td>0/88</td></tr><tr><td>transformer_1</td><td>test_test_known</td><td>0/50</td><td>7/103</td><td>1/107</td></tr><tr><td>transformer_1</td><td>test_test_test</td><td>0/50</td><td>0/136</td><td>2/82</td></tr><tr><td>transformer_2</td><td>test_known_known</td><td>7/50</td><td>76/113</td><td>7/93</td></tr><tr><td>transformer_2</td><td>test_known_test</td><td>0/50</td><td>34/124</td><td>4/88</td></tr><tr><td>transformer_2</td><td>test_test_known</td><td>0/50</td><td>24/103</td><td>1/107</td></tr><tr><td>transformer_2</td><td>test_test_test</td><td>0/50</td><td>22/136</td><td>1/82</td></tr><tr><td>no_ffn</td><td>test_known_known</td><td>3/50</td><td>57/113</td><td>5/93</td></tr><tr><td>no_ffn</td><td>test_known_test</td><td>0/50</td><td>0/124</td><td>0/88</td></tr><tr><td>no_ffn</td><td>test_test_known</td><td>0/50</td><td>4/103</td><td>0/107</td></tr><tr><td>no_ffn</td><td>test_test_test</td><td>0/50</td><td>0/136</td><td>0/82</td></tr><tr><td>no_layernorm</td><td>test_known_known</td><td>4/50</td><td>58/113</td><td>6/93</td></tr><tr><td>no_layernorm</td><td>test_known_test</td><td>0/50</td><td>8/124</td><td>6/88</td></tr><tr><td>no_layernorm</td><td>test_test_known</td><td>0/50</td><td>2/103</td><td>4/107</td></tr><tr><td>no_layernorm</td><td>test_test_test</td><td>0/50</td><td>0/136</td><td>7/82</td></tr><tr><td>no_residual</td><td>test_known_known</td><td>20/50</td><td>95/113</td><td>32/93</td></tr><tr><td>no_residual</td><td>test_known_test</td><td>0/50</td><td>0/124</td><td>1/88</td></tr><tr><td>no_residual</td><td>test_test_known</td><td>1/50</td><td>19/103</td><td>4/107</td></tr><tr><td>no_residual</td><td>test_test_test</td><td>0/50</td><td>0/136</td><td>0/82</td></tr></tbody></table></div>
+<h2>How to explain a finding</h2><p>Question → change → observation → interpretation → limit. Attention describes internal routing for a prediction. A head intervention measures dependence at a particular checkpoint; neither automatically establishes a semantic head role. Low exact-surface leakage alone does not establish useful or safe clinical transformation.</p></main></html>

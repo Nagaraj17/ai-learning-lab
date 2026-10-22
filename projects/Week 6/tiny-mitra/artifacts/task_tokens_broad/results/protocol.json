@@ -1,0 +1,26 @@
+{
+  "series": "broader-input continued training",
+  "dataset_hash": "29141b9e65ccfc90c18046f1c6b6d0ed5136cd284fda7b282cc4eeeebce4420a",
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "data_producer_source_hash": "bcb542781f9f4bda848e840d9018753729d0c82632fab431dbf42f9372617213",
+  "architectures": [
+    "transformer_2",
+    "embedding_only",
+    "single_attention",
+    "multi_attention",
+    "transformer_1",
+    "no_ffn",
+    "no_layernorm",
+    "no_residual"
+  ],
+  "parent_updates": 2000,
+  "stage_updates": 2000,
+  "cumulative_updates": 4000,
+  "batch_size": 16,
+  "lr": 0.0007,
+  "seed": 42,
+  "parent_root": "artifacts\\task_tokens",
+  "selection": "fixed final stage update; minimum-loss weights kept separately",
+  "change": "broader name lengths and identifier digits plus another declared training stage",
+  "limits": "Coverage and added optimization both change; do not attribute the difference solely to one. Authored prompts are development acceptance, not the final partitions."
+}

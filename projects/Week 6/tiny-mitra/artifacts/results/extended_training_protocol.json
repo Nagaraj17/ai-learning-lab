@@ -1,0 +1,11 @@
+{
+  "architecture": "transformer_2",
+  "seed": 42,
+  "total_steps": 5000,
+  "initial_steps": 1000,
+  "source_hash": "a399a568af148bd3b0e2cd08c5aaa07f9ab045cbc5035ee0446c03d832d4b33d",
+  "reason": "validation-only poor clinical preservation under the 1,000-update budget",
+  "selection": "retain original best-validation selection rule; report latest separately and label extra budget",
+  "comparison_scope": "exploratory extension; does not overwrite fixed-budget benchmark",
+  "final_test_seen": false
+}

@@ -1,0 +1,21 @@
+{
+  "checked_at_utc": "2026-10-17T19:01:22.492317+00:00",
+  "scope": "CPU primitives and parameter serialization only; no Mitra model",
+  "python": "3.10.6 (tags/v3.10.6:9c7b4bd, Aug  1 2022, 21:53:49) [MSC v.1932 64 bit (AMD64)]",
+  "executable": "C:\\Users\\Nagar\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "checks": {
+    "forward_and_gradient": true,
+    "optimizer_reduces_toy_loss": true,
+    "cpu_state_roundtrip": true
+  },
+  "torch_version": "2.1.2+cpu",
+  "cuda_available": false,
+  "optional_packages_present": {
+    "numpy": true,
+    "gradio": false,
+    "pytest": false,
+    "matplotlib": true
+  },
+  "passed": true
+}

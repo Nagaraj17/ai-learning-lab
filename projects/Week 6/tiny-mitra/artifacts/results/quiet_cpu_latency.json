@@ -1,0 +1,954 @@
+{
+  "device": "cpu",
+  "torch_threads": 2,
+  "torch_version": "2.1.2+cpu",
+  "source": "PATIENT John Lee DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA",
+  "procedure": "after queued training/evaluation processes finished; warm once; three greedy repetitions; load time separate; generated length varies by checkpoint",
+  "results": [
+    {
+      "study": "version_1",
+      "architecture": "embedding_only",
+      "training_seed": 42,
+      "step": 1000,
+      "load_seconds": 0.016261199954897165,
+      "median_seconds_per_note": 0.0177609003148973,
+      "generated_tokens": 72,
+      "tokens_per_second": 4053.8485506620746,
+      "samples": [
+        {
+          "seconds": 0.023752400185912848,
+          "tokens": 72,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.0177609003148973,
+          "tokens": 72,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.017538900021463633,
+          "tokens": 72,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "version_1",
+      "architecture": "single_attention",
+      "training_seed": 42,
+      "step": 400,
+      "load_seconds": 0.020068099722266197,
+      "median_seconds_per_note": 0.3252754001878202,
+      "generated_tokens": 197,
+      "tokens_per_second": 605.6406352470813,
+      "samples": [
+        {
+          "seconds": 0.29585189977660775,
+          "tokens": 197,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.3252754001878202,
+          "tokens": 197,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.3488740003667772,
+          "tokens": 197,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "version_1",
+      "architecture": "multi_attention",
+      "training_seed": 42,
+      "step": 400,
+      "load_seconds": 0.021016800310462713,
+      "median_seconds_per_note": 0.8558354000560939,
+      "generated_tokens": 220,
+      "tokens_per_second": 257.05877553742295,
+      "samples": [
+        {
+          "seconds": 0.8558354000560939,
+          "tokens": 220,
+          "termination": "output_limit"
+        },
+        {
+          "seconds": 1.0216542002744973,
+          "tokens": 220,
+          "termination": "output_limit"
+        },
+        {
+          "seconds": 0.7962652998976409,
+          "tokens": 220,
+          "termination": "output_limit"
+        }
+      ]
+    },
+    {
+      "study": "version_1",
+      "architecture": "transformer_1",
+      "training_seed": 42,
+      "step": 500,
+      "load_seconds": 0.031203499995172024,
+      "median_seconds_per_note": 0.21982029965147376,
+      "generated_tokens": 72,
+      "tokens_per_second": 327.54026863832127,
+      "samples": [
+        {
+          "seconds": 0.2371704000979662,
+          "tokens": 72,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.21982029965147376,
+          "tokens": 72,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.215132599696517,
+          "tokens": 72,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "version_1",
+      "architecture": "transformer_2",
+      "training_seed": 42,
+      "step": 400,
+      "load_seconds": 0.045651199761778116,
+      "median_seconds_per_note": 0.20017689978703856,
+      "generated_tokens": 44,
+      "tokens_per_second": 219.80558219659767,
+      "samples": [
+        {
+          "seconds": 0.19714979967102408,
+          "tokens": 44,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.20182899991050363,
+          "tokens": 44,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.20017689978703856,
+          "tokens": 44,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "version_1",
+      "architecture": "no_ffn",
+      "training_seed": 42,
+      "step": 600,
+      "load_seconds": 0.032469999976456165,
+      "median_seconds_per_note": 0.20586999971419573,
+      "generated_tokens": 49,
+      "tokens_per_second": 238.0142811872808,
+      "samples": [
+        {
+          "seconds": 0.21620430005714297,
+          "tokens": 49,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.18533529993146658,
+          "tokens": 49,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.20586999971419573,
+          "tokens": 49,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "version_1",
+      "architecture": "no_layernorm",
+      "training_seed": 42,
+      "step": 200,
+      "load_seconds": 0.030597500037401915,
+      "median_seconds_per_note": 0.19172789994627237,
+      "generated_tokens": 46,
+      "tokens_per_second": 239.92334977272745,
+      "samples": [
+        {
+          "seconds": 0.19090740010142326,
+          "tokens": 46,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.19172789994627237,
+          "tokens": 46,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.4146533999592066,
+          "tokens": 46,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "version_1",
+      "architecture": "no_residual",
+      "training_seed": 42,
+      "step": 600,
+      "load_seconds": 0.09276690008118749,
+      "median_seconds_per_note": 0.28374220011755824,
+      "generated_tokens": 46,
+      "tokens_per_second": 162.11899386464748,
+      "samples": [
+        {
+          "seconds": 0.40298640029504895,
+          "tokens": 46,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.28374220011755824,
+          "tokens": 46,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.26285910001024604,
+          "tokens": 46,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "assignment_v2",
+      "architecture": "embedding_only",
+      "training_seed": 42,
+      "step": 2000,
+      "load_seconds": 0.014928900171071291,
+      "median_seconds_per_note": 0.021900199819356203,
+      "generated_tokens": 64,
+      "tokens_per_second": 2922.3477652215047,
+      "samples": [
+        {
+          "seconds": 0.02110989997163415,
+          "tokens": 64,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.021900199819356203,
+          "tokens": 64,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.025675199925899506,
+          "tokens": 64,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "assignment_v2",
+      "architecture": "single_attention",
+      "training_seed": 42,
+      "step": 900,
+      "load_seconds": 0.024895199574530125,
+      "median_seconds_per_note": 0.08888710010796785,
+      "generated_tokens": 59,
+      "tokens_per_second": 663.7633574313359,
+      "samples": [
+        {
+          "seconds": 0.08888710010796785,
+          "tokens": 59,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.09298100043088198,
+          "tokens": 59,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.08249439997598529,
+          "tokens": 59,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "assignment_v2",
+      "architecture": "multi_attention",
+      "training_seed": 42,
+      "step": 400,
+      "load_seconds": 0.021876399870961905,
+      "median_seconds_per_note": 0.021346600260585546,
+      "generated_tokens": 12,
+      "tokens_per_second": 562.1504058497245,
+      "samples": [
+        {
+          "seconds": 0.022776799742132425,
+          "tokens": 12,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.021346600260585546,
+          "tokens": 12,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.02089269971475005,
+          "tokens": 12,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "assignment_v2",
+      "architecture": "transformer_1",
+      "training_seed": 42,
+      "step": 800,
+      "load_seconds": 0.03924289997667074,
+      "median_seconds_per_note": 0.1747428998351097,
+      "generated_tokens": 57,
+      "tokens_per_second": 326.19351088820287,
+      "samples": [
+        {
+          "seconds": 0.1929913000203669,
+          "tokens": 57,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.16729289991781116,
+          "tokens": 57,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.1747428998351097,
+          "tokens": 57,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "assignment_v2",
+      "architecture": "transformer_2",
+      "training_seed": 42,
+      "step": 500,
+      "load_seconds": 0.046641900204122066,
+      "median_seconds_per_note": 0.3501496999524534,
+      "generated_tokens": 59,
+      "tokens_per_second": 168.49935901133594,
+      "samples": [
+        {
+          "seconds": 0.2992776003666222,
+          "tokens": 59,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.3501496999524534,
+          "tokens": 59,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.713334099855274,
+          "tokens": 59,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "assignment_v2",
+      "architecture": "no_ffn",
+      "training_seed": 42,
+      "step": 600,
+      "load_seconds": 0.13518649991601706,
+      "median_seconds_per_note": 0.5414676000364125,
+      "generated_tokens": 57,
+      "tokens_per_second": 105.26945655874309,
+      "samples": [
+        {
+          "seconds": 0.5414676000364125,
+          "tokens": 57,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.4732081997208297,
+          "tokens": 57,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.7414247998967767,
+          "tokens": 57,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "assignment_v2",
+      "architecture": "no_layernorm",
+      "training_seed": 42,
+      "step": 200,
+      "load_seconds": 0.05891579994931817,
+      "median_seconds_per_note": 0.47757270000874996,
+      "generated_tokens": 48,
+      "tokens_per_second": 100.50825769379313,
+      "samples": [
+        {
+          "seconds": 0.37601560028269887,
+          "tokens": 48,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.5226297001354396,
+          "tokens": 48,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.47757270000874996,
+          "tokens": 48,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "assignment_v2",
+      "architecture": "no_residual",
+      "training_seed": 42,
+      "step": 1400,
+      "load_seconds": 0.06795599963515997,
+      "median_seconds_per_note": 0.4465915998443961,
+      "generated_tokens": 56,
+      "tokens_per_second": 125.3942080852211,
+      "samples": [
+        {
+          "seconds": 0.4465915998443961,
+          "tokens": 56,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.5080687999725342,
+          "tokens": 56,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.3571333000436425,
+          "tokens": 56,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "task_tokens",
+      "architecture": "embedding_only",
+      "training_seed": 42,
+      "step": 2000,
+      "load_seconds": 0.017482500057667494,
+      "median_seconds_per_note": 0.005833899602293968,
+      "generated_tokens": 16,
+      "tokens_per_second": 2742.5909067253374,
+      "samples": [
+        {
+          "seconds": 0.005833899602293968,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.0057127997279167175,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.008142000064253807,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "task_tokens",
+      "architecture": "single_attention",
+      "training_seed": 42,
+      "step": 2000,
+      "load_seconds": 0.024251500144600868,
+      "median_seconds_per_note": 0.017303399741649628,
+      "generated_tokens": 16,
+      "tokens_per_second": 924.6737773437483,
+      "samples": [
+        {
+          "seconds": 0.018836500123143196,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.017303399741649628,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.016826399601995945,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "task_tokens",
+      "architecture": "multi_attention",
+      "training_seed": 42,
+      "step": 2000,
+      "load_seconds": 0.02218349976465106,
+      "median_seconds_per_note": 0.02023999998345971,
+      "generated_tokens": 16,
+      "tokens_per_second": 790.5138346381091,
+      "samples": [
+        {
+          "seconds": 0.020826799795031548,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.02023999998345971,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.019414800219237804,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "task_tokens",
+      "architecture": "transformer_1",
+      "training_seed": 42,
+      "step": 2000,
+      "load_seconds": 0.037537900265306234,
+      "median_seconds_per_note": 0.03955570003017783,
+      "generated_tokens": 16,
+      "tokens_per_second": 404.49290463304357,
+      "samples": [
+        {
+          "seconds": 0.042668099980801344,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.03955570003017783,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.03675020020455122,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "task_tokens",
+      "architecture": "transformer_2",
+      "training_seed": 42,
+      "step": 2000,
+      "load_seconds": 0.05522499978542328,
+      "median_seconds_per_note": 0.06679300032556057,
+      "generated_tokens": 16,
+      "tokens_per_second": 239.5460590483022,
+      "samples": [
+        {
+          "seconds": 0.062271700240671635,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.07284780032932758,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.06679300032556057,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "task_tokens",
+      "architecture": "no_ffn",
+      "training_seed": 42,
+      "step": 2000,
+      "load_seconds": 0.043850400019437075,
+      "median_seconds_per_note": 0.04696880001574755,
+      "generated_tokens": 16,
+      "tokens_per_second": 340.65166652406646,
+      "samples": [
+        {
+          "seconds": 0.04696880001574755,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.04613849986344576,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.047553000040352345,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "task_tokens",
+      "architecture": "no_layernorm",
+      "training_seed": 42,
+      "step": 2000,
+      "load_seconds": 0.039530300069600344,
+      "median_seconds_per_note": 0.04382190015166998,
+      "generated_tokens": 16,
+      "tokens_per_second": 365.1142452660229,
+      "samples": [
+        {
+          "seconds": 0.04382190015166998,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.038667500019073486,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.04927209997549653,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "task_tokens",
+      "architecture": "no_residual",
+      "training_seed": 42,
+      "step": 2000,
+      "load_seconds": 0.0438787997700274,
+      "median_seconds_per_note": 0.06528729991987348,
+      "generated_tokens": 16,
+      "tokens_per_second": 245.0706342525523,
+      "samples": [
+        {
+          "seconds": 0.06528729991987348,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.06294990004971623,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.06829369999468327,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "mitra_final",
+      "architecture": "embedding_only",
+      "training_seed": 42,
+      "step": 4000,
+      "load_seconds": 0.013494200073182583,
+      "median_seconds_per_note": 0.008112399838864803,
+      "generated_tokens": 18,
+      "tokens_per_second": 2218.825545773247,
+      "samples": [
+        {
+          "seconds": 0.00672469986602664,
+          "tokens": 18,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.008416399825364351,
+          "tokens": 18,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.008112399838864803,
+          "tokens": 18,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "mitra_final",
+      "architecture": "single_attention",
+      "training_seed": 42,
+      "step": 4000,
+      "load_seconds": 0.025621899869292974,
+      "median_seconds_per_note": 0.019144400022923946,
+      "generated_tokens": 16,
+      "tokens_per_second": 835.7535352813999,
+      "samples": [
+        {
+          "seconds": 0.017468899954110384,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.019144400022923946,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.020956700202077627,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "mitra_final",
+      "architecture": "multi_attention",
+      "training_seed": 42,
+      "step": 4000,
+      "load_seconds": 0.03088989993557334,
+      "median_seconds_per_note": 0.022971699945628643,
+      "generated_tokens": 16,
+      "tokens_per_second": 696.5091846868168,
+      "samples": [
+        {
+          "seconds": 0.01878410018980503,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.022971699945628643,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.024043300189077854,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "mitra_final",
+      "architecture": "transformer_1",
+      "training_seed": 42,
+      "step": 4000,
+      "load_seconds": 0.039941100403666496,
+      "median_seconds_per_note": 0.038569699972867966,
+      "generated_tokens": 16,
+      "tokens_per_second": 414.83340578887766,
+      "samples": [
+        {
+          "seconds": 0.045030500274151564,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.0378839997574687,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.038569699972867966,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "mitra_final",
+      "architecture": "transformer_2",
+      "training_seed": 42,
+      "step": 4000,
+      "load_seconds": 0.06083450000733137,
+      "median_seconds_per_note": 0.06589930038899183,
+      "generated_tokens": 16,
+      "tokens_per_second": 242.7946868260338,
+      "samples": [
+        {
+          "seconds": 0.07215990033000708,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.06589930038899183,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.06442700000479817,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "mitra_final",
+      "architecture": "no_ffn",
+      "training_seed": 42,
+      "step": 4000,
+      "load_seconds": 0.0537663996219635,
+      "median_seconds_per_note": 0.05099569959565997,
+      "generated_tokens": 16,
+      "tokens_per_second": 313.75194627904847,
+      "samples": [
+        {
+          "seconds": 0.05099569959565997,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.04391010012477636,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.0542242000810802,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "mitra_final",
+      "architecture": "no_layernorm",
+      "training_seed": 42,
+      "step": 4000,
+      "load_seconds": 0.04683690005913377,
+      "median_seconds_per_note": 0.047004600055515766,
+      "generated_tokens": 16,
+      "tokens_per_second": 340.3922165299325,
+      "samples": [
+        {
+          "seconds": 0.047004600055515766,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.04338459996506572,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.04722579987719655,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "mitra_final",
+      "architecture": "no_residual",
+      "training_seed": 42,
+      "step": 4000,
+      "load_seconds": 0.057254299987107515,
+      "median_seconds_per_note": 0.05839650006964803,
+      "generated_tokens": 16,
+      "tokens_per_second": 273.98902298797367,
+      "samples": [
+        {
+          "seconds": 0.06691409973427653,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.05656869988888502,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.05839650006964803,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "mitra_final",
+      "architecture": "transformer_2_seed7",
+      "training_seed": 7,
+      "step": 4000,
+      "load_seconds": 0.04738039989024401,
+      "median_seconds_per_note": 0.057867299765348434,
+      "generated_tokens": 16,
+      "tokens_per_second": 276.49467082237993,
+      "samples": [
+        {
+          "seconds": 0.057867299765348434,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.06050190003588796,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.056242499966174364,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "mitra_final",
+      "architecture": "transformer_2_seed123",
+      "training_seed": 123,
+      "step": 4000,
+      "load_seconds": 0.04901019996032119,
+      "median_seconds_per_note": 0.06350470008328557,
+      "generated_tokens": 16,
+      "tokens_per_second": 251.9498553495444,
+      "samples": [
+        {
+          "seconds": 0.05595779977738857,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.06350470008328557,
+          "tokens": 16,
+          "termination": "eos"
+        },
+        {
+          "seconds": 0.06567869987338781,
+          "tokens": 16,
+          "termination": "eos"
+        }
+      ]
+    },
+    {
+      "study": "four_note_pilot",
+      "architecture": "transformer_2",
+      "training_seed": 42,
+      "step": 500,
+      "load_seconds": 0.04766190005466342,
+      "median_seconds_per_note": 0.5364989000372589,
+      "generated_tokens": 62,
+      "tokens_per_second": 115.5640766377978,
+      "samples": [
+        {
+          "seconds": 0.522134399972856,
+          "tokens": 62,
+          "termination": "context_limit"
+        },
+        {
+          "seconds": 0.5364989000372589,
+          "tokens": 62,
+          "termination": "context_limit"
+        },
+        {
+          "seconds": 0.5780850001610816,
+          "tokens": 62,
+          "termination": "context_limit"
+        }
+      ]
+    }
+  ]
+}

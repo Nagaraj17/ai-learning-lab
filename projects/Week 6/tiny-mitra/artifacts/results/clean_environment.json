@@ -1,0 +1,102 @@
+{
+  "passed": true,
+  "python": "3.10.6 (tags/v3.10.6:9c7b4bd, Aug  1 2022, 21:53:49) [MSC v.1932 64 bit (AMD64)]",
+  "environment": "C:\\Users\\Nagar\\source\\repos\\ai-learning-lab\\projects\\Week 6\\tiny-mitra\\.venv-repro",
+  "system_site_packages": false,
+  "packages": {
+    "torch": {
+      "version": "2.1.2+cpu",
+      "path": "C:\\Users\\Nagar\\source\\repos\\ai-learning-lab\\projects\\Week 6\\tiny-mitra\\.venv-repro\\Lib\\site-packages\\torch\\__init__.py"
+    },
+    "numpy": {
+      "version": "1.24.3",
+      "path": "C:\\Users\\Nagar\\source\\repos\\ai-learning-lab\\projects\\Week 6\\tiny-mitra\\.venv-repro\\Lib\\site-packages\\numpy\\__init__.py"
+    },
+    "matplotlib": {
+      "version": "3.9.2",
+      "path": "C:\\Users\\Nagar\\source\\repos\\ai-learning-lab\\projects\\Week 6\\tiny-mitra\\.venv-repro\\Lib\\site-packages\\matplotlib\\__init__.py"
+    },
+    "gradio": {
+      "version": "5.50.0",
+      "path": "C:\\Users\\Nagar\\source\\repos\\ai-learning-lab\\projects\\Week 6\\tiny-mitra\\.venv-repro\\Lib\\site-packages\\gradio\\__init__.py"
+    },
+    "pytest": {
+      "version": "8.4.2",
+      "path": "C:\\Users\\Nagar\\source\\repos\\ai-learning-lab\\projects\\Week 6\\tiny-mitra\\.venv-repro\\Lib\\site-packages\\pytest\\__init__.py"
+    }
+  },
+  "pip_check": "No broken requirements found.",
+  "test_exit_code": 0,
+  "gradio_components": 116,
+  "actual_generation": {
+    "text": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+    "tokens": [
+      {
+        "id": 109,
+        "token": "PATIENT",
+        "probability": 0.9999039173126221
+      },
+      {
+        "id": 106,
+        "token": " ",
+        "probability": 0.999972939491272
+      },
+      {
+        "id": 6,
+        "token": "[NAME]",
+        "probability": 0.9999480247497559
+      },
+      {
+        "id": 106,
+        "token": " ",
+        "probability": 0.9999759197235107
+      },
+      {
+        "id": 119,
+        "token": "VISITED",
+        "probability": 0.999554455280304
+      },
+      {
+        "id": 106,
+        "token": " ",
+        "probability": 0.9999741315841675
+      },
+      {
+        "id": 7,
+        "token": "[DOCTOR]",
+        "probability": 0.9995112419128418
+      },
+      {
+        "id": 106,
+        "token": " ",
+        "probability": 0.9999772310256958
+      },
+      {
+        "id": 120,
+        "token": "ON",
+        "probability": 0.999138355255127
+      },
+      {
+        "id": 106,
+        "token": " ",
+        "probability": 0.9999629259109497
+      },
+      {
+        "id": 8,
+        "token": "[DATE]",
+        "probability": 0.9997237324714661
+      },
+      {
+        "id": 3,
+        "token": "<EOS>",
+        "probability": 0.9999352693557739
+      }
+    ],
+    "termination": "eos",
+    "mode": "greedy",
+    "temperature": null,
+    "seed": 42,
+    "protocol_valid": true
+  },
+  "scope": "fresh local Windows CPU installation and real checkpoint route; not an actual Colab/GPU or complete-browser verification"
+}

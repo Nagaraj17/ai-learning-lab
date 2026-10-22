@@ -1,0 +1,1816 @@
+{
+  "metrics": {
+    "tp": 12,
+    "fp": 192,
+    "fn": 74,
+    "identifiers": 86,
+    "leaked_identifiers": 0,
+    "leaked_note": 0,
+    "clinical_correct": 3,
+    "clinical_support": 33,
+    "exact": 2,
+    "examples": 50,
+    "precision": 0.058823529411764705,
+    "recall": 0.13953488372093023,
+    "f1": 0.08275862068965517,
+    "exact_match": 0.04,
+    "identifier_leakage": 0.0,
+    "note_leakage": 0.0,
+    "clinical_preservation": 0.09090909090909091,
+    "categories": {
+      "MRN": {
+        "tp": 0,
+        "support": 16,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "PATIENT": {
+        "tp": 4,
+        "support": 45,
+        "leaked": 0,
+        "recall": 0.08888888888888889
+      },
+      "DOCTOR": {
+        "tp": 0,
+        "support": 5,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "DATE": {
+        "tp": 5,
+        "support": 5,
+        "leaked": 0,
+        "recall": 1.0
+      },
+      "PHONE": {
+        "tp": 0,
+        "support": 7,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "ADDRESS": {
+        "tp": 3,
+        "support": 4,
+        "leaked": 0,
+        "recall": 0.75
+      },
+      "DOB": {
+        "tp": 0,
+        "support": 4,
+        "leaked": 0,
+        "recall": 0.0
+      }
+    },
+    "controls": 5,
+    "control_over_redactions": 5,
+    "example_ids": [
+      "assignment_0900",
+      "assignment_0901",
+      "assignment_0902",
+      "assignment_0903",
+      "assignment_0904",
+      "assignment_0905",
+      "assignment_0906",
+      "assignment_0907",
+      "assignment_0908",
+      "assignment_0909",
+      "assignment_0910",
+      "assignment_0911",
+      "assignment_0912",
+      "assignment_0913",
+      "assignment_0914",
+      "assignment_0915",
+      "assignment_0916",
+      "assignment_0917",
+      "assignment_0918",
+      "assignment_0919",
+      "assignment_0920",
+      "assignment_0921",
+      "assignment_0922",
+      "assignment_0923",
+      "assignment_0924",
+      "assignment_0925",
+      "assignment_0926",
+      "assignment_0927",
+      "assignment_0928",
+      "assignment_0929",
+      "assignment_0930",
+      "assignment_0931",
+      "assignment_0932",
+      "assignment_0933",
+      "assignment_0934",
+      "assignment_0935",
+      "assignment_0936",
+      "assignment_0937",
+      "assignment_0938",
+      "assignment_0939",
+      "assignment_0940",
+      "assignment_0941",
+      "assignment_0942",
+      "assignment_0943",
+      "assignment_0944",
+      "assignment_0945",
+      "assignment_0946",
+      "assignment_0947",
+      "assignment_0948",
+      "assignment_0949"
+    ],
+    "valid_terminations": 50,
+    "evaluation": "sentence-anchor version 2; exact-surface leakage; complete clinical associations",
+    "device": "cpu"
+  },
+  "outputs": [
+    {
+      "id": "assignment_0900",
+      "split": "test_test_known",
+      "source": "TREATMENT Chemotherapy DIAGNOSIS ASTHMA BIOMARKER EGFR",
+      "expected": "TREATMENT Chemotherapy DIAGNOSIS ASTHMA BIOMARKER EGFR",
+      "generated": "TREATMENT DrugB TREATMENT [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.0047194999642670155,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0901",
+      "split": "test_test_known",
+      "source": "MRN 586815 PATIENT Hugo Reed",
+      "expected": "MRN [MRN] PATIENT [NAME]",
+      "generated": "MRN [MRN] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.010044100228697062,
+      "tokens": 20,
+      "counts": {
+        "tp": 0,
+        "fp": 8,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0902",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Park VISITED Dr Reed ON March 15",
+      "expected": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+      "generated": "PATIENT [NAME] DIAGNOSIS [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.00829260004684329,
+      "tokens": 12,
+      "counts": {
+        "tp": 1,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0903",
+      "split": "test_test_known",
+      "source": "PATIENT Evelyn Banerjee DIAGNOSIS ASTHMA",
+      "expected": "PATIENT [NAME] DIAGNOSIS ASTHMA",
+      "generated": "PATIENT [NAME] [NAME] [NAME] [NAME] DIAGNOSIS [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.010047500021755695,
+      "tokens": 18,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0904",
+      "split": "test_test_known",
+      "source": "PATIENT Evelyn Banerjee VISITED Dr Reed ON October 12",
+      "expected": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+      "generated": "PATIENT ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.004227799829095602,
+      "tokens": 6,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 2,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0905",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Reed PHONE 5550904897",
+      "expected": "PATIENT [NAME] PHONE [PHONE]",
+      "generated": "PATIENT [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.006657100282609463,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0906",
+      "split": "test_test_known",
+      "source": "PATIENT Evan Park PHONE 5552137450",
+      "expected": "PATIENT [NAME] PHONE [PHONE]",
+      "generated": "PATIENT [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.006435600109398365,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0907",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Park LIVES 1007 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] LIVES [ADDRESS]",
+      "generated": "PATIENT LIVES [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.0057345000095665455,
+      "tokens": 6,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 1,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0908",
+      "split": "test_test_known",
+      "source": "MRN 112459 PATIENT Vikram Patel DIAGNOSIS ASTHMA",
+      "expected": "MRN [MRN] PATIENT [NAME] DIAGNOSIS ASTHMA",
+      "generated": "PATIENT [NAME] DIAGNOSIS [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.006409300025552511,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0909",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Reed PHONE 5554975606",
+      "expected": "PATIENT [NAME] PHONE [PHONE]",
+      "generated": "PATIENT [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.008180799894034863,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0910",
+      "split": "test_test_known",
+      "source": "TREATMENT DrugB DIAGNOSIS ASTHMA BIOMARKER ALK",
+      "expected": "TREATMENT DrugB DIAGNOSIS ASTHMA BIOMARKER ALK",
+      "generated": "TREATMENT DrugB TREATMENT [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.005321699660271406,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0911",
+      "split": "test_test_known",
+      "source": "PATIENT Evan Park DOB December 24 1989",
+      "expected": "PATIENT [NAME] DOB [DATE]",
+      "generated": "PATIENT [NAME] [NAME] [NAME] DIAGNOSIS [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.008493499830365181,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0912",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Reed DIAGNOSIS ASTHMA",
+      "expected": "PATIENT [NAME] DIAGNOSIS ASTHMA",
+      "generated": "PATIENT [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.004031399730592966,
+      "tokens": 8,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0913",
+      "split": "test_test_known",
+      "source": "PATIENT Asha Reed MRN 276707 DIAGNOSIS DIABETES",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES",
+      "generated": "PATIENT [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.006120800040662289,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0914",
+      "split": "test_test_known",
+      "source": "PATIENT Asha Reed DIAGNOSIS DIABETES BIOMARKER NONE TREATMENT Chemotherapy",
+      "expected": "PATIENT [NAME] DIAGNOSIS DIABETES BIOMARKER NONE TREATMENT Chemotherapy",
+      "generated": "PATIENT [NAME] [NAME] [NAME] DIAGNOSIS [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.004528400022536516,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0915",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Park VISITED Dr Reed ON April 21",
+      "expected": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+      "generated": "PATIENT [NAME] DIAGNOSIS [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.004704099614173174,
+      "tokens": 12,
+      "counts": {
+        "tp": 1,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0916",
+      "split": "test_test_known",
+      "source": "MRN 597730 PATIENT Asha Park DIAGNOSIS ASTHMA",
+      "expected": "MRN [MRN] PATIENT [NAME] DIAGNOSIS ASTHMA",
+      "generated": "PATIENT [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.005834699608385563,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0917",
+      "split": "test_test_known",
+      "source": "PATIENT Evan Park DOB October 18 1975",
+      "expected": "PATIENT [NAME] DOB [DATE]",
+      "generated": "PATIENT [NAME] [NAME] [NAME] DIAGNOSIS [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.005629900377243757,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0918",
+      "split": "test_test_known",
+      "source": "PATIENT Vikram Patel VISITED Dr Reed ON April 8",
+      "expected": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+      "generated": "PATIENT DIAGNOSIS [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.005345900077372789,
+      "tokens": 10,
+      "counts": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0919",
+      "split": "test_test_known",
+      "source": "PATIENT Asha Reed DIAGNOSIS NSCLC",
+      "expected": "PATIENT [NAME] DIAGNOSIS NSCLC",
+      "generated": "PATIENT [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.0029620002023875713,
+      "tokens": 8,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 1,
+        "exact": 1,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0920",
+      "split": "test_test_known",
+      "source": "TREATMENT DrugA BIOMARKER EGFR DIAGNOSIS ASTHMA",
+      "expected": "TREATMENT DrugA BIOMARKER EGFR DIAGNOSIS ASTHMA",
+      "generated": "TREATMENT DrugB TREATMENT [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.004045899957418442,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0921",
+      "split": "test_test_known",
+      "source": "PATIENT Vikram Patel DOB August 12 1987",
+      "expected": "PATIENT [NAME] DOB [DATE]",
+      "generated": "MRN [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.006226199679076672,
+      "tokens": 14,
+      "counts": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0922",
+      "split": "test_test_known",
+      "source": "MRN 649355 PATIENT Hugo Reed",
+      "expected": "MRN [MRN] PATIENT [NAME]",
+      "generated": "MRN [MRN] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.011659400071948767,
+      "tokens": 20,
+      "counts": {
+        "tp": 0,
+        "fp": 8,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0923",
+      "split": "test_test_known",
+      "source": "MRN 967532 PATIENT Evelyn Banerjee DIAGNOSIS DIABETES",
+      "expected": "MRN [MRN] PATIENT [NAME] DIAGNOSIS DIABETES",
+      "generated": "PATIENT [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.005384800024330616,
+      "tokens": 10,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0924",
+      "split": "test_test_known",
+      "source": "PATIENT Asha Park PHONE 5550466156",
+      "expected": "PATIENT [NAME] PHONE [PHONE]",
+      "generated": "PATIENT [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.007014899980276823,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0925",
+      "split": "test_test_known",
+      "source": "PATIENT Anastasia Mehta DIAGNOSIS NSCLC",
+      "expected": "PATIENT [NAME] DIAGNOSIS NSCLC",
+      "generated": "PATIENT [NAME] [NAME] [NAME] [NAME] DIAGNOSIS [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.008718300145119429,
+      "tokens": 18,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0926",
+      "split": "test_test_known",
+      "source": "PATIENT Anastasia Mehta DOB December 6 1997",
+      "expected": "PATIENT [NAME] DOB [DATE]",
+      "generated": "PATIENT [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.006078700069338083,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 4,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0927",
+      "split": "test_test_known",
+      "source": "MRN 762758 PATIENT Vikram Patel DIAGNOSIS DIABETES",
+      "expected": "MRN [MRN] PATIENT [NAME] DIAGNOSIS DIABETES",
+      "generated": "PATIENT [NAME] DIAGNOSIS [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.007535300217568874,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0928",
+      "split": "test_test_known",
+      "source": "PATIENT Evan Park LIVES 1028 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] LIVES [ADDRESS]",
+      "generated": "PATIENT LIVES [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.005404599942266941,
+      "tokens": 6,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 1,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0929",
+      "split": "test_test_known",
+      "source": "PATIENT Anastasia Mehta MRN 797042 DIAGNOSIS DIABETES",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS DIABETES",
+      "generated": "PATIENT [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.006801200099289417,
+      "tokens": 10,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0930",
+      "split": "test_test_known",
+      "source": "TREATMENT DrugC BIOMARKER NONE DIAGNOSIS NSCLC",
+      "expected": "TREATMENT DrugC BIOMARKER NONE DIAGNOSIS NSCLC",
+      "generated": "TREATMENT DrugB TREATMENT [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.0040040998719632626,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0931",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Reed RECEIVED Chemotherapy",
+      "expected": "PATIENT [NAME] RECEIVED Chemotherapy",
+      "generated": "PATIENT [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.003123499918729067,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0932",
+      "split": "test_test_known",
+      "source": "MRN 523644 PATIENT Zoya Park",
+      "expected": "MRN [MRN] PATIENT [NAME]",
+      "generated": "MRN [MRN] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.008967699948698282,
+      "tokens": 20,
+      "counts": {
+        "tp": 0,
+        "fp": 8,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0933",
+      "split": "test_test_known",
+      "source": "PATIENT Vikram Patel LIVES 1033 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] LIVES [ADDRESS]",
+      "generated": "PATIENT [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.004374099895358086,
+      "tokens": 4,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0934",
+      "split": "test_test_known",
+      "source": "MRN 359659 PATIENT Evan Park",
+      "expected": "MRN [MRN] PATIENT [NAME]",
+      "generated": "MRN [MRN] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.009247299749404192,
+      "tokens": 20,
+      "counts": {
+        "tp": 0,
+        "fp": 8,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0935",
+      "split": "test_test_known",
+      "source": "PATIENT Anastasia Mehta PHONE 5559587729",
+      "expected": "PATIENT [NAME] PHONE [PHONE]",
+      "generated": "PATIENT [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.005641499999910593,
+      "tokens": 10,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0936",
+      "split": "test_test_known",
+      "source": "MRN 309220 PATIENT Evan Reed",
+      "expected": "MRN [MRN] PATIENT [NAME]",
+      "generated": "MRN [MRN] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.007641199976205826,
+      "tokens": 20,
+      "counts": {
+        "tp": 0,
+        "fp": 8,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0937",
+      "split": "test_test_known",
+      "source": "MRN 855504 PATIENT Asha Reed",
+      "expected": "MRN [MRN] PATIENT [NAME]",
+      "generated": "MRN [MRN] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.00868949992582202,
+      "tokens": 20,
+      "counts": {
+        "tp": 0,
+        "fp": 8,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0938",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Reed LIVES 1038 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] LIVES [ADDRESS]",
+      "generated": "PATIENT LIVES [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.01028829999268055,
+      "tokens": 6,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 1,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0939",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Reed DIAGNOSIS DIABETES",
+      "expected": "PATIENT [NAME] DIAGNOSIS DIABETES",
+      "generated": "PATIENT [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.008687099907547235,
+      "tokens": 8,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0940",
+      "split": "test_test_known",
+      "source": "TREATMENT DrugB BIOMARKER ALK DIAGNOSIS DIABETES",
+      "expected": "TREATMENT DrugB BIOMARKER ALK DIAGNOSIS DIABETES",
+      "generated": "TREATMENT DrugB TREATMENT [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.01004769979044795,
+      "tokens": 12,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0941",
+      "split": "test_test_known",
+      "source": "PATIENT Evan Park MRN 343662 DIAGNOSIS ASTHMA",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA",
+      "generated": "PATIENT [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.055061399936676025,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0942",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Reed DIAGNOSIS NSCLC",
+      "expected": "PATIENT [NAME] DIAGNOSIS NSCLC",
+      "generated": "PATIENT [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.041079599875956774,
+      "tokens": 8,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 1,
+        "exact": 1,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0943",
+      "split": "test_test_known",
+      "source": "MRN 255160 PATIENT Asha Reed",
+      "expected": "MRN [MRN] PATIENT [NAME]",
+      "generated": "MRN [MRN] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.016921500209718943,
+      "tokens": 20,
+      "counts": {
+        "tp": 0,
+        "fp": 8,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0944",
+      "split": "test_test_known",
+      "source": "PATIENT Asha Reed RECEIVED DrugB",
+      "expected": "PATIENT [NAME] RECEIVED DrugB",
+      "generated": "PATIENT [NAME] DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.004333899822086096,
+      "tokens": 8,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0945",
+      "split": "test_test_known",
+      "source": "PATIENT Hugo Reed PHONE 5558421567",
+      "expected": "PATIENT [NAME] PHONE [PHONE]",
+      "generated": "PATIENT [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.012839299626648426,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0946",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Reed PHONE 5554101703",
+      "expected": "PATIENT [NAME] PHONE [PHONE]",
+      "generated": "PATIENT [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.012203299906104803,
+      "tokens": 16,
+      "counts": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0947",
+      "split": "test_test_known",
+      "source": "MRN 471984 PATIENT Asha Park",
+      "expected": "MRN [MRN] PATIENT [NAME]",
+      "generated": "MRN [MRN] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.013518200255930424,
+      "tokens": 20,
+      "counts": {
+        "tp": 0,
+        "fp": 8,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0948",
+      "split": "test_test_known",
+      "source": "PATIENT Zoya Reed VISITED Dr Reed ON January 27",
+      "expected": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+      "generated": "PATIENT [NAME] DIAGNOSIS [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.009191000368446112,
+      "tokens": 12,
+      "counts": {
+        "tp": 1,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0949",
+      "split": "test_test_known",
+      "source": "MRN 297299 PATIENT Hugo Reed",
+      "expected": "MRN [MRN] PATIENT [NAME]",
+      "generated": "MRN [MRN] [NAME] [NAME] [NAME] [NAME] [NAME] [NAME] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.013211800251156092,
+      "tokens": 20,
+      "counts": {
+        "tp": 0,
+        "fp": 8,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    }
+  ],
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+  "protocol_hash": "f69f297980fdf411fa23b270684d890ec9b15af7d73cc68e1d635fd1aff7d010",
+  "data_producer_source_hash": "f2ae852fc4af39e317f5fdb5528146ead5c48299e0a5720c866a5e4facce655f",
+  "checkpoint_sha256": "1a90c2dde0ab0377f240b98399b943314ecc0326c462709deb510b9d6d22149a",
+  "checkpoint_step": 4000,
+  "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+  "architecture": "embedding_only",
+  "seed": 42,
+  "split": "test_test_known",
+  "teacher_forced": {
+    "loss": 0.8717212596861255,
+    "next_token_accuracy": 0.7226890756302521,
+    "scored_tokens": 476,
+    "examples": 50
+  },
+  "scope": "complete frozen final partition; no tuning from these outcomes"
+}

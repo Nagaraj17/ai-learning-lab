@@ -1,0 +1,932 @@
+{
+  "run_id": "mitra_final/transformer_2_seed42",
+  "checkpoint_step": 4000,
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+  "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+  "example_ids": [
+    "assignment_0700",
+    "assignment_0701",
+    "assignment_0702",
+    "assignment_0704",
+    "assignment_0705",
+    "assignment_0717",
+    "assignment_0719",
+    "assignment_0703"
+  ],
+  "measurements": [
+    {
+      "experiment_id": "head_baseline",
+      "generated_metrics": {
+        "tp": 14,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 14,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 6,
+        "clinical_support": 6,
+        "exact": 8,
+        "examples": 8,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": 1.0,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 1.0,
+        "categories": {
+          "PATIENT": {
+            "tp": 7,
+            "support": 7,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "MRN": {
+            "tp": 2,
+            "support": 2,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "valid_terminations": 8,
+        "example_ids": [
+          "assignment_0700",
+          "assignment_0701",
+          "assignment_0702",
+          "assignment_0704",
+          "assignment_0705",
+          "assignment_0717",
+          "assignment_0719",
+          "assignment_0703"
+        ]
+      },
+      "teacher_forced": {
+        "loss": 0.00017356750322505832,
+        "scored_tokens": 80
+      }
+    },
+    {
+      "experiment_id": "head_0_0",
+      "generated_metrics": {
+        "tp": 4,
+        "fp": 3,
+        "fn": 10,
+        "identifiers": 14,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 5,
+        "clinical_support": 6,
+        "exact": 1,
+        "examples": 8,
+        "precision": 0.5714285714285714,
+        "recall": 0.2857142857142857,
+        "f1": 0.38095238095238093,
+        "exact_match": 0.125,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.8333333333333334,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 7,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 2,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "valid_terminations": 8,
+        "example_ids": [
+          "assignment_0700",
+          "assignment_0701",
+          "assignment_0702",
+          "assignment_0704",
+          "assignment_0705",
+          "assignment_0717",
+          "assignment_0719",
+          "assignment_0703"
+        ]
+      },
+      "teacher_forced": {
+        "loss": 1.1057235717773437,
+        "scored_tokens": 80
+      }
+    },
+    {
+      "experiment_id": "head_0_1",
+      "generated_metrics": {
+        "tp": 10,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 14,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 6,
+        "clinical_support": 6,
+        "exact": 6,
+        "examples": 8,
+        "precision": 0.8333333333333334,
+        "recall": 0.7142857142857143,
+        "f1": 0.7692307692307693,
+        "exact_match": 0.75,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 1.0,
+        "categories": {
+          "PATIENT": {
+            "tp": 5,
+            "support": 7,
+            "leaked": 0,
+            "recall": 0.7142857142857143
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 2,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "valid_terminations": 8,
+        "example_ids": [
+          "assignment_0700",
+          "assignment_0701",
+          "assignment_0702",
+          "assignment_0704",
+          "assignment_0705",
+          "assignment_0717",
+          "assignment_0719",
+          "assignment_0703"
+        ]
+      },
+      "teacher_forced": {
+        "loss": 0.34607820510864257,
+        "scored_tokens": 80
+      }
+    },
+    {
+      "experiment_id": "head_0_2",
+      "generated_metrics": {
+        "tp": 12,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 14,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 4,
+        "clinical_support": 6,
+        "exact": 5,
+        "examples": 8,
+        "precision": 0.9230769230769231,
+        "recall": 0.8571428571428571,
+        "f1": 0.8888888888888888,
+        "exact_match": 0.625,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.6666666666666666,
+        "categories": {
+          "PATIENT": {
+            "tp": 7,
+            "support": 7,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "MRN": {
+            "tp": 2,
+            "support": 2,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "valid_terminations": 8,
+        "example_ids": [
+          "assignment_0700",
+          "assignment_0701",
+          "assignment_0702",
+          "assignment_0704",
+          "assignment_0705",
+          "assignment_0717",
+          "assignment_0719",
+          "assignment_0703"
+        ]
+      },
+      "teacher_forced": {
+        "loss": 0.3368858337402344,
+        "scored_tokens": 80
+      }
+    },
+    {
+      "experiment_id": "head_0_3",
+      "generated_metrics": {
+        "tp": 14,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 14,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 5,
+        "clinical_support": 6,
+        "exact": 7,
+        "examples": 8,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": 0.875,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.8333333333333334,
+        "categories": {
+          "PATIENT": {
+            "tp": 7,
+            "support": 7,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "MRN": {
+            "tp": 2,
+            "support": 2,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "valid_terminations": 8,
+        "example_ids": [
+          "assignment_0700",
+          "assignment_0701",
+          "assignment_0702",
+          "assignment_0704",
+          "assignment_0705",
+          "assignment_0717",
+          "assignment_0719",
+          "assignment_0703"
+        ]
+      },
+      "teacher_forced": {
+        "loss": 0.02681506276130676,
+        "scored_tokens": 80
+      }
+    },
+    {
+      "experiment_id": "head_1_0",
+      "generated_metrics": {
+        "tp": 13,
+        "fp": 1,
+        "fn": 1,
+        "identifiers": 14,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 6,
+        "clinical_support": 6,
+        "exact": 7,
+        "examples": 8,
+        "precision": 0.9285714285714286,
+        "recall": 0.9285714285714286,
+        "f1": 0.9285714285714286,
+        "exact_match": 0.875,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 1.0,
+        "categories": {
+          "PATIENT": {
+            "tp": 7,
+            "support": 7,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "MRN": {
+            "tp": 2,
+            "support": 2,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "valid_terminations": 8,
+        "example_ids": [
+          "assignment_0700",
+          "assignment_0701",
+          "assignment_0702",
+          "assignment_0704",
+          "assignment_0705",
+          "assignment_0717",
+          "assignment_0719",
+          "assignment_0703"
+        ]
+      },
+      "teacher_forced": {
+        "loss": 0.06373684406280518,
+        "scored_tokens": 80
+      }
+    },
+    {
+      "experiment_id": "head_1_1",
+      "generated_metrics": {
+        "tp": 14,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 14,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 3,
+        "clinical_support": 6,
+        "exact": 7,
+        "examples": 8,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": 0.875,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.5,
+        "categories": {
+          "PATIENT": {
+            "tp": 7,
+            "support": 7,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "MRN": {
+            "tp": 2,
+            "support": 2,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "valid_terminations": 8,
+        "example_ids": [
+          "assignment_0700",
+          "assignment_0701",
+          "assignment_0702",
+          "assignment_0704",
+          "assignment_0705",
+          "assignment_0717",
+          "assignment_0719",
+          "assignment_0703"
+        ]
+      },
+      "teacher_forced": {
+        "loss": 0.019270797073841096,
+        "scored_tokens": 80
+      }
+    },
+    {
+      "experiment_id": "head_1_2",
+      "generated_metrics": {
+        "tp": 13,
+        "fp": 3,
+        "fn": 1,
+        "identifiers": 14,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 3,
+        "clinical_support": 6,
+        "exact": 6,
+        "examples": 8,
+        "precision": 0.8125,
+        "recall": 0.9285714285714286,
+        "f1": 0.8666666666666667,
+        "exact_match": 0.75,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.5,
+        "categories": {
+          "PATIENT": {
+            "tp": 7,
+            "support": 7,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "MRN": {
+            "tp": 1,
+            "support": 2,
+            "leaked": 0,
+            "recall": 0.5
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "valid_terminations": 8,
+        "example_ids": [
+          "assignment_0700",
+          "assignment_0701",
+          "assignment_0702",
+          "assignment_0704",
+          "assignment_0705",
+          "assignment_0717",
+          "assignment_0719",
+          "assignment_0703"
+        ]
+      },
+      "teacher_forced": {
+        "loss": 0.15244624614715577,
+        "scored_tokens": 80
+      }
+    },
+    {
+      "experiment_id": "head_1_3",
+      "generated_metrics": {
+        "tp": 14,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 14,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 5,
+        "clinical_support": 6,
+        "exact": 7,
+        "examples": 8,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": 0.875,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.8333333333333334,
+        "categories": {
+          "PATIENT": {
+            "tp": 7,
+            "support": 7,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "MRN": {
+            "tp": 2,
+            "support": 2,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "valid_terminations": 8,
+        "example_ids": [
+          "assignment_0700",
+          "assignment_0701",
+          "assignment_0702",
+          "assignment_0704",
+          "assignment_0705",
+          "assignment_0717",
+          "assignment_0719",
+          "assignment_0703"
+        ]
+      },
+      "teacher_forced": {
+        "loss": 0.09945638179779052,
+        "scored_tokens": 80
+      }
+    },
+    {
+      "experiment_id": "pair_layer0",
+      "generated_metrics": {
+        "tp": 1,
+        "fp": 6,
+        "fn": 13,
+        "identifiers": 14,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 5,
+        "clinical_support": 6,
+        "exact": 1,
+        "examples": 8,
+        "precision": 0.14285714285714285,
+        "recall": 0.07142857142857142,
+        "f1": 0.09523809523809523,
+        "exact_match": 0.125,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.8333333333333334,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 7,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 2,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "valid_terminations": 8,
+        "example_ids": [
+          "assignment_0700",
+          "assignment_0701",
+          "assignment_0702",
+          "assignment_0704",
+          "assignment_0705",
+          "assignment_0717",
+          "assignment_0719",
+          "assignment_0703"
+        ]
+      },
+      "teacher_forced": {
+        "loss": 1.526078701019287,
+        "scored_tokens": 80
+      }
+    },
+    {
+      "experiment_id": "pair_layer1",
+      "generated_metrics": {
+        "tp": 12,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 14,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 2,
+        "clinical_support": 6,
+        "exact": 4,
+        "examples": 8,
+        "precision": 0.8571428571428571,
+        "recall": 0.8571428571428571,
+        "f1": 0.8571428571428571,
+        "exact_match": 0.5,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.3333333333333333,
+        "categories": {
+          "PATIENT": {
+            "tp": 7,
+            "support": 7,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "MRN": {
+            "tp": 2,
+            "support": 2,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "valid_terminations": 8,
+        "example_ids": [
+          "assignment_0700",
+          "assignment_0701",
+          "assignment_0702",
+          "assignment_0704",
+          "assignment_0705",
+          "assignment_0717",
+          "assignment_0719",
+          "assignment_0703"
+        ]
+      },
+      "teacher_forced": {
+        "loss": 0.12273998260498047,
+        "scored_tokens": 80
+      }
+    }
+  ]
+}

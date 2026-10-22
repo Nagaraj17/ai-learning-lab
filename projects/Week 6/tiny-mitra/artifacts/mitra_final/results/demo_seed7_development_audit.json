@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "training_seed": 7,
+  "checkpoint_step": 4000,
+  "authored_correct_notes": 11,
+  "authored_notes": 11,
+  "clinical_correct_notes": 2,
+  "clinical_notes": 2,
+  "scope": "source/data/tokenizer/checkpoint and raw counts audited; development-only; primary seed42 remains10/11 and comparison unchanged"
+}

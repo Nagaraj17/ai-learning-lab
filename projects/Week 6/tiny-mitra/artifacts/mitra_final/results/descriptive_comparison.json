@@ -1,0 +1,287 @@
+{
+  "training_diagnostics": [
+    {
+      "architecture": "embedding_only",
+      "parameters": 35218,
+      "updates": 4000,
+      "logged_gradient_observations": 40,
+      "maximum_logged_gradient_norm_before_clip": 1.5190855264663696,
+      "logged_observations_above_clip_threshold1": 1,
+      "largest_positive_validation_loss_change_between_logged_updates": 0.052122206914992475,
+      "durable_run_elapsed_seconds": 170.06049250019714,
+      "timing_limit": "local concurrent workers; not an isolated architecture speed benchmark"
+    },
+    {
+      "architecture": "single_attention",
+      "parameters": 51858,
+      "updates": 4000,
+      "logged_gradient_observations": 40,
+      "maximum_logged_gradient_norm_before_clip": 1.5717339515686035,
+      "logged_observations_above_clip_threshold1": 16,
+      "largest_positive_validation_loss_change_between_logged_updates": 0.21034874409546322,
+      "durable_run_elapsed_seconds": 272.062557999976,
+      "timing_limit": "local concurrent workers; not an isolated architecture speed benchmark"
+    },
+    {
+      "architecture": "multi_attention",
+      "parameters": 51858,
+      "updates": 4000,
+      "logged_gradient_observations": 40,
+      "maximum_logged_gradient_norm_before_clip": 1.4390413761138916,
+      "logged_observations_above_clip_threshold1": 11,
+      "largest_positive_validation_loss_change_between_logged_updates": 0.19119679447495486,
+      "durable_run_elapsed_seconds": 337.6999886999838,
+      "timing_limit": "local concurrent workers; not an isolated architecture speed benchmark"
+    },
+    {
+      "architecture": "transformer_1",
+      "parameters": 77074,
+      "updates": 4000,
+      "logged_gradient_observations": 40,
+      "maximum_logged_gradient_norm_before_clip": 0.6019785404205322,
+      "logged_observations_above_clip_threshold1": 0,
+      "largest_positive_validation_loss_change_between_logged_updates": 0.11734036779229018,
+      "durable_run_elapsed_seconds": 868.0821770997718,
+      "timing_limit": "local concurrent workers; not an isolated architecture speed benchmark"
+    },
+    {
+      "architecture": "transformer_2",
+      "parameters": 118802,
+      "updates": 4000,
+      "logged_gradient_observations": 40,
+      "maximum_logged_gradient_norm_before_clip": 1.3775532245635986,
+      "logged_observations_above_clip_threshold1": 1,
+      "largest_positive_validation_loss_change_between_logged_updates": 0.1460509391931386,
+      "durable_run_elapsed_seconds": 1657.3255897001363,
+      "timing_limit": "local concurrent workers; not an isolated architecture speed benchmark"
+    },
+    {
+      "architecture": "no_ffn",
+      "parameters": 68882,
+      "updates": 4000,
+      "logged_gradient_observations": 40,
+      "maximum_logged_gradient_norm_before_clip": 1.3939406871795654,
+      "logged_observations_above_clip_threshold1": 1,
+      "largest_positive_validation_loss_change_between_logged_updates": 0.10842355441697782,
+      "durable_run_elapsed_seconds": 730.722569799982,
+      "timing_limit": "local concurrent workers; not an isolated architecture speed benchmark"
+    },
+    {
+      "architecture": "no_layernorm",
+      "parameters": 118162,
+      "updates": 4000,
+      "logged_gradient_observations": 40,
+      "maximum_logged_gradient_norm_before_clip": 2.6933505535125732,
+      "logged_observations_above_clip_threshold1": 6,
+      "largest_positive_validation_loss_change_between_logged_updates": 0.3682116335837833,
+      "durable_run_elapsed_seconds": 674.9601853997447,
+      "timing_limit": "local concurrent workers; not an isolated architecture speed benchmark"
+    },
+    {
+      "architecture": "no_residual",
+      "parameters": 118802,
+      "updates": 4000,
+      "logged_gradient_observations": 40,
+      "maximum_logged_gradient_norm_before_clip": 3.1091556549072266,
+      "logged_observations_above_clip_threshold1": 7,
+      "largest_positive_validation_loss_change_between_logged_updates": 0.22018058527083617,
+      "durable_run_elapsed_seconds": 497.8932669996284,
+      "timing_limit": "local concurrent workers; not an isolated architecture speed benchmark"
+    }
+  ],
+  "training_seed_ranges": [
+    {
+      "architecture": "embedding_only",
+      "seeds": [
+        42,
+        7,
+        123
+      ],
+      "diagnostic_exact": {
+        "mean": 0.06944444444444445,
+        "minimum": 0.041666666666666664,
+        "maximum": 0.08333333333333333,
+        "values": [
+          0.08333333333333333,
+          0.041666666666666664,
+          0.08333333333333333
+        ]
+      },
+      "diagnostic_recall": {
+        "mean": 0.21296296296296297,
+        "minimum": 0.1388888888888889,
+        "maximum": 0.25,
+        "values": [
+          0.25,
+          0.1388888888888889,
+          0.25
+        ]
+      },
+      "diagnostic_clinical_preservation": {
+        "mean": 0.027777777777777776,
+        "minimum": 0.0,
+        "maximum": 0.041666666666666664,
+        "values": [
+          0.041666666666666664,
+          0.0,
+          0.041666666666666664
+        ]
+      },
+      "acceptance_correct_notes": {
+        "mean": 0,
+        "minimum": 0,
+        "maximum": 0,
+        "values": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "architecture": "single_attention",
+      "seeds": [
+        42,
+        7,
+        123
+      ],
+      "diagnostic_exact": {
+        "mean": 0.861111111111111,
+        "minimum": 0.75,
+        "maximum": 0.9166666666666666,
+        "values": [
+          0.9166666666666666,
+          0.9166666666666666,
+          0.75
+        ]
+      },
+      "diagnostic_recall": {
+        "mean": 0.9537037037037037,
+        "minimum": 0.9166666666666666,
+        "maximum": 0.9722222222222222,
+        "values": [
+          0.9166666666666666,
+          0.9722222222222222,
+          0.9722222222222222
+        ]
+      },
+      "diagnostic_clinical_preservation": {
+        "mean": 0.9027777777777778,
+        "minimum": 0.7916666666666666,
+        "maximum": 0.9583333333333334,
+        "values": [
+          0.9583333333333334,
+          0.9583333333333334,
+          0.7916666666666666
+        ]
+      },
+      "acceptance_correct_notes": {
+        "mean": 10,
+        "minimum": 9,
+        "maximum": 11,
+        "values": [
+          10,
+          11,
+          9
+        ]
+      }
+    },
+    {
+      "architecture": "multi_attention",
+      "seeds": [
+        42,
+        7,
+        123
+      ],
+      "diagnostic_exact": {
+        "mean": 0.9166666666666666,
+        "minimum": 0.8333333333333334,
+        "maximum": 1.0,
+        "values": [
+          0.8333333333333334,
+          1.0,
+          0.9166666666666666
+        ]
+      },
+      "diagnostic_recall": {
+        "mean": 0.9629629629629629,
+        "minimum": 0.9444444444444444,
+        "maximum": 1.0,
+        "values": [
+          0.9444444444444444,
+          1.0,
+          0.9444444444444444
+        ]
+      },
+      "diagnostic_clinical_preservation": {
+        "mean": 0.9305555555555556,
+        "minimum": 0.875,
+        "maximum": 1.0,
+        "values": [
+          0.875,
+          1.0,
+          0.9166666666666666
+        ]
+      },
+      "acceptance_correct_notes": {
+        "mean": 8.666666666666666,
+        "minimum": 8,
+        "maximum": 9,
+        "values": [
+          8,
+          9,
+          9
+        ]
+      }
+    },
+    {
+      "architecture": "transformer_2",
+      "seeds": [
+        42,
+        7,
+        123
+      ],
+      "diagnostic_exact": {
+        "mean": 0.9861111111111112,
+        "minimum": 0.9583333333333334,
+        "maximum": 1.0,
+        "values": [
+          0.9583333333333334,
+          1.0,
+          1.0
+        ]
+      },
+      "diagnostic_recall": {
+        "mean": 1.0,
+        "minimum": 1.0,
+        "maximum": 1.0,
+        "values": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "diagnostic_clinical_preservation": {
+        "mean": 0.9861111111111112,
+        "minimum": 0.9583333333333334,
+        "maximum": 1.0,
+        "values": [
+          0.9583333333333334,
+          1.0,
+          1.0
+        ]
+      },
+      "acceptance_correct_notes": {
+        "mean": 10.666666666666666,
+        "minimum": 10,
+        "maximum": 11,
+        "values": [
+          10,
+          11,
+          11
+        ]
+      }
+    }
+  ],
+  "limits": "three seeds vary initialization and minibatch order on shared development examples; descriptive ranges, not significance or independent datasets; component variants have one primary seed; fewer parameters and equal updates are not equal compute"
+}

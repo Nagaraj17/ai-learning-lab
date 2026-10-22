@@ -1,0 +1,3 @@
+# Registered experiments hash source bytes. Preserve LF on every platform,
+# including Windows checkouts with core.autocrlf enabled.
+*.py text eol=lf

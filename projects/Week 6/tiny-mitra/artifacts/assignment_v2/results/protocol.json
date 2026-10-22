@@ -1,0 +1,34 @@
+{
+  "version": "assignment_v2",
+  "reason": "Instructor-format coverage gap found in source review: add VISITED/ON, LIVES, DOB, MRN orderings and all clinical preservation terms. Version-1 final outcomes do not tune this series.",
+  "dataset_hash": "1754352412d811cc35a09da5b44450ca39c68ffaf4b6b86b0d9b002bbdff17fd",
+  "core_source_hash": "a399a568af148bd3b0e2cd08c5aaa07f9ab045cbc5035ee0446c03d832d4b33d",
+  "assignment_source_hash": "e60ab3bbfcee9287b2192438c53cff0064c757103cb1c6f6dea5982cbf7e6b2f",
+  "architectures": [
+    "embedding_only",
+    "single_attention",
+    "multi_attention",
+    "transformer_1",
+    "transformer_2",
+    "no_ffn",
+    "no_layernorm",
+    "no_residual"
+  ],
+  "context": 256,
+  "width": 64,
+  "ffn": 192,
+  "heads": 4,
+  "seed": 42,
+  "steps": 2000,
+  "lr": 0.0007,
+  "batch_size": 16,
+  "selection": "minimum token-weighted validation cross entropy; latest reported separately",
+  "evaluation": "11 authored instructor/clinical acceptance prompts plus 24 validation diagnostics; final partitions remain untouched until review",
+  "primary_generated_criteria": [
+    "exact note match",
+    "correct typed replacements",
+    "clinical field/value preservation",
+    "exact-surface leakage"
+  ],
+  "threshold": "descriptive comparison; no significance or universal-superiority claim"
+}

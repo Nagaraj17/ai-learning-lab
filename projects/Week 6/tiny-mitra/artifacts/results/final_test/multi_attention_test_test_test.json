@@ -1,0 +1,2058 @@
+{
+  "metrics": {
+    "tp": 0,
+    "fp": 28,
+    "fn": 136,
+    "identifiers": 136,
+    "leaked_identifiers": 0,
+    "leaked_note": 0,
+    "clinical_correct": 0,
+    "clinical_support": 82,
+    "exact": 0,
+    "examples": 50,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "exact_match": 0.0,
+    "identifier_leakage": 0.0,
+    "note_leakage": 0.0,
+    "clinical_preservation": 0.0,
+    "categories": {
+      "MRN": {
+        "tp": 0,
+        "support": 22,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "PATIENT": {
+        "tp": 0,
+        "support": 45,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "ADDRESS": {
+        "tp": 0,
+        "support": 23,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "PHONE": {
+        "tp": 0,
+        "support": 23,
+        "leaked": 0,
+        "recall": 0.0
+      },
+      "DOB": {
+        "tp": 0,
+        "support": 23,
+        "leaked": 0,
+        "recall": 0.0
+      }
+    },
+    "controls": 5,
+    "control_over_redactions": 0,
+    "seconds": 113.36403249949217,
+    "generated_tokens": 4224,
+    "seconds_per_note": 2.2672806499898432,
+    "valid_terminations": 48,
+    "mode": "greedy",
+    "temperature": null,
+    "sampling_seed": 42,
+    "device": "cpu",
+    "coverage": "declared subset; see IDs",
+    "example_ids": [
+      "example_0950",
+      "example_0951",
+      "example_0952",
+      "example_0953",
+      "example_0954",
+      "example_0955",
+      "example_0956",
+      "example_0957",
+      "example_0958",
+      "example_0959",
+      "example_0960",
+      "example_0961",
+      "example_0962",
+      "example_0963",
+      "example_0964",
+      "example_0965",
+      "example_0966",
+      "example_0967",
+      "example_0968",
+      "example_0969",
+      "example_0970",
+      "example_0971",
+      "example_0972",
+      "example_0973",
+      "example_0974",
+      "example_0975",
+      "example_0976",
+      "example_0977",
+      "example_0978",
+      "example_0979",
+      "example_0980",
+      "example_0981",
+      "example_0982",
+      "example_0983",
+      "example_0984",
+      "example_0985",
+      "example_0986",
+      "example_0987",
+      "example_0988",
+      "example_0989",
+      "example_0990",
+      "example_0991",
+      "example_0992",
+      "example_0993",
+      "example_0994",
+      "example_0995",
+      "example_0996",
+      "example_0997",
+      "example_0998",
+      "example_0999"
+    ]
+  },
+  "outputs": [
+    {
+      "id": "example_0950",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugB dose950",
+      "expected": "DIAGNOSIS DIABETES BIOMARKER ALK TREATMENT DrugB dose950",
+      "generated": "PATR NTEATEATMA TE MEATESS DIS TMARENT TES AR NONERKENOSISISSSS DrugMENT DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.5298806997016072,
+      "tokens": 79,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "example_0951",
+      "split": "test_test_test",
+      "source": "MRN 70000951 DIAGNOSIS DIABETES PATIENT Asha Reed TREATMENT DrugC",
+      "expected": "MRN [MRN] DIAGNOSIS DIABETES PATIENT [NAME] TREATMENT DrugC",
+      "generated": "DIENORENTMATHOSISIATIAT NT NO NOSIENOMET DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.18195419991388917,
+      "tokens": 47,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0952",
+      "split": "test_test_test",
+      "source": "MRN 70000952 DIAGNOSIS NSCLC PATIENT Hugo Reed TREATMENT DrugA",
+      "expected": "MRN [MRN] DIAGNOSIS NSCLC PATIENT [NAME] TREATMENT DrugA",
+      "generated": "DugATENOR [NAME] DIAT DIS NOS NTIATMAGNOS NOS DrugNOSIOS DrugNTREATMENTMATRENOS NOSS DIAGNOC DRENTMOS ENT NONONAGNTMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.6814927998930216,
+      "tokens": 113,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0953",
+      "split": "test_test_test",
+      "source": "MRN 70000953 DIAGNOSIS DIABETES PATIENT Hugo Park TREATMENT DrugB",
+      "expected": "MRN [MRN] DIAGNOSIS DIABETES PATIENT [NAME] TREATMENT DrugB",
+      "generated": "DIENORENTMATIAT DIATIAT NT [NAME] NTOSIENOMET DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.23039590008556843,
+      "tokens": 47,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0954",
+      "split": "test_test_test",
+      "source": "MRN 70000954 DIAGNOSIS ASTHMA PATIENT Hugo Reed TREATMENT DrugC",
+      "expected": "MRN [MRN] DIAGNOSIS ASTHMA PATIENT [NAME] TREATMENT DrugC",
+      "generated": "DIOS DruT DATENTENTISIS NTIATMAGNOS NOS DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.19572499999776483,
+      "tokens": 46,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0955",
+      "split": "test_test_test",
+      "source": "ADDRESS 1055 Oak St PHONE 555-000-0955 PATIENT Evan Park DOB 1975-02-13 TREATMENT DrugC",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugC",
+      "generated": "PNT ENOS ES ENT DIESS ATRENSS DIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.17762089986354113,
+      "tokens": 34,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0956",
+      "split": "test_test_test",
+      "source": "ADDRESS 1056 Oak St PHONE 555-000-0956 PATIENT Hugo Park DOB 1992-02-10 TREATMENT DrugB",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugB",
+      "generated": "PNT ENOS ES ENT DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.13114160019904375,
+      "tokens": 22,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0957",
+      "split": "test_test_test",
+      "source": "ADDRESS 1057 Oak St PHONE 555-000-0957 PATIENT Zoya Park DOB 1955-03-25 TREATMENT DrugC",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugC",
+      "generated": "PNT ENOS ES ENT DIESS ATRENENTRENTRENONT DIESIAGNT DrugC ENEAT ENT ENONTRENTR [NAME] DAGNATMRENT NTR AGNEATMENTRENTMENTR NT RNT DDrugISC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.8784252000041306,
+      "tokens": 132,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0958",
+      "split": "test_test_test",
+      "source": "ADDRESS 1058 Oak St PHONE 555-000-0958 PATIENT Hugo Park DOB 1952-06-23 TREATMENT DrugC",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugC",
+      "generated": "PNT ENOS ES ENT DIESS ATRENSS DIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.24567889980971813,
+      "tokens": 34,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0959",
+      "split": "test_test_test",
+      "source": "MRN 70000959 DIAGNOSIS NSCLC PATIENT Hugo Park TREATMENT DrugC",
+      "expected": "MRN [MRN] DIAGNOSIS NSCLC PATIENT [NAME] TREATMENT DrugC",
+      "generated": "DugATENOR [NAME] DIAT DIS NOS NTIATMAGNOS NOS DrugNOSIOS DrugNTREATMENTMATRENOS NOSS DIAGNOC DRENTMOS ENT NONONAGNTMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.6707970001734793,
+      "tokens": 113,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0960",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugC dose960",
+      "expected": "DIAGNOSIS DIABETES BIOMARKER EGFR TREATMENT DrugC dose960",
+      "generated": "DIATENTEATENOR TE NTE DIATR TR NTMENOS DIATMEATRESSSIOS TREATETREATMENTMATOB NTENTMEATMENTE  DDIATMENT",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.4808705998584628,
+      "tokens": 103,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "example_0961",
+      "split": "test_test_test",
+      "source": "ADDRESS 1061 Oak St PHONE 555-000-0961 PATIENT Asha Reed DOB 1952-07-20 TREATMENT DrugB",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugB",
+      "generated": "PNT ENOS ES ENT DIESS ATRENSS DIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.15585820004343987,
+      "tokens": 34,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0962",
+      "split": "test_test_test",
+      "source": "ADDRESS 1062 Oak St PHONE 555-000-0962 PATIENT Hugo Park DOB 1972-12-20 TREATMENT DrugB",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugB",
+      "generated": "PNT ENOS ES ENT DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.11079660011455417,
+      "tokens": 22,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0963",
+      "split": "test_test_test",
+      "source": "MRN 70000963 DIAGNOSIS DIABETES PATIENT Hugo Park TREATMENT DrugC",
+      "expected": "MRN [MRN] DIAGNOSIS DIABETES PATIENT [NAME] TREATMENT DrugC",
+      "generated": "DIENORENTMATIAT DIATIAT NT [NAME] NTOSIENOMET DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.23668319964781404,
+      "tokens": 47,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0964",
+      "split": "test_test_test",
+      "source": "MRN 70000964 DIAGNOSIS DIABETES PATIENT Hugo Park TREATMENT DrugB",
+      "expected": "MRN [MRN] DIAGNOSIS DIABETES PATIENT [NAME] TREATMENT DrugB",
+      "generated": "DIENORENTMATIAT DIATIAT NT [NAME] NTOSIENOMET DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.2718798997811973,
+      "tokens": 47,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0965",
+      "split": "test_test_test",
+      "source": "ADDRESS 1065 Oak St PHONE 555-000-0965 PATIENT Asha Park DOB 1957-02-27 TREATMENT DrugC",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugC",
+      "generated": "PNT ENOS ES ENT DIESS ATRENSS DIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.18703390005975962,
+      "tokens": 34,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0966",
+      "split": "test_test_test",
+      "source": "MRN 70000966 DIAGNOSIS ASTHMA PATIENT Asha Reed TREATMENT DrugB",
+      "expected": "MRN [MRN] DIAGNOSIS ASTHMA PATIENT [NAME] TREATMENT DrugB",
+      "generated": "DIOS DruT DAT DIENTISIS NTIATMAGNOS NOS DrugNOSIOMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.5181559999473393,
+      "tokens": 52,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0967",
+      "split": "test_test_test",
+      "source": "ADDRESS 1067 Oak St PHONE 555-000-0967 PATIENT Hugo Reed DOB 1963-03-01 TREATMENT DrugA",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugA",
+      "generated": "PNT ENT TRENT PENTR ATRENTRENONTRESIEASCTRENTR DrT DrugC ENT DIENTRENOS ENT NTRENTIENTMRENT NTR A NEATMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 2.5321594001725316,
+      "tokens": 105,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0968",
+      "split": "test_test_test",
+      "source": "ADDRESS 1068 Oak St PHONE 555-000-0968 PATIENT Asha Reed DOB 1951-06-04 TREATMENT DrugB",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugB",
+      "generated": "PNT ENOS ES NTRENTREAS ENTRENONTRESIERENTRENTR DrT DrugC ENTR RENTRENOS ENT NTRENTIENTMRENT NTR A NEATMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 9.719195399899036,
+      "tokens": 105,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0969",
+      "split": "test_test_test",
+      "source": "MRN 70000969 DIAGNOSIS NSCLC PATIENT Evan Reed TREATMENT DrugA",
+      "expected": "MRN [MRN] DIAGNOSIS NSCLC PATIENT [NAME] TREATMENT DrugA",
+      "generated": "DDIOS DruTR [NAME] DIATETRENTRENTMENOS DOSIATMETENOS DrugA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 4.974476899951696,
+      "tokens": 54,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0970",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS NSCLC BIOMARKER ALK TREATMENT DrugA dose970",
+      "expected": "DIAGNOSIS NSCLC BIOMARKER ALK TREATMENT DrugA dose970",
+      "generated": "DIATISC DIAGNOC DIAGNOC DIESIATOS T AGNTENTOSIS NERENOS ATRENSIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.3178536002524197,
+      "tokens": 65,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "example_0971",
+      "split": "test_test_test",
+      "source": "MRN 70000971 DIAGNOSIS ASTHMA PATIENT Evan Reed TREATMENT DrugC",
+      "expected": "MRN [MRN] DIAGNOSIS ASTHMA PATIENT [NAME] TREATMENT DrugC",
+      "generated": "DIOS DruT DATMATENTISIS NTISIAGNTEATHMENTHMEA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.28474090015515685,
+      "tokens": 46,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0972",
+      "split": "test_test_test",
+      "source": "ADDRESS 1072 Oak St PHONE 555-000-0972 PATIENT Zoya Park DOB 1958-06-03 TREATMENT DrugC",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugC",
+      "generated": "PNT ENOS ES NTRENTREAS ENTRENTMENTRENONTRENTRENS ENOSS DIAGNT RENTRENOS ENT NTRENTIENTMRENT NTR AGNEATMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.0167625998146832,
+      "tokens": 105,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0973",
+      "split": "test_test_test",
+      "source": "MRN 70000973 DIAGNOSIS ASTHMA PATIENT Asha Reed TREATMENT DrugA",
+      "expected": "MRN [MRN] DIAGNOSIS ASTHMA PATIENT [NAME] TREATMENT DrugA",
+      "generated": "DIOS DruT [NAME] DIATENTMATIS NTMENOS A",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.22231510002166033,
+      "tokens": 35,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0974",
+      "split": "test_test_test",
+      "source": "MRN 70000974 DIAGNOSIS ASTHMA PATIENT Hugo Park TREATMENT DrugA",
+      "expected": "MRN [MRN] DIAGNOSIS ASTHMA PATIENT [NAME] TREATMENT DrugA",
+      "generated": "DrATHMDR [NAME] DIAT DIS NOS NTIATHOS AT NOS DrugATR DIENSSSS DrugMENTRENTOMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.5315144998021424,
+      "tokens": 73,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0975",
+      "split": "test_test_test",
+      "source": "MRN 70000975 DIAGNOSIS DIABETES PATIENT Hugo Reed TREATMENT DrugC",
+      "expected": "MRN [MRN] DIAGNOSIS DIABETES PATIENT [NAME] TREATMENT DrugC",
+      "generated": "DIENORENTMATHOSISIATIAT NT NO NOSIENOMET DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.5198726002126932,
+      "tokens": 47,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0976",
+      "split": "test_test_test",
+      "source": "ADDRESS 1076 Oak St PHONE 555-000-0976 PATIENT Zoya Park DOB 1997-11-07 TREATMENT DrugA",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugA",
+      "generated": "PNT ENOS ESIAGNENTREAS DrugNTRENTREATMENTRENTR DrENOSS DIAGNT RENTRENOS ENT NTRENTIENTMRENT NTR A NEATMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.5099467998370528,
+      "tokens": 105,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0977",
+      "split": "test_test_test",
+      "source": "ADDRESS 1077 Oak St PHONE 555-000-0977 PATIENT Asha Reed DOB 1953-05-02 TREATMENT DrugB",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugB",
+      "generated": "PNT ENOS ES NTRENTREAS ENTRENTRENTRENONTRENTRENS ENOSS DIAGNT RENTRENOS ENT NTRENTIENTMRENT NTR AGNEATMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 2.3617513002827764,
+      "tokens": 105,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0978",
+      "split": "test_test_test",
+      "source": "MRN 70000978 DIAGNOSIS ASTHMA PATIENT Evan Park TREATMENT DrugA",
+      "expected": "MRN [MRN] DIAGNOSIS ASTHMA PATIENT [NAME] TREATMENT DrugA",
+      "generated": "DIOS DruTR DIENTENTISIS NTIATMAGNOS NATMETENOSIOSIENSIONTREATMENT TETONS ENT [ADDRESS]OC ENTE  ENTENTMENENT NTMENAGNATMOS TENTR N NTIONugCLCTRENENOS AT [NAME] EA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.9638038999401033,
+      "tokens": 149,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0979",
+      "split": "test_test_test",
+      "source": "ADDRESS 1079 Oak St PHONE 555-000-0979 PATIENT Hugo Reed DOB 1992-05-25 TREATMENT DrugC",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugC",
+      "generated": "PNT ENT TRENT ATRENOSS ENTRENTMENTRENONTRENTRENS ENTMESIS [NAME] DISTRENTMENTRENTR [NAME] DAGNATMRENTRNTR AGNTIONA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.5276613999158144,
+      "tokens": 105,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0980",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS NSCLC BIOMARKER NONE TREATMENT DrugC dose980",
+      "expected": "DIAGNOSIS NSCLC BIOMARKER NONE TREATMENT DrugC dose980",
+      "generated": "DIAGNONTRENTIOC TIAGNTEATENTMENTMAGNTENTIATIATHMENTENTENTRENTR DAGNONTMENT TEGo AGNTHKCLC AGNOC DDIATHIAG",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 8.971339800395072,
+      "tokens": 106,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "example_0981",
+      "split": "test_test_test",
+      "source": "MRN 70000981 DIAGNOSIS DIABETES PATIENT Hugo Reed TREATMENT DrugC",
+      "expected": "MRN [MRN] DIAGNOSIS DIABETES PATIENT [NAME] TREATMENT DrugC",
+      "generated": "DIENORENTMATHOSISIATIAT NT NO NOSIENOMET DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 5.5404825997538865,
+      "tokens": 47,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0982",
+      "split": "test_test_test",
+      "source": "MRN 70000982 DIAGNOSIS ASTHMA PATIENT Zoya Park TREATMENT DrugB",
+      "expected": "MRN [MRN] DIAGNOSIS ASTHMA PATIENT [NAME] TREATMENT DrugB",
+      "generated": "DIOS DruTR DIENT NTISIS NTIATMAGNOS NATMETENOSIOSIENSIONTREATMENT TETONS ENT [ADDRESS]OC ENTE  ENT ENONT",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 12.545288399793208,
+      "tokens": 97,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0983",
+      "split": "test_test_test",
+      "source": "ADDRESS 1083 Oak St PHONE 555-000-0983 PATIENT Hugo Reed DOB 2000-08-14 TREATMENT DrugC",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugC",
+      "generated": "PNT ENOS ES NTRENTREAS ENTRENONTRESIEASCTRENTR DrT MENOS ENTR RENTRENOS ENT NTRENTIENTMRENOSNTR A NTRETMENTMENTRNTR NOC [NAME] MES DugNONTMAT [NAME]ONTR DRENTR NTESIATMENT AGNT NTEAGNTRNT AGNT [ADDRESS]RNTRENOS DISIS DIS D ATME DrATR DIAG",
+      "termination": "output_limit",
+      "protocol_valid": false,
+      "seconds": 6.792517499998212,
+      "tokens": 220,
+      "counts": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0984",
+      "split": "test_test_test",
+      "source": "ADDRESS 1084 Oak St PHONE 555-000-0984 PATIENT Asha Reed DOB 1991-10-21 TREATMENT DrugB",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugB",
+      "generated": "PNT ENOS ES ENT DrugNTRENTRENTRENTRENONT DIESIAGNT DrugC ENEAT ENT ENONTRENTR [NAME] DAGNATMONTRENTR AGNTRENA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.5379892000928521,
+      "tokens": 105,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0985",
+      "split": "test_test_test",
+      "source": "ADDRESS 1085 Oak St PHONE 555-000-0985 PATIENT Zoya Park DOB 1965-09-06 TREATMENT DrugB",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugB",
+      "generated": "PNT ENOS ES NTRENTREAS ENTRENONTRESIERKS DIESIA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.35581499990075827,
+      "tokens": 48,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0986",
+      "split": "test_test_test",
+      "source": "MRN 70000986 DIAGNOSIS NSCLC PATIENT Zoya Reed TREATMENT DrugB",
+      "expected": "MRN [MRN] DIAGNOSIS NSCLC PATIENT [NAME] TREATMENT DrugB",
+      "generated": "DugATENOR [NAME] DIAT DIS DIS NTIATMAGNOS NOS DrugBESIOS DrugNTREATMENTMATRENOS NOSS DIAGNOC DDIATMOS gNT NONONOSIATMOSS DNOS AGNTIONugCLCTRETENOS DIONS DugONONONTMATHMENTONOS B",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.985631899908185,
+      "tokens": 173,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0987",
+      "split": "test_test_test",
+      "source": "MRN 70000987 DIAGNOSIS NSCLC PATIENT Evan Park TREATMENT DrugB",
+      "expected": "MRN [MRN] DIAGNOSIS NSCLC PATIENT [NAME] TREATMENT DrugB",
+      "generated": "DDIOS DruTR [NAME] DIATENOS TRENTMENOS DOSIS DrugASSIOS DIS gATREATMENTMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.4698787000961602,
+      "tokens": 69,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0988",
+      "split": "test_test_test",
+      "source": "MRN 70000988 DIAGNOSIS ASTHMA PATIENT Zoya Park TREATMENT DrugC",
+      "expected": "MRN [MRN] DIAGNOSIS ASTHMA PATIENT [NAME] TREATMENT DrugC",
+      "generated": "DrATHMDR [NAME] DIAT DIS NOS NTIATHOS AT NOS DrugATR DIENSSSS DrugMENTRENTOMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.8309543002396822,
+      "tokens": 73,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0989",
+      "split": "test_test_test",
+      "source": "ADDRESS 1089 Oak St PHONE 555-000-0989 PATIENT Evan Reed DOB 1952-08-14 TREATMENT DrugC",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugC",
+      "generated": "PNT ENT TRENT ATRENOSS ENTRENTMENTRENONTRENTRENS ENTMESIS [NAME] DISTRENTMENTRENTR [NAME] DAGNATMRENTRNTR AGNTIONA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.1661811000667512,
+      "tokens": 105,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0990",
+      "split": "test_test_test",
+      "source": "DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugB dose990",
+      "expected": "DIAGNOSIS ASTHMA BIOMARKER ALK TREATMENT DrugB dose990",
+      "generated": "DIATIATIATIOS DIA MENTMATIENTIATMAGNTHMAS TENTENTHHMENTENTHMENTMAGNTHIAS T TESIAGNTENTMER DIATHIENTENTMENENT NTMENTISIATIONTENTOS MAGNTHFR TMENTONTIONENT N DugONTMENTMATHMENTONTENT",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.9608557000756264,
+      "tokens": 181,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 3,
+        "exact": 0,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "example_0991",
+      "split": "test_test_test",
+      "source": "ADDRESS 1091 Oak St PHONE 555-000-0991 PATIENT Hugo Park DOB 1968-12-16 TREATMENT DrugC",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugC",
+      "generated": "PNT ENOS ESIAGNENTREAS DrugASSS TREATMENTRENTR DrENOSS DIAGNOC DRENTMENT",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.87379390001297,
+      "tokens": 73,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0992",
+      "split": "test_test_test",
+      "source": "ADDRESS 1092 Oak St PHONE 555-000-0992 PATIENT Asha Reed DOB 1959-09-16 TREATMENT DrugB",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugB",
+      "generated": "PNT ENOS ES ENT DIESS ATRENENTRENTRENONT DIESIAGNT DrugC ENEAT ENT ENONTRENTR [NAME] DAGNATMRENT NTR AGNEATMENTRENTMENTR NT RNT DDrugISC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 10.864701700396836,
+      "tokens": 132,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0993",
+      "split": "test_test_test",
+      "source": "MRN 70000993 DIAGNOSIS DIABETES PATIENT Zoya Reed TREATMENT DrugB",
+      "expected": "MRN [MRN] DIAGNOSIS DIABETES PATIENT [NAME] TREATMENT DrugB",
+      "generated": "DIENORENTMATHOSISIATIAT NT NO NOSIENOMET DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 3.0994774997234344,
+      "tokens": 47,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0994",
+      "split": "test_test_test",
+      "source": "ADDRESS 1094 Oak St PHONE 555-000-0994 PATIENT Asha Park DOB 1958-05-19 TREATMENT DrugB",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugB",
+      "generated": "PNT ENOS ES ENT DrugNTRENTRENTRENTRENONT DIESIAGNT DrugC ENEAT ENT ENONTRENTR [NAME] DAGNATMOS RENTR AGNEATMENTRENTMENTR NT RNT DrSrugNONTMAT MENTR DRENTR NTR MENTRENTIS RNTREAGNTRNT AGNT DrSSIS MAGNTRENT ENTENT MENTIATR DIAG",
+      "termination": "output_limit",
+      "protocol_valid": false,
+      "seconds": 16.430706299841404,
+      "tokens": 220,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0995",
+      "split": "test_test_test",
+      "source": "ADDRESS 1095 Oak St PHONE 555-000-0995 PATIENT Hugo Park DOB 1964-09-08 TREATMENT DrugA",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugA",
+      "generated": "PNT ENOS ES NTRENTREAS ENTRENONTRESIERENTRENTR DrT DrugC ENTR RENTRENOS ENT NTRENTIENTMRENOSNTR A NEATMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 4.02935570012778,
+      "tokens": 105,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0996",
+      "split": "test_test_test",
+      "source": "MRN 70000996 DIAGNOSIS NSCLC PATIENT Asha Reed TREATMENT DrugA",
+      "expected": "MRN [MRN] DIAGNOSIS NSCLC PATIENT [NAME] TREATMENT DrugA",
+      "generated": "DruTIOS NOR NTR DIS NOS DIS DIAGNTIOS NENONOSS NOS DIS DrugB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.3723591002635658,
+      "tokens": 61,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0997",
+      "split": "test_test_test",
+      "source": "ADDRESS 1097 Oak St PHONE 555-000-0997 PATIENT Zoya Reed DOB 1988-09-06 TREATMENT DrugA",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugA",
+      "generated": "PNT ENT TRENT PATRNOSS ENTRENONTRESIEASCTRENTR DrT DrugC ENT DIENTRENOS ENT NTRENTIENTMRENT NTR A NEATMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.7933002999052405,
+      "tokens": 105,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0998",
+      "split": "test_test_test",
+      "source": "MRN 70000998 DIAGNOSIS DIABETES PATIENT Zoya Park TREATMENT DrugA",
+      "expected": "MRN [MRN] DIAGNOSIS DIABETES PATIENT [NAME] TREATMENT DrugA",
+      "generated": "DIENORENTMATIAT DIATIAT NT [NAME] NTOSIENOMET DrugC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 0.34339299984276295,
+      "tokens": 47,
+      "counts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 2,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 2,
+        "exact": 0,
+        "categories": {
+          "MRN": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "example_0999",
+      "split": "test_test_test",
+      "source": "ADDRESS 1099 Oak St PHONE 555-000-0999 PATIENT Evan Park DOB 1959-04-22 TREATMENT DrugA",
+      "expected": "ADDRESS [ADDRESS] PHONE [PHONE] PATIENT [NAME] DOB [DATE] TREATMENT DrugA",
+      "generated": "PNT ENT TRENT ATRENOSS ENTRENTMENTRENONTRENTRENS ENTMESIS [NAME] DISTRENTMENTRENTR [NAME] DAGNATMRENTRNTR AGNTIONA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "seconds": 1.0335657997056842,
+      "tokens": 105,
+      "counts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 4,
+        "identifiers": 4,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 1,
+        "exact": 0,
+        "categories": {
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "PATIENT": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    }
+  ],
+  "experiment_id": "final_multi_attention_test_test_test",
+  "architecture": "multi_attention",
+  "seed": 42,
+  "split": "test_test_test",
+  "source_hash": "a399a568af148bd3b0e2cd08c5aaa07f9ab045cbc5035ee0446c03d832d4b33d",
+  "dataset_hash": "368646b32a01c79aed83b468b999afebaeff47f31d97f8e66c3a75bdb1a24113",
+  "tokenizer_hash": "20d5ed18ecc52a6b1dc6c3ac9e4f1892a5759c0af3cf32be7042673aadacebd7",
+  "checkpoint_step": 400,
+  "teacher_forced": {
+    "loss": 2.2001917236231128,
+    "next_token_accuracy": 0.36313071116408424,
+    "scored_tokens": 2517,
+    "examples": 50
+  },
+  "scope": "complete declared final partition; no tuning from these outputs"
+}

@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "executed_code_cells": [
+    1,
+    3,
+    5,
+    7,
+    9,
+    11,
+    13,
+    15,
+    17
+  ],
+  "device": "cpu",
+  "scope": "mentor execution of calculations; learner comprehension remains open"
+}

@@ -1,0 +1,356 @@
+{
+  "passed": true,
+  "scope": "author engineering audit; existing outputs/identities/counts checked without retraining or changing the frozen models; not an independent reviewer",
+  "source_hash": "a399a568af148bd3b0e2cd08c5aaa07f9ab045cbc5035ee0446c03d832d4b33d",
+  "dataset_hash": "368646b32a01c79aed83b468b999afebaeff47f31d97f8e66c3a75bdb1a24113",
+  "repeat_checks": [
+    {
+      "run": "embedding_only_seed7",
+      "selected_step": 1000,
+      "raw_notes": 12,
+      "passed": true
+    },
+    {
+      "run": "embedding_only_seed123",
+      "selected_step": 1000,
+      "raw_notes": 12,
+      "passed": true
+    },
+    {
+      "run": "single_attention_seed7",
+      "selected_step": 400,
+      "raw_notes": 12,
+      "passed": true
+    },
+    {
+      "run": "single_attention_seed123",
+      "selected_step": 400,
+      "raw_notes": 12,
+      "passed": true
+    },
+    {
+      "run": "multi_attention_seed7",
+      "selected_step": 400,
+      "raw_notes": 12,
+      "passed": true
+    },
+    {
+      "run": "multi_attention_seed123",
+      "selected_step": 400,
+      "raw_notes": 12,
+      "passed": true
+    },
+    {
+      "run": "transformer_2_seed7",
+      "selected_step": 500,
+      "raw_notes": 12,
+      "passed": true
+    },
+    {
+      "run": "transformer_2_seed123",
+      "selected_step": 400,
+      "raw_notes": 12,
+      "passed": true
+    }
+  ],
+  "final_checks": [
+    {
+      "architecture": "embedding_only",
+      "partition": "test_known_known",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "embedding_only",
+      "partition": "test_known_test",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "embedding_only",
+      "partition": "test_test_known",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "embedding_only",
+      "partition": "test_test_test",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "single_attention",
+      "partition": "test_known_known",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "single_attention",
+      "partition": "test_known_test",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "single_attention",
+      "partition": "test_test_known",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "single_attention",
+      "partition": "test_test_test",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "multi_attention",
+      "partition": "test_known_known",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "multi_attention",
+      "partition": "test_known_test",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "multi_attention",
+      "partition": "test_test_known",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "multi_attention",
+      "partition": "test_test_test",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_1",
+      "partition": "test_known_known",
+      "raw_notes": 50,
+      "exact": 12,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_1",
+      "partition": "test_known_test",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_1",
+      "partition": "test_test_known",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_1",
+      "partition": "test_test_test",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_2",
+      "partition": "test_known_known",
+      "raw_notes": 50,
+      "exact": 7,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_2",
+      "partition": "test_known_test",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_2",
+      "partition": "test_test_known",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_2",
+      "partition": "test_test_test",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "no_ffn",
+      "partition": "test_known_known",
+      "raw_notes": 50,
+      "exact": 3,
+      "passed": true
+    },
+    {
+      "architecture": "no_ffn",
+      "partition": "test_known_test",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "no_ffn",
+      "partition": "test_test_known",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "no_ffn",
+      "partition": "test_test_test",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "no_layernorm",
+      "partition": "test_known_known",
+      "raw_notes": 50,
+      "exact": 4,
+      "passed": true
+    },
+    {
+      "architecture": "no_layernorm",
+      "partition": "test_known_test",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "no_layernorm",
+      "partition": "test_test_known",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "no_layernorm",
+      "partition": "test_test_test",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "no_residual",
+      "partition": "test_known_known",
+      "raw_notes": 50,
+      "exact": 20,
+      "passed": true
+    },
+    {
+      "architecture": "no_residual",
+      "partition": "test_known_test",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    },
+    {
+      "architecture": "no_residual",
+      "partition": "test_test_known",
+      "raw_notes": 50,
+      "exact": 1,
+      "passed": true
+    },
+    {
+      "architecture": "no_residual",
+      "partition": "test_test_test",
+      "raw_notes": 50,
+      "exact": 0,
+      "passed": true
+    }
+  ],
+  "investigation_checks": [
+    {
+      "file": "baseline.json",
+      "notes": 8,
+      "passed": true
+    },
+    {
+      "file": "layer0_head0.json",
+      "notes": 8,
+      "passed": true
+    },
+    {
+      "file": "layer0_head1.json",
+      "notes": 8,
+      "passed": true
+    },
+    {
+      "file": "layer0_head2.json",
+      "notes": 8,
+      "passed": true
+    },
+    {
+      "file": "layer0_head3.json",
+      "notes": 8,
+      "passed": true
+    },
+    {
+      "file": "layer1_head0.json",
+      "notes": 8,
+      "passed": true
+    },
+    {
+      "file": "layer1_head1.json",
+      "notes": 8,
+      "passed": true
+    },
+    {
+      "file": "layer1_head2.json",
+      "notes": 8,
+      "passed": true
+    },
+    {
+      "file": "layer1_head3.json",
+      "notes": 8,
+      "passed": true
+    },
+    {
+      "file": "pair_layer0.json",
+      "notes": 8,
+      "passed": true
+    },
+    {
+      "file": "pair_layer1.json",
+      "notes": 8,
+      "passed": true
+    },
+    {
+      "file": "temperature_0.1.json",
+      "notes": 8,
+      "passed": true
+    },
+    {
+      "file": "temperature_0.7.json",
+      "notes": 8,
+      "passed": true
+    },
+    {
+      "file": "temperature_1.2.json",
+      "notes": 8,
+      "passed": true
+    }
+  ],
+  "final_generation_evaluations": 1600,
+  "distinct_final_notes": 200
+}

@@ -1,0 +1,34 @@
+{
+  "series": "final single-corpus comparison",
+  "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "data_producer_source_hash": "f2ae852fc4af39e317f5fdb5528146ead5c48299e0a5720c866a5e4facce655f",
+  "producer_files": [
+    "broad_data.py",
+    "submission_experiments.py"
+  ],
+  "initialization": "random weights, seed 42; no weights from earlier experiments",
+  "architectures": [
+    "transformer_2",
+    "embedding_only",
+    "single_attention",
+    "multi_attention",
+    "transformer_1",
+    "no_ffn",
+    "no_layernorm",
+    "no_residual"
+  ],
+  "steps": 4000,
+  "batch_size": 16,
+  "lr": 0.0007,
+  "seed": 42,
+  "width": 64,
+  "ffn": 192,
+  "heads": 4,
+  "context": 256,
+  "device": "cpu",
+  "selection": "fixed final update for all architectures; minimum-loss checkpoints saved separately",
+  "data": "one saved corpus of 1,000 examples: 700 train, 100 validation and four final partitions of 50 notes; authored development sources excluded; final test names exclude development names",
+  "evaluation": "24 declared validation diagnostics and 11 authored development prompts; final partitions released only after review",
+  "limits": "synthetic grammar, single seed initially; exact-surface leakage is not complete clinical safety; different tokenizers/selection histories must not be mixed"
+}

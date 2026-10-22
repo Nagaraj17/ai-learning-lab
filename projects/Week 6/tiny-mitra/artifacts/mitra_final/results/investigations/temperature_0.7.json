@@ -1,0 +1,346 @@
+{
+  "run_id": "mitra_final/transformer_2_seed42",
+  "checkpoint_step": 4000,
+  "source_hash": "bf6418a89068cb5d0d457573435518a39a23d17c7d074d2c87b388533cb3b173",
+  "dataset_hash": "c3f7a797f7610d8ef45d8977340a2705c1570b63c6af367ba355a124781bdcb7",
+  "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+  "example_ids": [
+    "assignment_0700",
+    "assignment_0701",
+    "assignment_0702",
+    "assignment_0704",
+    "assignment_0705",
+    "assignment_0717",
+    "assignment_0719",
+    "assignment_0703"
+  ],
+  "mode": "sample",
+  "temperature": 0.7,
+  "generated_metrics": {
+    "tp": 14,
+    "fp": 0,
+    "fn": 0,
+    "identifiers": 14,
+    "leaked_identifiers": 0,
+    "leaked_note": 0,
+    "clinical_correct": 6,
+    "clinical_support": 6,
+    "exact": 8,
+    "examples": 8,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "exact_match": 1.0,
+    "identifier_leakage": 0.0,
+    "note_leakage": 0.0,
+    "clinical_preservation": 1.0,
+    "categories": {
+      "PATIENT": {
+        "tp": 7,
+        "support": 7,
+        "leaked": 0,
+        "recall": 1.0
+      },
+      "MRN": {
+        "tp": 2,
+        "support": 2,
+        "leaked": 0,
+        "recall": 1.0
+      },
+      "DOCTOR": {
+        "tp": 1,
+        "support": 1,
+        "leaked": 0,
+        "recall": 1.0
+      },
+      "DATE": {
+        "tp": 1,
+        "support": 1,
+        "leaked": 0,
+        "recall": 1.0
+      },
+      "ADDRESS": {
+        "tp": 1,
+        "support": 1,
+        "leaked": 0,
+        "recall": 1.0
+      },
+      "DOB": {
+        "tp": 1,
+        "support": 1,
+        "leaked": 0,
+        "recall": 1.0
+      },
+      "PHONE": {
+        "tp": 1,
+        "support": 1,
+        "leaked": 0,
+        "recall": 1.0
+      }
+    },
+    "controls": 1,
+    "control_over_redactions": 0,
+    "valid_terminations": 8,
+    "example_ids": [
+      "assignment_0700",
+      "assignment_0701",
+      "assignment_0702",
+      "assignment_0704",
+      "assignment_0705",
+      "assignment_0717",
+      "assignment_0719",
+      "assignment_0703"
+    ]
+  },
+  "teacher_forced": {
+    "loss": 0.00017356750322505832,
+    "scored_tokens": 80
+  },
+  "outputs": [
+    {
+      "id": "assignment_0700",
+      "source": "BIOMARKER ALK TREATMENT DrugA DIAGNOSIS NSCLC",
+      "expected": "BIOMARKER ALK TREATMENT DrugA DIAGNOSIS NSCLC",
+      "generated": "BIOMARKER ALK TREATMENT DrugA DIAGNOSIS NSCLC",
+      "termination": "eos",
+      "protocol_valid": true,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 0,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 3,
+        "clinical_support": 3,
+        "exact": 1,
+        "categories": {},
+        "no_identifier_control": true
+      }
+    },
+    {
+      "id": "assignment_0701",
+      "source": "PATIENT Leah Lee RECEIVED DrugB",
+      "expected": "PATIENT [NAME] RECEIVED DrugB",
+      "generated": "PATIENT [NAME] RECEIVED DrugB",
+      "termination": "eos",
+      "protocol_valid": true,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 1,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 1,
+        "exact": 1,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0702",
+      "source": "PATIENT Noah Rao MRN 694958 DIAGNOSIS ASTHMA",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA",
+      "generated": "PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "counts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 1,
+        "exact": 1,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0704",
+      "source": "PATIENT Quentin Malhotra VISITED Dr Jones ON April 10",
+      "expected": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+      "generated": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 3,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 1,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0705",
+      "source": "PATIENT Maya Shah LIVES 805 Main Street Dallas Texas",
+      "expected": "PATIENT [NAME] LIVES [ADDRESS]",
+      "generated": "PATIENT [NAME] LIVES [ADDRESS]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "counts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 1,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0717",
+      "source": "PATIENT Victor Deshmukh DOB March 28 1990",
+      "expected": "PATIENT [NAME] DOB [DATE]",
+      "generated": "PATIENT [NAME] DOB [DATE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "counts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 1,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0719",
+      "source": "PATIENT John Shah PHONE 5550617517",
+      "expected": "PATIENT [NAME] PHONE [PHONE]",
+      "generated": "PATIENT [NAME] PHONE [PHONE]",
+      "termination": "eos",
+      "protocol_valid": true,
+      "counts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 0,
+        "exact": 1,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    },
+    {
+      "id": "assignment_0703",
+      "source": "PATIENT Elena Ramirez MRN 565370 DIAGNOSIS ASTHMA",
+      "expected": "PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA",
+      "generated": "PATIENT [NAME] MRN [MRN] DIAGNOSIS ASTHMA",
+      "termination": "eos",
+      "protocol_valid": true,
+      "counts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "identifiers": 2,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 1,
+        "exact": 1,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          },
+          "MRN": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0
+          }
+        },
+        "no_identifier_control": false
+      }
+    }
+  ]
+}

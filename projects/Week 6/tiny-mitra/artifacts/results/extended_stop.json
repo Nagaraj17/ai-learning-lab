@@ -1,0 +1,5 @@
+{
+  "date_ist": "2026-10-18",
+  "reason": "Prioritize missing instructor sentence-form coverage. Original eight-run benchmark/repeats/final evaluation preserved.",
+  "status": "Intentionally stopped exploratory extension at its latest durable checkpoint; not a numerical failure"
+}

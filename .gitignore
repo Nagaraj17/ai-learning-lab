@@ -55,3 +55,7 @@ ai-learning/bin/*
 ai-learning/include/*
 ai-learning/etc/*
 ai-learning/etc/*
+
+# Copyrighted/private learning resources
+resources/private/*
+!resources/private/README.md

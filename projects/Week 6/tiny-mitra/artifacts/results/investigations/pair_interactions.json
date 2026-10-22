@@ -1,0 +1,77 @@
+{
+  "comparisons": [
+    {
+      "layer": 0,
+      "heads": [
+        1,
+        0
+      ],
+      "measurements": {
+        "recall": {
+          "baseline": 0.4666666666666667,
+          "single_deltas": [
+            -0.4666666666666667,
+            -0.2
+          ],
+          "pair_delta": -0.4666666666666667,
+          "pair_minus_sum_of_single_deltas": 0.20000000000000007
+        },
+        "exact_match": {
+          "baseline": 0.125,
+          "single_deltas": [
+            -0.125,
+            -0.125
+          ],
+          "pair_delta": -0.125,
+          "pair_minus_sum_of_single_deltas": 0.125
+        },
+        "clinical_preservation": {
+          "baseline": 0.058823529411764705,
+          "single_deltas": [
+            -0.058823529411764705,
+            -0.058823529411764705
+          ],
+          "pair_delta": -0.058823529411764705,
+          "pair_minus_sum_of_single_deltas": 0.058823529411764705
+        }
+      }
+    },
+    {
+      "layer": 1,
+      "heads": [
+        1,
+        2
+      ],
+      "measurements": {
+        "recall": {
+          "baseline": 0.4666666666666667,
+          "single_deltas": [
+            -0.13333333333333336,
+            -0.13333333333333336
+          ],
+          "pair_delta": -0.33333333333333337,
+          "pair_minus_sum_of_single_deltas": -0.06666666666666665
+        },
+        "exact_match": {
+          "baseline": 0.125,
+          "single_deltas": [
+            -0.125,
+            -0.125
+          ],
+          "pair_delta": -0.125,
+          "pair_minus_sum_of_single_deltas": 0.125
+        },
+        "clinical_preservation": {
+          "baseline": 0.058823529411764705,
+          "single_deltas": [
+            -0.058823529411764705,
+            -0.058823529411764705
+          ],
+          "pair_delta": -0.058823529411764705,
+          "pair_minus_sum_of_single_deltas": 0.058823529411764705
+        }
+      }
+    }
+  ],
+  "scope": "exploratory validation-selected pairs; metric floors/ceilings and tiny support limit interaction interpretation"
+}

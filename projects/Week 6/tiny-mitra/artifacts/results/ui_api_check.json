@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "scope": "API: real embedding checkpoint generation, token trace, saved evidence response, expected no-attention error; full-model/head UI verification still pending",
+  "generated": "PAT DIATMENONOSTRENTIAT [NAME] DIAGNOS DIATENTIENT [NAME] DOB [DATE] PHONT [PHONE] DDRESS [ADDRESS] TREATMENT DrugB",
+  "termination": "eos",
+  "model_count_in_evidence": 1
+}

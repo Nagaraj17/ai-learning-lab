@@ -4,6 +4,14 @@
 
 ---
 
+## Tiny Mitra team review
+
+Start with the [team guide](projects/Week%206/tiny-mitra/TEAM_START_HERE.md), the [refresher](weekly%20curriculum/06-Tiny-Mitra-Project/PREREQUISITE_KNOWLEDGE.md), and the [final presentation and speaker notes](presentations/mitra/README.md).
+
+The Git checkout includes code, notebooks, synthetic datasets and measured reports. Trained checkpoints and local environments are excluded; see the team guide before trying the live demo.
+
+---
+
 ## Mission
 
 This repository is not about completing tutorials.

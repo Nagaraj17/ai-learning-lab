@@ -1,0 +1,2075 @@
+{
+  "run_id": "transformer_2_seed42",
+  "checkpoint_step": 400,
+  "source_hash": "a399a568af148bd3b0e2cd08c5aaa07f9ab045cbc5035ee0446c03d832d4b33d",
+  "dataset_hash": "368646b32a01c79aed83b468b999afebaeff47f31d97f8e66c3a75bdb1a24113",
+  "example_ids": [
+    "example_0700",
+    "example_0701",
+    "example_0703",
+    "example_0704",
+    "example_0706",
+    "example_0702",
+    "example_0705",
+    "example_0707"
+  ],
+  "measurements": [
+    {
+      "experiment_id": "head_baseline",
+      "intervention": null,
+      "teacher_forced": {
+        "loss": 0.6237146200029833,
+        "next_token_accuracy": 0.8353221957040573,
+        "scored_tokens": 419,
+        "examples": 8
+      },
+      "generated_metrics": {
+        "tp": 7,
+        "fp": 4,
+        "fn": 8,
+        "identifiers": 15,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 17,
+        "exact": 1,
+        "examples": 8,
+        "precision": 0.6363636363636364,
+        "recall": 0.4666666666666667,
+        "f1": 0.5384615384615384,
+        "exact_match": 0.125,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.058823529411764705,
+        "categories": {
+          "PATIENT": {
+            "tp": 2,
+            "support": 7,
+            "leaked": 0,
+            "recall": 0.2857142857142857
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 3,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "seconds": 3.7816198994405568,
+        "generated_tokens": 398,
+        "seconds_per_note": 0.4727024874300696,
+        "valid_terminations": 8,
+        "mode": "greedy",
+        "temperature": null,
+        "sampling_seed": 42,
+        "device": "cpu",
+        "coverage": "declared subset; see IDs",
+        "example_ids": [
+          "example_0700",
+          "example_0701",
+          "example_0703",
+          "example_0704",
+          "example_0706",
+          "example_0702",
+          "example_0705",
+          "example_0707"
+        ]
+      },
+      "category_precision_recall": {
+        "UNASSOCIATED": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "support": 0,
+          "proposed": 1,
+          "precision": 0.0,
+          "recall": null
+        },
+        "PATIENT": {
+          "tp": 2,
+          "fp": 3,
+          "fn": 5,
+          "support": 7,
+          "proposed": 5,
+          "precision": 0.4,
+          "recall": 0.2857142857142857
+        },
+        "MRN": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "support": 3,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DOCTOR": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "DATE": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "DIAGNOSIS": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        },
+        "TREATMENT": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        },
+        "DOB": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "PHONE": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "ADDRESS": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "raw_evidence": "artifacts\\results\\investigations\\baseline.json"
+    },
+    {
+      "experiment_id": "head_0_0",
+      "intervention": {
+        "layer": 0,
+        "disabled_heads": [
+          0
+        ],
+        "retrained": false
+      },
+      "teacher_forced": {
+        "loss": 1.049968856046763,
+        "next_token_accuracy": 0.684964200477327,
+        "scored_tokens": 419,
+        "examples": 8
+      },
+      "generated_metrics": {
+        "tp": 4,
+        "fp": 12,
+        "fn": 11,
+        "identifiers": 15,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 17,
+        "exact": 0,
+        "examples": 8,
+        "precision": 0.25,
+        "recall": 0.26666666666666666,
+        "f1": 0.25806451612903225,
+        "exact_match": 0.0,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 7,
+            "leaked": 0,
+            "recall": 0.14285714285714285
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 3,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "seconds": 12.435159500222653,
+        "generated_tokens": 465,
+        "seconds_per_note": 1.5543949375278316,
+        "valid_terminations": 8,
+        "mode": "greedy",
+        "temperature": null,
+        "sampling_seed": 42,
+        "device": "cpu",
+        "coverage": "declared subset; see IDs",
+        "example_ids": [
+          "example_0700",
+          "example_0701",
+          "example_0703",
+          "example_0704",
+          "example_0706",
+          "example_0702",
+          "example_0705",
+          "example_0707"
+        ]
+      },
+      "category_precision_recall": {
+        "UNASSOCIATED": {
+          "tp": 0,
+          "fp": 3,
+          "fn": 0,
+          "support": 0,
+          "proposed": 3,
+          "precision": 0.0,
+          "recall": null
+        },
+        "PATIENT": {
+          "tp": 1,
+          "fp": 9,
+          "fn": 6,
+          "support": 7,
+          "proposed": 10,
+          "precision": 0.1,
+          "recall": 0.14285714285714285
+        },
+        "MRN": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "support": 3,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DOCTOR": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DATE": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "TREATMENT": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        },
+        "DOB": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "PHONE": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "ADDRESS": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "raw_evidence": "artifacts\\results\\investigations\\layer0_head0.json"
+    },
+    {
+      "experiment_id": "head_0_1",
+      "intervention": {
+        "layer": 0,
+        "disabled_heads": [
+          1
+        ],
+        "retrained": false
+      },
+      "teacher_forced": {
+        "loss": 0.8025348089759845,
+        "next_token_accuracy": 0.747016706443914,
+        "scored_tokens": 419,
+        "examples": 8
+      },
+      "generated_metrics": {
+        "tp": 0,
+        "fp": 5,
+        "fn": 15,
+        "identifiers": 15,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 17,
+        "exact": 0,
+        "examples": 8,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "exact_match": 0.0,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 7,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 3,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "seconds": 6.703537099994719,
+        "generated_tokens": 525,
+        "seconds_per_note": 0.8379421374993399,
+        "valid_terminations": 8,
+        "mode": "greedy",
+        "temperature": null,
+        "sampling_seed": 42,
+        "device": "cpu",
+        "coverage": "declared subset; see IDs",
+        "example_ids": [
+          "example_0700",
+          "example_0701",
+          "example_0703",
+          "example_0704",
+          "example_0706",
+          "example_0702",
+          "example_0705",
+          "example_0707"
+        ]
+      },
+      "category_precision_recall": {
+        "UNASSOCIATED": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        },
+        "PATIENT": {
+          "tp": 0,
+          "fp": 5,
+          "fn": 7,
+          "support": 7,
+          "proposed": 5,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "MRN": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "support": 3,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DOCTOR": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DATE": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DOB": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "PHONE": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "ADDRESS": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        }
+      },
+      "raw_evidence": "artifacts\\results\\investigations\\layer0_head1.json"
+    },
+    {
+      "experiment_id": "head_0_2",
+      "intervention": {
+        "layer": 0,
+        "disabled_heads": [
+          2
+        ],
+        "retrained": false
+      },
+      "teacher_forced": {
+        "loss": 0.8284057034512977,
+        "next_token_accuracy": 0.7613365155131265,
+        "scored_tokens": 419,
+        "examples": 8
+      },
+      "generated_metrics": {
+        "tp": 7,
+        "fp": 3,
+        "fn": 8,
+        "identifiers": 15,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 17,
+        "exact": 0,
+        "examples": 8,
+        "precision": 0.7,
+        "recall": 0.4666666666666667,
+        "f1": 0.56,
+        "exact_match": 0.0,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.0,
+        "categories": {
+          "PATIENT": {
+            "tp": 2,
+            "support": 7,
+            "leaked": 0,
+            "recall": 0.2857142857142857
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 3,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 1,
+        "seconds": 4.249096600338817,
+        "generated_tokens": 459,
+        "seconds_per_note": 0.5311370750423521,
+        "valid_terminations": 8,
+        "mode": "greedy",
+        "temperature": null,
+        "sampling_seed": 42,
+        "device": "cpu",
+        "coverage": "declared subset; see IDs",
+        "example_ids": [
+          "example_0700",
+          "example_0701",
+          "example_0703",
+          "example_0704",
+          "example_0706",
+          "example_0702",
+          "example_0705",
+          "example_0707"
+        ]
+      },
+      "category_precision_recall": {
+        "UNASSOCIATED": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "support": 0,
+          "proposed": 1,
+          "precision": 0.0,
+          "recall": null
+        },
+        "PATIENT": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 5,
+          "support": 7,
+          "proposed": 2,
+          "precision": 1.0,
+          "recall": 0.2857142857142857
+        },
+        "MRN": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "support": 3,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DOCTOR": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "DATE": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "DIAGNOSIS": {
+          "tp": 0,
+          "fp": 2,
+          "fn": 0,
+          "support": 0,
+          "proposed": 2,
+          "precision": 0.0,
+          "recall": null
+        },
+        "TREATMENT": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        },
+        "DOB": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "PHONE": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "ADDRESS": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "raw_evidence": "artifacts\\results\\investigations\\layer0_head2.json"
+    },
+    {
+      "experiment_id": "head_0_3",
+      "intervention": {
+        "layer": 0,
+        "disabled_heads": [
+          3
+        ],
+        "retrained": false
+      },
+      "teacher_forced": {
+        "loss": 0.77038464967277,
+        "next_token_accuracy": 0.7684964200477327,
+        "scored_tokens": 419,
+        "examples": 8
+      },
+      "generated_metrics": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 9,
+        "identifiers": 15,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 17,
+        "exact": 0,
+        "examples": 8,
+        "precision": 0.8571428571428571,
+        "recall": 0.4,
+        "f1": 0.5454545454545454,
+        "exact_match": 0.0,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.0,
+        "categories": {
+          "PATIENT": {
+            "tp": 2,
+            "support": 7,
+            "leaked": 0,
+            "recall": 0.2857142857142857
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 3,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "seconds": 3.562758100684732,
+        "generated_tokens": 424,
+        "seconds_per_note": 0.4453447625855915,
+        "valid_terminations": 8,
+        "mode": "greedy",
+        "temperature": null,
+        "sampling_seed": 42,
+        "device": "cpu",
+        "coverage": "declared subset; see IDs",
+        "example_ids": [
+          "example_0700",
+          "example_0701",
+          "example_0703",
+          "example_0704",
+          "example_0706",
+          "example_0702",
+          "example_0705",
+          "example_0707"
+        ]
+      },
+      "category_precision_recall": {
+        "UNASSOCIATED": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        },
+        "PATIENT": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 5,
+          "support": 7,
+          "proposed": 2,
+          "precision": 1.0,
+          "recall": 0.2857142857142857
+        },
+        "MRN": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "support": 3,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DOCTOR": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "DATE": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 1,
+          "support": 1,
+          "proposed": 1,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "TREATMENT": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        },
+        "DOB": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "PHONE": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "ADDRESS": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "DIAGNOSIS": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        }
+      },
+      "raw_evidence": "artifacts\\results\\investigations\\layer0_head3.json"
+    },
+    {
+      "experiment_id": "head_1_0",
+      "intervention": {
+        "layer": 1,
+        "disabled_heads": [
+          0
+        ],
+        "retrained": false
+      },
+      "teacher_forced": {
+        "loss": 0.6980029996084427,
+        "next_token_accuracy": 0.8186157517899761,
+        "scored_tokens": 419,
+        "examples": 8
+      },
+      "generated_metrics": {
+        "tp": 7,
+        "fp": 4,
+        "fn": 8,
+        "identifiers": 15,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 1,
+        "clinical_support": 17,
+        "exact": 1,
+        "examples": 8,
+        "precision": 0.6363636363636364,
+        "recall": 0.4666666666666667,
+        "f1": 0.5384615384615384,
+        "exact_match": 0.125,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.058823529411764705,
+        "categories": {
+          "PATIENT": {
+            "tp": 2,
+            "support": 7,
+            "leaked": 0,
+            "recall": 0.2857142857142857
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 3,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "seconds": 5.284501399844885,
+        "generated_tokens": 463,
+        "seconds_per_note": 0.6605626749806106,
+        "valid_terminations": 8,
+        "mode": "greedy",
+        "temperature": null,
+        "sampling_seed": 42,
+        "device": "cpu",
+        "coverage": "declared subset; see IDs",
+        "example_ids": [
+          "example_0700",
+          "example_0701",
+          "example_0703",
+          "example_0704",
+          "example_0706",
+          "example_0702",
+          "example_0705",
+          "example_0707"
+        ]
+      },
+      "category_precision_recall": {
+        "UNASSOCIATED": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "support": 0,
+          "proposed": 1,
+          "precision": 0.0,
+          "recall": null
+        },
+        "DIAGNOSIS": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        },
+        "PATIENT": {
+          "tp": 2,
+          "fp": 3,
+          "fn": 5,
+          "support": 7,
+          "proposed": 5,
+          "precision": 0.4,
+          "recall": 0.2857142857142857
+        },
+        "MRN": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "support": 3,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DOCTOR": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "DATE": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "TREATMENT": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        },
+        "DOB": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "PHONE": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "ADDRESS": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "raw_evidence": "artifacts\\results\\investigations\\layer1_head0.json"
+    },
+    {
+      "experiment_id": "head_1_1",
+      "intervention": {
+        "layer": 1,
+        "disabled_heads": [
+          1
+        ],
+        "retrained": false
+      },
+      "teacher_forced": {
+        "loss": 0.8296677764674075,
+        "next_token_accuracy": 0.7374701670644391,
+        "scored_tokens": 419,
+        "examples": 8
+      },
+      "generated_metrics": {
+        "tp": 5,
+        "fp": 11,
+        "fn": 10,
+        "identifiers": 15,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 17,
+        "exact": 0,
+        "examples": 8,
+        "precision": 0.3125,
+        "recall": 0.3333333333333333,
+        "f1": 0.3225806451612903,
+        "exact_match": 0.0,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 7,
+            "leaked": 0,
+            "recall": 0.14285714285714285
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 3,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "seconds": 5.0259338999167085,
+        "generated_tokens": 435,
+        "seconds_per_note": 0.6282417374895886,
+        "valid_terminations": 8,
+        "mode": "greedy",
+        "temperature": null,
+        "sampling_seed": 42,
+        "device": "cpu",
+        "coverage": "declared subset; see IDs",
+        "example_ids": [
+          "example_0700",
+          "example_0701",
+          "example_0703",
+          "example_0704",
+          "example_0706",
+          "example_0702",
+          "example_0705",
+          "example_0707"
+        ]
+      },
+      "category_precision_recall": {
+        "UNASSOCIATED": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "support": 0,
+          "proposed": 1,
+          "precision": 0.0,
+          "recall": null
+        },
+        "PATIENT": {
+          "tp": 1,
+          "fp": 6,
+          "fn": 6,
+          "support": 7,
+          "proposed": 7,
+          "precision": 0.14285714285714285,
+          "recall": 0.14285714285714285
+        },
+        "MRN": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "support": 3,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "PHONE": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 0,
+          "support": 1,
+          "proposed": 2,
+          "precision": 0.5,
+          "recall": 1.0
+        },
+        "DOCTOR": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "DATE": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "DOB": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "ADDRESS": {
+          "tp": 0,
+          "fp": 3,
+          "fn": 1,
+          "support": 1,
+          "proposed": 3,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "DIAGNOSIS": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        }
+      },
+      "raw_evidence": "artifacts\\results\\investigations\\layer1_head1.json"
+    },
+    {
+      "experiment_id": "head_1_2",
+      "intervention": {
+        "layer": 1,
+        "disabled_heads": [
+          2
+        ],
+        "retrained": false
+      },
+      "teacher_forced": {
+        "loss": 0.766297916239372,
+        "next_token_accuracy": 0.7637231503579952,
+        "scored_tokens": 419,
+        "examples": 8
+      },
+      "generated_metrics": {
+        "tp": 5,
+        "fp": 7,
+        "fn": 10,
+        "identifiers": 15,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 17,
+        "exact": 0,
+        "examples": 8,
+        "precision": 0.4166666666666667,
+        "recall": 0.3333333333333333,
+        "f1": 0.37037037037037035,
+        "exact_match": 0.0,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.0,
+        "categories": {
+          "PATIENT": {
+            "tp": 2,
+            "support": 7,
+            "leaked": 0,
+            "recall": 0.2857142857142857
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 3,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "seconds": 3.71665390022099,
+        "generated_tokens": 334,
+        "seconds_per_note": 0.4645817375276238,
+        "valid_terminations": 8,
+        "mode": "greedy",
+        "temperature": null,
+        "sampling_seed": 42,
+        "device": "cpu",
+        "coverage": "declared subset; see IDs",
+        "example_ids": [
+          "example_0700",
+          "example_0701",
+          "example_0703",
+          "example_0704",
+          "example_0706",
+          "example_0702",
+          "example_0705",
+          "example_0707"
+        ]
+      },
+      "category_precision_recall": {
+        "UNASSOCIATED": {
+          "tp": 0,
+          "fp": 2,
+          "fn": 0,
+          "support": 0,
+          "proposed": 2,
+          "precision": 0.0,
+          "recall": null
+        },
+        "DIAGNOSIS": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        },
+        "PATIENT": {
+          "tp": 2,
+          "fp": 3,
+          "fn": 5,
+          "support": 7,
+          "proposed": 5,
+          "precision": 0.4,
+          "recall": 0.2857142857142857
+        },
+        "MRN": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "support": 3,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DOCTOR": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "DATE": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "PHONE": {
+          "tp": 0,
+          "fp": 2,
+          "fn": 1,
+          "support": 1,
+          "proposed": 2,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "DOB": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "ADDRESS": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        }
+      },
+      "raw_evidence": "artifacts\\results\\investigations\\layer1_head2.json"
+    },
+    {
+      "experiment_id": "head_1_3",
+      "intervention": {
+        "layer": 1,
+        "disabled_heads": [
+          3
+        ],
+        "retrained": false
+      },
+      "teacher_forced": {
+        "loss": 0.7372639002834129,
+        "next_token_accuracy": 0.7708830548926014,
+        "scored_tokens": 419,
+        "examples": 8
+      },
+      "generated_metrics": {
+        "tp": 7,
+        "fp": 1,
+        "fn": 8,
+        "identifiers": 15,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 17,
+        "exact": 0,
+        "examples": 8,
+        "precision": 0.875,
+        "recall": 0.4666666666666667,
+        "f1": 0.6086956521739131,
+        "exact_match": 0.0,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.0,
+        "categories": {
+          "PATIENT": {
+            "tp": 2,
+            "support": 7,
+            "leaked": 0,
+            "recall": 0.2857142857142857
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 3,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOCTOR": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DATE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "ADDRESS": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "seconds": 6.219411599449813,
+        "generated_tokens": 350,
+        "seconds_per_note": 0.7774264499312267,
+        "valid_terminations": 8,
+        "mode": "greedy",
+        "temperature": null,
+        "sampling_seed": 42,
+        "device": "cpu",
+        "coverage": "declared subset; see IDs",
+        "example_ids": [
+          "example_0700",
+          "example_0701",
+          "example_0703",
+          "example_0704",
+          "example_0706",
+          "example_0702",
+          "example_0705",
+          "example_0707"
+        ]
+      },
+      "category_precision_recall": {
+        "UNASSOCIATED": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        },
+        "PATIENT": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 5,
+          "support": 7,
+          "proposed": 2,
+          "precision": 1.0,
+          "recall": 0.2857142857142857
+        },
+        "MRN": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "support": 3,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DOCTOR": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "DATE": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "DIAGNOSIS": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        },
+        "TREATMENT": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        },
+        "DOB": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 0,
+          "support": 1,
+          "proposed": 2,
+          "precision": 0.5,
+          "recall": 1.0
+        },
+        "PHONE": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "ADDRESS": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "raw_evidence": "artifacts\\results\\investigations\\layer1_head3.json"
+    },
+    {
+      "experiment_id": "pair_layer0",
+      "intervention": {
+        "layer": 0,
+        "disabled_heads": [
+          1,
+          0
+        ],
+        "selection": "two largest adverse single-head effects on these validation diagnostics; ties by head ID"
+      },
+      "teacher_forced": {
+        "loss": 1.2389277273829058,
+        "next_token_accuracy": 0.6085918854415274,
+        "scored_tokens": 419,
+        "examples": 8
+      },
+      "generated_metrics": {
+        "tp": 0,
+        "fp": 12,
+        "fn": 15,
+        "identifiers": 15,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 17,
+        "exact": 0,
+        "examples": 8,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "exact_match": 0.0,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.0,
+        "categories": {
+          "PATIENT": {
+            "tp": 0,
+            "support": 7,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 3,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOB": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "seconds": 14.902104299515486,
+        "generated_tokens": 1015,
+        "seconds_per_note": 1.8627630374394357,
+        "valid_terminations": 5,
+        "mode": "greedy",
+        "temperature": null,
+        "sampling_seed": 42,
+        "device": "cpu",
+        "coverage": "declared subset; see IDs",
+        "example_ids": [
+          "example_0700",
+          "example_0701",
+          "example_0703",
+          "example_0704",
+          "example_0706",
+          "example_0702",
+          "example_0705",
+          "example_0707"
+        ]
+      },
+      "category_precision_recall": {
+        "UNASSOCIATED": {
+          "tp": 0,
+          "fp": 5,
+          "fn": 0,
+          "support": 0,
+          "proposed": 5,
+          "precision": 0.0,
+          "recall": null
+        },
+        "PATIENT": {
+          "tp": 0,
+          "fp": 7,
+          "fn": 7,
+          "support": 7,
+          "proposed": 7,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "MRN": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "support": 3,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DOCTOR": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DATE": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DOB": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "PHONE": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "ADDRESS": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DIAGNOSIS": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        }
+      },
+      "raw_evidence": "artifacts\\results\\investigations\\pair_layer0.json"
+    },
+    {
+      "experiment_id": "pair_layer1",
+      "intervention": {
+        "layer": 1,
+        "disabled_heads": [
+          1,
+          2
+        ],
+        "selection": "two largest adverse single-head effects on these validation diagnostics; ties by head ID"
+      },
+      "teacher_forced": {
+        "loss": 0.957760831336702,
+        "next_token_accuracy": 0.720763723150358,
+        "scored_tokens": 419,
+        "examples": 8
+      },
+      "generated_metrics": {
+        "tp": 2,
+        "fp": 5,
+        "fn": 13,
+        "identifiers": 15,
+        "leaked_identifiers": 0,
+        "leaked_note": 0,
+        "clinical_correct": 0,
+        "clinical_support": 17,
+        "exact": 0,
+        "examples": 8,
+        "precision": 0.2857142857142857,
+        "recall": 0.13333333333333333,
+        "f1": 0.18181818181818182,
+        "exact_match": 0.0,
+        "identifier_leakage": 0.0,
+        "note_leakage": 0.0,
+        "clinical_preservation": 0.0,
+        "categories": {
+          "PATIENT": {
+            "tp": 1,
+            "support": 7,
+            "leaked": 0,
+            "recall": 0.14285714285714285
+          },
+          "MRN": {
+            "tp": 0,
+            "support": 3,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOCTOR": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DATE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "DOB": {
+            "tp": 1,
+            "support": 1,
+            "leaked": 0,
+            "recall": 1.0
+          },
+          "PHONE": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          },
+          "ADDRESS": {
+            "tp": 0,
+            "support": 1,
+            "leaked": 0,
+            "recall": 0.0
+          }
+        },
+        "controls": 1,
+        "control_over_redactions": 0,
+        "seconds": 3.448969500605017,
+        "generated_tokens": 390,
+        "seconds_per_note": 0.4311211875756271,
+        "valid_terminations": 8,
+        "mode": "greedy",
+        "temperature": null,
+        "sampling_seed": 42,
+        "device": "cpu",
+        "coverage": "declared subset; see IDs",
+        "example_ids": [
+          "example_0700",
+          "example_0701",
+          "example_0703",
+          "example_0704",
+          "example_0706",
+          "example_0702",
+          "example_0705",
+          "example_0707"
+        ]
+      },
+      "category_precision_recall": {
+        "UNASSOCIATED": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        },
+        "PATIENT": {
+          "tp": 1,
+          "fp": 3,
+          "fn": 6,
+          "support": 7,
+          "proposed": 4,
+          "precision": 0.25,
+          "recall": 0.14285714285714285
+        },
+        "MRN": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "support": 3,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DOCTOR": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 1,
+          "support": 1,
+          "proposed": 1,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "DATE": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DOB": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1,
+          "proposed": 1,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "PHONE": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 1,
+          "support": 1,
+          "proposed": 1,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "ADDRESS": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1,
+          "proposed": 0,
+          "precision": null,
+          "recall": 0.0
+        },
+        "DIAGNOSIS": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "support": 0,
+          "proposed": 0,
+          "precision": null,
+          "recall": null
+        }
+      },
+      "raw_evidence": "artifacts\\results\\investigations\\pair_layer1.json"
+    }
+  ],
+  "note": "teacher-forced loss and free-generation metrics are distinct; source checkpoint unchanged"
+}

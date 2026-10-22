@@ -1,0 +1,646 @@
+[
+  {
+    "source": "PATIENT John Smith VISITED Dr Jones ON January 12",
+    "target": "PATIENT [NAME] VISITED [DOCTOR] ON [DATE]",
+    "identifiers": [
+      {
+        "field": "PATIENT",
+        "value": "John Smith",
+        "start": 8,
+        "end": 18,
+        "placeholder": "[NAME]"
+      },
+      {
+        "field": "DOCTOR",
+        "value": "Dr Jones",
+        "start": 27,
+        "end": 35,
+        "placeholder": "[DOCTOR]"
+      },
+      {
+        "field": "DATE",
+        "value": "January 12",
+        "start": 39,
+        "end": 49,
+        "placeholder": "[DATE]"
+      }
+    ],
+    "preserved": [],
+    "target_fields": [
+      {
+        "field": "PATIENT",
+        "start": 8,
+        "end": 14
+      },
+      {
+        "field": "DOCTOR",
+        "start": 23,
+        "end": 31
+      },
+      {
+        "field": "DATE",
+        "start": 35,
+        "end": 41
+      }
+    ],
+    "slots": [
+      {
+        "field": "PATIENT",
+        "left_literal": "PATIENT ",
+        "right_literal": " VISITED "
+      },
+      {
+        "field": "DOCTOR",
+        "left_literal": " VISITED ",
+        "right_literal": " ON "
+      },
+      {
+        "field": "DATE",
+        "left_literal": " ON ",
+        "right_literal": ""
+      }
+    ],
+    "pattern": "PATIENT {PATIENT} VISITED {DOCTOR} ON {DATE}",
+    "no_identifiers": false,
+    "id": "instructor_0",
+    "split": "authored_acceptance",
+    "template_id": "0",
+    "dataset_version": "assignment_v2"
+  },
+  {
+    "source": "PATIENT Mary Brown DOB March 4 1965",
+    "target": "PATIENT [NAME] DOB [DATE]",
+    "identifiers": [
+      {
+        "field": "PATIENT",
+        "value": "Mary Brown",
+        "start": 8,
+        "end": 18,
+        "placeholder": "[NAME]"
+      },
+      {
+        "field": "DOB",
+        "value": "March 4 1965",
+        "start": 23,
+        "end": 35,
+        "placeholder": "[DATE]"
+      }
+    ],
+    "preserved": [],
+    "target_fields": [
+      {
+        "field": "PATIENT",
+        "start": 8,
+        "end": 14
+      },
+      {
+        "field": "DOB",
+        "start": 19,
+        "end": 25
+      }
+    ],
+    "slots": [
+      {
+        "field": "PATIENT",
+        "left_literal": "PATIENT ",
+        "right_literal": " DOB "
+      },
+      {
+        "field": "DOB",
+        "left_literal": " DOB ",
+        "right_literal": ""
+      }
+    ],
+    "pattern": "PATIENT {PATIENT} DOB {DOB}",
+    "no_identifiers": false,
+    "id": "instructor_1",
+    "split": "authored_acceptance",
+    "template_id": "1",
+    "dataset_version": "assignment_v2"
+  },
+  {
+    "source": "MRN 482991 PATIENT Robert Green",
+    "target": "MRN [MRN] PATIENT [NAME]",
+    "identifiers": [
+      {
+        "field": "MRN",
+        "value": "482991",
+        "start": 4,
+        "end": 10,
+        "placeholder": "[MRN]"
+      },
+      {
+        "field": "PATIENT",
+        "value": "Robert Green",
+        "start": 19,
+        "end": 31,
+        "placeholder": "[NAME]"
+      }
+    ],
+    "preserved": [],
+    "target_fields": [
+      {
+        "field": "MRN",
+        "start": 4,
+        "end": 9
+      },
+      {
+        "field": "PATIENT",
+        "start": 18,
+        "end": 24
+      }
+    ],
+    "slots": [
+      {
+        "field": "MRN",
+        "left_literal": "MRN ",
+        "right_literal": " PATIENT "
+      },
+      {
+        "field": "PATIENT",
+        "left_literal": " PATIENT ",
+        "right_literal": ""
+      }
+    ],
+    "pattern": "MRN {MRN} PATIENT {PATIENT}",
+    "no_identifiers": false,
+    "id": "instructor_2",
+    "split": "authored_acceptance",
+    "template_id": "2",
+    "dataset_version": "assignment_v2"
+  },
+  {
+    "source": "PATIENT Alice White PHONE 5551234567",
+    "target": "PATIENT [NAME] PHONE [PHONE]",
+    "identifiers": [
+      {
+        "field": "PATIENT",
+        "value": "Alice White",
+        "start": 8,
+        "end": 19,
+        "placeholder": "[NAME]"
+      },
+      {
+        "field": "PHONE",
+        "value": "5551234567",
+        "start": 26,
+        "end": 36,
+        "placeholder": "[PHONE]"
+      }
+    ],
+    "preserved": [],
+    "target_fields": [
+      {
+        "field": "PATIENT",
+        "start": 8,
+        "end": 14
+      },
+      {
+        "field": "PHONE",
+        "start": 21,
+        "end": 28
+      }
+    ],
+    "slots": [
+      {
+        "field": "PATIENT",
+        "left_literal": "PATIENT ",
+        "right_literal": " PHONE "
+      },
+      {
+        "field": "PHONE",
+        "left_literal": " PHONE ",
+        "right_literal": ""
+      }
+    ],
+    "pattern": "PATIENT {PATIENT} PHONE {PHONE}",
+    "no_identifiers": false,
+    "id": "instructor_3",
+    "split": "authored_acceptance",
+    "template_id": "3",
+    "dataset_version": "assignment_v2"
+  },
+  {
+    "source": "PATIENT Kevin Black LIVES 412 Main Street Dallas Texas",
+    "target": "PATIENT [NAME] LIVES [ADDRESS]",
+    "identifiers": [
+      {
+        "field": "PATIENT",
+        "value": "Kevin Black",
+        "start": 8,
+        "end": 19,
+        "placeholder": "[NAME]"
+      },
+      {
+        "field": "ADDRESS",
+        "value": "412 Main Street Dallas Texas",
+        "start": 26,
+        "end": 54,
+        "placeholder": "[ADDRESS]"
+      }
+    ],
+    "preserved": [],
+    "target_fields": [
+      {
+        "field": "PATIENT",
+        "start": 8,
+        "end": 14
+      },
+      {
+        "field": "ADDRESS",
+        "start": 21,
+        "end": 30
+      }
+    ],
+    "slots": [
+      {
+        "field": "PATIENT",
+        "left_literal": "PATIENT ",
+        "right_literal": " LIVES "
+      },
+      {
+        "field": "ADDRESS",
+        "left_literal": " LIVES ",
+        "right_literal": ""
+      }
+    ],
+    "pattern": "PATIENT {PATIENT} LIVES {ADDRESS}",
+    "no_identifiers": false,
+    "id": "instructor_4",
+    "split": "authored_acceptance",
+    "template_id": "4",
+    "dataset_version": "assignment_v2"
+  },
+  {
+    "source": "PATIENT Susan Gray DIAGNOSIS NSCLC",
+    "target": "PATIENT [NAME] DIAGNOSIS NSCLC",
+    "identifiers": [
+      {
+        "field": "PATIENT",
+        "value": "Susan Gray",
+        "start": 8,
+        "end": 18,
+        "placeholder": "[NAME]"
+      }
+    ],
+    "preserved": [
+      {
+        "field": "DIAGNOSIS",
+        "value": "NSCLC",
+        "start": 29,
+        "end": 34
+      }
+    ],
+    "target_fields": [
+      {
+        "field": "PATIENT",
+        "start": 8,
+        "end": 14
+      },
+      {
+        "field": "DIAGNOSIS",
+        "start": 25,
+        "end": 30
+      }
+    ],
+    "slots": [
+      {
+        "field": "PATIENT",
+        "left_literal": "PATIENT ",
+        "right_literal": " DIAGNOSIS "
+      },
+      {
+        "field": "DIAGNOSIS",
+        "left_literal": " DIAGNOSIS ",
+        "right_literal": ""
+      }
+    ],
+    "pattern": "PATIENT {PATIENT} DIAGNOSIS {DIAGNOSIS}",
+    "no_identifiers": false,
+    "id": "instructor_5",
+    "split": "authored_acceptance",
+    "template_id": "5",
+    "dataset_version": "assignment_v2"
+  },
+  {
+    "source": "MRN 482991 PATIENT Mary Brown DIAGNOSIS NSCLC",
+    "target": "MRN [MRN] PATIENT [NAME] DIAGNOSIS NSCLC",
+    "identifiers": [
+      {
+        "field": "MRN",
+        "value": "482991",
+        "start": 4,
+        "end": 10,
+        "placeholder": "[MRN]"
+      },
+      {
+        "field": "PATIENT",
+        "value": "Mary Brown",
+        "start": 19,
+        "end": 29,
+        "placeholder": "[NAME]"
+      }
+    ],
+    "preserved": [
+      {
+        "field": "DIAGNOSIS",
+        "value": "NSCLC",
+        "start": 40,
+        "end": 45
+      }
+    ],
+    "target_fields": [
+      {
+        "field": "MRN",
+        "start": 4,
+        "end": 9
+      },
+      {
+        "field": "PATIENT",
+        "start": 18,
+        "end": 24
+      },
+      {
+        "field": "DIAGNOSIS",
+        "start": 35,
+        "end": 40
+      }
+    ],
+    "slots": [
+      {
+        "field": "MRN",
+        "left_literal": "MRN ",
+        "right_literal": " PATIENT "
+      },
+      {
+        "field": "PATIENT",
+        "left_literal": " PATIENT ",
+        "right_literal": " DIAGNOSIS "
+      },
+      {
+        "field": "DIAGNOSIS",
+        "left_literal": " DIAGNOSIS ",
+        "right_literal": ""
+      }
+    ],
+    "pattern": "MRN {MRN} PATIENT {PATIENT} DIAGNOSIS {DIAGNOSIS}",
+    "no_identifiers": false,
+    "id": "instructor_6",
+    "split": "authored_acceptance",
+    "template_id": "6",
+    "dataset_version": "assignment_v2"
+  },
+  {
+    "source": "PATIENT Olivia Martinez MRN 991723 DIAGNOSIS NSCLC",
+    "target": "PATIENT [NAME] MRN [MRN] DIAGNOSIS NSCLC",
+    "identifiers": [
+      {
+        "field": "PATIENT",
+        "value": "Olivia Martinez",
+        "start": 8,
+        "end": 23,
+        "placeholder": "[NAME]"
+      },
+      {
+        "field": "MRN",
+        "value": "991723",
+        "start": 28,
+        "end": 34,
+        "placeholder": "[MRN]"
+      }
+    ],
+    "preserved": [
+      {
+        "field": "DIAGNOSIS",
+        "value": "NSCLC",
+        "start": 45,
+        "end": 50
+      }
+    ],
+    "target_fields": [
+      {
+        "field": "PATIENT",
+        "start": 8,
+        "end": 14
+      },
+      {
+        "field": "MRN",
+        "start": 19,
+        "end": 24
+      },
+      {
+        "field": "DIAGNOSIS",
+        "start": 35,
+        "end": 40
+      }
+    ],
+    "slots": [
+      {
+        "field": "PATIENT",
+        "left_literal": "PATIENT ",
+        "right_literal": " MRN "
+      },
+      {
+        "field": "MRN",
+        "left_literal": " MRN ",
+        "right_literal": " DIAGNOSIS "
+      },
+      {
+        "field": "DIAGNOSIS",
+        "left_literal": " DIAGNOSIS ",
+        "right_literal": ""
+      }
+    ],
+    "pattern": "PATIENT {PATIENT} MRN {MRN} DIAGNOSIS {DIAGNOSIS}",
+    "no_identifiers": false,
+    "id": "instructor_7",
+    "split": "authored_acceptance",
+    "template_id": "7",
+    "dataset_version": "assignment_v2"
+  },
+  {
+    "source": "PATIENT John Smith DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA",
+    "target": "PATIENT [NAME] DIAGNOSIS NSCLC BIOMARKER EGFR TREATMENT DrugA",
+    "identifiers": [
+      {
+        "field": "PATIENT",
+        "value": "John Smith",
+        "start": 8,
+        "end": 18,
+        "placeholder": "[NAME]"
+      }
+    ],
+    "preserved": [
+      {
+        "field": "DIAGNOSIS",
+        "value": "NSCLC",
+        "start": 29,
+        "end": 34
+      },
+      {
+        "field": "BIOMARKER",
+        "value": "EGFR",
+        "start": 45,
+        "end": 49
+      },
+      {
+        "field": "TREATMENT",
+        "value": "DrugA",
+        "start": 60,
+        "end": 65
+      }
+    ],
+    "target_fields": [
+      {
+        "field": "PATIENT",
+        "start": 8,
+        "end": 14
+      },
+      {
+        "field": "DIAGNOSIS",
+        "start": 25,
+        "end": 30
+      },
+      {
+        "field": "BIOMARKER",
+        "start": 41,
+        "end": 45
+      },
+      {
+        "field": "TREATMENT",
+        "start": 56,
+        "end": 61
+      }
+    ],
+    "slots": [
+      {
+        "field": "PATIENT",
+        "left_literal": "PATIENT ",
+        "right_literal": " DIAGNOSIS "
+      },
+      {
+        "field": "DIAGNOSIS",
+        "left_literal": " DIAGNOSIS ",
+        "right_literal": " BIOMARKER "
+      },
+      {
+        "field": "BIOMARKER",
+        "left_literal": " BIOMARKER ",
+        "right_literal": " TREATMENT "
+      },
+      {
+        "field": "TREATMENT",
+        "left_literal": " TREATMENT ",
+        "right_literal": ""
+      }
+    ],
+    "pattern": "PATIENT {PATIENT} DIAGNOSIS {DIAGNOSIS} BIOMARKER {BIOMARKER} TREATMENT {TREATMENT}",
+    "no_identifiers": false,
+    "id": "instructor_8",
+    "split": "authored_acceptance",
+    "template_id": "8",
+    "dataset_version": "assignment_v2"
+  },
+  {
+    "source": "PATIENT John Smith RECEIVED DrugA",
+    "target": "PATIENT [NAME] RECEIVED DrugA",
+    "identifiers": [
+      {
+        "field": "PATIENT",
+        "value": "John Smith",
+        "start": 8,
+        "end": 18,
+        "placeholder": "[NAME]"
+      }
+    ],
+    "preserved": [
+      {
+        "field": "TREATMENT",
+        "value": "DrugA",
+        "start": 28,
+        "end": 33
+      }
+    ],
+    "target_fields": [
+      {
+        "field": "PATIENT",
+        "start": 8,
+        "end": 14
+      },
+      {
+        "field": "TREATMENT",
+        "start": 24,
+        "end": 29
+      }
+    ],
+    "slots": [
+      {
+        "field": "PATIENT",
+        "left_literal": "PATIENT ",
+        "right_literal": " RECEIVED "
+      },
+      {
+        "field": "TREATMENT",
+        "left_literal": " RECEIVED ",
+        "right_literal": ""
+      }
+    ],
+    "pattern": "PATIENT {PATIENT} RECEIVED {TREATMENT}",
+    "no_identifiers": false,
+    "id": "instructor_9",
+    "split": "authored_acceptance",
+    "template_id": "9",
+    "dataset_version": "assignment_v2"
+  },
+  {
+    "source": "PATIENT John Smith RECEIVED DrugB",
+    "target": "PATIENT [NAME] RECEIVED DrugB",
+    "identifiers": [
+      {
+        "field": "PATIENT",
+        "value": "John Smith",
+        "start": 8,
+        "end": 18,
+        "placeholder": "[NAME]"
+      }
+    ],
+    "preserved": [
+      {
+        "field": "TREATMENT",
+        "value": "DrugB",
+        "start": 28,
+        "end": 33
+      }
+    ],
+    "target_fields": [
+      {
+        "field": "PATIENT",
+        "start": 8,
+        "end": 14
+      },
+      {
+        "field": "TREATMENT",
+        "start": 24,
+        "end": 29
+      }
+    ],
+    "slots": [
+      {
+        "field": "PATIENT",
+        "left_literal": "PATIENT ",
+        "right_literal": " RECEIVED "
+      },
+      {
+        "field": "TREATMENT",
+        "left_literal": " RECEIVED ",
+        "right_literal": ""
+      }
+    ],
+    "pattern": "PATIENT {PATIENT} RECEIVED {TREATMENT}",
+    "no_identifiers": false,
+    "id": "instructor_10",
+    "split": "authored_acceptance",
+    "template_id": "9",
+    "dataset_version": "assignment_v2"
+  }
+]

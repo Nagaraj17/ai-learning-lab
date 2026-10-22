@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "scope": "earlier corrected-grammar character study; identities/raw counts verified, not a quality endorsement or final submission",
+  "checks": [
+    {
+      "architecture": "embedding_only",
+      "updates": 2000,
+      "selected_step": 2000,
+      "passed": true
+    },
+    {
+      "architecture": "single_attention",
+      "updates": 2000,
+      "selected_step": 900,
+      "passed": true
+    },
+    {
+      "architecture": "multi_attention",
+      "updates": 2000,
+      "selected_step": 400,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_1",
+      "updates": 2000,
+      "selected_step": 800,
+      "passed": true
+    },
+    {
+      "architecture": "transformer_2",
+      "updates": 2000,
+      "selected_step": 500,
+      "passed": true
+    },
+    {
+      "architecture": "no_ffn",
+      "updates": 2000,
+      "selected_step": 600,
+      "passed": true
+    },
+    {
+      "architecture": "no_layernorm",
+      "updates": 2000,
+      "selected_step": 200,
+      "passed": true
+    },
+    {
+      "architecture": "no_residual",
+      "updates": 2000,
+      "selected_step": 1400,
+      "passed": true
+    }
+  ]
+}

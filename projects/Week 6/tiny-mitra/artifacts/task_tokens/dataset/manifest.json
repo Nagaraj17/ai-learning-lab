@@ -1,0 +1,44 @@
+{
+  "version": "assignment_v2",
+  "dataset_hash": "1754352412d811cc35a09da5b44450ca39c68ffaf4b6b86b0d9b002bbdff17fd",
+  "counts": {
+    "train": 700,
+    "validation": 100,
+    "test_known_known": 50,
+    "test_known_test": 50,
+    "test_test_known": 50,
+    "test_test_test": 50
+  },
+  "category_counts": {
+    "BIOMARKER": 183,
+    "TREATMENT": 340,
+    "DIAGNOSIS": 481,
+    "MRN": 291,
+    "PATIENT": 898,
+    "ADDRESS": 108,
+    "DOB": 82,
+    "PHONE": 77,
+    "DOCTOR": 131,
+    "DATE": 131
+  },
+  "maximum_full_tokens": 84,
+  "context": 256,
+  "trained_templates": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "policy": "replace identity spans including physician titles; retain surrounding wording and clinical field/value associations",
+  "novelty_limitations": "control layouts shared; date values may recur; name/doctor pools separate; MRN/phone/address values unique where present",
+  "maximum_character_full_tokens": 146,
+  "tokenizer_hash": "519cf5e14f6eb7ecb52ad50742b7536835f42d9b04f4637fe34c5f6fd82c357a",
+  "vocabulary_size": 146,
+  "tokenization": "fixed task pieces with character fallback; original source strings and split identities unchanged"
+}

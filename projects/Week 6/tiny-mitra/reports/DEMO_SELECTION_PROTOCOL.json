@@ -1,0 +1,14 @@
+{
+  "candidate_seeds_in_priority_order": [
+    42,
+    7,
+    123
+  ],
+  "architecture": "transformer_2",
+  "checkpoint": "latest.pt at fixed update4000",
+  "acceptance_gate": "all11 authored notes exactly correct with valid EOS plus both additional clinical checks exactly correct with valid EOS",
+  "selection": "first passing candidate in declared priority order; otherwise no passing demo candidate",
+  "timing_disclosure": "declared after observing seed42 authored10/11 and before either repeat completed; exploratory development selection",
+  "benchmark": "primary architecture comparison remains seed42, independent of demo selection",
+  "no_final_test_selection": true
+}

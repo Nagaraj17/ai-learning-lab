@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "checked_raw_generation_reports": [
+    "baseline",
+    "layer0_head0",
+    "layer0_head1",
+    "layer0_head2",
+    "layer0_head3",
+    "layer1_head0",
+    "layer1_head1",
+    "layer1_head2",
+    "layer1_head3",
+    "pair_layer0",
+    "pair_layer1",
+    "temperature_0.1",
+    "temperature_0.7",
+    "temperature_1.2"
+  ],
+  "diagnostic_notes_per_report": 8,
+  "scope": "saved identities/count recomputation; intervention restoration was checked by the runner; semantic head roles are not inferred"
+}
