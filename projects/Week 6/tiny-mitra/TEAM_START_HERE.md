@@ -2,6 +2,8 @@
 
 This is an educational decoder-only GPT assembled from PyTorch primitives. We implement attention, causal masking, head splitting/merging, LayerNorm, decoder blocks and autoregressive generation ourselves. We do not use pretrained model weights, `nn.Transformer`, `nn.MultiheadAttention`, or an LLM model library.
 
+For the hand-in, follow the [clean submission guide](submission/README.md). Submit the single final-study ZIP rather than the complete working repository. Historical experiments stay available here for reference.
+
 ## Start with these files
 
 1. [Prerequisite refresher](../../../weekly%20curriculum/06-Tiny-Mitra-Project/PREREQUISITE_KNOWLEDGE.md): tokens, embeddings, position, linear projections, attention, masks, training and evaluation. Work through one concept at a time.

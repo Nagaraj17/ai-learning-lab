@@ -11,6 +11,8 @@ The expected target is a label. Actual generation is computed by the selected ch
 
 ## Joining from GitHub
 
+For the assignment hand-in, use the [clean submission guide](submission/README.md). It separates the final runnable package from the repository's historical studies and explains every included category. Build its ZIP with `python -m tools.package_submission`; launch the packaged UI with `python app.py --submission`.
+
 Read [TEAM_START_HERE.md](TEAM_START_HERE.md) first. This source checkout contains code, notebooks, synthetic datasets, saved measurements and presentation files. The existing `.gitignore` excludes trained `.pt` checkpoints, virtual environments and demo ZIPs. A fresh clone therefore does not contain the weights needed to reproduce the saved live-demo outputs. The verified local demo ZIP includes weights and must be supplied separately; alternatively, run your own explicitly separate practice training session.
 
 ## Current evidence
